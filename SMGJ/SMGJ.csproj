@@ -1,0 +1,2085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A8FF9C6B-9545-488B-A4E2-63AF341C761A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SMGJ</RootNamespace>
+    <AssemblyName>SMGJ</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44371</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PROFILIController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Microsoft\AspNet\Identity\UserManager.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\dbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FERMA.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetUser.cs" />
+    <Compile Include="Models\GJEDHAT_PARAMETRAT.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GJEDHI.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\KOMUNA.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KONTAMINIMI.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LAGESHTIA_AJRIT.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Medium.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MENU.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MENU_ROLI.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NJOFTIMET.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NJOFTIMET_USER.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUMESHTI.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUMESHTI_DETAJET.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RACA.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRAHJET_ZEMRES.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TEMPERATURA.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TIPI.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER_IN_FERMA.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YNDYRA.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\theme\assets\css\plugins.css" />
+    <Content Include="Content\theme\assets\css\styles.css" />
+    <Content Include="Content\theme\assets\css\themes\theme-1.css" />
+    <Content Include="Content\theme\assets\css\themes\theme-2.css" />
+    <Content Include="Content\theme\assets\css\themes\theme-3.css" />
+    <Content Include="Content\theme\assets\css\themes\theme-4.css" />
+    <Content Include="Content\theme\assets\css\themes\theme-5.css" />
+    <Content Include="Content\theme\assets\css\themes\theme-6.css" />
+    <Content Include="Content\theme\assets\images\africa-17344_640.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-1-big.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-1-small.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-1-xl.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-1.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-10.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-2-small.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-2.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-3-small.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-3.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-4-small.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-4.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-5-small.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-5.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-6.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-7.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-8.jpg" />
+    <Content Include="Content\theme\assets\images\avatar-9.jpg" />
+    <Content Include="Content\theme\assets\images\dark_dots.png" />
+    <Content Include="Content\theme\assets\images\default-user.png" />
+    <Content Include="Content\theme\assets\images\line_detail.png" />
+    <Content Include="Content\theme\assets\images\lion-403764_640.jpg" />
+    <Content Include="Content\theme\assets\images\lion-565818_640.jpg" />
+    <Content Include="Content\theme\assets\images\lion-565820_640.jpg" />
+    <Content Include="Content\theme\assets\images\logo.png" />
+    <Content Include="Content\theme\assets\images\logo2.png" />
+    <Content Include="Content\theme\assets\images\media-user.png" />
+    <Content Include="Content\theme\assets\images\note_dot.png" />
+    <Content Include="Content\theme\assets\images\photodune-4043508-3d-modern-office-room-l.jpg" />
+    <Content Include="Content\theme\assets\images\picture.svg" />
+    <Content Include="Content\theme\assets\images\plane.png" />
+    <Content Include="Content\theme\assets\images\your-logo-here.png" />
+    <Content Include="Content\theme\assets\js\charts.js" />
+    <Content Include="Content\theme\assets\js\form-elements.js" />
+    <Content Include="Content\theme\assets\js\form-image-cropping.js" />
+    <Content Include="Content\theme\assets\js\form-text-editor.js" />
+    <Content Include="Content\theme\assets\js\form-validation.js" />
+    <Content Include="Content\theme\assets\js\form-wizard.js" />
+    <Content Include="Content\theme\assets\js\index.js" />
+    <Content Include="Content\theme\assets\js\login.js" />
+    <Content Include="Content\theme\assets\js\main.js" />
+    <Content Include="Content\theme\assets\js\maps.js" />
+    <Content Include="Content\theme\assets\js\pages-calendar.js" />
+    <Content Include="Content\theme\assets\js\pages-messages.js" />
+    <Content Include="Content\theme\assets\js\table-data.js" />
+    <Content Include="Content\theme\assets\js\ui-buttons.js" />
+    <Content Include="Content\theme\assets\js\ui-elements.js" />
+    <Content Include="Content\theme\assets\js\ui-nestable.js" />
+    <Content Include="Content\theme\assets\js\ui-notifications.js" />
+    <Content Include="Content\theme\assets\js\ui-treeview.js" />
+    <Content Include="Content\theme\vendor\animate.css\animate.css" />
+    <Content Include="Content\theme\vendor\animate.css\animate.min.css" />
+    <Content Include="Content\theme\vendor\autosize\autosize.js" />
+    <Content Include="Content\theme\vendor\autosize\autosize.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker3.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.nb.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datetimepicker\bootstrap-datetimepicker.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datetimepicker\bootstrap-datetimepicker.js" />
+    <Content Include="Content\theme\vendor\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-fileinput\jasny-bootstrap.css" />
+    <Content Include="Content\theme\vendor\bootstrap-fileinput\jasny-bootstrap.js" />
+    <Content Include="Content\theme\vendor\bootstrap-fileinput\jasny-bootstrap.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-fileinput\jasny-bootstrap.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-progressbar\bootstrap-progressbar-3.3.0.css" />
+    <Content Include="Content\theme\vendor\bootstrap-progressbar\bootstrap-progressbar-3.3.0.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-progressbar\bootstrap-progressbar.js" />
+    <Content Include="Content\theme\vendor\bootstrap-progressbar\bootstrap-progressbar.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-rating\bootstrap-rating.css" />
+    <Content Include="Content\theme\vendor\bootstrap-rating\bootstrap-rating.js" />
+    <Content Include="Content\theme\vendor\bootstrap-rating\bootstrap-rating.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-timepicker\bootstrap-responsive.css" />
+    <Content Include="Content\theme\vendor\bootstrap-timepicker\bootstrap-timepicker.css" />
+    <Content Include="Content\theme\vendor\bootstrap-timepicker\bootstrap-timepicker.js" />
+    <Content Include="Content\theme\vendor\bootstrap-timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap-touchspin\jquery.bootstrap-touchspin.css" />
+    <Content Include="Content\theme\vendor\bootstrap-touchspin\jquery.bootstrap-touchspin.js" />
+    <Content Include="Content\theme\vendor\bootstrap-touchspin\jquery.bootstrap-touchspin.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap-touchspin\jquery.bootstrap-touchspin.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\theme\vendor\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\theme\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\theme\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\theme\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\theme\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\theme\vendor\bootstrap\js\npm.js" />
+    <Content Include="Content\theme\vendor\bootstrap\js\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="Content\theme\vendor\Chart.js\Chart.js" />
+    <Content Include="Content\theme\vendor\Chart.js\Chart.min.js" />
+    <Content Include="Content\theme\vendor\ckeditor\adapters\jquery.js" />
+    <Content Include="Content\theme\vendor\ckeditor\build-config.js" />
+    <Content Include="Content\theme\vendor\ckeditor\ckeditor.js" />
+    <Content Include="Content\theme\vendor\ckeditor\config.js" />
+    <Content Include="Content\theme\vendor\ckeditor\contents.css" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\af.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ar.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\bg.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\bn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\bs.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\cs.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\cy.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\da.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\de.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\el.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\en-au.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\en-ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\en-gb.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\en.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\eo.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\es.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\et.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\eu.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\fa.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\fi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\fo.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\fr-ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\fr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\gl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\gu.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\he.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\hi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\hr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\hu.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\id.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\is.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\it.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ja.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ka.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\km.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ko.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ku.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\lt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\lv.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\mk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\mn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ms.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\nb.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\nl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\no.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\pl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\pt-br.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\pt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ro.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ru.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\si.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\sk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\sl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\sq.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\sr-latn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\sr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\sv.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\th.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\tr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\tt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\ug.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\uk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\vi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\zh-cn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\lang\zh.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\icons.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\ajax.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\api.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\appendto.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\assets\inlineall\logo.png" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\assets\sample.jpg" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\assets\uilanguages\languages.js" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\datafiltering.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\divreplace.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\index.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\inlineall.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\inlinebycode.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\inlinetextarea.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\jquery.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\dialog\dialog.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\magicline\magicline.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\readonly.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\replacebyclass.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\replacebycode.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\sample.css" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\sample.js" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\tabindex.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\uicolor.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\uilanguages.html" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\xhtmlstyle.html" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dev\icons16.svg" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dev\icons32.svg" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dialog.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\editor.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\editor_ie.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\icons.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\arrow.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\close.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\lock.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\images\refresh.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\skin.js" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\dialog.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\editor.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\icons.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\close.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="Content\theme\vendor\ckeditor\styles.js" />
+    <Content Include="Content\theme\vendor\DataTables\css\DT_bootstrap.css" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\back_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\back_enabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\back_enabled_hover.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\favicon.ico" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\forward_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\forward_enabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\forward_enabled_hover.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\sort_asc.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\sort_asc_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\sort_both.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\sort_desc.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\sort_desc_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\theme\vendor\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\theme\vendor\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\theme\vendor\DataTables\images\back_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\back_enabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\back_enabled_hover.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\favicon.ico" />
+    <Content Include="Content\theme\vendor\DataTables\images\forward_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\forward_enabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\forward_enabled_hover.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\sort_asc.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\sort_both.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\sort_desc.png" />
+    <Content Include="Content\theme\vendor\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\theme\vendor\DataTables\jquery.dataTables.js" />
+    <Content Include="Content\theme\vendor\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Content\theme\vendor\fontawesome\css\font-awesome.css" />
+    <Content Include="Content\theme\vendor\fontawesome\css\font-awesome.min.css" />
+    <Content Include="Content\theme\vendor\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\theme\vendor\fullcalendar\fullcalendar.css" />
+    <Content Include="Content\theme\vendor\fullcalendar\fullcalendar.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Content\theme\vendor\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Content\theme\vendor\fullcalendar\gcal.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang-all.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ar-tn.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ar.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\bg.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ca.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\cs.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\da.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\de-at.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\de.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\el.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\en-au.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\en-ca.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\en-gb.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\es.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\fa.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\fi.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\fr.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\he.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\hi.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\hr.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\hu.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\id.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\is.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\it.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ja.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ko.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\lt.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\lv.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\nb.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\nl.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\pl.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\pt-br.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\pt.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ro.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\ru.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\sk.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\sl.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\sr.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\sv.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\th.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\tr.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\uk.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\vi.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Content\theme\vendor\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Content\theme\vendor\gmaps\gmaps.js" />
+    <Content Include="Content\theme\vendor\javascript-Load-Image\load-image.all.min.js" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\demos.css" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\main.css" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\pool.jpg" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\sago.jpg" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\sagomod.jpg" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\sagomod.png" />
+    <Content Include="Content\theme\vendor\Jcrop\Jcrop.gif" />
+    <Content Include="Content\theme\vendor\Jcrop\jquery.color.js" />
+    <Content Include="Content\theme\vendor\Jcrop\jquery.Jcrop.css" />
+    <Content Include="Content\theme\vendor\Jcrop\jquery.Jcrop.js" />
+    <Content Include="Content\theme\vendor\Jcrop\jquery.Jcrop.min.css" />
+    <Content Include="Content\theme\vendor\Jcrop\jquery.Jcrop.min.js" />
+    <Content Include="Content\theme\vendor\Jcrop\jquery.min.js" />
+    <Content Include="Content\theme\vendor\jquery-cookie\jquery.cookie.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\app.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\cors\jquery.xdr-transport.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\demo-ie8.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\demo.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\jquery.fileupload.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\css\style.css" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\img\loading.gif" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\img\progressbar.gif" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-angular.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-audio.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-image.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-process.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-ui.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-validate.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload-video.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.fileupload.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\jquery.iframe-transport.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\main.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-go\static\favicon.ico" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-go\static\robots.txt" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-python\static\favicon.ico" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-python\static\robots.txt" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\node\server.js" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\php\index.php" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\php\UploadHandler.php" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\vendor\jquery.ui.widget.js" />
+    <Content Include="Content\theme\vendor\jquery-smart-wizard\jquery.smartWizard.js" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\animated-overlay.gif" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\theme\vendor\jquery-ui\jquery-ui-1.10.1.custom.css" />
+    <Content Include="Content\theme\vendor\jquery-ui\jquery-ui-1.10.1.custom.min.css" />
+    <Content Include="Content\theme\vendor\jquery-ui\jquery-ui-1.10.1.custom.min.js" />
+    <Content Include="Content\theme\vendor\jquery-ui\jquery-ui-1.10.2.custom.min.js" />
+    <Content Include="Content\theme\vendor\jquery-ui\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\additional-methods.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\additional-methods.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\jquery.validate.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\jquery.validate.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ar.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ar.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_bg.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_bg.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ca.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ca.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_cs.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_cs.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_da.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_da.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_de.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_de.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_el.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_el.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_es.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_es.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_es_AR.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_es_AR.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_et.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_et.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_eu.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_eu.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_fa.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_fa.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_fi.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_fi.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_fr.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_fr.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_gl.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_gl.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_he.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_he.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_hr.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_hr.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_hu.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_hu.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_id.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_id.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_is.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_is.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_it.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_it.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ja.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ja.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ka.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ka.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_kk.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_kk.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ko.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ko.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_lt.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_lt.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_lv.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_lv.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_my.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_my.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_nl.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_nl.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_no.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_no.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_pl.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_pl.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_pt_BR.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_pt_BR.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_pt_PT.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_pt_PT.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ro.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ro.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ru.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_ru.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_si.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_si.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sk.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sk.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sl.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sl.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sr.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sr.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sr_lat.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sr_lat.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sv.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_sv.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_th.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_th.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_tj.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_tj.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_tr.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_tr.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_uk.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_uk.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_vi.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_vi.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_zh.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_zh.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_zh_TW.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\messages_zh_TW.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_de.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_de.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_es_CL.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_es_CL.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_fi.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_fi.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_nl.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_nl.min.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_pt.js" />
+    <Content Include="Content\theme\vendor\jquery-validation\localization\methods_pt.min.js" />
+    <Content Include="Content\theme\vendor\jquery.sparkline\jquery.sparkline.js" />
+    <Content Include="Content\theme\vendor\jquery.sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\theme\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\theme\vendor\jstree\jstree.js" />
+    <Content Include="Content\theme\vendor\jstree\jstree.min.js" />
+    <Content Include="Content\theme\vendor\jstree\themes\default-dark\32px.png" />
+    <Content Include="Content\theme\vendor\jstree\themes\default-dark\40px.png" />
+    <Content Include="Content\theme\vendor\jstree\themes\default-dark\style.css" />
+    <Content Include="Content\theme\vendor\jstree\themes\default-dark\style.min.css" />
+    <Content Include="Content\theme\vendor\jstree\themes\default-dark\throbber.gif" />
+    <Content Include="Content\theme\vendor\jstree\themes\default\32px.png" />
+    <Content Include="Content\theme\vendor\jstree\themes\default\40px.png" />
+    <Content Include="Content\theme\vendor\jstree\themes\default\style.css" />
+    <Content Include="Content\theme\vendor\jstree\themes\default\style.min.css" />
+    <Content Include="Content\theme\vendor\jstree\themes\default\throbber.gif" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda-themeless.css" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda-themeless.min.css" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda.css" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda.jquery.min.js" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda.js" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda.min.css" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\ladda.min.js" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\spin.js" />
+    <Content Include="Content\theme\vendor\ladda-bootstrap\spin.min.js" />
+    <Content Include="Content\theme\vendor\maskedinput\jquery.maskedinput.js" />
+    <Content Include="Content\theme\vendor\maskedinput\jquery.maskedinput.min.js" />
+    <Content Include="Content\theme\vendor\modernizr\modernizr.js" />
+    <Content Include="Content\theme\vendor\moment\moment.js" />
+    <Content Include="Content\theme\vendor\moment\moment.min.js" />
+    <Content Include="Content\theme\vendor\nestable\jquery.nestable.css" />
+    <Content Include="Content\theme\vendor\nestable\jquery.nestable.js" />
+    <Content Include="Content\theme\vendor\perfect-scrollbar\perfect-scrollbar.min.css" />
+    <Content Include="Content\theme\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="Content\theme\vendor\select2\select2.css" />
+    <Content Include="Content\theme\vendor\select2\select2.js" />
+    <Content Include="Content\theme\vendor\select2\select2.min.css" />
+    <Content Include="Content\theme\vendor\select2\select2.min.js" />
+    <Content Include="Content\theme\vendor\selectFx\classie.js" />
+    <Content Include="Content\theme\vendor\selectFx\selectFx.js" />
+    <Content Include="Content\theme\vendor\sweetalert\ie9.css" />
+    <Content Include="Content\theme\vendor\sweetalert\sweet-alert.css" />
+    <Content Include="Content\theme\vendor\sweetalert\sweet-alert.js" />
+    <Content Include="Content\theme\vendor\sweetalert\sweet-alert.min.js" />
+    <Content Include="Content\theme\vendor\switchery\switchery.css" />
+    <Content Include="Content\theme\vendor\switchery\switchery.js" />
+    <Content Include="Content\theme\vendor\switchery\switchery.min.css" />
+    <Content Include="Content\theme\vendor\switchery\switchery.min.js" />
+    <Content Include="Content\theme\vendor\themify-icons\fonts\themify.svg" />
+    <Content Include="Content\theme\vendor\themify-icons\themify-icons.css" />
+    <Content Include="Content\theme\vendor\themify-icons\themify-icons.min.css" />
+    <Content Include="Content\theme\vendor\toastr\toastr.css" />
+    <Content Include="Content\theme\vendor\toastr\toastr.js" />
+    <Content Include="Content\theme\vendor\toastr\toastr.min.css" />
+    <Content Include="Content\theme\vendor\toastr\toastr.min.js" />
+    <Content Include="Content\theme\vendor\twbs-pagination\jquery.twbsPagination.js" />
+    <Content Include="Content\theme\vendor\twbs-pagination\jquery.twbsPagination.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\dbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+      <LastGenOutput>dbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+      <LastGenOutput>dbModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\theme\assets\images\Thumbs.db" />
+    <Content Include="Content\theme\master\.sass-cache\039f382ee25dba40266a1e6a3ac7ab39100d3e30\_grid-background.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\04b0d5f35836e0812feae48ff72291556f99ae6d\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0a2710ced4666c5a55181ee75fdb5da08a3bb4b6\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0b0e4ee1b0b53b8fa010d6f42550d7015860ac6d\_clearfix.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0b0e4ee1b0b53b8fa010d6f42550d7015860ac6d\_float.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0b0e4ee1b0b53b8fa010d6f42550d7015860ac6d\_hacks.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0b0e4ee1b0b53b8fa010d6f42550d7015860ac6d\_min.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0b0e4ee1b0b53b8fa010d6f42550d7015860ac6d\_reset.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0b0e4ee1b0b53b8fa010d6f42550d7015860ac6d\_tag-cloud.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0bbd9319c69a9ced62a64bdd53eba8a693f91439\_ellipsis.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0bbd9319c69a9ced62a64bdd53eba8a693f91439\_force-wrap.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0bbd9319c69a9ced62a64bdd53eba8a693f91439\_nowrap.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0bbd9319c69a9ced62a64bdd53eba8a693f91439\_replacement.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0e06fa0c09a302244e30129bc910a75824bd2cd5\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0e06fa0c09a302244e30129bc910a75824bd2cd5\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0f664329a5aaf0bc4773d35b9b88ea21d0fd4dea\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0f664329a5aaf0bc4773d35b9b88ea21d0fd4dea\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0f664329a5aaf0bc4773d35b9b88ea21d0fd4dea\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0f664329a5aaf0bc4773d35b9b88ea21d0fd4dea\theme-4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0f664329a5aaf0bc4773d35b9b88ea21d0fd4dea\theme-5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0f664329a5aaf0bc4773d35b9b88ea21d0fd4dea\theme-6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0fe32041465fad2594d3e6990258ef37169337e7\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\0fe32041465fad2594d3e6990258ef37169337e7\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\128c3508f915c9cd53fe638ba5b0035f6d949d14\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\130767b1aeda629e255017ee9a107f8f886d7505\_ellipsis.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\130767b1aeda629e255017ee9a107f8f886d7505\_force-wrap.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\130767b1aeda629e255017ee9a107f8f886d7505\_nowrap.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\130767b1aeda629e255017ee9a107f8f886d7505\_replacement.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1958d003753373f4ac2c0aa90be2ac7e0d5c7e92\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\1c88310d56ad027f61387ed3a7705ab28fa4a30b\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\210669bf8d42337543d6762b1737c7a2daa3d6e0\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\21d32f871144d4ae1922ca966aba61008d4a005a\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\26dcdf3d8042d9dc3e65ab432f3d20d671f3d6a6\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\290415f33e72a3d16d2e6ee9cfd9ea70b8a95e75\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\290415f33e72a3d16d2e6ee9cfd9ea70b8a95e75\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\290415f33e72a3d16d2e6ee9cfd9ea70b8a95e75\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\290415f33e72a3d16d2e6ee9cfd9ea70b8a95e75\theme-4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\290415f33e72a3d16d2e6ee9cfd9ea70b8a95e75\theme-5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\290415f33e72a3d16d2e6ee9cfd9ea70b8a95e75\theme-6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\29384955e3dc782c883d5cde428543d4ff972713\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\29384955e3dc782c883d5cde428543d4ff972713\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\2d0787f9f54d16cd86875e4eda2af3eb1c66619b\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\320b0c51f6f3aeaab69c329dc9cc036abbe69409\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\338807d39f913d7d031cb0647db1502c23f595f6\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\338807d39f913d7d031cb0647db1502c23f595f6\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\338807d39f913d7d031cb0647db1502c23f595f6\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\338807d39f913d7d031cb0647db1502c23f595f6\theme-4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\338807d39f913d7d031cb0647db1502c23f595f6\theme-5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\338807d39f913d7d031cb0647db1502c23f595f6\theme-6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\36db56d43ba71c23bad74fb07f067fb8f87b1a9d\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3784138faecbec2764068f2cb2bcaf63ea1e5566\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\39a665f486486b4be0f85978b78c2a871a68835c\_bullets.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\39a665f486486b4be0f85978b78c2a871a68835c\_horizontal-list.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\39a665f486486b4be0f85978b78c2a871a68835c\_inline-block-list.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\39a665f486486b4be0f85978b78c2a871a68835c\_inline-list.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_breadcrumb.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_colors.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\3ddde7c6ef4ca4f847eee3decef55fd60ddace19\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\4cac05d0e8e552ab26490dd4f4ae07fd391f32fe\_clearfix.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\4cac05d0e8e552ab26490dd4f4ae07fd391f32fe\_float.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\4cac05d0e8e552ab26490dd4f4ae07fd391f32fe\_hacks.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\4cac05d0e8e552ab26490dd4f4ae07fd391f32fe\_min.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\4cac05d0e8e552ab26490dd4f4ae07fd391f32fe\_reset.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\4cac05d0e8e552ab26490dd4f4ae07fd391f32fe\_tag-cloud.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\5281ed778ade900577dcbafbd3d08b00879285f6\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\5281ed778ade900577dcbafbd3d08b00879285f6\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\5281ed778ade900577dcbafbd3d08b00879285f6\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\53f8f887a37058e91afa67fdaa647a132b54865b\_color.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\53f8f887a37058e91afa67fdaa647a132b54865b\_general.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\53f8f887a37058e91afa67fdaa647a132b54865b\_sprites.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\53f8f887a37058e91afa67fdaa647a132b54865b\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\550a9445d2ba74555d1cbec112edac666244bb3a\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_file-input.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_jcrop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_multiple-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\575b3dff0ce1ffe9b8613de88a4c7041a27461c6\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\5a1ef9d4f892e27e33b99dd430bdcb304f2885e1\_compass.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\5a893e0614a0ed14c3bf66c94942b4d26bf6836f\_grid-background.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_header.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_layout-boxed.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_main-container.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_pageslideLeft.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_pageslideRight.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_slidingbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b090a8b8fa295ec7a81caec1167d764811c8dc4\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6b190507f8f2f5558c1e21c08cc6459d42883b3d\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6dfddb98f8ad6f7ceff1e43e9d92a62c6ed32f5d\_hover-link.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6dfddb98f8ad6f7ceff1e43e9d92a62c6ed32f5d\_link-colors.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6dfddb98f8ad6f7ceff1e43e9d92a62c6ed32f5d\_unstyled-link.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\6e1567fa8a7d943f8808dd8f29deadf93595f150\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\70f34ec9ce5fd3b1282e1599cb8304b664e186a6\_hover-link.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\70f34ec9ce5fd3b1282e1599cb8304b664e186a6\_link-colors.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\70f34ec9ce5fd3b1282e1599cb8304b664e186a6\_unstyled-link.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\734940a4aaca52d1cfed31e061edd502a2251d37\_css3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\734940a4aaca52d1cfed31e061edd502a2251d37\_support.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\734940a4aaca52d1cfed31e061edd502a2251d37\_typography.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\734940a4aaca52d1cfed31e061edd502a2251d37\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_animation.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_appearance.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_background-clip.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_background-origin.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_background-size.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_border-radius.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_box-shadow.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_box-sizing.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_columns.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_deprecated-support.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_filter.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_flexbox.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_font-face.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_hyphenation.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_images.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_inline-block.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_opacity.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_regions.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_text-shadow.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_transform.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_transition.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\79887538295371f578f8c3ecdacfd29b868881b5\_user-interface.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\7aa908196d23385861320d63131ab93b421e21ac\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8034af7f97018cb92c3613419df89a12bdff6f98\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8034af7f97018cb92c3613419df89a12bdff6f98\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8034af7f97018cb92c3613419df89a12bdff6f98\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8034af7f97018cb92c3613419df89a12bdff6f98\theme-4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8034af7f97018cb92c3613419df89a12bdff6f98\theme-5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8034af7f97018cb92c3613419df89a12bdff6f98\theme-6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\82592daae40966684bccda72da3ee065230279d2\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8cf5390d0ae65c57f40022a4228a48543ec1cbd2\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8f3b9183054cab00536d0c8a46b5a64a863d19d1\_css3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8f3b9183054cab00536d0c8a46b5a64a863d19d1\_support.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8f3b9183054cab00536d0c8a46b5a64a863d19d1\_typography.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\8f3b9183054cab00536d0c8a46b5a64a863d19d1\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\94b71014830c0813658f482c4b874495d1dfa295\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\97f04b2cbc3d0b3b607dea61165ddfb41c4549ab\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_bootstrap-daterangepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_ckeditor.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_date-picker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_date-range-picker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_easy-pie-chart.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_inputlimiter.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_jcrop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_jQRangeSlider.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_jstree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_multiple-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_nvd3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_owl-carousel.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_select2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_summernote.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_tags-input.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9ac339f2708c7f45508fde3ef58312940b53c151\_time-picker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9af56a855a4daddf360755f73c53cb1c14343b6b\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9b5ffa9ac0427371154610cd0043ca7890041216\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9b5ffa9ac0427371154610cd0043ca7890041216\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9b5ffa9ac0427371154610cd0043ca7890041216\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9b5ffa9ac0427371154610cd0043ca7890041216\theme-4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9b5ffa9ac0427371154610cd0043ca7890041216\theme-5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9b5ffa9ac0427371154610cd0043ca7890041216\theme-6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9d23cdff02e698b20fb575842810b6cc2f9868a1\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9d64ddeafe77a74ae0515afe2e71925167183c42\_alternating-rows-and-columns.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9d64ddeafe77a74ae0515afe2e71925167183c42\_borders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9d64ddeafe77a74ae0515afe2e71925167183c42\_scaffolding.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_appearance.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_background-clip.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_background-origin.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_background-size.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_border-radius.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_box-shadow.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_box-sizing.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_box.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_columns.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_filter.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_font-face.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_hyphenation.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_images.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_inline-block.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_opacity.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_regions.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_shared.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_text-shadow.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_transform.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_transition.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\9f38a654fe7971982d704cad1dbb8e69a7d42f30\_user-interface.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\a6626e9f6a0ba5700c0a5ed49825e7a6ed3917f8\_bullets.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\a6626e9f6a0ba5700c0a5ed49825e7a6ed3917f8\_horizontal-list.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\a6626e9f6a0ba5700c0a5ed49825e7a6ed3917f8\_inline-block-list.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\a6626e9f6a0ba5700c0a5ed49825e7a6ed3917f8\_inline-list.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\a9f2b46c55c4d89de9516069367b3a02833418d5\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ac82f9c413a554eab144876182a1b12eaa6d9e70\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ac82f9c413a554eab144876182a1b12eaa6d9e70\theme-2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ac82f9c413a554eab144876182a1b12eaa6d9e70\theme-3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ac82f9c413a554eab144876182a1b12eaa6d9e70\theme-4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ac82f9c413a554eab144876182a1b12eaa6d9e70\theme-5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ac82f9c413a554eab144876182a1b12eaa6d9e70\theme-6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ad851f9c6ed25327d6cffff0204be47bf7b4d6af\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\aefdb1ccec4d4b7cf9a2028fa8426bf6f367ab2c\_ui-tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b0e6632294aae604c36b2edf0dd2fce94f7e167f\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-1.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-default.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style10.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style2.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style3.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style4.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style5.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style6.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style7.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style8.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\b3a2eee0ea4b9f74892c9ce96b98b9b72598cf42\theme-style9.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\bbeb742bf20a6b5feba7b958fd694d7efa196ff8\_alternating-rows-and-columns.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\bbeb742bf20a6b5feba7b958fd694d7efa196ff8\_borders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\bbeb742bf20a6b5feba7b958fd694d7efa196ff8\_scaffolding.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_bootstrap-sliders.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_chartjs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_file-upload.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_img-crop.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_nestable.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_sparkline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_sweet-alert.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\be78f740fe1853e6ff819effbf399fd7aff2809b\_tree.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\bfc500a759bdb5b22223b997263217d8eeede13e\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\bfc500a759bdb5b22223b997263217d8eeede13e\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_blog.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_coming-soon.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_gallery.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_horizontal-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_lock-screen.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_mobile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_modal.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_responsive.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_sliding-bar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_style-selector.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_subview.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c2d73278a259b6fb6c06c32f1b0beebba407b7fa\_widgets.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c33318c7301d66acc2b35abcc35f0f946e4998c6\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c33318c7301d66acc2b35abcc35f0f946e4998c6\_lists.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c33318c7301d66acc2b35abcc35f0f946e4998c6\_text.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c33318c7301d66acc2b35abcc35f0f946e4998c6\_vertical_rhythm.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_breadcrumb.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_colors.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c350cb3062fa29c11ea5aa67370c5c24d30ad9ef\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\c504df718318dfbec5297c4a0f09944498d18f32\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d0dd11c769672cf9d2f4f9774d606015c8855c28\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d0dd11c769672cf9d2f4f9774d606015c8855c28\_lists.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d0dd11c769672cf9d2f4f9774d606015c8855c28\_text.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d0dd11c769672cf9d2f4f9774d606015c8855c28\_units.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d0dd11c769672cf9d2f4f9774d606015c8855c28\_vertical_rhythm.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d3176386bbb0c088546cae5efe61b8f3c3410be6\_color.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d3176386bbb0c088546cae5efe61b8f3c3410be6\_general.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d3176386bbb0c088546cae5efe61b8f3c3410be6\_sprites.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d3176386bbb0c088546cae5efe61b8f3c3410be6\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\d56103dfd0d3056cda5dd3f2a6b2ec12d99d861d\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e67621cd065abe984bf3f7fe69cffa23a6ebf970\_compass.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e6c802434d2fcecf34893620eaaab60873bd7973\_contrast.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\styles-responsive.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\_colors.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\e706ab1832c7e4dbb4b78aeb1d22259482f61a26\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\eb5e7060b15f4d3b67e1f7af4aaaed1e4fe7c9b1\_css3-mixins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\eb5e7060b15f4d3b67e1f7af4aaaed1e4fe7c9b1\_media-queries.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\eb5e7060b15f4d3b67e1f7af4aaaed1e4fe7c9b1\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ee40c4b0f321c4223d0d4237ec80b3693a0ed7b5\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\ee40c4b0f321c4223d0d4237ec80b3693a0ed7b5\_sprite-img.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f00c2104e56adde3c6545d1dcded2c43e90bf569\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f00c2104e56adde3c6545d1dcded2c43e90bf569\_sprite-img.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f17a3216862f6e6d82cd140675a47c7b7b4fafff\_variables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f391ed3c069c2c3eddd8a9aff76764c313552498\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f391ed3c069c2c3eddd8a9aff76764c313552498\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_accordion.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_animations.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_base.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_chat.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_datepicker.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_error.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_form-elements.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_form-wizard.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_icons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_invoice.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_layout.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_links.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_login.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_maps.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_messages.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_modals.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_page-title.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_pages-calendar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_pagination.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_panels.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_popovers.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_pricing-table.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_tables.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_tabs.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_timeline.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_todo.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_tooltips.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_user-profile.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f4b39a20f88d45a9336564c59b6012f772326ca8\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f58d1ced0a69e87b384fbc3c2d2f0629dd4402fd\_brightness.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f58d1ced0a69e87b384fbc3c2d2f0629dd4402fd\_contrast.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f7fc381b19cb476367e5988f9684246471427ff3\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\f7fc381b19cb476367e5988f9684246471427ff3\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_footer.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_main-content.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_nav.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_off-sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_settings.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_sidebar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fb0a909eb22ef537c88c408267740857c04b7bf7\_top-navbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\plugins.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\styles.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\_buttons.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\_colors.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\_dropdown-menu.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\_labels-and-badges.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\_progressbar.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fccab680f88d8f9f85a21f113ad54366d0328cde\_utilities.scssc" />
+    <Content Include="Content\theme\master\.sass-cache\fd2f2785fd3d42bbc04dbb8e069d7b0251355d7e\_perfect-scrollbar.scssc" />
+    <Content Include="Content\theme\master\config.rb" />
+    <Content Include="Content\theme\master\sass\modules\_media-queries.scss" />
+    <Content Include="Content\theme\master\sass\modules\_variables.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_footer.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_main-content.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_nav.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_off-sidebar.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_settings.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_sidebar.scss" />
+    <Content Include="Content\theme\master\sass\partials\layout-elements\_top-navbar.scss" />
+    <Content Include="Content\theme\master\sass\partials\_accordion.scss" />
+    <Content Include="Content\theme\master\sass\partials\_animations.scss" />
+    <Content Include="Content\theme\master\sass\partials\_base.scss" />
+    <Content Include="Content\theme\master\sass\partials\_buttons.scss" />
+    <Content Include="Content\theme\master\sass\partials\_chat.scss" />
+    <Content Include="Content\theme\master\sass\partials\_datepicker.scss" />
+    <Content Include="Content\theme\master\sass\partials\_dropdown-menu.scss" />
+    <Content Include="Content\theme\master\sass\partials\_error.scss" />
+    <Content Include="Content\theme\master\sass\partials\_form-elements.scss" />
+    <Content Include="Content\theme\master\sass\partials\_form-wizard.scss" />
+    <Content Include="Content\theme\master\sass\partials\_icons.scss" />
+    <Content Include="Content\theme\master\sass\partials\_invoice.scss" />
+    <Content Include="Content\theme\master\sass\partials\_labels-and-badges.scss" />
+    <Content Include="Content\theme\master\sass\partials\_layout.scss" />
+    <Content Include="Content\theme\master\sass\partials\_links.scss" />
+    <Content Include="Content\theme\master\sass\partials\_login.scss" />
+    <Content Include="Content\theme\master\sass\partials\_maps.scss" />
+    <Content Include="Content\theme\master\sass\partials\_messages.scss" />
+    <Content Include="Content\theme\master\sass\partials\_modals.scss" />
+    <Content Include="Content\theme\master\sass\partials\_page-title.scss" />
+    <Content Include="Content\theme\master\sass\partials\_pages-calendar.scss" />
+    <Content Include="Content\theme\master\sass\partials\_pagination.scss" />
+    <Content Include="Content\theme\master\sass\partials\_panels.scss" />
+    <Content Include="Content\theme\master\sass\partials\_popovers.scss" />
+    <Content Include="Content\theme\master\sass\partials\_pricing-table.scss" />
+    <Content Include="Content\theme\master\sass\partials\_progressbar.scss" />
+    <Content Include="Content\theme\master\sass\partials\_tables.scss" />
+    <Content Include="Content\theme\master\sass\partials\_tabs.scss" />
+    <Content Include="Content\theme\master\sass\partials\_timeline.scss" />
+    <Content Include="Content\theme\master\sass\partials\_todo.scss" />
+    <Content Include="Content\theme\master\sass\partials\_tooltips.scss" />
+    <Content Include="Content\theme\master\sass\partials\_user-profile.scss" />
+    <Content Include="Content\theme\master\sass\partials\_utilities.scss" />
+    <Content Include="Content\theme\master\sass\plugins.scss" />
+    <Content Include="Content\theme\master\sass\styles.scss" />
+    <Content Include="Content\theme\master\sass\themes\theme-1.scss" />
+    <Content Include="Content\theme\master\sass\themes\theme-2.scss" />
+    <Content Include="Content\theme\master\sass\themes\theme-3.scss" />
+    <Content Include="Content\theme\master\sass\themes\theme-4.scss" />
+    <Content Include="Content\theme\master\sass\themes\theme-5.scss" />
+    <Content Include="Content\theme\master\sass\themes\theme-6.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_bootstrap-sliders.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_calendar.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_chartjs.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_file-input.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_img-crop.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_jcrop.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_maps.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_multiple-upload.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_nestable.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_perfect-scrollbar.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_sparkline.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_sweet-alert.scss" />
+    <Content Include="Content\theme\master\sass\vendor\_tree.scss" />
+    <Content Include="Content\theme\vendor\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\theme\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\theme\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\theme\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\theme\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\theme\vendor\ckeditor\CHANGES.md" />
+    <Content Include="Content\theme\vendor\ckeditor\LICENSE.md" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Content\theme\vendor\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Content\theme\vendor\ckeditor\README.md" />
+    <Content Include="Content\theme\vendor\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\dev\locations.json" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\readme.md" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="Content\theme\vendor\ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\Sorting icons.psd" />
+    <Content Include="Content\theme\vendor\DataTables\css\images\Thumbs.db" />
+    <Content Include="Content\theme\vendor\DataTables\images\Sorting icons.psd" />
+    <Content Include="Content\theme\vendor\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\theme\vendor\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\theme\vendor\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\theme\vendor\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\theme\vendor\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\theme\vendor\fontawesome\less\animated.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\bordered-pulled.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\core.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\fixed-width.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\font-awesome.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\icons.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\larger.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\list.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\mixins.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\path.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\rotated-flipped.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\stacked.less" />
+    <Content Include="Content\theme\vendor\fontawesome\less\variables.less" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\font-awesome.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_animated.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_core.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_fixed-width.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_icons.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_larger.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_list.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_mixins.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_path.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_stacked.scss" />
+    <Content Include="Content\theme\vendor\fontawesome\scss\_variables.scss" />
+    <Content Include="Content\theme\vendor\Jcrop\demo_files\Thumbs.db" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\img\Thumbs.db" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-go\app.yaml" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-go\app\main.go" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-python\app.yaml" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\gae-python\main.py" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\node\.gitignore" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\node\package.json" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\node\public\files\.gitignore" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\node\public\files\thumbnail\.gitignore" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\node\tmp\.gitignore" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\php\files\.gitignore" />
+    <Content Include="Content\theme\vendor\jquery-file-upload\server\php\files\.htaccess" />
+    <Content Include="Content\theme\vendor\jstree\themes\default\Thumbs.db" />
+    <Content Include="Content\theme\vendor\themify-icons\fonts\themify.eot" />
+    <Content Include="Content\theme\vendor\themify-icons\fonts\themify.ttf" />
+    <Content Include="Content\theme\vendor\themify-icons\fonts\themify.woff" />
+    <Content Include="Content\theme\vendor\toastr\toastr.js.map" />
+    <EntityDeploy Include="Models\dbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbModel.edmx.diagram">
+      <DependentUpon>dbModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\PROFILI\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\theme\assets\fonts\" />
+    <Folder Include="file\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>22345</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44371/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

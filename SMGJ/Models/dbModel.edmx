@@ -1,0 +1,1541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SMGJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FERMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emri" Type="varchar" MaxLength="100" />
+          <Property Name="KomunaID" Type="int" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="GJEDHAT_PARAMETRAT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GjedhiID" Type="int" />
+          <Property Name="RrahjeteZemresID" Type="int" />
+          <Property Name="TemperaturaID" Type="int" />
+          <Property Name="LageshtiaID" Type="int" />
+          <Property Name="DataMatjes" Type="datetime" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="GJEDHI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emri" Type="varchar" MaxLength="100" />
+          <Property Name="FermaID" Type="int" />
+          <Property Name="RacaID" Type="int" />
+          <Property Name="PrindiID" Type="int" />
+          <Property Name="TipiID" Type="int" />
+          <Property Name="Datelindja" Type="smalldatetime" />
+          <Property Name="Gjinia" Type="bit" />
+          <Property Name="Vathe" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pesha" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="KOMUNA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emri" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kodi" Type="char" MaxLength="2" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="KONTAMINIMI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vlera" Type="varchar" MaxLength="50" />
+          <Property Name="Niveli" Type="nvarchar" MaxLength="50" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="LAGESHTIA_AJRIT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vlera" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="MEDIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emertimi" Type="nvarchar" MaxLength="200" />
+          <Property Name="UniqueEmertimi" Type="uniqueidentifier" />
+          <Property Name="Shtegu" Type="varbinary" MaxLength="300" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Controller" Type="varchar" MaxLength="50" />
+          <Property Name="Action_Metoda" Type="varchar" MaxLength="50" />
+          <Property Name="Emertimi" Type="varchar" MaxLength="50" />
+          <Property Name="Renditja" Type="int" />
+        </EntityType>
+        <EntityType Name="MENU_ROLI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="RoliID" Type="int" Nullable="false" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="NJOFTIMET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gjedhi_ParametriID" Type="int" />
+          <Property Name="Data" Type="datetime" />
+          <Property Name="Mesazhi" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="NJOFTIMET_USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NjoftimetID" Type="int" Nullable="false" />
+          <Property Name="PrejID" Type="int" Nullable="false" />
+          <Property Name="TekID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUMESHTI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GjedhiID" Type="int" Nullable="false" />
+          <Property Name="YndyraID" Type="int" />
+          <Property Name="KontaminimiID" Type="int" />
+          <Property Name="SasiaProdhuar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DataProdhimit" Type="datetime" Nullable="false" />
+          <Property Name="DataSkadimit" Type="datetime" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="QUMESHTI_DETAJET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FermaID" Type="int" Nullable="false" />
+          <Property Name="DataProdhimit" Type="datetime" />
+          <Property Name="TotalLitra" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UshqimViqave" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Humbjet" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="RACA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emertimi" Type="varchar" MaxLength="100" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="RRAHJET_ZEMRES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vlera" Type="varchar" MaxLength="50" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="TEMPERATURA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vlera" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="TIPI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emertimi" Type="varchar" MaxLength="100" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Emri" Type="varchar" MaxLength="100" />
+          <Property Name="Mbiemri" Type="varchar" MaxLength="100" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Datelindja" Type="smalldatetime" />
+          <Property Name="NrTelefonit" Type="char" MaxLength="12" />
+          <Property Name="NrLeternjoftimit" Type="char" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="KomunaID" Type="int" Nullable="false" />
+          <Property Name="MediaID" Type="int" />
+          <Property Name="Aktiv" Type="bit" />
+          <Property Name="NjoftoEmail" Type="bit" />
+        </EntityType>
+        <EntityType Name="USER_IN_FERMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FermaID" Type="int" Nullable="false" />
+          <Property Name="Krijuar" Type="datetime" Nullable="false" />
+          <Property Name="KrijuarNga" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="YNDYRA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Perqindja" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Krijuar" Type="datetime" />
+          <Property Name="KrijuarNga" Type="int" />
+        </EntityType>
+        <Association Name="FK_FERMA_KOMUNA">
+          <End Role="KOMUNA" Type="Self.KOMUNA" Multiplicity="0..1" />
+          <End Role="FERMA" Type="Self.FERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KOMUNA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FERMA">
+              <PropertyRef Name="KomunaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_GJEDHI">
+          <End Role="GJEDHI" Type="Self.GJEDHI" Multiplicity="0..1" />
+          <End Role="GJEDHAT_PARAMETRAT" Type="Self.GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GJEDHI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="GjedhiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT">
+          <End Role="LAGESHTIA_AJRIT" Type="Self.LAGESHTIA_AJRIT" Multiplicity="0..1" />
+          <End Role="GJEDHAT_PARAMETRAT" Type="Self.GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LAGESHTIA_AJRIT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="LageshtiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES">
+          <End Role="RRAHJET_ZEMRES" Type="Self.RRAHJET_ZEMRES" Multiplicity="0..1" />
+          <End Role="GJEDHAT_PARAMETRAT" Type="Self.GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRAHJET_ZEMRES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="RrahjeteZemresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_TEMPERATURA">
+          <End Role="TEMPERATURA" Type="Self.TEMPERATURA" Multiplicity="0..1" />
+          <End Role="GJEDHAT_PARAMETRAT" Type="Self.GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPERATURA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="TemperaturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_FERMA">
+          <End Role="FERMA" Type="Self.FERMA" Multiplicity="0..1" />
+          <End Role="GJEDHI" Type="Self.GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FERMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI">
+              <PropertyRef Name="FermaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_GJEDHI1">
+          <End Role="GJEDHI" Type="Self.GJEDHI" Multiplicity="0..1" />
+          <End Role="GJEDHI1" Type="Self.GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GJEDHI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI1">
+              <PropertyRef Name="PrindiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_RACA">
+          <End Role="RACA" Type="Self.RACA" Multiplicity="0..1" />
+          <End Role="GJEDHI" Type="Self.GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RACA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI">
+              <PropertyRef Name="RacaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_TIPI">
+          <End Role="TIPI" Type="Self.TIPI" Multiplicity="0..1" />
+          <End Role="GJEDHI" Type="Self.GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI">
+              <PropertyRef Name="TipiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENU_ROLI_MENU">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="MENU_ROLI" Type="Self.MENU_ROLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MENU_ROLI">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_NJOFTIMET">
+          <End Role="NJOFTIMET" Type="Self.NJOFTIMET" Multiplicity="1" />
+          <End Role="NJOFTIMET1" Type="Self.NJOFTIMET" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NJOFTIMET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_USER_NJOFTIMET">
+          <End Role="NJOFTIMET" Type="Self.NJOFTIMET" Multiplicity="1" />
+          <End Role="NJOFTIMET_USER" Type="Self.NJOFTIMET_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NJOFTIMET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET_USER">
+              <PropertyRef Name="NjoftimetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_USER_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="NJOFTIMET_USER" Type="Self.NJOFTIMET_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET_USER">
+              <PropertyRef Name="PrejID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_USER_USER1">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="NJOFTIMET_USER" Type="Self.NJOFTIMET_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET_USER">
+              <PropertyRef Name="TekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_DETAJET_FERMA">
+          <End Role="FERMA" Type="Self.FERMA" Multiplicity="1" />
+          <End Role="QUMESHTI_DETAJET" Type="Self.QUMESHTI_DETAJET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FERMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI_DETAJET">
+              <PropertyRef Name="FermaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_DETAJET_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="QUMESHTI_DETAJET" Type="Self.QUMESHTI_DETAJET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI_DETAJET">
+              <PropertyRef Name="KrijuarNga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_GJEDHI">
+          <End Role="GJEDHI" Type="Self.GJEDHI" Multiplicity="1" />
+          <End Role="QUMESHTI" Type="Self.QUMESHTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GJEDHI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI">
+              <PropertyRef Name="GjedhiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_KONTAMINIMI">
+          <End Role="KONTAMINIMI" Type="Self.KONTAMINIMI" Multiplicity="0..1" />
+          <End Role="QUMESHTI" Type="Self.QUMESHTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KONTAMINIMI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI">
+              <PropertyRef Name="KontaminimiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_YNDYRA">
+          <End Role="YNDYRA" Type="Self.YNDYRA" Multiplicity="0..1" />
+          <End Role="QUMESHTI" Type="Self.QUMESHTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YNDYRA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI">
+              <PropertyRef Name="YndyraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_IN_FERMA_FERMA">
+          <End Role="FERMA" Type="Self.FERMA" Multiplicity="1" />
+          <End Role="USER_IN_FERMA" Type="Self.USER_IN_FERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FERMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER_IN_FERMA">
+              <PropertyRef Name="FermaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_IN_FERMA_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="USER_IN_FERMA" Type="Self.USER_IN_FERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER_IN_FERMA">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_KOMUNA">
+          <End Role="KOMUNA" Type="Self.KOMUNA" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KOMUNA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="KomunaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_MEDIA">
+          <End Role="MEDIA" Type="Self.MEDIA" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="MediaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMGJModelStoreContainer">
+          <EntitySet Name="FERMA" EntityType="Self.FERMA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="Self.GJEDHAT_PARAMETRAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GJEDHI" EntityType="Self.GJEDHI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KOMUNA" EntityType="Self.KOMUNA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KONTAMINIMI" EntityType="Self.KONTAMINIMI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LAGESHTIA_AJRIT" EntityType="Self.LAGESHTIA_AJRIT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEDIA" EntityType="Self.MEDIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENU_ROLI" EntityType="Self.MENU_ROLI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NJOFTIMET" EntityType="Self.NJOFTIMET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NJOFTIMET_USER" EntityType="Self.NJOFTIMET_USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUMESHTI" EntityType="Self.QUMESHTI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUMESHTI_DETAJET" EntityType="Self.QUMESHTI_DETAJET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RACA" EntityType="Self.RACA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRAHJET_ZEMRES" EntityType="Self.RRAHJET_ZEMRES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMPERATURA" EntityType="Self.TEMPERATURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPI" EntityType="Self.TIPI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_IN_FERMA" EntityType="Self.USER_IN_FERMA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YNDYRA" EntityType="Self.YNDYRA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FERMA_KOMUNA" Association="Self.FK_FERMA_KOMUNA">
+            <End Role="KOMUNA" EntitySet="KOMUNA" />
+            <End Role="FERMA" EntitySet="FERMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_GJEDHI" Association="Self.FK_GJEDHAT_PARAMETRAT_GJEDHI">
+            <End Role="GJEDHI" EntitySet="GJEDHI" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT" Association="Self.FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT">
+            <End Role="LAGESHTIA_AJRIT" EntitySet="LAGESHTIA_AJRIT" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES" Association="Self.FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES">
+            <End Role="RRAHJET_ZEMRES" EntitySet="RRAHJET_ZEMRES" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_TEMPERATURA" Association="Self.FK_GJEDHAT_PARAMETRAT_TEMPERATURA">
+            <End Role="TEMPERATURA" EntitySet="TEMPERATURA" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_FERMA" Association="Self.FK_GJEDHI_FERMA">
+            <End Role="FERMA" EntitySet="FERMA" />
+            <End Role="GJEDHI" EntitySet="GJEDHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_GJEDHI1" Association="Self.FK_GJEDHI_GJEDHI1">
+            <End Role="GJEDHI" EntitySet="GJEDHI" />
+            <End Role="GJEDHI1" EntitySet="GJEDHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_RACA" Association="Self.FK_GJEDHI_RACA">
+            <End Role="RACA" EntitySet="RACA" />
+            <End Role="GJEDHI" EntitySet="GJEDHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_TIPI" Association="Self.FK_GJEDHI_TIPI">
+            <End Role="TIPI" EntitySet="TIPI" />
+            <End Role="GJEDHI" EntitySet="GJEDHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENU_ROLI_MENU" Association="Self.FK_MENU_ROLI_MENU">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="MENU_ROLI" EntitySet="MENU_ROLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_NJOFTIMET" Association="Self.FK_NJOFTIMET_NJOFTIMET">
+            <End Role="NJOFTIMET" EntitySet="NJOFTIMET" />
+            <End Role="NJOFTIMET1" EntitySet="NJOFTIMET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_USER_NJOFTIMET" Association="Self.FK_NJOFTIMET_USER_NJOFTIMET">
+            <End Role="NJOFTIMET" EntitySet="NJOFTIMET" />
+            <End Role="NJOFTIMET_USER" EntitySet="NJOFTIMET_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_USER_USER" Association="Self.FK_NJOFTIMET_USER_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="NJOFTIMET_USER" EntitySet="NJOFTIMET_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_USER_USER1" Association="Self.FK_NJOFTIMET_USER_USER1">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="NJOFTIMET_USER" EntitySet="NJOFTIMET_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_DETAJET_FERMA" Association="Self.FK_QUMESHTI_DETAJET_FERMA">
+            <End Role="FERMA" EntitySet="FERMA" />
+            <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_DETAJET_USER" Association="Self.FK_QUMESHTI_DETAJET_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_GJEDHI" Association="Self.FK_QUMESHTI_GJEDHI">
+            <End Role="GJEDHI" EntitySet="GJEDHI" />
+            <End Role="QUMESHTI" EntitySet="QUMESHTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_KONTAMINIMI" Association="Self.FK_QUMESHTI_KONTAMINIMI">
+            <End Role="KONTAMINIMI" EntitySet="KONTAMINIMI" />
+            <End Role="QUMESHTI" EntitySet="QUMESHTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_YNDYRA" Association="Self.FK_QUMESHTI_YNDYRA">
+            <End Role="YNDYRA" EntitySet="YNDYRA" />
+            <End Role="QUMESHTI" EntitySet="QUMESHTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_IN_FERMA_FERMA" Association="Self.FK_USER_IN_FERMA_FERMA">
+            <End Role="FERMA" EntitySet="FERMA" />
+            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_IN_FERMA_USER" Association="Self.FK_USER_IN_FERMA_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_KOMUNA" Association="Self.FK_USER_KOMUNA">
+            <End Role="KOMUNA" EntitySet="KOMUNA" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_MEDIA" Association="Self.FK_USER_MEDIA">
+            <End Role="MEDIA" EntitySet="MEDIA" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SMGJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SMGJEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FERMAs" EntityType="SMGJModel.FERMA" />
+          <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="SMGJModel.GJEDHAT_PARAMETRAT" />
+          <EntitySet Name="GJEDHIs" EntityType="SMGJModel.GJEDHI" />
+          <EntitySet Name="KOMUNAs" EntityType="SMGJModel.KOMUNA" />
+          <EntitySet Name="KONTAMINIMIs" EntityType="SMGJModel.KONTAMINIMI" />
+          <EntitySet Name="LAGESHTIA_AJRIT" EntityType="SMGJModel.LAGESHTIA_AJRIT" />
+          <EntitySet Name="MEDIA" EntityType="SMGJModel.Medium" />
+          <EntitySet Name="MENUs" EntityType="SMGJModel.MENU" />
+          <EntitySet Name="MENU_ROLI" EntityType="SMGJModel.MENU_ROLI" />
+          <EntitySet Name="NJOFTIMETs" EntityType="SMGJModel.NJOFTIMET" />
+          <EntitySet Name="NJOFTIMET_USER" EntityType="SMGJModel.NJOFTIMET_USER" />
+          <EntitySet Name="QUMESHTIs" EntityType="SMGJModel.QUMESHTI" />
+          <EntitySet Name="QUMESHTI_DETAJET" EntityType="SMGJModel.QUMESHTI_DETAJET" />
+          <EntitySet Name="RACAs" EntityType="SMGJModel.RACA" />
+          <EntitySet Name="RRAHJET_ZEMRES" EntityType="SMGJModel.RRAHJET_ZEMRES" />
+          <EntitySet Name="TEMPERATURAs" EntityType="SMGJModel.TEMPERATURA" />
+          <EntitySet Name="TIPIs" EntityType="SMGJModel.TIPI" />
+          <EntitySet Name="USERs" EntityType="SMGJModel.USER" />
+          <EntitySet Name="USER_IN_FERMA" EntityType="SMGJModel.USER_IN_FERMA" />
+          <EntitySet Name="YNDYRAs" EntityType="SMGJModel.YNDYRA" />
+          <AssociationSet Name="FK_FERMA_KOMUNA" Association="SMGJModel.FK_FERMA_KOMUNA">
+            <End Role="KOMUNA" EntitySet="KOMUNAs" />
+            <End Role="FERMA" EntitySet="FERMAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_FERMA" Association="SMGJModel.FK_GJEDHI_FERMA">
+            <End Role="FERMA" EntitySet="FERMAs" />
+            <End Role="GJEDHI" EntitySet="GJEDHIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_DETAJET_FERMA" Association="SMGJModel.FK_QUMESHTI_DETAJET_FERMA">
+            <End Role="FERMA" EntitySet="FERMAs" />
+            <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_IN_FERMA_FERMA" Association="SMGJModel.FK_USER_IN_FERMA_FERMA">
+            <End Role="FERMA" EntitySet="FERMAs" />
+            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_GJEDHI" Association="SMGJModel.FK_GJEDHAT_PARAMETRAT_GJEDHI">
+            <End Role="GJEDHI" EntitySet="GJEDHIs" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT" Association="SMGJModel.FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT">
+            <End Role="LAGESHTIA_AJRIT" EntitySet="LAGESHTIA_AJRIT" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES" Association="SMGJModel.FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES">
+            <End Role="RRAHJET_ZEMRES" EntitySet="RRAHJET_ZEMRES" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_TEMPERATURA" Association="SMGJModel.FK_GJEDHAT_PARAMETRAT_TEMPERATURA">
+            <End Role="TEMPERATURA" EntitySet="TEMPERATURAs" />
+            <End Role="GJEDHAT_PARAMETRAT" EntitySet="GJEDHAT_PARAMETRAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_GJEDHI1" Association="SMGJModel.FK_GJEDHI_GJEDHI1">
+            <End Role="GJEDHI" EntitySet="GJEDHIs" />
+            <End Role="GJEDHI1" EntitySet="GJEDHIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_RACA" Association="SMGJModel.FK_GJEDHI_RACA">
+            <End Role="RACA" EntitySet="RACAs" />
+            <End Role="GJEDHI" EntitySet="GJEDHIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GJEDHI_TIPI" Association="SMGJModel.FK_GJEDHI_TIPI">
+            <End Role="TIPI" EntitySet="TIPIs" />
+            <End Role="GJEDHI" EntitySet="GJEDHIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_GJEDHI" Association="SMGJModel.FK_QUMESHTI_GJEDHI">
+            <End Role="GJEDHI" EntitySet="GJEDHIs" />
+            <End Role="QUMESHTI" EntitySet="QUMESHTIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_KOMUNA" Association="SMGJModel.FK_USER_KOMUNA">
+            <End Role="KOMUNA" EntitySet="KOMUNAs" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_KONTAMINIMI" Association="SMGJModel.FK_QUMESHTI_KONTAMINIMI">
+            <End Role="KONTAMINIMI" EntitySet="KONTAMINIMIs" />
+            <End Role="QUMESHTI" EntitySet="QUMESHTIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_MEDIA" Association="SMGJModel.FK_USER_MEDIA">
+            <End Role="Medium" EntitySet="MEDIA" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENU_ROLI_MENU" Association="SMGJModel.FK_MENU_ROLI_MENU">
+            <End Role="MENU" EntitySet="MENUs" />
+            <End Role="MENU_ROLI" EntitySet="MENU_ROLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_NJOFTIMET" Association="SMGJModel.FK_NJOFTIMET_NJOFTIMET">
+            <End Role="NJOFTIMET" EntitySet="NJOFTIMETs" />
+            <End Role="NJOFTIMET1" EntitySet="NJOFTIMETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_USER_NJOFTIMET" Association="SMGJModel.FK_NJOFTIMET_USER_NJOFTIMET">
+            <End Role="NJOFTIMET" EntitySet="NJOFTIMETs" />
+            <End Role="NJOFTIMET_USER" EntitySet="NJOFTIMET_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_USER_USER" Association="SMGJModel.FK_NJOFTIMET_USER_USER">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="NJOFTIMET_USER" EntitySet="NJOFTIMET_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NJOFTIMET_USER_USER1" Association="SMGJModel.FK_NJOFTIMET_USER_USER1">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="NJOFTIMET_USER" EntitySet="NJOFTIMET_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_YNDYRA" Association="SMGJModel.FK_QUMESHTI_YNDYRA">
+            <End Role="YNDYRA" EntitySet="YNDYRAs" />
+            <End Role="QUMESHTI" EntitySet="QUMESHTIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QUMESHTI_DETAJET_USER" Association="SMGJModel.FK_QUMESHTI_DETAJET_USER">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_IN_FERMA_USER" Association="SMGJModel.FK_USER_IN_FERMA_USER">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="FERMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KomunaID" Type="Int32" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="KOMUNA" Relationship="SMGJModel.FK_FERMA_KOMUNA" FromRole="FERMA" ToRole="KOMUNA" />
+          <NavigationProperty Name="GJEDHIs" Relationship="SMGJModel.FK_GJEDHI_FERMA" FromRole="FERMA" ToRole="GJEDHI" />
+          <NavigationProperty Name="QUMESHTI_DETAJET" Relationship="SMGJModel.FK_QUMESHTI_DETAJET_FERMA" FromRole="FERMA" ToRole="QUMESHTI_DETAJET" />
+          <NavigationProperty Name="USER_IN_FERMA" Relationship="SMGJModel.FK_USER_IN_FERMA_FERMA" FromRole="FERMA" ToRole="USER_IN_FERMA" />
+        </EntityType>
+        <EntityType Name="GJEDHAT_PARAMETRAT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GjedhiID" Type="Int32" />
+          <Property Name="RrahjeteZemresID" Type="Int32" />
+          <Property Name="TemperaturaID" Type="Int32" />
+          <Property Name="LageshtiaID" Type="Int32" />
+          <Property Name="DataMatjes" Type="DateTime" Precision="3" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHI" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_GJEDHI" FromRole="GJEDHAT_PARAMETRAT" ToRole="GJEDHI" />
+          <NavigationProperty Name="LAGESHTIA_AJRIT" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT" FromRole="GJEDHAT_PARAMETRAT" ToRole="LAGESHTIA_AJRIT" />
+          <NavigationProperty Name="RRAHJET_ZEMRES" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES" FromRole="GJEDHAT_PARAMETRAT" ToRole="RRAHJET_ZEMRES" />
+          <NavigationProperty Name="TEMPERATURA" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_TEMPERATURA" FromRole="GJEDHAT_PARAMETRAT" ToRole="TEMPERATURA" />
+        </EntityType>
+        <EntityType Name="GJEDHI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FermaID" Type="Int32" />
+          <Property Name="RacaID" Type="Int32" />
+          <Property Name="PrindiID" Type="Int32" />
+          <Property Name="TipiID" Type="Int32" />
+          <Property Name="Datelindja" Type="DateTime" Precision="0" />
+          <Property Name="Gjinia" Type="Boolean" />
+          <Property Name="Vathe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pesha" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="FERMA" Relationship="SMGJModel.FK_GJEDHI_FERMA" FromRole="GJEDHI" ToRole="FERMA" />
+          <NavigationProperty Name="GJEDHAT_PARAMETRAT" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_GJEDHI" FromRole="GJEDHI" ToRole="GJEDHAT_PARAMETRAT" />
+          <NavigationProperty Name="GJEDHI1" Relationship="SMGJModel.FK_GJEDHI_GJEDHI1" FromRole="GJEDHI" ToRole="GJEDHI1" />
+          <NavigationProperty Name="GJEDHI2" Relationship="SMGJModel.FK_GJEDHI_GJEDHI1" FromRole="GJEDHI1" ToRole="GJEDHI" />
+          <NavigationProperty Name="RACA" Relationship="SMGJModel.FK_GJEDHI_RACA" FromRole="GJEDHI" ToRole="RACA" />
+          <NavigationProperty Name="TIPI" Relationship="SMGJModel.FK_GJEDHI_TIPI" FromRole="GJEDHI" ToRole="TIPI" />
+          <NavigationProperty Name="QUMESHTIs" Relationship="SMGJModel.FK_QUMESHTI_GJEDHI" FromRole="GJEDHI" ToRole="QUMESHTI" />
+        </EntityType>
+        <EntityType Name="KOMUNA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emri" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kodi" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="FERMAs" Relationship="SMGJModel.FK_FERMA_KOMUNA" FromRole="KOMUNA" ToRole="FERMA" />
+          <NavigationProperty Name="USERs" Relationship="SMGJModel.FK_USER_KOMUNA" FromRole="KOMUNA" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="KONTAMINIMI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vlera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Niveli" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="QUMESHTIs" Relationship="SMGJModel.FK_QUMESHTI_KONTAMINIMI" FromRole="KONTAMINIMI" ToRole="QUMESHTI" />
+        </EntityType>
+        <EntityType Name="LAGESHTIA_AJRIT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vlera" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHAT_PARAMETRAT" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT" FromRole="LAGESHTIA_AJRIT" ToRole="GJEDHAT_PARAMETRAT" />
+        </EntityType>
+        <EntityType Name="Medium">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emertimi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UniqueEmertimi" Type="Guid" />
+          <Property Name="Shtegu" Type="Binary" MaxLength="300" FixedLength="false" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="USERs" Relationship="SMGJModel.FK_USER_MEDIA" FromRole="Medium" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Action_Metoda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emertimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Renditja" Type="Int32" />
+          <NavigationProperty Name="MENU_ROLI" Relationship="SMGJModel.FK_MENU_ROLI_MENU" FromRole="MENU" ToRole="MENU_ROLI" />
+        </EntityType>
+        <EntityType Name="MENU_ROLI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="RoliID" Type="Int32" Nullable="false" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="MENU" Relationship="SMGJModel.FK_MENU_ROLI_MENU" FromRole="MENU_ROLI" ToRole="MENU" />
+        </EntityType>
+        <EntityType Name="NJOFTIMET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gjedhi_ParametriID" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Precision="3" />
+          <Property Name="Mesazhi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NJOFTIMET1" Relationship="SMGJModel.FK_NJOFTIMET_NJOFTIMET" FromRole="NJOFTIMET" ToRole="NJOFTIMET1" />
+          <NavigationProperty Name="NJOFTIMET2" Relationship="SMGJModel.FK_NJOFTIMET_NJOFTIMET" FromRole="NJOFTIMET1" ToRole="NJOFTIMET" />
+          <NavigationProperty Name="NJOFTIMET_USER" Relationship="SMGJModel.FK_NJOFTIMET_USER_NJOFTIMET" FromRole="NJOFTIMET" ToRole="NJOFTIMET_USER" />
+        </EntityType>
+        <EntityType Name="NJOFTIMET_USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NjoftimetID" Type="Int32" Nullable="false" />
+          <Property Name="PrejID" Type="Int32" Nullable="false" />
+          <Property Name="TekID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NJOFTIMET" Relationship="SMGJModel.FK_NJOFTIMET_USER_NJOFTIMET" FromRole="NJOFTIMET_USER" ToRole="NJOFTIMET" />
+          <NavigationProperty Name="USER" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER" FromRole="NJOFTIMET_USER" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER1" FromRole="NJOFTIMET_USER" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="QUMESHTI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GjedhiID" Type="Int32" Nullable="false" />
+          <Property Name="YndyraID" Type="Int32" />
+          <Property Name="KontaminimiID" Type="Int32" />
+          <Property Name="SasiaProdhuar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DataProdhimit" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataSkadimit" Type="DateTime" Precision="3" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHI" Relationship="SMGJModel.FK_QUMESHTI_GJEDHI" FromRole="QUMESHTI" ToRole="GJEDHI" />
+          <NavigationProperty Name="KONTAMINIMI" Relationship="SMGJModel.FK_QUMESHTI_KONTAMINIMI" FromRole="QUMESHTI" ToRole="KONTAMINIMI" />
+          <NavigationProperty Name="YNDYRA" Relationship="SMGJModel.FK_QUMESHTI_YNDYRA" FromRole="QUMESHTI" ToRole="YNDYRA" />
+        </EntityType>
+        <EntityType Name="QUMESHTI_DETAJET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FermaID" Type="Int32" Nullable="false" />
+          <Property Name="DataProdhimit" Type="DateTime" Precision="3" />
+          <Property Name="TotalLitra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UshqimViqave" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Humbjet" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="FERMA" Relationship="SMGJModel.FK_QUMESHTI_DETAJET_FERMA" FromRole="QUMESHTI_DETAJET" ToRole="FERMA" />
+          <NavigationProperty Name="USER" Relationship="SMGJModel.FK_QUMESHTI_DETAJET_USER" FromRole="QUMESHTI_DETAJET" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="RACA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emertimi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHIs" Relationship="SMGJModel.FK_GJEDHI_RACA" FromRole="RACA" ToRole="GJEDHI" />
+        </EntityType>
+        <EntityType Name="RRAHJET_ZEMRES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vlera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHAT_PARAMETRAT" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES" FromRole="RRAHJET_ZEMRES" ToRole="GJEDHAT_PARAMETRAT" />
+        </EntityType>
+        <EntityType Name="TEMPERATURA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vlera" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHAT_PARAMETRAT" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_TEMPERATURA" FromRole="TEMPERATURA" ToRole="GJEDHAT_PARAMETRAT" />
+        </EntityType>
+        <EntityType Name="TIPI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emertimi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="GJEDHIs" Relationship="SMGJModel.FK_GJEDHI_TIPI" FromRole="TIPI" ToRole="GJEDHI" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Emri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Mbiemri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Datelindja" Type="DateTime" Precision="0" />
+          <Property Name="NrTelefonit" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="NrLeternjoftimit" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KomunaID" Type="Int32" Nullable="false" />
+          <Property Name="MediaID" Type="Int32" />
+          <Property Name="Aktiv" Type="Boolean" />
+          <Property Name="NjoftoEmail" Type="Boolean" />
+          <NavigationProperty Name="KOMUNA" Relationship="SMGJModel.FK_USER_KOMUNA" FromRole="USER" ToRole="KOMUNA" />
+          <NavigationProperty Name="Medium" Relationship="SMGJModel.FK_USER_MEDIA" FromRole="USER" ToRole="Medium" />
+          <NavigationProperty Name="NJOFTIMET_USER" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER" FromRole="USER" ToRole="NJOFTIMET_USER" />
+          <NavigationProperty Name="NJOFTIMET_USER1" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER1" FromRole="USER" ToRole="NJOFTIMET_USER" />
+          <NavigationProperty Name="QUMESHTI_DETAJET" Relationship="SMGJModel.FK_QUMESHTI_DETAJET_USER" FromRole="USER" ToRole="QUMESHTI_DETAJET" />
+          <NavigationProperty Name="USER_IN_FERMA" Relationship="SMGJModel.FK_USER_IN_FERMA_USER" FromRole="USER" ToRole="USER_IN_FERMA" />
+        </EntityType>
+        <EntityType Name="USER_IN_FERMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FermaID" Type="Int32" Nullable="false" />
+          <Property Name="Krijuar" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FERMA" Relationship="SMGJModel.FK_USER_IN_FERMA_FERMA" FromRole="USER_IN_FERMA" ToRole="FERMA" />
+          <NavigationProperty Name="USER" Relationship="SMGJModel.FK_USER_IN_FERMA_USER" FromRole="USER_IN_FERMA" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="YNDYRA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Perqindja" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Krijuar" Type="DateTime" Precision="3" />
+          <Property Name="KrijuarNga" Type="Int32" />
+          <NavigationProperty Name="QUMESHTIs" Relationship="SMGJModel.FK_QUMESHTI_YNDYRA" FromRole="YNDYRA" ToRole="QUMESHTI" />
+        </EntityType>
+        <Association Name="FK_FERMA_KOMUNA">
+          <End Type="SMGJModel.KOMUNA" Role="KOMUNA" Multiplicity="0..1" />
+          <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KOMUNA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FERMA">
+              <PropertyRef Name="KomunaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_FERMA">
+          <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FERMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI">
+              <PropertyRef Name="FermaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_DETAJET_FERMA">
+          <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="1" />
+          <End Type="SMGJModel.QUMESHTI_DETAJET" Role="QUMESHTI_DETAJET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FERMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI_DETAJET">
+              <PropertyRef Name="FermaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_IN_FERMA_FERMA">
+          <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="1" />
+          <End Type="SMGJModel.USER_IN_FERMA" Role="USER_IN_FERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FERMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER_IN_FERMA">
+              <PropertyRef Name="FermaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_GJEDHI">
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHAT_PARAMETRAT" Role="GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GJEDHI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="GjedhiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_LAGESHTIA_AJRIT">
+          <End Type="SMGJModel.LAGESHTIA_AJRIT" Role="LAGESHTIA_AJRIT" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHAT_PARAMETRAT" Role="GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LAGESHTIA_AJRIT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="LageshtiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES">
+          <End Type="SMGJModel.RRAHJET_ZEMRES" Role="RRAHJET_ZEMRES" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHAT_PARAMETRAT" Role="GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRAHJET_ZEMRES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="RrahjeteZemresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHAT_PARAMETRAT_TEMPERATURA">
+          <End Type="SMGJModel.TEMPERATURA" Role="TEMPERATURA" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHAT_PARAMETRAT" Role="GJEDHAT_PARAMETRAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEMPERATURA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHAT_PARAMETRAT">
+              <PropertyRef Name="TemperaturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_GJEDHI1">
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GJEDHI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI1">
+              <PropertyRef Name="PrindiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_RACA">
+          <End Type="SMGJModel.RACA" Role="RACA" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RACA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI">
+              <PropertyRef Name="RacaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GJEDHI_TIPI">
+          <End Type="SMGJModel.TIPI" Role="TIPI" Multiplicity="0..1" />
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GJEDHI">
+              <PropertyRef Name="TipiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_GJEDHI">
+          <End Type="SMGJModel.GJEDHI" Role="GJEDHI" Multiplicity="1" />
+          <End Type="SMGJModel.QUMESHTI" Role="QUMESHTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GJEDHI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI">
+              <PropertyRef Name="GjedhiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_KOMUNA">
+          <End Type="SMGJModel.KOMUNA" Role="KOMUNA" Multiplicity="1" />
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KOMUNA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="KomunaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_KONTAMINIMI">
+          <End Type="SMGJModel.KONTAMINIMI" Role="KONTAMINIMI" Multiplicity="0..1" />
+          <End Type="SMGJModel.QUMESHTI" Role="QUMESHTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KONTAMINIMI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI">
+              <PropertyRef Name="KontaminimiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_MEDIA">
+          <End Type="SMGJModel.Medium" Role="Medium" Multiplicity="0..1" />
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medium">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="MediaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENU_ROLI_MENU">
+          <End Type="SMGJModel.MENU" Role="MENU" Multiplicity="1" />
+          <End Type="SMGJModel.MENU_ROLI" Role="MENU_ROLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MENU_ROLI">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_NJOFTIMET">
+          <End Type="SMGJModel.NJOFTIMET" Role="NJOFTIMET" Multiplicity="1" />
+          <End Type="SMGJModel.NJOFTIMET" Role="NJOFTIMET1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NJOFTIMET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_USER_NJOFTIMET">
+          <End Type="SMGJModel.NJOFTIMET" Role="NJOFTIMET" Multiplicity="1" />
+          <End Type="SMGJModel.NJOFTIMET_USER" Role="NJOFTIMET_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NJOFTIMET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET_USER">
+              <PropertyRef Name="NjoftimetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_USER_USER">
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="SMGJModel.NJOFTIMET_USER" Role="NJOFTIMET_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET_USER">
+              <PropertyRef Name="PrejID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NJOFTIMET_USER_USER1">
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="SMGJModel.NJOFTIMET_USER" Role="NJOFTIMET_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NJOFTIMET_USER">
+              <PropertyRef Name="TekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_YNDYRA">
+          <End Type="SMGJModel.YNDYRA" Role="YNDYRA" Multiplicity="0..1" />
+          <End Type="SMGJModel.QUMESHTI" Role="QUMESHTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YNDYRA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI">
+              <PropertyRef Name="YndyraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QUMESHTI_DETAJET_USER">
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="SMGJModel.QUMESHTI_DETAJET" Role="QUMESHTI_DETAJET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUMESHTI_DETAJET">
+              <PropertyRef Name="KrijuarNga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_IN_FERMA_USER">
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="SMGJModel.USER_IN_FERMA" Role="USER_IN_FERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER_IN_FERMA">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMGJModelStoreContainer" CdmEntityContainer="SMGJEntities">
+          <EntitySetMapping Name="FERMAs">
+            <EntityTypeMapping TypeName="SMGJModel.FERMA">
+              <MappingFragment StoreEntitySet="FERMA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="KomunaID" ColumnName="KomunaID" />
+                <ScalarProperty Name="Emri" ColumnName="Emri" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GJEDHAT_PARAMETRAT">
+            <EntityTypeMapping TypeName="SMGJModel.GJEDHAT_PARAMETRAT">
+              <MappingFragment StoreEntitySet="GJEDHAT_PARAMETRAT">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="DataMatjes" ColumnName="DataMatjes" />
+                <ScalarProperty Name="LageshtiaID" ColumnName="LageshtiaID" />
+                <ScalarProperty Name="TemperaturaID" ColumnName="TemperaturaID" />
+                <ScalarProperty Name="RrahjeteZemresID" ColumnName="RrahjeteZemresID" />
+                <ScalarProperty Name="GjedhiID" ColumnName="GjedhiID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GJEDHIs">
+            <EntityTypeMapping TypeName="SMGJModel.GJEDHI">
+              <MappingFragment StoreEntitySet="GJEDHI">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Pesha" ColumnName="Pesha" />
+                <ScalarProperty Name="Vathe" ColumnName="Vathe" />
+                <ScalarProperty Name="Gjinia" ColumnName="Gjinia" />
+                <ScalarProperty Name="Datelindja" ColumnName="Datelindja" />
+                <ScalarProperty Name="TipiID" ColumnName="TipiID" />
+                <ScalarProperty Name="PrindiID" ColumnName="PrindiID" />
+                <ScalarProperty Name="RacaID" ColumnName="RacaID" />
+                <ScalarProperty Name="FermaID" ColumnName="FermaID" />
+                <ScalarProperty Name="Emri" ColumnName="Emri" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KOMUNAs">
+            <EntityTypeMapping TypeName="SMGJModel.KOMUNA">
+              <MappingFragment StoreEntitySet="KOMUNA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Kodi" ColumnName="Kodi" />
+                <ScalarProperty Name="Emri" ColumnName="Emri" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KONTAMINIMIs">
+            <EntityTypeMapping TypeName="SMGJModel.KONTAMINIMI">
+              <MappingFragment StoreEntitySet="KONTAMINIMI">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Niveli" ColumnName="Niveli" />
+                <ScalarProperty Name="Vlera" ColumnName="Vlera" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LAGESHTIA_AJRIT">
+            <EntityTypeMapping TypeName="SMGJModel.LAGESHTIA_AJRIT">
+              <MappingFragment StoreEntitySet="LAGESHTIA_AJRIT">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Vlera" ColumnName="Vlera" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEDIA">
+            <EntityTypeMapping TypeName="SMGJModel.Medium">
+              <MappingFragment StoreEntitySet="MEDIA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Shtegu" ColumnName="Shtegu" />
+                <ScalarProperty Name="UniqueEmertimi" ColumnName="UniqueEmertimi" />
+                <ScalarProperty Name="Emertimi" ColumnName="Emertimi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENUs">
+            <EntityTypeMapping TypeName="SMGJModel.MENU">
+              <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="Renditja" ColumnName="Renditja" />
+                <ScalarProperty Name="Emertimi" ColumnName="Emertimi" />
+                <ScalarProperty Name="Action_Metoda" ColumnName="Action_Metoda" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENU_ROLI">
+            <EntityTypeMapping TypeName="SMGJModel.MENU_ROLI">
+              <MappingFragment StoreEntitySet="MENU_ROLI">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="RoliID" ColumnName="RoliID" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NJOFTIMETs">
+            <EntityTypeMapping TypeName="SMGJModel.NJOFTIMET">
+              <MappingFragment StoreEntitySet="NJOFTIMET">
+                <ScalarProperty Name="Mesazhi" ColumnName="Mesazhi" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Gjedhi_ParametriID" ColumnName="Gjedhi_ParametriID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NJOFTIMET_USER">
+            <EntityTypeMapping TypeName="SMGJModel.NJOFTIMET_USER">
+              <MappingFragment StoreEntitySet="NJOFTIMET_USER">
+                <ScalarProperty Name="TekID" ColumnName="TekID" />
+                <ScalarProperty Name="PrejID" ColumnName="PrejID" />
+                <ScalarProperty Name="NjoftimetID" ColumnName="NjoftimetID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUMESHTIs">
+            <EntityTypeMapping TypeName="SMGJModel.QUMESHTI">
+              <MappingFragment StoreEntitySet="QUMESHTI">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="DataSkadimit" ColumnName="DataSkadimit" />
+                <ScalarProperty Name="DataProdhimit" ColumnName="DataProdhimit" />
+                <ScalarProperty Name="SasiaProdhuar" ColumnName="SasiaProdhuar" />
+                <ScalarProperty Name="KontaminimiID" ColumnName="KontaminimiID" />
+                <ScalarProperty Name="YndyraID" ColumnName="YndyraID" />
+                <ScalarProperty Name="GjedhiID" ColumnName="GjedhiID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUMESHTI_DETAJET">
+            <EntityTypeMapping TypeName="SMGJModel.QUMESHTI_DETAJET">
+              <MappingFragment StoreEntitySet="QUMESHTI_DETAJET">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Humbjet" ColumnName="Humbjet" />
+                <ScalarProperty Name="UshqimViqave" ColumnName="UshqimViqave" />
+                <ScalarProperty Name="TotalLitra" ColumnName="TotalLitra" />
+                <ScalarProperty Name="DataProdhimit" ColumnName="DataProdhimit" />
+                <ScalarProperty Name="FermaID" ColumnName="FermaID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RACAs">
+            <EntityTypeMapping TypeName="SMGJModel.RACA">
+              <MappingFragment StoreEntitySet="RACA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Emertimi" ColumnName="Emertimi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRAHJET_ZEMRES">
+            <EntityTypeMapping TypeName="SMGJModel.RRAHJET_ZEMRES">
+              <MappingFragment StoreEntitySet="RRAHJET_ZEMRES">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Vlera" ColumnName="Vlera" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPERATURAs">
+            <EntityTypeMapping TypeName="SMGJModel.TEMPERATURA">
+              <MappingFragment StoreEntitySet="TEMPERATURA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Vlera" ColumnName="Vlera" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPIs">
+            <EntityTypeMapping TypeName="SMGJModel.TIPI">
+              <MappingFragment StoreEntitySet="TIPI">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Emertimi" ColumnName="Emertimi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="SMGJModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="NjoftoEmail" ColumnName="NjoftoEmail" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+                <ScalarProperty Name="KomunaID" ColumnName="KomunaID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NrLeternjoftimit" ColumnName="NrLeternjoftimit" />
+                <ScalarProperty Name="NrTelefonit" ColumnName="NrTelefonit" />
+                <ScalarProperty Name="Datelindja" ColumnName="Datelindja" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Mbiemri" ColumnName="Mbiemri" />
+                <ScalarProperty Name="Emri" ColumnName="Emri" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_IN_FERMA">
+            <EntityTypeMapping TypeName="SMGJModel.USER_IN_FERMA">
+              <MappingFragment StoreEntitySet="USER_IN_FERMA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="FermaID" ColumnName="FermaID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YNDYRAs">
+            <EntityTypeMapping TypeName="SMGJModel.YNDYRA">
+              <MappingFragment StoreEntitySet="YNDYRA">
+                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
+                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
+                <ScalarProperty Name="Perqindja" ColumnName="Perqindja" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
