@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SMGJ.Helpers;
 using SMGJ.Models;
 
 namespace SMGJ.Controllers
@@ -17,7 +19,7 @@ namespace SMGJ.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        SMGJDB db = new SMGJDB();
         public AccountController()
         {
         }
@@ -70,12 +72,15 @@ namespace SMGJ.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var message = string.Join(" | ", ModelState.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage));
                 return View(model);
             }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await PasswordSignIn(model.Email, model.Password, model.RememberMe, false); 
             switch (result)
             {
                 case SignInStatus.Success:
@@ -90,7 +95,56 @@ namespace SMGJ.Controllers
                     return View(model);
             }
         }
+        public async Task<SignInStatus> PasswordSignIn(string userName, string password, bool isPersistent, bool shouldLockout)
+        {
+            var user = await UserManager.FindByNameAsync(userName);
 
+            if (user == null)
+            {
+
+                await db.SaveChangesAsync();
+                return SignInStatus.Failure;
+            }
+
+            if (UserManager.IsLockedOutAsync(user.Id).Result)
+            {
+                return SignInStatus.LockedOut;
+            }
+
+            if (await UserManager.CheckPasswordAsync(user, password))
+            {
+                var userdb = await db.USERs.FirstOrDefaultAsync(q => q.UserId == user.Id);
+                if (userdb.Aktiv == false)
+                    return SignInStatus.Failure; 
+
+                var userIdentity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                if (isPersistent)
+                {
+                    AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, userIdentity);
+                }
+                else
+                {
+                    AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, userIdentity);
+                } 
+                await db.SaveChangesAsync();  
+                var culture = CultureHelper.GetImplementedCulture("sq-AL");
+                // Save culture in a cookie
+                HttpCookie cookie = Request.Cookies["_culture"];
+                if (cookie != null)
+                    cookie.Value = culture;   // update cookie value
+                else
+                {
+                    cookie = new HttpCookie("_culture");
+                    cookie.Value = culture;
+                    cookie.Expires = DateTime.Now.AddYears(1);
+                }
+                Response.Cookies.Add(cookie);
+                return SignInStatus.Success;
+            }
+
+            await db.SaveChangesAsync();
+            return SignInStatus.Failure;
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

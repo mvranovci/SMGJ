@@ -177,6 +177,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Microsoft\AspNet\Identity\UserManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\dbModel.Context.cs">
@@ -2023,7 +2024,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\theme\assets\fonts\" />
     <Folder Include="file\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
