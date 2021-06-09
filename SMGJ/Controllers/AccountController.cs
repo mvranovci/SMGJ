@@ -13,11 +13,12 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SMGJ.Helpers;
 using SMGJ.Models;
+using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
-     [Authorize]
-    public class AccountController : Controller
+    [Authorize]
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -26,7 +27,7 @@ namespace SMGJ.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -38,9 +39,9 @@ namespace SMGJ.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -64,6 +65,22 @@ namespace SMGJ.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> UserRegister( )
+        {
+            var user = await GetUser();
+            RegisterViewModelUser model = new RegisterViewModelUser();
+            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList(); 
+            var modeli = new List<SelectListItem>();
+            foreach (var item in gjinia)
+            { 
+                modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false }); 
+            } 
+            ViewBag.Gjinia = modeli;
+            ViewBag.KomunaID = await loadKomuna(null); 
+            return View(model);
+        }
         //
         // POST: /Account/Login
         [HttpPost]
@@ -81,7 +98,7 @@ namespace SMGJ.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await PasswordSignIn(model.Email, model.Password, model.RememberMe, false); 
+            var result = await PasswordSignIn(model.Email, model.Password, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -101,7 +118,7 @@ namespace SMGJ.Controllers
             var user = await UserManager.FindByNameAsync(userName);
 
             if (user == null)
-            { 
+            {
                 return SignInStatus.Failure;
             }
 
@@ -114,7 +131,7 @@ namespace SMGJ.Controllers
             {
                 var userdb = await db.USERs.FirstOrDefaultAsync(q => q.UserId == user.Id);
                 if (userdb.Aktiv == false)
-                    return SignInStatus.Failure; 
+                    return SignInStatus.Failure;
 
                 var userIdentity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                 if (isPersistent)
@@ -124,8 +141,8 @@ namespace SMGJ.Controllers
                 else
                 {
                     AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, userIdentity);
-                } 
-                await db.SaveChangesAsync();  
+                }
+                await db.SaveChangesAsync();
                 var culture = CultureHelper.GetImplementedCulture("sq-AL");
                 // Save culture in a cookie
                 HttpCookie cookie = Request.Cookies["_culture"];
@@ -173,7 +190,7 @@ namespace SMGJ.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -208,8 +225,8 @@ namespace SMGJ.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                   
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

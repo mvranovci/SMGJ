@@ -109,4 +109,41 @@ namespace SMGJ.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+    public class RegisterViewModelUser
+    {
+        public int ID { get; set; }
+        public string username { get; set; }
+
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string EmailAdresa { get; set; }
+
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        [StringLength(100, ErrorMessage = "Fjalëkalimi duhet të jetë minimum {2} karaktere.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string UserPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("UserPassword", ErrorMessage = "Fjalëkalimi dhe konfirmo fjalëkalimin nuk përputhen.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        public string Emri { get; set; }
+
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        public string Mbiemri { get; set; }
+
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        public int Gjinia { get; set; }
+
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        public int KomunaID { get; set; }
+         
+        public string NumriLeternjoftimit { get; set; }
+
+   
+    }
 }

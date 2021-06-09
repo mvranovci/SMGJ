@@ -1,7 +1,236 @@
-﻿
+﻿@model SMGJ.Models.RegisterViewModelUser
 @{
     ViewBag.Title = "UserRegister";
+    Layout = null;
+    var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
 }
+    <head>
+        <link rel="stylesheet" href="~/Content/theme/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/theme/vendor/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/Content/theme/assets/css/styles.css">
+        <link rel="stylesheet" href="~/Content/theme/themes/theme-1.css" id="skin_color" />
+        <link href="~/Content/theme/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
+    </head>
+    <body class="login">
+        <!-- start: REGISTRATION -->
+        <div class="row">
+            <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                <div class="logo margin-top-30">
+                    <img src="assets/images/logo.png" alt="Clip-Two" />
+                </div>
+                <!-- start: REGISTER BOX -->
+                <div class="box-register">
+                    <form id="forma" method="post">
+                        <fieldset>
+                            <legend>
+                                Sign Up
+                            </legend>
+                            <p>
+                                Enter your personal details below:
+                            </p>
 
-<h2>UserRegister</h2>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Emri, htmlAttributes: new { @class = "form-control ", @placeholder = "Emri" ,@id="emri1"})
+                                @Html.ValidationMessageFor(model => model.NumriLeternjoftimit, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Mbiemri, htmlAttributes: new { @class = "form-control ", @placeholder = "Mbiemri" })
+                                @Html.ValidationMessageFor(model => model.Mbiemri, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.NumriLeternjoftimit, htmlAttributes: new { @class = "form-control ", @placeholder = "Numri i leternjoftimit" })
+                                @Html.ValidationMessageFor(model => model.NumriLeternjoftimit, "", new { @class = "text-danger" })
+                            </div>
+
+                            @*<div class="form-group">
+                                <label class="block">
+                                    Gender
+                                </label>
+                                <div class="clip-radio radio-primary">
+                                    <input type="radio" id="rg-female" name="gender" value="female">
+                                    <label for="rg-female">
+                                        Female
+                                    </label>
+                                    <input type="radio" id="rg-male" name="gender" value="male">
+                                    <label for="rg-male">
+                                        Male
+                                    </label>
+                                </div>
+                            </div>*@
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.KomunaID, "Komuna", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.KomunaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                                @Html.ValidationMessageFor(model => model.KomunaID, "", new { @class = "text-danger symbol" })
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Gjinia
+                                </label><br />
+                                @foreach (var item in gjinia)
+                                {
+                                    <div class="clip-radio radio-primary radio-inline">
+                                        <input type="radio" id="@item.Value" name="selectone" value="@item.Value">
+                                        <label for="@item.Value">
+                                            @item.Text
+                                        </label>
+                                    </div>
+                                }
+                                @Html.ValidationMessageFor(m => m.Gjinia, "", new { @class = "text-danger" })
+                            </div>
+                            <p>
+                                Enter your account details below:
+                            </p>
+                            <div class="form-group">
+                                <span class="input-icon">
+                                    @Html.TextBoxFor(model => model.EmailAdresa, htmlAttributes: new { @class = "form-control ", @placeholder = "Email" })
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon">
+                                    @Html.PasswordFor(model => model.UserPassword, htmlAttributes: new { @class = "form-control ", @placeholder = "Password" })
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon">
+                                    @Html.PasswordFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "form-control ", @placeholder = "Confirm Password" })
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                            <div class="form-actions">
+                                <p>
+                                    Already have an account?
+                                    <a href="login_signin.html">
+                                        Log-in
+                                    </a>
+                                </p>
+                                <button type="button" class="btn btn-primary" onclick="regjistro(this)">Regjistro
+                                <i class="fa fa-arrow-circle-right"></i></button>
+                                 
+                            </div>
+                        </fieldset>
+                    </form>
+                    <!-- start: COPYRIGHT -->
+                    <div class="copyright">
+                        &copy; <span class="current-year"></span><span class="text-bold text-uppercase"> ClipTheme</span>. <span>All rights reserved</span>
+                    </div>
+                    <!-- end: COPYRIGHT -->
+                </div>
+                <!-- end: REGISTER BOX -->
+            </div>
+        </div>
+        <script src="~/Content/theme/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/theme/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/Content/theme/vendor/jquery-validation/jquery.validate.min.js"></script>
+        <script src="~/Content/theme/assets/js/main.js"></script>
+        <script src="~/Content/theme/assets/js/form-validation.js"></script>
+        <script src="~/Content/theme/assets/js/login.js"></script>
+        <script src="~/Content/theme/vendor/select2/select2.min.js"></script>
+        <script>
+            jQuery(document).ready(function () {
+                Main.init();
+                Login.init();
+            });
+        </script>
+        <script>
+
+            runValidator1 = function () {
+                var form1 = $('#forma');
+                var errorHandler1 = $('.errorHandler', form1);
+                var successHandler1 = $('.successHandler', form1);
+                $('#forma').validate({
+                    errorElement: "span", // contain the error msg in a span tag
+                    errorClass: 'help-block',
+                    errorPlacement: function (error, element) { // render error placement for each input type
+                        if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                            error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                        } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                            error.insertAfter($(element).closest('.form-group').children('div'));
+                        } else {
+                            error.insertAfter(element);
+                            // for other inputs, just perform default behavior
+                        }
+                    },
+                    ignore: "",
+                    rules: {
+                        UserPassword: {
+                            required: true,
+                            minlength: 6
+                        },
+                        emri1: {
+                            required: true  
+                        },
+                        ConfirmPassword: {
+                            required: true,
+                            equalTo: "#UserPassword"
+                        },
+                        selectone: {
+                            required: true
+                        },
+
+                        EmailAdresa: {
+                            required: true,
+                            email: true
+                        }
+                    },
+                    messages: {
+                        UserPassword: {
+                            minlength: "Gjatesia e passwordit duhet te jete minumum 6 karaktere",
+                            //   regex: "Fjalekalimi duhet te permbaje nje karakter, nje shkronje te madhe, nje shkronje te vogel dhe gjatesia te jete minimum 6",
+                        },
+                        EmailAdresa: {
+                            required: "We need your email address to contact you",
+                            email: "Your email address must be in the format of name@domain.com"
+                        },
+
+                    },
+                    invalidHandler: function (event, validator) { //display error alert on form submit
+                        successHandler1.hide();
+                        errorHandler1.show();
+                    },
+                    highlight: function (element) {
+                        $(element).closest('.help-block').removeClass('valid');
+                        // display OK icon
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                        // add the Bootstrap error class to the control group
+                    },
+                    unhighlight: function (element) { // revert the change done by hightlight
+                        $(element).closest('.form-group').removeClass('has-error');
+                        // set error class to the control group
+                    },
+                    success: function (label, element) {
+                        label.addClass('help-block valid');
+                        // mark the current input as valid and display OK icon
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                    },
+                    submitHandler: function (form) {
+                        successHandler1.show();
+                        errorHandler1.hide();
+                        // submit form
+                        //$('#form').submit();
+                    }
+                });
+            };
+            var regjistro = function (btn) {
+                runValidator1();
+                var emri = $("#Emri").val();
+                alert(emri);
+                if ($("#forma").valid() === true) {
+                   alert("yes");
+
+                }
+
+            };
+            jQuery(document).ready(function () {
+
+                $(".select2").select2(
+                    {
+                        width: '100%'
+                    });
+            })
+        </script>
+        <!-- end: JavaScript Event Handlers for this page -->
+        <!-- end: CLIP-TWO JAVASCRIPTS -->
+    </body>
 

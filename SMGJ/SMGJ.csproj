@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\dbModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -194,6 +195,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnumsToSelectList.cs" />
     <Compile Include="Models\FERMA.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

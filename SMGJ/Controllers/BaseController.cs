@@ -111,7 +111,7 @@ namespace SMGJ.Controllers
         }
         public async Task<SelectList> loadKomuna(int? selected)
         { 
-            var allvalues = await db.KOMUNAs.ToListAsync();
+            var allvalues = await  db.KOMUNAs.ToListAsync();
 
             if (selected.HasValue)
                 return new SelectList(allvalues, "ID", "Emri", selected.Value);
