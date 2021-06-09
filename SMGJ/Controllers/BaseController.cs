@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -11,7 +12,8 @@ using SMGJ.Helpers;
 using SMGJ.Models;
 
 namespace SMGJ.Controllers
-{
+{ 
+    [Authorize]
     public class BaseController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -91,6 +93,7 @@ namespace SMGJ.Controllers
                         usertotal.Emri = user.Emri;
                         usertotal.Mbiemri = user.Mbiemri;
                         usertotal.NumriLeternjoftimit = user.NrLeternjoftimit;
+                        usertotal.RoleID = usertotal.RoleID;
                         Session["User"] = usertotal;
                     }
                     catch (Exception)
@@ -105,6 +108,15 @@ namespace SMGJ.Controllers
                 usertotal = (GetUser)Session["User"];
             }
             return usertotal;
+        }
+        public async Task<SelectList> loadKomuna(int? selected)
+        { 
+            var allvalues = await db.KOMUNAs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emri", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emri");
         }
         public ApplicationUserManager UserManager
         {

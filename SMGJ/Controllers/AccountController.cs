@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,7 +16,7 @@ using SMGJ.Models;
 
 namespace SMGJ.Controllers
 {
-    [Authorize]
+     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -62,7 +64,6 @@ namespace SMGJ.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
         //
         // POST: /Account/Login
         [HttpPost]
@@ -100,9 +101,7 @@ namespace SMGJ.Controllers
             var user = await UserManager.FindByNameAsync(userName);
 
             if (user == null)
-            {
-
-                await db.SaveChangesAsync();
+            { 
                 return SignInStatus.Failure;
             }
 
@@ -437,6 +436,7 @@ namespace SMGJ.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[AllowAnonymous]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

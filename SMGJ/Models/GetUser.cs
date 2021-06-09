@@ -16,4 +16,5 @@ namespace SMGJ.Models
         public int RoleID { get; set; } 
     } 
 
+
 }
