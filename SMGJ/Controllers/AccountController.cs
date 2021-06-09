@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -80,6 +81,96 @@ namespace SMGJ.Controllers
             ViewBag.Gjinia = modeli;
             ViewBag.KomunaID = await loadKomuna(null); 
             return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> UserRegister_Post(RegisterViewModelUser model)
+        {
+            //var user = await GetUser();
+            MessageJs returnmodel = new MessageJs();
+            if (ModelState.IsValid)
+            {
+               
+                var user = new ApplicationUser { UserName = model.username, Email = model.EmailAdresa };
+                var result = await UserManager.CreateAsync(user, model.UserPassword);
+                if (result.Succeeded)
+                {
+                    try
+                    {
+
+                        var userfound = await UserManager.FindByEmailAsync(model.EmailAdresa);
+                         int roli = (int)Roli.Fermer;
+                        var rolefound = (new ApplicationDbContext()).Roles.FirstOrDefault(q => q.Id == roli.ToString());
+
+                        USER new_user = new USER();
+                        new_user.UserId = userfound.Id;
+                        new_user.Emri = model.Emri;
+                        new_user.Mbiemri = model.Mbiemri;
+                        new_user.RoleID = roli;
+                        new_user.KomunaID = model.KomunaID;
+                        new_user.Email = model.EmailAdresa;
+                        new_user.NrLeternjoftimit = model.NumriLeternjoftimit;
+
+                        ASCIIEncoding binarypass = new ASCIIEncoding();
+                        string encrypted = Encrypt(model.UserPassword);
+                        byte[] passwordArray = binarypass.GetBytes(encrypted);
+                        new_user.Password = passwordArray;
+                        new_user.RandomNumber = RandomString(6, false);
+                        db.USERs.Add(new_user);
+                        await UserManager.AddToRoleAsync(userfound.Id, rolefound.Name.ToString());
+                        await db.SaveChangesAsync();
+                        returnmodel.status = true;
+                        returnmodel.Mesazhi = "Perdoruesi u regjistrua me sukses";
+                        return Json(returnmodel, JsonRequestBehavior.AllowGet);
+                    }
+                    catch
+                    {
+                        await UserManager.DeleteAsync(user);
+                        returnmodel.status = false;
+                        returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+                        return Json(returnmodel, JsonRequestBehavior.AllowGet);
+                    }
+
+
+
+                }
+                else
+                {
+                   
+                    returnmodel.status = false;
+                    returnmodel.Mesazhi = "Perdoruesi egziston";
+                    return Json(returnmodel, JsonRequestBehavior.DenyGet);
+                }
+            }
+
+            else
+            {
+
+                var message = string.Join(" | ", ModelState.Values
+                           .SelectMany(v => v.Errors)
+                           .Select(e => e.ErrorMessage));
+
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+            }
+        }
+
+        private string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 1; i < size + 1; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            else
+                return builder.ToString();
         }
         //
         // POST: /Account/Login
@@ -451,11 +542,11 @@ namespace SMGJ.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //[AllowAnonymous]
+
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
+            Session["User"] = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

@@ -144,6 +144,8 @@ namespace SMGJ.Models
          
         public string NumriLeternjoftimit { get; set; }
 
+        public USER user { get; set; }
+
    
     }
 }

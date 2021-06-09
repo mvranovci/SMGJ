@@ -226,6 +226,7 @@
     <Compile Include="Models\MENU_ROLI.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageJs.cs" />
     <Compile Include="Models\NJOFTIMET.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -2021,6 +2022,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\PROFILI\Index.cshtml" />
     <Content Include="Views\Account\UserRegister.cshtml" />
+    <Content Include="Views\Home\GetUserHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -36,6 +36,9 @@ namespace SMGJ.Models
         public Nullable<int> MediaID { get; set; }
         public Nullable<bool> Aktiv { get; set; }
         public Nullable<bool> NjoftoEmail { get; set; }
+        public Nullable<bool> Gjinia { get; set; }
+        public byte[] Password { get; set; }
+        public string RandomNumber { get; set; }
     
         public virtual KOMUNA KOMUNA { get; set; }
         public virtual Medium Medium { get; set; }

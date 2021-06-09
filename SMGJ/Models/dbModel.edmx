@@ -203,6 +203,9 @@
           <Property Name="MediaID" Type="int" />
           <Property Name="Aktiv" Type="bit" />
           <Property Name="NjoftoEmail" Type="bit" />
+          <Property Name="Gjinia" Type="bit" />
+          <Property Name="Password" Type="varbinary(max)" />
+          <Property Name="RandomNumber" Type="char" MaxLength="6" />
         </EntityType>
         <EntityType Name="USER_IN_FERMA">
           <Key>
@@ -966,6 +969,9 @@
           <Property Name="MediaID" Type="Int32" />
           <Property Name="Aktiv" Type="Boolean" />
           <Property Name="NjoftoEmail" Type="Boolean" />
+          <Property Name="Gjinia" Type="Boolean" />
+          <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="RandomNumber" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="KOMUNA" Relationship="SMGJModel.FK_USER_KOMUNA" FromRole="USER" ToRole="KOMUNA" />
           <NavigationProperty Name="Medium" Relationship="SMGJModel.FK_USER_MEDIA" FromRole="USER" ToRole="Medium" />
           <NavigationProperty Name="NJOFTIMET_USER" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER" FromRole="USER" ToRole="NJOFTIMET_USER" />
@@ -1478,6 +1484,9 @@
           <EntitySetMapping Name="USERs">
             <EntityTypeMapping TypeName="SMGJModel.USER">
               <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="RandomNumber" ColumnName="RandomNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gjinia" ColumnName="Gjinia" />
                 <ScalarProperty Name="NjoftoEmail" ColumnName="NjoftoEmail" />
                 <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
                 <ScalarProperty Name="MediaID" ColumnName="MediaID" />

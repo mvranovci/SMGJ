@@ -18,5 +18,13 @@ namespace SMGJ.Helpers
             Asnje = 3
 
         }
+
+        public enum Roli
+        {
+            
+            Administrator = 1,        
+            Fermer = 2
+
+        }
     }
 }
