@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<SMGJ.Models.MENU>
 @{
     ViewBag.Title = "Index";
+    int t = 1;
 }
 <section id="page-title">
     <div class="row">
@@ -60,7 +61,7 @@
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                                             <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                            <a href="" onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -73,3 +74,35 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        var deletemenu = function (btn) { 
+            var obj = { ID: $(btn).data("menuid")  };  
+                $.ajax({
+                    url: "@Url.Action("DeleteMenu", "MENU")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            location.reload();
+                        }
+                        else {
+                            alert(rs.Message, "error");
+                        } 
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                }); 
+            };
+    </script>
+
+}
+
+

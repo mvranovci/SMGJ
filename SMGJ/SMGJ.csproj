@@ -2027,6 +2027,7 @@
     <Content Include="Views\Home\GetUserHome.cshtml" />
     <Content Include="Views\MENU\Index.cshtml" />
     <Content Include="Views\MENU\Create.cshtml" />
+    <Content Include="Views\MENU\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,18 +1,20 @@
 ﻿@model SMGJ.Models.MENU
 @{
-    ViewBag.Title = "Create";
-} 
+    ViewBag.Title = "Edit";
+}
+@Html.HiddenFor(m => m.ID)
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="mainTitle">Regjistrimi i menu-se</h1>
+            <h1 class="mainTitle">Editimi i menu-se</h1>
         </div>
     </div>
 </section>
 <div class="container-fluid container-fullw bg-white">
     <div class="panel panel-white">
         <div class="panel-body">
-            <form id="forma"> 
+            <form id="forma">
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -66,10 +68,10 @@
         </div>
         <div class="panel-footer clearfix">
             <div class="col-md-12">
-                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="regjistro(this)"> 
+                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="edito(this)">
                     Register <i class="fa fa-arrow-circle-right"></i>
                 </button>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
@@ -107,7 +109,7 @@
                     Renditja: {
                         required: true,
                         number: true
-                        
+
                     }
                 },
                 invalidHandler: function (event, validator) { //display error alert on form submit
@@ -137,10 +139,11 @@
                 }
             });
         };
-        var regjistro = function (btn) {
-                runValidator1(); 
-                if ($("#forma").valid() === true) { 
-                    var obj = {  
+        var edito = function (btn) {
+                runValidator1();
+                if ($("#forma").valid() === true) {
+                    var obj = {
+                    ID: $("#ID").val(),
                     Controller: $("#Controller").val(),
                     Action_Metoda: $("#Action_Metoda").val(),
                     Emertimi: $("#Emertimi").val(),
@@ -149,7 +152,7 @@
                 };
                 var url_redirect = '@Url.Action("Index", "MENU")';
                 $.ajax({
-                    url: "@Url.Action("Create", "MENU")",
+                    url: "@Url.Action("Edit", "MENU")",
                     cache: false,
                     type: "POST",
                     dataType: "json",
@@ -172,9 +175,10 @@
                     }
                 });
             }
-             
+
             };
     </script>
 
 
 }
+
