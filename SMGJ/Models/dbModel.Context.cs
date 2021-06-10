@@ -25,6 +25,7 @@ namespace SMGJ.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<FERMA> FERMAs { get; set; }
         public virtual DbSet<GJEDHAT_PARAMETRAT> GJEDHAT_PARAMETRAT { get; set; }
         public virtual DbSet<GJEDHI> GJEDHIs { get; set; }
@@ -40,10 +41,10 @@ namespace SMGJ.Models
         public virtual DbSet<QUMESHTI_DETAJET> QUMESHTI_DETAJET { get; set; }
         public virtual DbSet<RACA> RACAs { get; set; }
         public virtual DbSet<RRAHJET_ZEMRES> RRAHJET_ZEMRES { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TEMPERATURA> TEMPERATURAs { get; set; }
         public virtual DbSet<TIPI> TIPIs { get; set; }
         public virtual DbSet<USER> USERs { get; set; }
-        public virtual DbSet<USER_IN_FERMA> USER_IN_FERMA { get; set; }
         public virtual DbSet<YNDYRA> YNDYRAs { get; set; }
     }
 }

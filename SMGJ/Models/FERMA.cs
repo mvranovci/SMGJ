@@ -19,7 +19,7 @@ namespace SMGJ.Models
         {
             this.GJEDHIs = new HashSet<GJEDHI>();
             this.QUMESHTI_DETAJET = new HashSet<QUMESHTI_DETAJET>();
-            this.USER_IN_FERMA = new HashSet<USER_IN_FERMA>();
+            this.USERs = new HashSet<USER>();
         }
     
         public int ID { get; set; }
@@ -34,6 +34,6 @@ namespace SMGJ.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QUMESHTI_DETAJET> QUMESHTI_DETAJET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER_IN_FERMA> USER_IN_FERMA { get; set; }
+        public virtual ICollection<USER> USERs { get; set; }
     }
 }

@@ -20,11 +20,11 @@ namespace SMGJ.Models
             this.NJOFTIMET_USER = new HashSet<NJOFTIMET_USER>();
             this.NJOFTIMET_USER1 = new HashSet<NJOFTIMET_USER>();
             this.QUMESHTI_DETAJET = new HashSet<QUMESHTI_DETAJET>();
-            this.USER_IN_FERMA = new HashSet<USER_IN_FERMA>();
         }
     
         public int ID { get; set; }
         public string UserId { get; set; }
+        public Nullable<int> FermaID { get; set; }
         public string Emri { get; set; }
         public string Mbiemri { get; set; }
         public int RoleID { get; set; }
@@ -40,6 +40,7 @@ namespace SMGJ.Models
         public byte[] Password { get; set; }
         public string RandomNumber { get; set; }
     
+        public virtual FERMA FERMA { get; set; }
         public virtual KOMUNA KOMUNA { get; set; }
         public virtual Medium Medium { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -48,7 +49,5 @@ namespace SMGJ.Models
         public virtual ICollection<NJOFTIMET_USER> NJOFTIMET_USER1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QUMESHTI_DETAJET> QUMESHTI_DETAJET { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER_IN_FERMA> USER_IN_FERMA { get; set; }
     }
 }

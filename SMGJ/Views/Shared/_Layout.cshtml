@@ -1,7 +1,11 @@
 ﻿<!DOCTYPE html>
+@using SMGJ.Models
 @{
 
     SMGJ.Models.SMGJDB db = new SMGJ.Models.SMGJDB();
+   
+    GetUser user = (GetUser)Session["User"];
+    int roli = Session["RoliID"] != null ? user.RoleID : 0;
 }
 <html>
 <head>
@@ -65,24 +69,49 @@
 
                         //     var m = db.MENUs.Where(q=>q.Controller == controller && q.Action_Metoda == "action").tolist();
 
+
+                        var current_controller = ViewContext.RouteData.Values["controller"].ToString();
+                        var current_action = ViewContext.RouteData.Values["action"].ToString();
+                        
+                        string current_menu = "/" + current_controller + "/" + current_action;
+
+                        var lista_menuve = (from i in db.MENUs
+
+                                            let string_url = (i.Controller + "/" + i.Action_Metoda == "" ? "javascript:void(0)" :
+                                              "/" + i.Controller + "/" + i.Action_Metoda)
+
+                                            let css = current_menu.ToLower() == string_url.ToLower() ? "active open" : ""
+
+                                            join m in db.MENU_ROLI on i.ID equals m.MenuID
+                                            where m.RoliID == roli
+
+                                            orderby i.Renditja select new Menute
+                                            {
+                                                Pershkrimi = i.Emertimi,
+                                                Url = string_url,
+                                                css = css
+                                            }).ToList();
+
+
+
                     }
                     <ul class="main-navigation-menu">
-                        @*@foreach (var item in m)
+                        @foreach (var item in lista_menuve)
                             {
-                                  <li class="active open">
-                                <a href="">
+                                  <li class="@item.css">
+                                <a href="@item.Url">
                                     <div class="item-content">
                                         <div class="item-media">
                                             <i class="ti-home"></i>
                                         </div>
                                         <div class="item-inner">
-                                            <span class="title"> Dashboard </span>
+                                            <span class="title"> @item.Pershkrimi </span>
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                            }*@
-                        <li class="active open">
+                            }
+                        @*<li class="active open">
                             <a href="index.html">
                                 <div class="item-content">
                                     <div class="item-media">
@@ -93,7 +122,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </li>
+                        </li>*@
                     </ul>
                 </nav>
             </div>

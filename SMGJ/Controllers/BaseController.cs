@@ -100,7 +100,7 @@ namespace SMGJ.Controllers
                         usertotal.Emri = user.Emri;
                         usertotal.Mbiemri = user.Mbiemri;
                         usertotal.NumriLeternjoftimit = user.NrLeternjoftimit;
-                        usertotal.RoleID = usertotal.RoleID;
+                        usertotal.RoleID = user.RoleID;
                         Session["User"] = usertotal;
                         Session["RoliID"] = usertotal.RoleID;
                     }

@@ -12,15 +12,11 @@ namespace SMGJ.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USER_IN_FERMA
+    public partial class C__MigrationHistory
     {
-        public int ID { get; set; }
-        public int UserID { get; set; }
-        public int FermaID { get; set; }
-        public System.DateTime Krijuar { get; set; }
-        public int KrijuarNga { get; set; }
-    
-        public virtual FERMA FERMA { get; set; }
-        public virtual USER USER { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

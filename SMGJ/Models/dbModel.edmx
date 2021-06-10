@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SMGJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -168,6 +178,16 @@
           <Property Name="Krijuar" Type="datetime" />
           <Property Name="KrijuarNga" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TEMPERATURA">
           <Key>
             <PropertyRef Name="ID" />
@@ -192,6 +212,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="FermaID" Type="int" />
           <Property Name="Emri" Type="varchar" MaxLength="100" />
           <Property Name="Mbiemri" Type="varchar" MaxLength="100" />
           <Property Name="RoleID" Type="int" Nullable="false" />
@@ -206,16 +227,6 @@
           <Property Name="Gjinia" Type="bit" />
           <Property Name="Password" Type="varbinary(max)" />
           <Property Name="RandomNumber" Type="char" MaxLength="6" />
-        </EntityType>
-        <EntityType Name="USER_IN_FERMA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="FermaID" Type="int" Nullable="false" />
-          <Property Name="Krijuar" Type="datetime" Nullable="false" />
-          <Property Name="KrijuarNga" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="YNDYRA">
           <Key>
@@ -334,7 +345,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MENU_ROLI_MENU">
+        <Association Name="FK_MENU_ROLI_Controller_Actions_Menu">
           <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
           <End Role="MENU_ROLI" Type="Self.MENU_ROLI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -454,27 +465,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USER_IN_FERMA_FERMA">
-          <End Role="FERMA" Type="Self.FERMA" Multiplicity="1" />
-          <End Role="USER_IN_FERMA" Type="Self.USER_IN_FERMA" Multiplicity="*" />
+        <Association Name="FK_USER_FERMA">
+          <End Role="FERMA" Type="Self.FERMA" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FERMA">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="USER_IN_FERMA">
+            <Dependent Role="USER">
               <PropertyRef Name="FermaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_USER_IN_FERMA_USER">
-          <End Role="USER" Type="Self.USER" Multiplicity="1" />
-          <End Role="USER_IN_FERMA" Type="Self.USER_IN_FERMA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="USER_IN_FERMA">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -503,6 +502,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SMGJModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FERMA" EntityType="Self.FERMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="Self.GJEDHAT_PARAMETRAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHI" EntityType="Self.GJEDHI" Schema="dbo" store:Type="Tables" />
@@ -518,10 +518,10 @@
           <EntitySet Name="QUMESHTI_DETAJET" EntityType="Self.QUMESHTI_DETAJET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RACA" EntityType="Self.RACA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRAHJET_ZEMRES" EntityType="Self.RRAHJET_ZEMRES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TEMPERATURA" EntityType="Self.TEMPERATURA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPI" EntityType="Self.TIPI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USER_IN_FERMA" EntityType="Self.USER_IN_FERMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YNDYRA" EntityType="Self.YNDYRA" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_FERMA_KOMUNA" Association="Self.FK_FERMA_KOMUNA">
             <End Role="KOMUNA" EntitySet="KOMUNA" />
@@ -559,7 +559,7 @@
             <End Role="TIPI" EntitySet="TIPI" />
             <End Role="GJEDHI" EntitySet="GJEDHI" />
           </AssociationSet>
-          <AssociationSet Name="FK_MENU_ROLI_MENU" Association="Self.FK_MENU_ROLI_MENU">
+          <AssociationSet Name="FK_MENU_ROLI_Controller_Actions_Menu" Association="Self.FK_MENU_ROLI_Controller_Actions_Menu">
             <End Role="MENU" EntitySet="MENU" />
             <End Role="MENU_ROLI" EntitySet="MENU_ROLI" />
           </AssociationSet>
@@ -599,13 +599,9 @@
             <End Role="YNDYRA" EntitySet="YNDYRA" />
             <End Role="QUMESHTI" EntitySet="QUMESHTI" />
           </AssociationSet>
-          <AssociationSet Name="FK_USER_IN_FERMA_FERMA" Association="Self.FK_USER_IN_FERMA_FERMA">
+          <AssociationSet Name="FK_USER_FERMA" Association="Self.FK_USER_FERMA">
             <End Role="FERMA" EntitySet="FERMA" />
-            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_IN_FERMA_USER" Association="Self.FK_USER_IN_FERMA_USER">
             <End Role="USER" EntitySet="USER" />
-            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_KOMUNA" Association="Self.FK_USER_KOMUNA">
             <End Role="KOMUNA" EntitySet="KOMUNA" />
@@ -621,6 +617,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SMGJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SMGJEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="SMGJModel.C__MigrationHistory" />
           <EntitySet Name="FERMAs" EntityType="SMGJModel.FERMA" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="SMGJModel.GJEDHAT_PARAMETRAT" />
           <EntitySet Name="GJEDHIs" EntityType="SMGJModel.GJEDHI" />
@@ -636,10 +633,10 @@
           <EntitySet Name="QUMESHTI_DETAJET" EntityType="SMGJModel.QUMESHTI_DETAJET" />
           <EntitySet Name="RACAs" EntityType="SMGJModel.RACA" />
           <EntitySet Name="RRAHJET_ZEMRES" EntityType="SMGJModel.RRAHJET_ZEMRES" />
+          <EntitySet Name="sysdiagrams" EntityType="SMGJModel.sysdiagram" />
           <EntitySet Name="TEMPERATURAs" EntityType="SMGJModel.TEMPERATURA" />
           <EntitySet Name="TIPIs" EntityType="SMGJModel.TIPI" />
           <EntitySet Name="USERs" EntityType="SMGJModel.USER" />
-          <EntitySet Name="USER_IN_FERMA" EntityType="SMGJModel.USER_IN_FERMA" />
           <EntitySet Name="YNDYRAs" EntityType="SMGJModel.YNDYRA" />
           <AssociationSet Name="FK_FERMA_KOMUNA" Association="SMGJModel.FK_FERMA_KOMUNA">
             <End Role="KOMUNA" EntitySet="KOMUNAs" />
@@ -653,9 +650,9 @@
             <End Role="FERMA" EntitySet="FERMAs" />
             <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
           </AssociationSet>
-          <AssociationSet Name="FK_USER_IN_FERMA_FERMA" Association="SMGJModel.FK_USER_IN_FERMA_FERMA">
+          <AssociationSet Name="FK_USER_FERMA" Association="SMGJModel.FK_USER_FERMA">
             <End Role="FERMA" EntitySet="FERMAs" />
-            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
+            <End Role="USER" EntitySet="USERs" />
           </AssociationSet>
           <AssociationSet Name="FK_GJEDHAT_PARAMETRAT_GJEDHI" Association="SMGJModel.FK_GJEDHAT_PARAMETRAT_GJEDHI">
             <End Role="GJEDHI" EntitySet="GJEDHIs" />
@@ -701,7 +698,7 @@
             <End Role="Medium" EntitySet="MEDIA" />
             <End Role="USER" EntitySet="USERs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MENU_ROLI_MENU" Association="SMGJModel.FK_MENU_ROLI_MENU">
+          <AssociationSet Name="FK_MENU_ROLI_Controller_Actions_Menu" Association="SMGJModel.FK_MENU_ROLI_Controller_Actions_Menu">
             <End Role="MENU" EntitySet="MENUs" />
             <End Role="MENU_ROLI" EntitySet="MENU_ROLI" />
           </AssociationSet>
@@ -729,11 +726,17 @@
             <End Role="USER" EntitySet="USERs" />
             <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
           </AssociationSet>
-          <AssociationSet Name="FK_USER_IN_FERMA_USER" Association="SMGJModel.FK_USER_IN_FERMA_USER">
-            <End Role="USER" EntitySet="USERs" />
-            <End Role="USER_IN_FERMA" EntitySet="USER_IN_FERMA" />
-          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -746,7 +749,7 @@
           <NavigationProperty Name="KOMUNA" Relationship="SMGJModel.FK_FERMA_KOMUNA" FromRole="FERMA" ToRole="KOMUNA" />
           <NavigationProperty Name="GJEDHIs" Relationship="SMGJModel.FK_GJEDHI_FERMA" FromRole="FERMA" ToRole="GJEDHI" />
           <NavigationProperty Name="QUMESHTI_DETAJET" Relationship="SMGJModel.FK_QUMESHTI_DETAJET_FERMA" FromRole="FERMA" ToRole="QUMESHTI_DETAJET" />
-          <NavigationProperty Name="USER_IN_FERMA" Relationship="SMGJModel.FK_USER_IN_FERMA_FERMA" FromRole="FERMA" ToRole="USER_IN_FERMA" />
+          <NavigationProperty Name="USERs" Relationship="SMGJModel.FK_USER_FERMA" FromRole="FERMA" ToRole="USER" />
         </EntityType>
         <EntityType Name="GJEDHAT_PARAMETRAT">
           <Key>
@@ -843,7 +846,7 @@
           <Property Name="Action_Metoda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Emertimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Renditja" Type="Int32" />
-          <NavigationProperty Name="MENU_ROLI" Relationship="SMGJModel.FK_MENU_ROLI_MENU" FromRole="MENU" ToRole="MENU_ROLI" />
+          <NavigationProperty Name="MENU_ROLI" Relationship="SMGJModel.FK_MENU_ROLI_Controller_Actions_Menu" FromRole="MENU" ToRole="MENU_ROLI" />
         </EntityType>
         <EntityType Name="MENU_ROLI">
           <Key>
@@ -854,7 +857,7 @@
           <Property Name="RoliID" Type="Int32" Nullable="false" />
           <Property Name="Krijuar" Type="DateTime" Precision="3" />
           <Property Name="KrijuarNga" Type="Int32" />
-          <NavigationProperty Name="MENU" Relationship="SMGJModel.FK_MENU_ROLI_MENU" FromRole="MENU_ROLI" ToRole="MENU" />
+          <NavigationProperty Name="MENU" Relationship="SMGJModel.FK_MENU_ROLI_Controller_Actions_Menu" FromRole="MENU_ROLI" ToRole="MENU" />
         </EntityType>
         <EntityType Name="NJOFTIMET">
           <Key>
@@ -932,6 +935,16 @@
           <Property Name="KrijuarNga" Type="Int32" />
           <NavigationProperty Name="GJEDHAT_PARAMETRAT" Relationship="SMGJModel.FK_GJEDHAT_PARAMETRAT_RRAHJET_ZEMRES" FromRole="RRAHJET_ZEMRES" ToRole="GJEDHAT_PARAMETRAT" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TEMPERATURA">
           <Key>
             <PropertyRef Name="ID" />
@@ -958,6 +971,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FermaID" Type="Int32" />
           <Property Name="Emri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Mbiemri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
@@ -972,24 +986,12 @@
           <Property Name="Gjinia" Type="Boolean" />
           <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="RandomNumber" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="FERMA" Relationship="SMGJModel.FK_USER_FERMA" FromRole="USER" ToRole="FERMA" />
           <NavigationProperty Name="KOMUNA" Relationship="SMGJModel.FK_USER_KOMUNA" FromRole="USER" ToRole="KOMUNA" />
           <NavigationProperty Name="Medium" Relationship="SMGJModel.FK_USER_MEDIA" FromRole="USER" ToRole="Medium" />
           <NavigationProperty Name="NJOFTIMET_USER" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER" FromRole="USER" ToRole="NJOFTIMET_USER" />
           <NavigationProperty Name="NJOFTIMET_USER1" Relationship="SMGJModel.FK_NJOFTIMET_USER_USER1" FromRole="USER" ToRole="NJOFTIMET_USER" />
           <NavigationProperty Name="QUMESHTI_DETAJET" Relationship="SMGJModel.FK_QUMESHTI_DETAJET_USER" FromRole="USER" ToRole="QUMESHTI_DETAJET" />
-          <NavigationProperty Name="USER_IN_FERMA" Relationship="SMGJModel.FK_USER_IN_FERMA_USER" FromRole="USER" ToRole="USER_IN_FERMA" />
-        </EntityType>
-        <EntityType Name="USER_IN_FERMA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="FermaID" Type="Int32" Nullable="false" />
-          <Property Name="Krijuar" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="KrijuarNga" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FERMA" Relationship="SMGJModel.FK_USER_IN_FERMA_FERMA" FromRole="USER_IN_FERMA" ToRole="FERMA" />
-          <NavigationProperty Name="USER" Relationship="SMGJModel.FK_USER_IN_FERMA_USER" FromRole="USER_IN_FERMA" ToRole="USER" />
         </EntityType>
         <EntityType Name="YNDYRA">
           <Key>
@@ -1037,14 +1039,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USER_IN_FERMA_FERMA">
-          <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="1" />
-          <End Type="SMGJModel.USER_IN_FERMA" Role="USER_IN_FERMA" Multiplicity="*" />
+        <Association Name="FK_USER_FERMA">
+          <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="0..1" />
+          <End Type="SMGJModel.USER" Role="USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FERMA">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="USER_IN_FERMA">
+            <Dependent Role="USER">
               <PropertyRef Name="FermaID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1181,7 +1183,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MENU_ROLI_MENU">
+        <Association Name="FK_MENU_ROLI_Controller_Actions_Menu">
           <End Type="SMGJModel.MENU" Role="MENU" Multiplicity="1" />
           <End Type="SMGJModel.MENU_ROLI" Role="MENU_ROLI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1265,24 +1267,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_USER_IN_FERMA_USER">
-          <End Type="SMGJModel.USER" Role="USER" Multiplicity="1" />
-          <End Type="SMGJModel.USER_IN_FERMA" Role="USER_IN_FERMA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="USER_IN_FERMA">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SMGJModelStoreContainer" CdmEntityContainer="SMGJEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SMGJModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FERMAs">
             <EntityTypeMapping TypeName="SMGJModel.FERMA">
               <MappingFragment StoreEntitySet="FERMA">
@@ -1461,6 +1461,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SMGJModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TEMPERATURAs">
             <EntityTypeMapping TypeName="SMGJModel.TEMPERATURA">
               <MappingFragment StoreEntitySet="TEMPERATURA">
@@ -1498,18 +1509,8 @@
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Mbiemri" ColumnName="Mbiemri" />
                 <ScalarProperty Name="Emri" ColumnName="Emri" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="USER_IN_FERMA">
-            <EntityTypeMapping TypeName="SMGJModel.USER_IN_FERMA">
-              <MappingFragment StoreEntitySet="USER_IN_FERMA">
-                <ScalarProperty Name="KrijuarNga" ColumnName="KrijuarNga" />
-                <ScalarProperty Name="Krijuar" ColumnName="Krijuar" />
                 <ScalarProperty Name="FermaID" ColumnName="FermaID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
