@@ -25,7 +25,6 @@ namespace SMGJ.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<FERMA> FERMAs { get; set; }
         public virtual DbSet<GJEDHAT_PARAMETRAT> GJEDHAT_PARAMETRAT { get; set; }
         public virtual DbSet<GJEDHI> GJEDHIs { get; set; }

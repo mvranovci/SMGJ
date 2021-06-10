@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SMGJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -104,6 +94,7 @@
           <Property Name="Action_Metoda" Type="varchar" MaxLength="50" />
           <Property Name="Emertimi" Type="varchar" MaxLength="50" />
           <Property Name="Renditja" Type="int" />
+          <Property Name="Aktiv" Type="bit" />
         </EntityType>
         <EntityType Name="MENU_ROLI">
           <Key>
@@ -502,7 +493,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SMGJModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FERMA" EntityType="Self.FERMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="Self.GJEDHAT_PARAMETRAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHI" EntityType="Self.GJEDHI" Schema="dbo" store:Type="Tables" />
@@ -617,7 +607,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SMGJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SMGJEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="SMGJModel.C__MigrationHistory" />
           <EntitySet Name="FERMAs" EntityType="SMGJModel.FERMA" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="SMGJModel.GJEDHAT_PARAMETRAT" />
           <EntitySet Name="GJEDHIs" EntityType="SMGJModel.GJEDHI" />
@@ -727,16 +716,6 @@
             <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -846,6 +825,7 @@
           <Property Name="Action_Metoda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Emertimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Renditja" Type="Int32" />
+          <Property Name="Aktiv" Type="Boolean" />
           <NavigationProperty Name="MENU_ROLI" Relationship="SMGJModel.FK_MENU_ROLI_Controller_Actions_Menu" FromRole="MENU" ToRole="MENU_ROLI" />
         </EntityType>
         <EntityType Name="MENU_ROLI">
@@ -1273,16 +1253,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SMGJModelStoreContainer" CdmEntityContainer="SMGJEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="SMGJModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FERMAs">
             <EntityTypeMapping TypeName="SMGJModel.FERMA">
               <MappingFragment StoreEntitySet="FERMA">
@@ -1373,6 +1343,7 @@
           <EntitySetMapping Name="MENUs">
             <EntityTypeMapping TypeName="SMGJModel.MENU">
               <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
                 <ScalarProperty Name="Renditja" ColumnName="Renditja" />
                 <ScalarProperty Name="Emertimi" ColumnName="Emertimi" />
                 <ScalarProperty Name="Action_Metoda" ColumnName="Action_Metoda" />

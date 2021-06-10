@@ -3,9 +3,9 @@
 @{
 
     SMGJ.Models.SMGJDB db = new SMGJ.Models.SMGJDB();
-   
+
     GetUser user = (GetUser)Session["User"];
-    int roli = Session["RoliID"] != null ? user.RoleID : 0;
+   int roli = Session["User"] != null ? user.RoleID : 0;
 }
 <html>
 <head>
@@ -32,8 +32,8 @@
     <link rel="stylesheet" href="~/Content/theme/assets/css/styles.css">
     <link rel="stylesheet" href="~/Content/theme/assets/css/plugins.css">
     <link rel="stylesheet" href="~/Content/theme/assets/css/themes/theme-1.css" id="skin_color" />
-    <link href="~/Content/cms/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
-
+    <link href="~/Content/theme/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
+    <link href="~/Content/theme/vendor/DataTables/css/DT_bootstrap.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <div id="app">
@@ -72,20 +72,15 @@
 
                         var current_controller = ViewContext.RouteData.Values["controller"].ToString();
                         var current_action = ViewContext.RouteData.Values["action"].ToString();
-                        
                         string current_menu = "/" + current_controller + "/" + current_action;
-
                         var lista_menuve = (from i in db.MENUs
-
                                             let string_url = (i.Controller + "/" + i.Action_Metoda == "" ? "javascript:void(0)" :
                                               "/" + i.Controller + "/" + i.Action_Metoda)
-
                                             let css = current_menu.ToLower() == string_url.ToLower() ? "active open" : ""
-
                                             join m in db.MENU_ROLI on i.ID equals m.MenuID
-                                            where m.RoliID == roli
-
-                                            orderby i.Renditja select new Menute
+                                            where m.RoliID == roli && i.Aktiv != false
+                                            orderby i.Renditja
+                                            select new Menute
                                             {
                                                 Pershkrimi = i.Emertimi,
                                                 Url = string_url,
@@ -97,8 +92,8 @@
                     }
                     <ul class="main-navigation-menu">
                         @foreach (var item in lista_menuve)
-                            {
-                                  <li class="@item.css">
+                        {
+                            <li class="@item.css">
                                 <a href="@item.Url">
                                     <div class="item-content">
                                         <div class="item-media">
@@ -110,19 +105,19 @@
                                     </div>
                                 </a>
                             </li>
-                            }
+                        }
                         @*<li class="active open">
-                            <a href="index.html">
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <i class="ti-home"></i>
+                                <a href="index.html">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-home"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Dashboard </span>
+                                        </div>
                                     </div>
-                                    <div class="item-inner">
-                                        <span class="title"> Dashboard </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>*@
+                                </a>
+                            </li>*@
                     </ul>
                 </nav>
             </div>
@@ -261,35 +256,35 @@
                         </li>
                         <li class="dropdown current-user">
                             @*<a href class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/Content/theme/assets/images/avatar-1.jpg" alt="Peter"> <span class="username">Peter <i class="ti-angle-down"></i></i></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-dark">
-                                <li>
-                                    <a href="pages_user_profile.html">
-                                        My Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="pages_calendar.html">
-                                        My Calendar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a hef="pages_messages.html">
-                                        My Messages (3)
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="login_lockscreen.html">
-                                        Lock Screen
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="login_signin.html">
-                                        Log Out
-                                    </a>
-                                </li>
-                            </ul>*@
+                                    <img src="/Content/theme/assets/images/avatar-1.jpg" alt="Peter"> <span class="username">Peter <i class="ti-angle-down"></i></i></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-dark">
+                                    <li>
+                                        <a href="pages_user_profile.html">
+                                            My Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pages_calendar.html">
+                                            My Calendar
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a hef="pages_messages.html">
+                                            My Messages (3)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="login_lockscreen.html">
+                                            Lock Screen
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="login_signin.html">
+                                            Log Out
+                                        </a>
+                                    </li>
+                                </ul>*@
                         </li>
                     </ul>
 
@@ -311,17 +306,20 @@
     <script src="~/Content/theme/vendor/switchery/switchery.min.js"></script>
     <script src="~/Content/theme/assets/js/main.js"></script>
     <script src="~/Content/theme/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/theme/vendor/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/theme/assets/js/table-data.js"></script>
+    <script src="~/Content/theme/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Content/theme/assets/js/form-validation.js"></script>
     <script>
         jQuery(document).ready(function () {
             Main.init();
             log_out();
+            TableData.init();
         });
 
         var log_out = function ()
-
         {
-
-                        $.ajax({
+            $.ajax({
                 url: "@Url.Action("GetUserHome","Home")",
                 cache: false,
                 type: "GET",

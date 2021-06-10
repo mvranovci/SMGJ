@@ -1,0 +1,183 @@
+﻿@model SMGJ.Models.MENU
+@{
+    ViewBag.Title = "Create";
+}
+@*@Html.HiddenFor(Model.ID)*@
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Regjistrimi i menu-se</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <form id="forma">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Kontrolleri <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(m => m.Controller, new { @class = "form-control", @placeholder = "Shkruani emrin e kontrollerit" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Action metoda <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(m => m.Action_Metoda, new { @class = "form-control", @placeholder = "Shkruani emrin e metodes" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Emertimi <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(m => m.Emertimi, new { @class = "form-control", @placeholder = "Shkruani emertimin" })
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Renditja <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(m => m.Renditja, new { @class = "form-control", @placeholder = "Shkruani rendditjen" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="checkbox clip-check check-primary">
+                                    <input type="checkbox" id="Aktiv" value="1" checked>
+                                    <label for="Aktiv">
+                                        Aktiv
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="regjistro(this)"> 
+                    Register <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div> 
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    Controller: {
+                        required: true
+                    },
+                    Action_Metoda: {
+                        required: true
+                    },
+                    Emertimi: {
+                        required: true
+                    },
+
+                    Renditja: {
+                        required: true,
+                        number: true
+                        
+                    }
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+        var regjistro = function (btn) {
+                runValidator1(); 
+                if ($("#forma").valid() === true) { 
+                    var obj = { 
+                        //ID: $("#ID").val(),
+                    Controller: $("#Controller").val(),
+                    Action_Metoda: $("#Action_Metoda").val(),
+                    Emertimi: $("#Emertimi").val(),
+                    Renditja: $("#Renditja").val(),
+                    Aktiv: $('#Aktiv').is(':checked')
+                };
+                var url_redirect = '@Url.Action("Index", "MENU")';
+                $.ajax({
+                    url: "@Url.Action("Create", "MENU")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            window.location.href = url_redirect;
+                        }
+                        else {
+                            alert(rs.Message, "error");
+                        }
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+             
+            };
+    </script>
+
+
+}

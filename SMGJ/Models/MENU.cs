@@ -25,6 +25,7 @@ namespace SMGJ.Models
         public string Action_Metoda { get; set; }
         public string Emertimi { get; set; }
         public Nullable<int> Renditja { get; set; }
+        public Nullable<bool> Aktiv { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MENU_ROLI> MENU_ROLI { get; set; }
