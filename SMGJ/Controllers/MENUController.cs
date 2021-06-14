@@ -34,13 +34,18 @@ namespace SMGJ.Controllers
             try
             {
                 MENU menu =   db.MENUs.Find(model.ID);
-                // detyre:    Nese  menu-ja e gjetur egziston tek tabela e MENU_ROLI
-                //le t del mesazh qe nuk muni me fshi kete tabel
+                var exist = db.MENU_ROLI.Any(q => q.MenuID == model.ID);
+                if(exist)
+                {
+                    returnmodel.status = false;
+                    returnmodel.Mesazhi = "Nuk mund te fshihet menu-ja, egziston tek rolet"; 
+                    return Json(returnmodel, JsonRequestBehavior.DenyGet);
 
-                //Detyra 2: Me dal me konfirmu para me se mujt me fshi nje menu
+                }
                 db.MENUs.Remove(menu);
                 await db.SaveChangesAsync();
-                returnmodel.status = true; 
+                returnmodel.status = true;
+                returnmodel.Mesazhi = "Menu-ja eshte fshire nga sistemi";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -119,8 +124,7 @@ namespace SMGJ.Controllers
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
                     returnmodel.Mesazhi = "Menu-ja u editua me sukses";
-                    return Json(returnmodel, JsonRequestBehavior.AllowGet);
-                    return Json(returnmodel, JsonRequestBehavior.AllowGet);
+                    return Json(returnmodel, JsonRequestBehavior.AllowGet); 
                 }
                 catch
                 {

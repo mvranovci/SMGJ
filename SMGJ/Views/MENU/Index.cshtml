@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<SMGJ.Models.MENU>
 @{
     ViewBag.Title = "Index";
-    int t = 1;
-}
+} 
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
@@ -61,7 +60,7 @@
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                                             <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a href="" onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                            <a  onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -73,12 +72,24 @@
 
         </div>
     </div>
-</div>
+</div> 
 @section Scripts{
     <script>
-        var deletemenu = function (btn) { 
-            var obj = { ID: $(btn).data("menuid")  };  
-                $.ajax({
+        var deletemenu = function (btn) {
+            var obj = { ID: $(btn).data("menuid") };
+            swal({
+                title: "A jeni i sigurte?",
+                text: "Jeni duke fshire të dhëna nga sistemi",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Po, fshije!",
+                cancelButtonText: "Jo, anuloje!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                    if (isConfirm) { 
+                    $.ajax({
                     url: "@Url.Action("DeleteMenu", "MENU")",
                     cache: false,
                     type: "POST",
@@ -86,11 +97,17 @@
                     data: obj,
                     success: function (rs) {
                         if (rs.status) {
-                            location.reload();
+                            swal({ title: "Fshire", text: rs.Mesazhi, type: "success" },
+                                function () {
+                                    location.reload();
+                                }
+                            ); 
                         }
                         else {
-                            alert(rs.Message, "error");
-                        } 
+                            swal("Gabim!",
+                                rs.Mesazhi,
+                                "info"); 
+                        }
                     },
                     error: function (jqXHR, error, errorThrown) {
                         if (jqXHR.status && jqXHR.status == 400) {
@@ -99,8 +116,13 @@
                             console.log("Something went wrong");
                         }
                     }
-                }); 
-            };
+                });
+                } else {
+                    swal("Anuluar", "Fshirja e te dhenave eshte anuluar :)", "error");
+                }
+            });
+
+        };
     </script>
 
 }
