@@ -1,0 +1,125 @@
+﻿@model IEnumerable<SMGJ.Models.RRAHJET_ZEMRES>
+@using SMGJ.Models
+@{
+    ViewBag.Title = "Index";
+    SMGJDB db = new SMGJDB();
+}
+    <section id="page-title">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <p class="text-center big-icon" id="heart">
+                    <i class="fa fa-heart-o heart-pulse"></i>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1 class="mainTitle text-center">  Tabela Rrahjet e Zemres</h1>
+            </div>
+        </div>
+    </section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="@Url.Action("Create","RRAHJET_ZEMRES")" class="btn btn-green">Regjistro</a>
+        </div>
+    </div>
+    <div class="row margin-top-15 ">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Lista e Vlerave te Rrahjeve te Zemres </h5>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th class="hidden-xs">Rrahjet e Zemres</th>
+                                <th class="hidden-xs"> Krijuar</th>
+                                <th class="hidden-xs"> Krijuar Nga</th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var user = db.USERs.Find(item.KrijuarNga);
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <td class="hidden-xs">
+                                        @item.Vlera
+                                    </td>
+
+                                    <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
+                                    <td>@user.Emri @user.Mbiemri</td>
+                                    <td>
+                                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                            <a href="@Url.Action("Edit","RRAHJET_ZEMRES" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" onclick="deleterrahjetzemres(this)" data-rrahjetid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var deleterrahjetzemres = function (btn) {
+            var obj = { ID: $(btn).data("rrahjetid") };
+            swal({
+                title: "A jeni i sigurte?",
+                text: "Jeni duke fshire të dhëna nga sistemi",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Po, fshije!",
+                cancelButtonText: "Jo, anuloje!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                    if (isConfirm) {
+                    $.ajax({
+                    url: "@Url.Action("DeleteRrahjetZemres", "RRAHJET_ZEMRES")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal({title: "Ne rregull!", text: rs.Mesazhi, type: "success" },
+                                function () {
+                                    location.reload();
+                                }
+                            );
+                        }
+                        else {
+                            swal("Gabim!",
+                                rs.Mesazhi,
+                                "info");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+                } else {
+                    swal("Anuluar", "Fshirja e te dhenave eshte anuluar!", "error");
+                }
+            });
+
+        };
+    </script>
+    }
+
