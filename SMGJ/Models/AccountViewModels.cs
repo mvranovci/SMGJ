@@ -83,7 +83,7 @@ namespace SMGJ.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        //[Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -100,6 +100,8 @@ namespace SMGJ.Models
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
+        public string UserId { get; set; }
+
     }
 
     public class ForgotPasswordViewModel

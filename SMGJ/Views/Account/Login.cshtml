@@ -53,7 +53,7 @@
                                 @*<input type="password" class="form-control password" name="password" placeholder="Password">*@
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
                                 <i class="fa fa-lock"></i>
-                                <a class="forgot" href="login_forgot.html">
+                                <a class="forgot" href="@Url.Action("ForgotPassword","Account" )">
                                     I forgot my password
                                 </a>
                             </span>

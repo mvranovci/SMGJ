@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MENUController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
+    <Compile Include="Controllers\TEMPERATURAController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2029,6 +2030,9 @@
     <Content Include="Views\MENU\Index.cshtml" />
     <Content Include="Views\MENU\Create.cshtml" />
     <Content Include="Views\MENU\Edit.cshtml" />
+    <Content Include="Views\Temperatura\Index.cshtml" />
+    <Content Include="Views\Temperatura\Create.cshtml" />
+    <Content Include="Views\Temperatura\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

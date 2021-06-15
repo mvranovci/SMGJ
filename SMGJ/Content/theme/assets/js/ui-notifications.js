@@ -1,4 +1,5 @@
-var UINotifications = function() {"use strict";
+var UINotifications = function () {
+	"use strict";
 	//function to initiate Toastr notifications
 	var initToastr = function() {
 		var i = -1;
@@ -108,7 +109,6 @@ var UINotifications = function() {"use strict";
 	};
 
 	var initSweetAlert = function() {
-
 		$(".basic-message").on("click", function(e) {
 			swal({
 				title: "Here's a message!",
@@ -151,7 +151,7 @@ var UINotifications = function() {"use strict";
 
 			e.preventDefault
 		});
-		$(".warning-message-parameter").on("click", function(e) {
+		$(".warning-message-parameter").on("click", function (e) {
 			swal({
 				title: "Are you sure?",
 				text: "You will not be able to recover this imaginary file!",

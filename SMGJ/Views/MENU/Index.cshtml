@@ -1,7 +1,14 @@
 ﻿@model IEnumerable<SMGJ.Models.MENU>
 @{
     ViewBag.Title = "Index";
+<<<<<<< HEAD
+    int t = 1;
+}
+
+
+=======
 } 
+>>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
@@ -60,7 +67,12 @@
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                                             <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+<<<<<<< HEAD
+                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+                                        
+=======
                                             <a  onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+>>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
                                         </div>
                                     </td>
                                 </tr>
@@ -69,9 +81,40 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
+<<<<<<< HEAD
+</div>
+
+
+<script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+@section Scripts{
+    <script>
+        $(".warning-message-parameter").on("click", function (e) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this deletion!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel the process!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    deletemenu(e.currentTarget);
+                } else {
+                    swal("Cancelled", "Your menu is safe :)", "error");
+                }
+            });
+            e.preventDefault
+        });
+
+        var deletemenu = function (btn) {
+            var obj = { ID: $(btn).data("menuid")  };
+                $.ajax({
+=======
 </div> 
 @section Scripts{
     <script>
@@ -90,6 +133,7 @@
             }, function (isConfirm) {
                     if (isConfirm) { 
                     $.ajax({
+>>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
                     url: "@Url.Action("DeleteMenu", "MENU")",
                     cache: false,
                     type: "POST",
@@ -97,6 +141,15 @@
                     data: obj,
                     success: function (rs) {
                         if (rs.status) {
+<<<<<<< HEAD
+                            swal("Deleted!", rs.Mesazhi, "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1500)
+                        }
+                        else {
+                            swal("Cancelled", rs.Mesazhi , "error");
+=======
                             swal({ title: "Fshire", text: rs.Mesazhi, type: "success" },
                                 function () {
                                     location.reload();
@@ -107,6 +160,7 @@
                             swal("Gabim!",
                                 rs.Mesazhi,
                                 "info"); 
+>>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
                         }
                     },
                     error: function (jqXHR, error, errorThrown) {
@@ -117,14 +171,16 @@
                         }
                     }
                 });
+<<<<<<< HEAD
+=======
                 } else {
                     swal("Anuluar", "Fshirja e te dhenave eshte anuluar :)", "error");
                 }
             });
 
+>>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
         };
     </script>
-
 }
 
 

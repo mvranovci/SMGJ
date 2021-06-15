@@ -143,12 +143,13 @@
                 runValidator1();
                 if ($("#forma").valid() === true) {
                     var obj = {
-                    ID: $("#ID").val(),
-                    Controller: $("#Controller").val(),
-                    Action_Metoda: $("#Action_Metoda").val(),
-                    Emertimi: $("#Emertimi").val(),
-                    Renditja: $("#Renditja").val(),
-                    Aktiv: $('#Aktiv').is(':checked')
+                        ID: $("#ID").val(),
+                        Controller: $("#Controller").val(),
+                        Action_Metoda: $("#Action_Metoda").val(),
+                        Emertimi: $("#Emertimi").val(),
+                        Renditja: $("#Renditja").val(),
+                        Aktiv: $('#Aktiv').is(':checked')
+                      
                 };
                 var url_redirect = '@Url.Action("Index", "MENU")';
                 $.ajax({

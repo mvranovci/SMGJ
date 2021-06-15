@@ -9,82 +9,91 @@ using System.Data.Entity;
 
 namespace SMGJ.Controllers
 {
-    public class MENUController : BaseController
+    public class TemperaturaController : BaseController
     {
         SMGJDB db = new SMGJDB();
-        // GET: MENU
+        // GET: Temperatura
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
-            List<MENU> model = db.MENUs.ToList();
+            List<TEMPERATURA> model = db.TEMPERATURAs.ToList();
             return View(model);
         }
         public async Task<ActionResult> Create()
         {
             var user = await GetUser();
-            MENU model = new MENU();
+            TEMPERATURA model = new TEMPERATURA();
             return View(model);
         }
-        // DeleteMenu
-        [HttpPost]
-        public async Task<ActionResult> DeleteMenu(MENU model)
+      
+         [HttpPost]
+        public async Task<ActionResult> DeleteTemperatura(TEMPERATURA model)
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
+
             try
             {
-                MENU menu = db.MENUs.Find(model.ID);
-                var exist = db.MENU_ROLI.Any(q => q.MenuID == model.ID);
+                TEMPERATURA menu =   db.TEMPERATURAs.Find(model.ID);
+                var exist = db.GJEDHAT_PARAMETRAT.Any(q => q.TemperaturaID == model.ID);
                 if (exist)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "menu ekziston";
+                    returnmodel.Mesazhi = "Kete nuk mund ta fshini sepse ekziston tek Tabela GjedhiParametrat";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 
-                db.MENUs.Remove(menu);
+                db.TEMPERATURAs.Remove(menu);
                 await db.SaveChangesAsync();
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "sukses";
+                returnmodel.Mesazhi = "Temperatura eshte fshire me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                returnmodel.status = false;
+                returnmodel.status = false; 
                 returnmodel.Mesazhi = "Ka ndodhur nje gabim";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
-            }
+            }  
         }
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
-            MENU model = new MENU();
+            TEMPERATURA model = new TEMPERATURA();
             if (id != null)
             {
-                model = db.MENUs.Find(id.Value);
+                model = db.TEMPERATURAs.Find(id.Value);
             }
             return View(model);
         }
         [HttpPost]
-        public async Task<ActionResult> Create(MENU model)
+        public async Task<ActionResult> Create(TEMPERATURA model)
         {
+
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
+
+            var exists = db.TEMPERATURAs.Any(t => t.Vlera == model.Vlera);
+            if (exists) { 
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete temperature, sepse ekziston!";
+                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+            }
+
             if (ModelState.IsValid)
             {
+
                 try
                 {
-                    MENU new_model = new MENU();
+                    TEMPERATURA new_model = new TEMPERATURA();  
 
-                    new_model.Controller = model.Controller;
-                    new_model.Action_Metoda = model.Action_Metoda;
-                    new_model.Aktiv = model.Aktiv;
-                    new_model.Emertimi = model.Emertimi;
-                    new_model.Renditja = model.Renditja;
-                    db.MENUs.Add(new_model);
+                    new_model.Vlera = model.Vlera; 
+                    new_model.KrijuarNga = user.ID ;
+                    new_model.Krijuar = DateTime.Now;
+                    db.TEMPERATURAs.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Menu-ja u regjistrua me sukses";
+                    returnmodel.Mesazhi = "Temperatura u regjistrua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
@@ -103,28 +112,33 @@ namespace SMGJ.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(MENU model)
+        public async Task<ActionResult> Edit(TEMPERATURA model)
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
+
+            var exists = db.TEMPERATURAs.Any(t => t.Vlera == model.Vlera);
+            if (exists)
+            {
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete temperature, sepse ekziston!";
+                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    MENU new_model = db.MENUs.Find(model.ID);
+                    TEMPERATURA new_model = db.TEMPERATURAs.Find(model.ID);
 
-                    new_model.Controller = model.Controller;
-                    new_model.Action_Metoda = model.Action_Metoda;
-                    new_model.Aktiv = model.Aktiv;
-                    new_model.Emertimi = model.Emertimi;
-                    new_model.Renditja = model.Renditja;
+                    new_model.Vlera = model.Vlera;
+                    new_model.KrijuarNga = user.ID;
+                    new_model.Krijuar = DateTime.Now;
                     //bone update
                     db.Entry(new_model).State = EntityState.Modified;
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Menu-ja u editua me sukses";
-                    return Json(returnmodel, JsonRequestBehavior.AllowGet);
+                    returnmodel.Mesazhi = "Temperatura u editua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
