@@ -247,6 +247,7 @@
     <Compile Include="Models\RRAHJET_ZEMRES.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SendMail.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

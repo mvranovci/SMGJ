@@ -102,7 +102,7 @@ namespace SMGJ.Controllers
                         usertotal.NumriLeternjoftimit = user.NrLeternjoftimit;
                         usertotal.RoleID = user.RoleID;
                         Session["User"] = usertotal;
-                        Session["RoliID"] = usertotal.RoleID;
+                        //Session["RoliID"] = usertotal.RoleID;
                     }
                     catch (Exception)
                     {
@@ -114,6 +114,7 @@ namespace SMGJ.Controllers
             else
             {
                 usertotal = (GetUser)Session["User"];
+                Session["Roli"] = usertotal.RoleID;
             }
             return usertotal;
         }

@@ -4,8 +4,8 @@
 
     SMGJ.Models.SMGJDB db = new SMGJ.Models.SMGJDB();
 
-    GetUser user = (GetUser)Session["User"];
-   int roli = Session["User"] != null ? user.RoleID : 0;
+    GetUser user = (GetUser)Session["User"]; 
+    int roli = Session["Roli"] == null ? 0 : int.Parse(Session["Roli"].ToString());
 }
 <html>
 <head>

@@ -23,6 +23,8 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             MENU model = new MENU();
+            var allroles = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList().Select(q => new SelectListItem { Value = q.Id, Text = q.Name }).ToList();
+            ViewBag.RoleID = allroles;
             return View(model);
         }
         // DeleteMenu
