@@ -22,6 +22,7 @@ namespace SMGJ.Models
     
         public int ID { get; set; }
         public Nullable<decimal> Perqindja { get; set; }
+        public string Emertimi { get; set; }
         public Nullable<System.DateTime> Krijuar { get; set; }
         public Nullable<int> KrijuarNga { get; set; }
     

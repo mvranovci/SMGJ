@@ -19,7 +19,6 @@ namespace SMGJ.Models
         public Nullable<int> AksioniID { get; set; }
         public string Pershkrimi { get; set; }
     
-        public virtual Aksionet_Menu Aksionet_Menu { get; set; }
         public virtual Controller_Actions_Menu Controller_Actions_Menu1 { get; set; }
         public virtual Controller_Actions_Menu Controller_Actions_Menu2 { get; set; }
         public virtual Controller_Menu Controller_Menu { get; set; }

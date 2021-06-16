@@ -25,6 +25,8 @@ namespace SMGJ.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Controller_Actions_Menu> Controller_Actions_Menu { get; set; }
+        public virtual DbSet<Controller_Menu> Controller_Menu { get; set; }
         public virtual DbSet<FERMA> FERMAs { get; set; }
         public virtual DbSet<GJEDHAT_PARAMETRAT> GJEDHAT_PARAMETRAT { get; set; }
         public virtual DbSet<GJEDHI> GJEDHIs { get; set; }

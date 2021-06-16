@@ -19,7 +19,5 @@ namespace SMGJ.Models
         public int RoliID { get; set; }
         public Nullable<System.DateTime> Krijuar { get; set; }
         public Nullable<int> KrijuarNga { get; set; }
-    
-        public virtual MENU MENU { get; set; }
     }
 }

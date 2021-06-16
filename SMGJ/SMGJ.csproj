@@ -172,16 +172,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KOMUNAController.cs" />
+    <Compile Include="Controllers\LAGESHTIA_AJRITController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MENUController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
+    <Compile Include="Controllers\RRAHJET_ZEMRESController.cs" />
     <Compile Include="Controllers\TEMPERATURAController.cs" />
+    <Compile Include="Controllers\TipiController.cs" />
+    <Compile Include="Controllers\YNDYRAController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Controller_Actions_Menu.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Controller_Menu.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2033,6 +2044,20 @@
     <Content Include="Views\Temperatura\Index.cshtml" />
     <Content Include="Views\Temperatura\Create.cshtml" />
     <Content Include="Views\Temperatura\Edit.cshtml" />
+    <Content Include="Views\KOMUNA\Create.cshtml" />
+    <Content Include="Views\KOMUNA\Edit.cshtml" />
+    <Content Include="Views\KOMUNA\Index.cshtml" />
+    <Content Include="Views\LAGESHTIA_AJRIT\Create.cshtml" />
+    <Content Include="Views\LAGESHTIA_AJRIT\Edit.cshtml" />
+    <Content Include="Views\LAGESHTIA_AJRIT\Index.cshtml" />
+    <Content Include="Views\RRAHJET_ZEMRES\Create.cshtml" />
+    <Content Include="Views\RRAHJET_ZEMRES\Edit.cshtml" />
+    <Content Include="Views\RRAHJET_ZEMRES\Index.cshtml" />
+    <Content Include="Views\Tipi\AddOrEdit.cshtml" />
+    <Content Include="Views\Tipi\Index.cshtml" />
+    <Content Include="Views\YNDYRA\Create.cshtml" />
+    <Content Include="Views\YNDYRA\Edit.cshtml" />
+    <Content Include="Views\YNDYRA\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
