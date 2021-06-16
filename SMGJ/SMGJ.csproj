@@ -172,9 +172,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KOMUNAController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MENUController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
+    <Compile Include="Controllers\RRAHJET_ZEMRESController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2029,6 +2031,12 @@
     <Content Include="Views\MENU\Index.cshtml" />
     <Content Include="Views\MENU\Create.cshtml" />
     <Content Include="Views\MENU\Edit.cshtml" />
+    <Content Include="Views\KOMUNA\Create.cshtml" />
+    <Content Include="Views\KOMUNA\Edit.cshtml" />
+    <Content Include="Views\KOMUNA\Index.cshtml" />
+    <Content Include="Views\RRAHJET_ZEMRES\Create.cshtml" />
+    <Content Include="Views\RRAHJET_ZEMRES\Edit.cshtml" />
+    <Content Include="Views\RRAHJET_ZEMRES\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

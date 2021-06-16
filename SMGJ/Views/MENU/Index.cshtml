@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SMGJ.Models.MENU>
 @{
     ViewBag.Title = "Index";
-} 
+}  
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
@@ -59,7 +59,7 @@
                                     </td>
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                            <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Edit","MENU" , new {id=  SMGJ.Controllers.BaseController.Encrypt(item.ID.ToString())})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
                                             <a  onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
                                         </div>
                                     </td>
