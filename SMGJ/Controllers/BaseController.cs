@@ -169,6 +169,14 @@ namespace SMGJ.Controllers
                 return null;
             }
         }
+        public async Task<SelectList> loadMenu(int? selected)
+        {
+            var allvalues = await db.MENUs.Where(q=>q.Aktiv==true).ToListAsync();
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emertimi");
+        }
 
         public static string Decrypt(string encryptedText)
         {
