@@ -5,9 +5,18 @@ using System.Web;
 
 namespace SMGJ.Models
 {
-    public class Klasat_ndihmese
+     public class Klasat_ndihmese
     {
 
+    }
+    public class menu_roli
+    {
+        public int RoleID { get; set; }
+        public IList<MENU> menu
+        {
+            get; set;
+        }
+       
     }
     public class Menute
     {
