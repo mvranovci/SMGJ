@@ -1,7 +1,7 @@
-﻿@model IEnumerable<SMGJ.Models.MENU>
+@model IEnumerable<SMGJ.Models.MENU>
 @{
     ViewBag.Title = "Index";
-}  
+}
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
@@ -55,12 +55,11 @@
                                             }
                                         }
                                         <span class="label label-sm label-@klasa">@pershktimi</span>
-
                                     </td>
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                            <a href="@Url.Action("Edit","MENU" , new {id=  SMGJ.Controllers.BaseController.Encrypt(item.ID.ToString())})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a  onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                            <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -69,27 +68,35 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
-</div> 
+</div>
+<script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
 @section Scripts{
     <script>
-        var deletemenu = function (btn) {
-            var obj = { ID: $(btn).data("menuid") };
+        $(".warning-message-parameter").on("click", function (e) {
             swal({
-                title: "A jeni i sigurte?",
-                text: "Jeni duke fshire të dhëna nga sistemi",
+                title: "Are you sure?",
+                text: "You will not be able to recover this deletion!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Po, fshije!",
-                cancelButtonText: "Jo, anuloje!",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel the process!",
                 closeOnConfirm: false,
                 closeOnCancel: false
             }, function (isConfirm) {
-                    if (isConfirm) { 
-                    $.ajax({
+                if (isConfirm) {
+                    deletemenu(e.currentTarget);
+                } else {
+                    swal("Cancelled", "Your menu is safe :)", "error");
+                }
+            });
+            e.preventDefault
+        });
+        var deletemenu = function (btn) {
+            var obj = { ID: $(btn).data("menuid")  };
+                $.ajax({
                     url: "@Url.Action("DeleteMenu", "MENU")",
                     cache: false,
                     type: "POST",
@@ -97,16 +104,13 @@
                     data: obj,
                     success: function (rs) {
                         if (rs.status) {
-                            swal({ title: "Fshire", text: rs.Mesazhi, type: "success" },
-                                function () {
-                                    location.reload();
-                                }
-                            ); 
+                            swal("Deleted!", rs.Mesazhi, "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1500)
                         }
                         else {
-                            swal("Gabim!",
-                                rs.Mesazhi,
-                                "info"); 
+                            swal("Cancelled", rs.Mesazhi , "error");
                         }
                     },
                     error: function (jqXHR, error, errorThrown) {
@@ -117,14 +121,6 @@
                         }
                     }
                 });
-                } else {
-                    swal("Anuluar", "Fshirja e te dhenave eshte anuluar :)", "error");
-                }
-            });
-
         };
     </script>
-
 }
-
-

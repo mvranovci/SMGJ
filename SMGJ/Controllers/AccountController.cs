@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -351,20 +352,35 @@ namespace SMGJ.Controllers
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+       [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                MessageJs returnmodel = new MessageJs();
+                var user = UserManager.FindByEmail(model.Email);
+                if (user == null)
                 {
+                    returnmodel.status = false;
+                    returnmodel.Mesazhi = "Nuk ekziston emaili i kerkuar";
+                    return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    // return View("ForgotPasswordConfirmation");
                 }
+                
+                var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                var callbackUrl = Url.Action("ResetPassword", "Account",new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //  await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                string subjekti = "Resetimi i fjalëkalimit";
+                string body = "<p>I/e nderuar,</p><p> Ju lutemi klikoni butonin më poshtë për të përfunduar resetimin  e fjalëkalimit tuaj</p><p style=\"max-width:153px; padding: 10px 15px; border-radius: 5px; background-color:blue\"><a href=\"" + callbackUrl + "\" style=\"color:white;text-decoration: none;\">NDRYSHO FJALËKALIMIN</a> </p>" +
+                  "<br><p>Pasi t'a ndryshoni passwordin ky link nuk eshte me valid!</p><p>Nëse butoni më lart nuk funksionon atëherë ju lutem ta kopjoni linkun më poshtë dhe ta hapni në një dritare të re</p><p style=\"background-color:#e6e6f8;padding: 10px;\"> " + callbackUrl + "</p><br> <br><br><p><i>HR TEAM</i><p style=\" font-size:11px; \">Note: Do not reply to this email. </p><p style=\"text-align:center; font-size:11px; \"> Copyright 	&copy; HR All rights reserved </p>";
+                var threadDergoEmail = new Thread(() => SendMail.DergoEmail(model.Email, subjekti, body)); threadDergoEmail.Start();
+                returnmodel.status = true;
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
+
+                //For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
@@ -387,7 +403,7 @@ namespace SMGJ.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string code, string UserId)
         {
             return code == null ? View("Error") : View();
         }
@@ -399,20 +415,22 @@ namespace SMGJ.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+           
+            var user = UserManager.FindById(model.UserId);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                //return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("Login", "Account");
             }
             AddErrors(result);
             return View();
