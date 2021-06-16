@@ -1,0 +1,149 @@
+@model IEnumerable<SMGJ.Models.TIPI>
+@using SMGJ.Models
+@{
+    ViewBag.Title = "Index";
+    SMGJDB db = new SMGJDB();
+}
+
+<h2 style="font-family: Georgia, serif "><center>TIPI</center></h2>
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-green" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit","Tipi")')"><i class="fa fa-plus"></i> Regjistro</a>
+    </div>
+</div>
+<div class="row margin-top-15 ">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Emërtimi</th>
+                            <th>Krijuar</th>
+                            <th class="hidden-xs"> KrijuarNga</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var user = db.USERs.Find(item.KrijuarNga);
+                            <tr>
+                                <td>@item.ID</td>
+                                <td class="hidden-xs">
+                                    @item.Emertimi
+                                </td>
+                                <td>@item.Krijuar</td>
+                                <td>@user.Emri @user.Mbiemri</td>
+                                <td>
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                        <a class="btn btn-transparent btn-xs"  onclick="PopupForm('@Url.Action("AddOrEdit","Tipi",new { id = item.ID})')" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                        <a onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-remove"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var Popup;
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        draggable: false,
+                        modal: true,
+                        resizable: false,
+                        show: {
+                            effect: 'fade',
+                            duration: 1000
+                        },
+                        title: 'Plotëso',
+                        height: 180,
+                        width: 400,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                            location.reload();
+                        }
+                    });
+                });
+        }
+
+        function SubmitForm(form) {
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        var deletemenu = function (btn) {
+            var obj = { ID: $(btn).data("menuid") };
+            swal({
+                title: "Kujdes!!!",
+                text: "Jeni duke fshire të dhëna nga sistemi",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes!",
+                cancelButtonText: "No!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                    if (isConfirm) {
+                    $.ajax({
+                    url: "@Url.Action("Delete", "Tipi")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal({ title: "Deleted", text: rs.Mesazhi, type: "success" },
+                                function () {
+                                    location.reload();
+                                }
+                            );
+                        }
+                        else {
+                            swal("Gabim!",
+                                rs.Mesazhi,
+                                "info");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+                } else {
+                    swal("Anuluar", "Fshirja e te dhenave eshte anuluar :)", "error");
+                }
+            });
+
+        };
+    </script>
+}
