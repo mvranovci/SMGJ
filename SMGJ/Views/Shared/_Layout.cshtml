@@ -34,14 +34,12 @@
     <link rel="stylesheet" href="~/Content/theme/assets/css/themes/theme-1.css" id="skin_color" />
     <link href="~/Content/theme/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
     <link href="~/Content/theme/vendor/DataTables/css/DT_bootstrap.css" rel="stylesheet" media="screen">
-<<<<<<< HEAD
+ 
     <link href="~/Content/theme/vendor/sweetalert/sweet-alert.css" rel="stylesheet" media="screen">
     <link href="~/Content/theme/vendor/sweetalert/ie9.css" rel="stylesheet" media="screen">
-=======
+ 
     <link href="~/Content/theme/vendor/toastr/toastr.min.css" rel="stylesheet" media="screen">
-    <link href="/Content/theme/vendor/sweetalert/sweet-alert.css" rel="stylesheet" media="screen">
-    <link href="/Content/theme/vendor/sweetalert/ie9.css" rel="stylesheet" media="screen">
->>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
+ 
 </head>
 <body>
     <div id="app">
@@ -321,19 +319,20 @@
     <script src="~/Content/theme/assets/js/main.js"></script>
     <script src="~/Content/theme/assets/js/table-data.js"></script>
     <script src="~/Content/theme/assets/js/form-validation.js"></script>
-<<<<<<< HEAD
-
-
-=======
+ 
     <script src="~/Content/theme/vendor/toastr/toastr.min.js"></script>
     <script src="~/Content/theme/assets/js/ui-notifications.js"></script>
     <script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
->>>>>>> e5481055c5749f4c30140eea04cb97dbef94551c
+ 
     <script>
         jQuery(document).ready(function () {
             Main.init();
             log_out();
             TableData.init();
+            $(".select2").select2(
+                {
+                    width: '100%'
+                });
         });
 
         var log_out = function ()
@@ -355,7 +354,7 @@
                 }
             });
         }
-
+        
 
     </script>
     @RenderSection("scripts", required: false)

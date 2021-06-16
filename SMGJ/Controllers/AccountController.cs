@@ -69,18 +69,18 @@ namespace SMGJ.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<ActionResult> UserRegister( )
+        public async Task<ActionResult> UserRegister()
         {
             var user = await GetUser();
             RegisterViewModelUser model = new RegisterViewModelUser();
-            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList(); 
+            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
             var modeli = new List<SelectListItem>();
             foreach (var item in gjinia)
-            { 
-                modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false }); 
-            } 
+            {
+                modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false });
+            }
             ViewBag.Gjinia = modeli;
-            ViewBag.KomunaID = await loadKomuna(null); 
+            ViewBag.KomunaID = await loadKomuna(null);
             return View(model);
         }
 
@@ -92,7 +92,7 @@ namespace SMGJ.Controllers
             MessageJs returnmodel = new MessageJs();
             if (ModelState.IsValid)
             {
-               
+
                 var user = new ApplicationUser { UserName = model.username, Email = model.EmailAdresa };
                 var result = await UserManager.CreateAsync(user, model.UserPassword);
                 if (result.Succeeded)
@@ -101,7 +101,7 @@ namespace SMGJ.Controllers
                     {
 
                         var userfound = await UserManager.FindByEmailAsync(model.EmailAdresa);
-                         int roli = (int)Roli.Fermer;
+                        int roli = (int)Roli.Fermer;
                         var rolefound = (new ApplicationDbContext()).Roles.FirstOrDefault(q => q.Id == roli.ToString());
 
                         USER new_user = new USER();
@@ -138,7 +138,7 @@ namespace SMGJ.Controllers
                 }
                 else
                 {
-                   
+
                     returnmodel.status = false;
                     returnmodel.Mesazhi = "Perdoruesi egziston";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
@@ -299,9 +299,88 @@ namespace SMGJ.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
-            return View();
+            var user = await GetUser();
+            RegisterViewModel model = new RegisterViewModel();
+            var allvalues = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList().Select(q => new SelectListItem { Value = q.Id, Text = q.Name }).ToList();
+            ViewBag.InstitucioniID = await loadKomuna(null);
+            ViewBag.RoleID = allvalues;
+            ViewBag.RoleUserID = user.RoleID;
+            var modeli = new List<SelectListItem>();
+            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
+            foreach (var item in gjinia)
+            {
+                modeli.Add(new SelectListItem { Value = item.Value.ToString(), Text = item.Text, Selected = false });
+            }
+            ViewBag.Gjinia = modeli;
+            MENU modeil = new MENU();
+            return View(model);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register_Post(RegisterViewModel model)
+        {
+            var usermodel = await GetUser();
+            MessageJs returnmodel = new MessageJs();
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    try
+                    {
+                        var userfound = await UserManager.FindByEmailAsync(model.Email);
+                        int roliID = model.RoleID;
+                        USER newUser = new USER();
+                        newUser.UserId = userfound.Id;
+                        newUser.Emri = model.Emri;
+                        newUser.Mbiemri = model.Mbiemri;
+                        newUser.NrLeternjoftimit = model.NumriPersonal;
+                        newUser.NrTelefonit = model.Telefoni;
+                        newUser.KomunaID = model.InstitucioniID;
+                        if (model.Ditelindja != null)
+                        {
+                            newUser.Datelindja = model.Ditelindja.Value;
+                        }
+                        else
+                        {
+                            newUser.Datelindja = null;
+                        }
+                        newUser.Email = model.Email;
+                        newUser.RandomNumber = RandomString(6, false);
+                        newUser.Aktiv = model.Statusi;
+                        newUser.RoleID = roliID;
+                        newUser.Gjinia = Convert.ToBoolean(model.Gjinia);
+                        db.USERs.Add(newUser);
+                        await db.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await UserManager.DeleteAsync(user);
+
+                    }
+                    returnmodel.status = true;
+                    return Json(returnmodel, JsonRequestBehavior.AllowGet);
+                }
+                AddErrors(result);
+            }
+
+            var message = string.Join(" | ", ModelState.Values
+                       .SelectMany(v => v.Errors)
+                       .Select(e => e.ErrorMessage));
+            var modeli = new List<SelectListItem>();
+            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
+            foreach (var item in gjinia)
+            {
+                modeli.Add(new SelectListItem { Value = item.Value.ToString(), Text = item.Text, Selected = false });
+            }
+            ViewBag.Gjinia = modeli;
+            ViewBag.RoleID = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList().Select(q => new SelectListItem { Value = q.Id, Text = q.Name }).ToList();
+            ViewBag.InstitucioniID = await loadKomuna(null);
+            return View(model);
         }
 
         //
@@ -352,7 +431,7 @@ namespace SMGJ.Controllers
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
-       [AllowAnonymous]
+        [AllowAnonymous]
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -368,10 +447,10 @@ namespace SMGJ.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     // return View("ForgotPasswordConfirmation");
                 }
-                
+
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 
-                var callbackUrl = Url.Action("ResetPassword", "Account",new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 //  await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
                 string subjekti = "Resetimi i fjalëkalimit";
                 string body = "<p>I/e nderuar,</p><p> Ju lutemi klikoni butonin më poshtë për të përfunduar resetimin  e fjalëkalimit tuaj</p><p style=\"max-width:153px; padding: 10px 15px; border-radius: 5px; background-color:blue\"><a href=\"" + callbackUrl + "\" style=\"color:white;text-decoration: none;\">NDRYSHO FJALËKALIMIN</a> </p>" +
@@ -415,12 +494,12 @@ namespace SMGJ.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-           
+
             var user = UserManager.FindById(model.UserId);
             if (user == null)
             {

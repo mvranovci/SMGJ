@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SMGJ.Models
@@ -14,7 +15,22 @@ namespace SMGJ.Models
     {
         public string ReturnUrl { get; set; }
     }
+    public class Perdoruesit
+    {
+        public string Perdoruesi { get; set; }
+        public string Institucioni { get; set; }
+        public string InstitucioniEN { get; set; }
+        public string InstitucioniSR { get; set; }
+        public string Email { get; set; }
+        public string RoliKryesor { get; set; }
+        public bool AktivNeInstitucion { get; set; }
+        public string User { get; set; }
+        public string UserID { get; set; }
+        public int ID { get; set; }  
+        public int InstitucioniID { get; set; }
+        public string RoliKryesorID { get; set; }
 
+    }
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -64,23 +80,38 @@ namespace SMGJ.Models
 
     public class RegisterViewModel
     {
-        [Required]
+       // [Required]
         //[EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        [Display(Name = "UserName")] 
+        public string UserName { get; set; } 
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+         
         public string ConfirmPassword { get; set; }
-    }
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        public string Emri { get; set; }
 
+        [Required(ErrorMessage = "Plotësoni fushën!")]
+        public string Mbiemri { get; set; }
+
+        public DateTime? Ditelindja { get; set; }
+        public string Adresa { get; set; }
+        public string Telefoni { get; set; }
+        //[Required(ErrorMessage = "Plotësoni fushën!")]
+        public string NumriPersonal { get; set; } 
+        public bool Statusi { get; set; }
+        [Required]
+        public int RoleID { get; set; } 
+        public int InstitucioniID { get; set; }
+        public int Gjinia { get; set; }
+    }
+    public class Editimi : RegisterViewModel
+    { 
+        public int ID { get; set; } 
+    }
     public class ResetPasswordViewModel
     {
         //[Required]

@@ -41,9 +41,11 @@ namespace SMGJ.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        public int? ID { get; set; }
+        public int? UserID { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
         [Required]

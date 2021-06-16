@@ -1,12 +1,13 @@
-﻿@model SMGJ.Models.RegisterViewModel
+﻿@model SMGJ.Models.Editimi
 @{
     ViewBag.Title = "Create";
     var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
 }
+@Html.HiddenFor(m => m.ID)
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="mainTitle">Regjistrimi i perdoruesve</h1>
+            <h1 class="mainTitle">Editimi i perdoruesve</h1>
         </div>
     </div>
 </section>
@@ -90,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                        
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         Gjinia
@@ -102,12 +103,12 @@
                                     }
                                 </div>
                                 <div class="col-md-6">
-                                    <label> 
+                                    <label>
                                     </label>
                                     <div class="checkbox clip-check check-primary">
-                                        <input type="checkbox" id="checkbox1" value="1" checked="checked">
+                                        <input type="checkbox" id="checkbox1" value="1" checked=@ViewBag.check>
                                         <label for="checkbox1">
-                                          Statusi
+                                            Statusi
                                         </label>
                                     </div>
                                 </div>
@@ -149,29 +150,13 @@
                                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Shenoni username" })
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label">
-                                        Fjalekalimi
-                                    </label><span class="symbol required"></span>
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Shenoni password" })
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label">
-                                        Konfirmo fjalekalimin
-                                    </label><span class="symbol required"></span>
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Konfirmo password" })
-                                </div>
-                            </div>
                         </div>
                     </fieldset>
                 </div>
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-primary pull-right" onclick="savedata(this)">Regjistro   <i class="fa fa-arrow-circle-right"></i></button>
+                            <button type="button" class="btn btn-primary pull-right" onclick="editdata(this)">Edito   <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -179,8 +164,7 @@
         </div>
 
     </div>
-</div>
-
+</div> 
 
 @section Scripts{
     <script>
@@ -210,15 +194,7 @@
                 },
                 ignore: "",
                 rules: {
-                    Password: {
-                        required: true,
-                        minlength: 6,
-                        legalPassword: true,
-                    },
-                    ConfirmPassword: {
-                        required: true,
-                        equalTo: "#Password"
-                    },
+
                     Emri: {
                         required: true,
                     },
@@ -266,25 +242,27 @@
                 }
             });
         };
-        var savedata = function (btn) {
+        var editdata = function (btn) {
                 runValidator1();
                 if ($("#forma").valid() === true) {
                     var obj = {
+                        ID: $("#ID").val(),
                         Emri: $("#Emri").val(),
                         Mbiemri: $("#Mbiemri").val(),
                         NumriPersonal: $("#NumriPersonal").val(),
-                        Ditelindja: $("#Ditelindja").val(), 
+                        Ditelindja: $("#Ditelindja").val(),
                         Telefoni: $("#Telefoni").val(),
                         RoleID: $("#RoleID").val(),
+                        Email: $("#Email").val(),
                         InstitucioniID: $("#InstitucioniID").val(),
                         UserName: $("#UserName").val(),
-                        Password: $("#Password").val(),
                         Gjinia: $("input[name='select1']:checked").val(),
                         Statusi: $('#checkbox1').is(':checked')
-                };
+                     // fetije
+                    };
                 var url_redirect = '@Url.Action("Index", "USER")';
                 $.ajax({
-                    url: "@Url.Action("Register_Post", "Account")",
+                    url: "@Url.Action("Edit", "USER")",
                     cache: false,
                     type: "POST",
                     dataType: "json",
@@ -308,7 +286,5 @@
             }
 
             };
-    </script>
-
-
+    </script> 
 }

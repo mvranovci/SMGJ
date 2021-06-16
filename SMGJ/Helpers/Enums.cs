@@ -11,17 +11,12 @@ namespace SMGJ.Helpers
         public enum Gjinia
         {
             [Description("Mashkull ")]
-            Mashkull = 1,
+            Mashkull = 0,
             [Description("Femer")]
-            Femer = 2,
-            [Description("Asnje")]
-            Asnje = 3
-
+            Femer = 1
         }
-
         public enum Roli
-        {
-            
+        { 
             Administrator = 1,        
             Fermer = 2
 
