@@ -1,0 +1,130 @@
+﻿@model SMGJ.Models.LAGESHTIA_AJRIT
+@{
+    ViewBag.Title = "Create";
+}
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Regjistrimi i lageshtive </h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <form id="forma">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Vlera<span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(m => m.Vlera, new { @class = "form-control", @placeholder = "Shkruani vleren" })
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="regjistro(this)">
+                    Register <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    Emertimi: {
+                        required: true
+                    },
+                    Vlera: {
+                        required: true,
+                        number: true
+                    }
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+        var regjistro = function (btn) {
+            runValidator1()
+            if ($("#forma").valid() === true) {
+                var obj = {
+                    Vlera: $("#Vlera").val(),
+                 //   Emertimi: $("#Emertimi").val(),
+                };
+                var url_redirect = '@Url.Action("Index", "LAGESHTIA_AJRIT")';
+                $.ajax({
+                    url: "@Url.Action("Create", "LAGESHTIA_AJRIT")",
+                    cache: false,
+                    type: "Post",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal("U Insertua!", "Te dhenat u insertuan me sukses", "success");
+                            window.setTimeout(function () { location.reload(url_redirect),2000 });
+                        } else {
+                            swal("Anulim", "E dhena ekziston", "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        }
+                        else {
+                            swal("Gabim", "Provoni perseri", "error");
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+}
