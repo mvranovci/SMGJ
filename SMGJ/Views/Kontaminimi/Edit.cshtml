@@ -1,0 +1,206 @@
+﻿@model SMGJ.Models.KONTAMINIMI
+@{
+    ViewBag.Title = "Edit";
+    var nivelet = (List<SelectListItem>)ViewBag.Nivelet;
+}
+@Html.HiddenFor(k => k.ID)
+<head>
+    <link href="~/Content/theme/vendor/sweetalert/sweet-alert.css" rel="stylesheet" media="screen">
+    <link href="~/Content/theme/vendor/sweetalert/ie9.css" rel="stylesheet" media="screen">
+    <link href="~/Content/theme/vendor/toastr/toastr.min.css" rel="stylesheet" media="screen">
+    <link href="~/Content/theme/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
+</head>
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" style="color:royalblue; font-family: Shakespeare, 'Times New Roman', Times, serif">Editimi i kontaminimit</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <form id="forma">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Vlera <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(k => k.Vlera, new { @class = "form-control", @placeholder = "Shkruani vleren e kontaminimit" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Niveli <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            <br />
+                            @{ var niveli = Model.Niveli;
+                                var indeksi = nivelet.FindIndex(l => l.Text == niveli);
+                                nivelet.RemoveAt(indeksi);
+                                }
+                            @*@Html.TextBoxFor(k => k.Niveli, new { @class = "form-control", @placeholder = "" })*@
+                            @*@Html.DropDownList("Zgjedh", nivelet, new { @class = "@form-control select2", @name = "dropdown", @Id = "Niveli" })*@
+                            @Html.DropDownListFor(n => nivelet, nivelet, niveli, (new { @class = "form-control select2", @Id = "Niveli" }))
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="edito(this)">
+                    Ndrysho <i class="fa fa-arrow-circle-right"></i>
+                </button>
+
+                <a href="@Url.Action("Index","KONTAMINIMI")" class="btn btn-danger btn-wide">Anulo <i class="fa fa-arrow-circle-left"></i></a>
+                @*<button class="btn btn-primary btn-wide pull-right" type="button" onclick="@Url.Action("Index","KONTAMINIMI")">
+                        Cancel <i class="fa fa-crosshairs"></i>
+                    </button>
+
+                            <a href="@Url.Action("Index","KONTAMINIMI")" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>*@
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    Controller: {
+                        required: true
+                    },
+                    Action_Metoda: {
+                        required: true
+                    },
+                    Emertimi: {
+                        required: true
+                    },
+
+                    Renditja: {
+                        required: true,
+                        number: true
+
+                    },
+                    Vlera: {
+                        required: true,
+                        number: true
+                    },
+                    Niveli: {
+                        required: true,
+                    },
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+        var edito = function (btn) {
+                runValidator1();
+                if ($("#forma").valid() === true) {
+                    var obj = {
+                    //Controller: $("#Controller").val(),
+                    //Action_Metoda: $("#Action_Metoda").val(),
+                    //Emertimi: $("#Emertimi").val(),
+                    //Renditja: $("#Renditja").val(),
+                        //Aktiv: $('#Aktiv').is(':checked')
+                        Vlera: $("#Vlera").val(),
+                        Niveli: $("#Niveli :selected").text()
+                };
+                var url_redirect = '@Url.Action("Index", "KONTAMINIMI")';
+                $.ajax({
+                    url: "@Url.Action("Edit", "KONTAMINIMI")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal({ title: "U ndryshua!", text: "Kontaminimi që keni zgjedhur është ndryshuar me sukses!", type: "success" }, function () {
+                                //location.reload()
+                                window.location.href = url_redirect;
+
+                            });
+                        }
+                        else {
+                            //alert(rs.Mesazhi, "error");
+                            swal("Gabim në ndërrim", rs.Mesazhi, "error");
+                        }
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                            swal("Anulim!", "Ka ndodhur një problem në ndërrim! Ju lutemi provoni përsëri!", "error")
+                        } else {
+                            swal("Anulim!", "Ka ndodhur një problem në ndërrim! Ju lutemi provoni përsëri!", "error")
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+
+        };
+
+
+    </script>
+    <script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+    <script src="~/Content/theme/vendor/toastr/toastr.min.js"></script>
+    <script src="~/Content/theme/assets/js/main.js"></script>
+    <script src="~/Content/theme/assets/js/ui-notifications.js"></script>
+    <script src="~/Content/theme/vendor/select2/select2.min.js"></script>
+    <link href="~/Content/theme/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
+    <script>
+        jQuery(document).ready(function () {
+
+            $(".select2").select2(
+                {
+                    width: '100%'
+                });
+        })
+    </script>
+
+}
+
