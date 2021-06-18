@@ -6,43 +6,22 @@ using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Microsoft.AspNet.Identity;
-
-using static SMGJ.Helpers.Enums;
-using System.Web.Security;
-using System.IO;
-using System.Text;
-using Microsoft.AspNet.Identity.Owin;
-using static SMGJ.Controllers.ManageController;
+using Microsoft.AspNet.Identity; 
+using static SMGJ.Helpers.Enums; 
 
 namespace SMGJ.Controllers
 {
     public class PROFILIController : BaseController
     {
         SMGJDB db = new SMGJDB();
-        MessageJs returnmodel = new MessageJs();
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        MessageJs returnmodel = new MessageJs(); 
         // GET: PROFILI
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
             var model = db.USERs.Find(user.ID);
-           
-            return View(model);
-        }
-        public async Task<ActionResult> Create()
-        {
-            var user = await GetUser();
-            USER model = new USER();
-            return View(model);
-        }
-        public async Task<ActionResult> Edit()
-        {
-            var user = await GetUser();
-            var model = db.USERs.Find(user.ID);
-            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
             var modeli = new List<SelectListItem>();
+            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
             foreach (var item in gjinia)
             {
                 if (model.Gjinia != null)
@@ -63,12 +42,33 @@ namespace SMGJ.Controllers
                 }
             }
             ViewBag.Gjinia = modeli;
-            return PartialView(model);
+            ChangePasswordViewModel passwordmodel = new ChangePasswordViewModel();
+            ViewBag.passwordmodel = passwordmodel;
+            return View(model);
         }
+        public async Task<ActionResult> Create()
+        {
+            var user = await GetUser();
+            USER model = new USER();
+            return View(model);
+        }
+        [HttpPost] 
+        public async Task<ActionResult> EditPassword(ChangePasswordViewModel model)
+        { 
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                returnmodel.status = true;
+                returnmodel.Mesazhi = "Fjalekalimi i user-it u editua me sukses";
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
+            } 
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+            return Json(returnmodel, JsonRequestBehavior.AllowGet);
+        }
+    
 
-
-
-                 [HttpPost]
+        [HttpPost]
         public async Task<ActionResult> Edit(USER model)
         {
             var user = await GetUser();
@@ -87,11 +87,8 @@ namespace SMGJ.Controllers
                     new_model.Datelindja = model.Datelindja;
                     new_model.Password = model.Password;
                     new_model.Gjinia = model.Gjinia;
-                    new_model.RoleID = user.ID;
-
-                    
-                    ViewBag.RoleUserID = user.RoleID;
-                   
+                    new_model.RoleID = user.ID; 
+                    ViewBag.RoleUserID = user.RoleID; 
                     //bone update
                     db.Entry(new_model).State = EntityState.Modified;
                     //ruaj te dhenat
@@ -114,91 +111,7 @@ namespace SMGJ.Controllers
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
         }
-
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code, string UserId)
-        {
-            return code == null ? View("Error") : View();
-        }
-
-        //
-        // POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var user = UserManager.FindById(model.UserId);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                //return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Profili");
-            }
-            AddErrors(result);
-            return View();
-        }
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
-
-        private void AddErrors(IdentityResult result)
-        {
-            throw new NotImplementedException();
-        }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ChangePassword(ProfiliViewModel model)
-        //{
-        //    var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.psw.OldPassword, model.psw.NewPassword);
-        //    if (result.Succeeded)
-        //    {
-        //        SMGJDB db = new SMGJDB();
-        //        var usertoupdate = db.USERs.Find(model.psw.ID);
-        //        string password = model.psw.NewPassword;
-        //        ASCIIEncoding BinaryPassword = new ASCIIEncoding();
-        //        string encrypted = Encrypt(password);
-        //        byte[] passwordArray = BinaryPassword.GetBytes(encrypted);
-        //        usertoupdate.Password = passwordArray;
-        //        db.Entry(usertoupdate).State = EntityState.Modified;
-        //        await db.SaveChangesAsync();
-        //        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-        //        if (user != null)
-        //        {
-        //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-        //        }
-        //        ViewBag.Active = "active";
-        //        return RedirectToAction("Profili", new { id = model.psw.NewPassword, Message = ManageMessageId.ChangePasswordSuccess });
-        //    }
-        //    AddErrors(result);
-        //    return RedirectToAction("Profili", new { id = model.psw.OldPassword, Message = ManageMessageId.IncorrectPassword });
-        //}
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
+         
 
     }
 }

@@ -89,6 +89,7 @@ var FormElements = function() {"use strict";
 	var datePickerHandler = function() {
 		$('.datepicker').datepicker({
 			autoclose: true,
+			format: 'dd/mm/yyyy',
 			todayHighlight: true
 		});
 		$('.format-datepicker').datepicker({

@@ -5,23 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SMGJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Controller_Actions_Menu">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ControllerID" Type="int" />
-          <Property Name="AksioniID" Type="int" />
-          <Property Name="Pershkrimi" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Controller_Menu">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Controlleri" Type="nvarchar" MaxLength="50" />
-          <Property Name="Renditja" Type="int" />
-        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -246,30 +229,6 @@
           <Property Name="Krijuar" Type="datetime" />
           <Property Name="KrijuarNga" Type="int" />
         </EntityType>
-        <Association Name="FK_Controller_Actions_Menu_Controller_Actions_Menu">
-          <End Role="Controller_Actions_Menu" Type="Self.Controller_Actions_Menu" Multiplicity="1" />
-          <End Role="Controller_Actions_Menu1" Type="Self.Controller_Actions_Menu" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Controller_Actions_Menu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Controller_Actions_Menu1">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Controller_Actions_Menu_Controller_Menu">
-          <End Role="Controller_Menu" Type="Self.Controller_Menu" Multiplicity="0..1" />
-          <End Role="Controller_Actions_Menu" Type="Self.Controller_Actions_Menu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Controller_Menu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Controller_Actions_Menu">
-              <PropertyRef Name="ControllerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FERMA_KOMUNA">
           <End Role="KOMUNA" Type="Self.KOMUNA" Multiplicity="0..1" />
           <End Role="FERMA" Type="Self.FERMA" Multiplicity="*" />
@@ -523,8 +482,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SMGJModelStoreContainer">
-          <EntitySet Name="Controller_Actions_Menu" EntityType="Self.Controller_Actions_Menu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Controller_Menu" EntityType="Self.Controller_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FERMA" EntityType="Self.FERMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="Self.GJEDHAT_PARAMETRAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHI" EntityType="Self.GJEDHI" Schema="dbo" store:Type="Tables" />
@@ -545,14 +502,6 @@
           <EntitySet Name="TIPI" EntityType="Self.TIPI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YNDYRA" EntityType="Self.YNDYRA" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Controller_Actions_Menu_Controller_Actions_Menu" Association="Self.FK_Controller_Actions_Menu_Controller_Actions_Menu">
-            <End Role="Controller_Actions_Menu" EntitySet="Controller_Actions_Menu" />
-            <End Role="Controller_Actions_Menu1" EntitySet="Controller_Actions_Menu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Controller_Actions_Menu_Controller_Menu" Association="Self.FK_Controller_Actions_Menu_Controller_Menu">
-            <End Role="Controller_Menu" EntitySet="Controller_Menu" />
-            <End Role="Controller_Actions_Menu" EntitySet="Controller_Actions_Menu" />
-          </AssociationSet>
           <AssociationSet Name="FK_FERMA_KOMUNA" Association="Self.FK_FERMA_KOMUNA">
             <End Role="KOMUNA" EntitySet="KOMUNA" />
             <End Role="FERMA" EntitySet="FERMA" />
@@ -643,8 +592,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SMGJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SMGJEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Controller_Actions_Menu" EntityType="SMGJModel.Controller_Actions_Menu" />
-          <EntitySet Name="Controller_Menu" EntityType="SMGJModel.Controller_Menu" />
           <EntitySet Name="FERMAs" EntityType="SMGJModel.FERMA" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="SMGJModel.GJEDHAT_PARAMETRAT" />
           <EntitySet Name="GJEDHIs" EntityType="SMGJModel.GJEDHI" />
@@ -665,14 +612,6 @@
           <EntitySet Name="TIPIs" EntityType="SMGJModel.TIPI" />
           <EntitySet Name="USERs" EntityType="SMGJModel.USER" />
           <EntitySet Name="YNDYRAs" EntityType="SMGJModel.YNDYRA" />
-          <AssociationSet Name="FK_Controller_Actions_Menu_Controller_Actions_Menu" Association="SMGJModel.FK_Controller_Actions_Menu_Controller_Actions_Menu">
-            <End Role="Controller_Actions_Menu" EntitySet="Controller_Actions_Menu" />
-            <End Role="Controller_Actions_Menu1" EntitySet="Controller_Actions_Menu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Controller_Actions_Menu_Controller_Menu" Association="SMGJModel.FK_Controller_Actions_Menu_Controller_Menu">
-            <End Role="Controller_Menu" EntitySet="Controller_Menu" />
-            <End Role="Controller_Actions_Menu" EntitySet="Controller_Actions_Menu" />
-          </AssociationSet>
           <AssociationSet Name="FK_FERMA_KOMUNA" Association="SMGJModel.FK_FERMA_KOMUNA">
             <End Role="KOMUNA" EntitySet="KOMUNAs" />
             <End Role="FERMA" EntitySet="FERMAs" />
@@ -758,27 +697,6 @@
             <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Controller_Actions_Menu">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ControllerID" Type="Int32" />
-          <Property Name="AksioniID" Type="Int32" />
-          <Property Name="Pershkrimi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Controller_Actions_Menu1" Relationship="SMGJModel.FK_Controller_Actions_Menu_Controller_Actions_Menu" FromRole="Controller_Actions_Menu" ToRole="Controller_Actions_Menu1" />
-          <NavigationProperty Name="Controller_Actions_Menu2" Relationship="SMGJModel.FK_Controller_Actions_Menu_Controller_Actions_Menu" FromRole="Controller_Actions_Menu1" ToRole="Controller_Actions_Menu" />
-          <NavigationProperty Name="Controller_Menu" Relationship="SMGJModel.FK_Controller_Actions_Menu_Controller_Menu" FromRole="Controller_Actions_Menu" ToRole="Controller_Menu" />
-        </EntityType>
-        <EntityType Name="Controller_Menu">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Controlleri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Renditja" Type="Int32" />
-          <NavigationProperty Name="Controller_Actions_Menu" Relationship="SMGJModel.FK_Controller_Actions_Menu_Controller_Menu" FromRole="Controller_Menu" ToRole="Controller_Actions_Menu" />
-        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -1045,30 +963,6 @@
           <Property Name="KrijuarNga" Type="Int32" />
           <NavigationProperty Name="QUMESHTIs" Relationship="SMGJModel.FK_QUMESHTI_YNDYRA" FromRole="YNDYRA" ToRole="QUMESHTI" />
         </EntityType>
-        <Association Name="FK_Controller_Actions_Menu_Controller_Actions_Menu">
-          <End Type="SMGJModel.Controller_Actions_Menu" Role="Controller_Actions_Menu" Multiplicity="1" />
-          <End Type="SMGJModel.Controller_Actions_Menu" Role="Controller_Actions_Menu1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Controller_Actions_Menu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Controller_Actions_Menu1">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Controller_Actions_Menu_Controller_Menu">
-          <End Type="SMGJModel.Controller_Menu" Role="Controller_Menu" Multiplicity="0..1" />
-          <End Type="SMGJModel.Controller_Actions_Menu" Role="Controller_Actions_Menu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Controller_Menu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Controller_Actions_Menu">
-              <PropertyRef Name="ControllerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FERMA_KOMUNA">
           <End Type="SMGJModel.KOMUNA" Role="KOMUNA" Multiplicity="0..1" />
           <End Type="SMGJModel.FERMA" Role="FERMA" Multiplicity="*" />
@@ -1327,25 +1221,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SMGJModelStoreContainer" CdmEntityContainer="SMGJEntities">
-          <EntitySetMapping Name="Controller_Actions_Menu">
-            <EntityTypeMapping TypeName="SMGJModel.Controller_Actions_Menu">
-              <MappingFragment StoreEntitySet="Controller_Actions_Menu">
-                <ScalarProperty Name="Pershkrimi" ColumnName="Pershkrimi" />
-                <ScalarProperty Name="AksioniID" ColumnName="AksioniID" />
-                <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Controller_Menu">
-            <EntityTypeMapping TypeName="SMGJModel.Controller_Menu">
-              <MappingFragment StoreEntitySet="Controller_Menu">
-                <ScalarProperty Name="Renditja" ColumnName="Renditja" />
-                <ScalarProperty Name="Controlleri" ColumnName="Controlleri" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FERMAs">
             <EntityTypeMapping TypeName="SMGJModel.FERMA">
               <MappingFragment StoreEntitySet="FERMA">

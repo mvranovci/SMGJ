@@ -1,412 +1,327 @@
 ﻿@model SMGJ.Models.USER
+@using SMGJ.Models;
 @{
-    Layout = null;
-    //var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
+    var gjinia = (List<SelectListItem>)ViewBag.Gjinia; 
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="~/Content/theme/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/theme/vendor/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/Content/theme/vendor/themify-icons/themify-icons.min.css">
-    <link href="~/Content/theme/vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
-    <link href="~/Content/theme/vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
-    <link href="~/Content/theme/vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="~/Content/theme/assets/css/styles.css">
-    <link rel="stylesheet" href="~/Content/theme/assets/css/plugins.css">
-    <link rel="stylesheet" href="~/Content/theme/assets/css/themes/theme-1.css" id="skin_color" />
-    <link href="~/Content/theme/vendor/bootstrap-fileinput/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-    <div id="app">
-        <div class="app-content">
-            <div class="main-content">
-                <div class="wrap-content container" id="container">
-                    <section id="page-title">
+
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
+                    <li class="active">
+                        <a data-toggle="tab" href="#panel_overview">
+                            Profili
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#panel_edit_account">
+                            Ndrysho te dhenat personale
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#panel_password">
+                            Ndrysho Fjalekalimin
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="panel_overview" class="tab-pane fade in active">
                         <div class="row">
-                            <div class="col-sm-8">
-                                <h1 class="mainTitle">User Profile</h1>
-                            </div>
-                            <ol class="breadcrumb">
-                                <li>
-                                    <span>Pages</span>
-                                </li>
-                                <li class="active">
-                                    <span>User Profile</span>
-                                </li>
-                            </ol>
-                        </div>
-                    </section>
-                    <div class="container-fluid container-fullw bg-white">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="tabbable">
-                                    <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
-                                        <li class="active">
-                                            <a data-toggle="tab" href="#panel_overview">
-                                                Profili
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#panel_edit_account">
-                                                Ndrysho te dhenat personale
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#panel_password">
-                                                Ndrysho Fjalekalimin
-                                            </a>
-                                        </li>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="user-left">
 
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div id="panel_overview" class="tab-pane fade in active">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-12">
-                                                    <div class="user-left">
+                                    <div class="left col-sm-6 col-md-6">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3">Te dhenat per kontakt</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        @Html.HiddenFor(m => m.ID)
+                                                        @Html.HiddenFor(m => m.Password)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Emri:</td>
+                                                    <td>
+                                                        @Model.Emri
+                                                    </td>
+                                                    <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mbiemri:</td>
+                                                    <td>
+                                                        @Model.Mbiemri
+                                                    </td>
+                                                    <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email:</td>
+                                                    <td>
+                                                        @Model.Email
+                                                    </td>
+                                                    <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nr.Telefonit:</td>
+                                                    <td>@Model.NrTelefonit</td>
+                                                    <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3">Te dhenat gjenerale</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                                        <div class="left col-sm-6 col-md-6">
-                                                            <table class="table table-condensed">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th colspan="3">Te dhenat per kontakt</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td colspan="3">
-                                                                            @Html.HiddenFor(m => m.ID)
-                                                                            @Html.HiddenFor(m => m.Password)
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Emri:</td>
-                                                                        <td>
-                                                                            @Model.Emri
-                                                                        </td>
-                                                                    </tr>
+                                                <tr>
+                                                    <td>Roli</td>
+                                                    @{
+                                                        var pershkrimi = "Fermer";
 
+                                                        if (@Model.RoleID == 1)
+                                                        {
+                                                            pershkrimi = "Administrator";
+                                                        }
+                                                    }
+                                                    <td><span class="label label-sm label-info">@pershkrimi</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3">Te dhenat shtese</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
+                                                <tr>
+                                                    <td>Vendbanimi</td>
+                                                    <td>@Model.KOMUNA.Emri</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Datelindja</td>
+                                                    <td>@Model.Datelindja</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gjinia</td>
+                                                    @{
+                                                        var gender = "Mashkull";
 
-
-                                                                    <tr>
-                                                                        <td>Mbiemri:</td>
-                                                                        <td>
-                                                                            @Model.Mbiemri
-                                                                        </td>
-                                                                    </tr>
-
-
-                                                                    <tr>
-                                                                        <td>Email:</td>
-                                                                        <td>
-                                                                            @Model.Email
-
-                                                                        </td>
-                                                                    </tr>
-
-
-                                                                    <tr>
-                                                                        <td>Nr.Telefonit:</td>
-                                                                        <td>@Model.NrTelefonit</td>
-                                                                    </tr>
-
-
-                                                                </tbody>
-                                                            </table>
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th colspan="3">Te dhenat gjenerale</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                    <tr>
-                                                                        <td>Roli</td>
-                                                                        @{
-                                                                            var pershkrimi = "Fermer";
-
-                                                                            if (@Model.RoleID == 1)
-                                                                            {
-                                                                                pershkrimi = "Administrator";
-                                                                            }
-                                                                        }
-                                                                        <td><span class="label label-sm label-info">@pershkrimi</span></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th colspan="3">Te dhenat shtese</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                    <tr>
-                                                                        <td>Vendbanimi</td>
-                                                                        <td>@Model.KOMUNA.Emri</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Datelindja</td>
-                                                                        <td>@Model.Datelindja</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Gjinia</td>
-                                                                        @{
-                                                                            var gender = "Mashkull";
-
-                                                                            if (@Model.Gjinia == true)
-                                                                            {
-                                                                                gender = "Femer";
-                                                                            }
-                                                                        }
-                                                                        <td>@gender</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="center col-sm-6 col-md-6">
-                                                            <h4>@Model.Emri @Model.Mbiemri</h4>
+                                                        if (@Model.Gjinia == true)
+                                                        {
+                                                            gender = "Femer";
+                                                        }
+                                                    }
+                                                    <td>@gender</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="center col-sm-6 col-md-6">
+                                        <h4>@Model.Emri @Model.Mbiemri</h4>
 
 
-                                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                                <div class="user-image">
-                                                                    <div class="fileinput-new thumbnail">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="user-image">
+                                                <div class="fileinput-new thumbnail">
 
-                                                                        <img src="~/Content/theme/assets/images/avatar-1-xl.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="user-image-buttons">
-                                                                        <span class="btn btn-azure btn-file btn-sm">
-                                                                            <span class="fileinput-new"></span><span class="fileinput-exists"><i class="fa fa-pencil"></i></span>
-                                                                            <input type="file">
-                                                                        </span>
-                                                                        <a href="#" class="btn fileinput-exists btn-red btn-sm" data-dismiss="fileinput">
-                                                                            <i class="fa fa-times"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="social-icons block">
-                                                                <ul>
-                                                                    <li data-placement="top" data-original-title="Twitter" class="social-twitter tooltips">
-                                                                        <a href="http://www.twitter.com" target="_blank">
-                                                                            Twitter
-                                                                        </a>
-                                                                    </li>
-                                                                    <li data-placement="top" data-original-title="Facebook" class="social-facebook tooltips">
-                                                                        <a href="http://facebook.com" target="_blank">
-                                                                            Facebook
-                                                                        </a>
-                                                                    </li>
-                                                                    <li data-placement="top" data-original-title="Google" class="social-google tooltips">
-                                                                        <a href="http://google.com" target="_blank">
-                                                                            Google+
-                                                                        </a>
-                                                                    </li>
-                                                                    <li data-placement="top" data-original-title="LinkedIn" class="social-linkedin tooltips">
-                                                                        <a href="http://linkedin.com" target="_blank">
-                                                                            LinkedIn
-                                                                        </a>
-                                                                    </li>
-                                                                    <li data-placement="top" data-original-title="Github" class="social-github tooltips">
-                                                                        <a href="#" target="_blank">
-                                                                            Github
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <hr>
-                                                        </div>
-                                                    </div>
+                                                    <img src="~/Content/theme/assets/images/avatar-1-xl.jpg" alt="">
                                                 </div>
-
+                                                <div class="user-image-buttons">
+                                                    <span class="btn btn-azure btn-file btn-sm">
+                                                        <span class="fileinput-new"></span><span class="fileinput-exists"><i class="fa fa-pencil"></i></span>
+                                                        <input type="file">
+                                                    </span>
+                                                    <a href="#" class="btn fileinput-exists btn-red btn-sm" data-dismiss="fileinput">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div id="panel_edit_account" class="tab-pane fade  ">
-                                            <form action="#" role="form" id="form">
-                                                <fieldset>
-                                                    <legend>
-                                                        Ndrysho te dhenat personale
-                                                    </legend>
-                                                    <div class=" row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">
-                                                                    Emri
-                                                                </label>
-                                                                @Html.TextBoxFor(m => m.Emri, new { @class = "form-control", @placeholder = "" })
-
-                                                                @*//<input type="text" placeholder="Peter" class="form-control" id="firstname" name="firstname">*@
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">
-                                                                    Mbiemri
-                                                                </label>
-                                                                @Html.TextBoxFor(m => m.Mbiemri, new { @class = "form-control", @placeholder = "" })
-
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">
-                                                                    Email
-                                                                </label>
-                                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
-                                                                @*<input type="email" placeholder="" class="form-control" id="Email" name="email">*@
-
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label class="control-label">
-                                                                    Nr. Telefonit
-                                                                </label>
-                                                                @Html.TextBoxFor(m => m.NrTelefonit, new { @class = "form-control", @placeholder = "" })
-
-                                                            </div>
-                                                            
-
-
-                                                            <div class="form-group">
-                                                                <label class="control-label">Datelindja</label>
-                                                                @Html.TextBoxFor(m => m.Datelindja, new { @class = "form-control", @placeholder = "", type = "date" })
-                                                            </div>
-                                                            @*<div class="form-group">
-                                                                    @foreach (var item in gjinia)
-                                                                    {
-                                                                        <div class="clip-radio radio-primary radio-inline ">
-                                                                            <input type="radio" id="@item.Value" name="select1" value="@item.Value" checked=@item.Selected />
-                                                                            <label for="@item.Value">
-                                                                                @item.Text
-                                                                            </label>
-                                                                        </div>
-                                                                    }
-                                                                    @Html.ValidationMessageFor(m => m.Gjinia, "", new { @class = "text-danger" })
-                                                                </div>*@
-                                                        </div>
-                                                        
-
-                                                    </div>
-
-                                                </fieldset>
-
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <p>
-                                                            By clicking UPDATE, you are agreeing to the Policy and Terms &amp; Conditions.
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button class="btn btn-primary btn-wide pull-right" type="button" onclick="edito(this)">
-                                                            Edito <i class="fa fa-arrow-circle-right"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                        <hr>
+                                        <div class="social-icons block">
+                                            <ul>
+                                                <li data-placement="top" data-original-title="Twitter" class="social-twitter tooltips">
+                                                    <a href="http://www.twitter.com" target="_blank">
+                                                        Twitter
+                                                    </a>
+                                                </li>
+                                                <li data-placement="top" data-original-title="Facebook" class="social-facebook tooltips">
+                                                    <a href="http://facebook.com" target="_blank">
+                                                        Facebook
+                                                    </a>
+                                                </li>
+                                                <li data-placement="top" data-original-title="Google" class="social-google tooltips">
+                                                    <a href="http://google.com" target="_blank">
+                                                        Google+
+                                                    </a>
+                                                </li>
+                                                <li data-placement="top" data-original-title="LinkedIn" class="social-linkedin tooltips">
+                                                    <a href="http://linkedin.com" target="_blank">
+                                                        LinkedIn
+                                                    </a>
+                                                </li>
+                                                <li data-placement="top" data-original-title="Github" class="social-github tooltips">
+                                                    <a href="#" target="_blank">
+                                                        Github
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div id="panel_password" class="tab-pane fade">
-                                            @Html.ValidationSummary("", new { @class = "text-danger" })
-                                            @Html.HiddenFor(model => model.UserId)
-                                            @*@using (Html.BeginForm("Index", "Profili", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
-                                            <form action="#" role="form" class="form-forgot " id="forgot">
-                                                <fieldset>
-                                                    <legend>
-                                                        Ndrysho Fjalekalimin
-                                                    </legend>
-                                                    <div class="row">
-                                                        @Html.ValidationSummary("", new { @class = "text-danger" })
-
-                                                        <div class="form-group" style="margin-bottom:90px;">
-                                                            <div class="col-md-12">
-                                                                <label class="control-label">
-                                                                    Fjalekalimi aktual
-                                                                </label>
-                                                                <span class="input-icon">
-                                                                    @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control", @placeholder = "Fjalekalimi i vjeter", autocomplete = "off" })
-                                                                    <i class="fa fa-lock"></i>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group"  style="margin-bottom:170px;">
-                                                            <div class="col-md-12">
-                                                                <label class="control-label">
-                                                                    Fjalekalimi i ri
-                                                                </label>
-                                                                <span class="input-icon">
-                                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Fjalekalimi i ri", autocomplete = "off" })
-                                                                    <i class="fa fa-lock"></i>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-md-12">
-                                                                <label class="control-label">
-                                                                    Konfirmo fjalekalimin e ri
-                                                                </label>
-                                                                <span class="input-icon">
-                                                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Konfirmo fjalekalimin", autocomplete = "off" })
-                                                                    <i class="fa fa-mail-reply-all"></i>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                       
-                                                    </div>
-
-                                                </fieldset>
-
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <p>
-                                                            By clicking UPDATE, you are agreeing to the Policy and Terms &amp; Conditions.
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button type="button" class="btn btn-primary btn-block btn-flat" onclick="editoPassword(this)">Ndrysho <i class="fa fa-arrow-circle-right"></i></button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <hr>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                    </div>
+                    <div id="panel_edit_account" class="tab-pane fade  ">
+                        <form action="#" role="form" id="form">
+                            <fieldset>
+                                <legend>
+                                    Ndrysho te dhenat personale
+                                </legend>
+                                <div class=" row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Emri
+                                            </label>
+                                            @Html.TextBoxFor(m => m.Emri, new { @class = "form-control", @placeholder = "" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Mbiemri
+                                            </label>
+                                            @Html.TextBoxFor(m => m.Mbiemri, new { @class = "form-control", @placeholder = "" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Email
+                                            </label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Nr. Telefonit
+                                            </label>
+                                            @Html.TextBoxFor(m => m.NrTelefonit, new { @class = "form-control", @placeholder = "" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Datelindja</label>
+                                            <p class="input-group input-append datepicker date">
+                                                @Html.TextBoxFor(m => m.Datelindja, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-primary">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </p>
+
+                                        </div>
+                                        <div class="form-group">
+                                            @foreach (var item in gjinia)
+                                            {
+                                                <div class="clip-radio radio-primary radio-inline ">
+                                                    <input type="radio" id="@item.Value" name="select1" value="@item.Value" checked=@item.Selected />
+                                                    <label for="@item.Value">
+                                                        @item.Text
+                                                    </label>
+                                                </div>
+                                            }
+                                            @Html.ValidationMessageFor(m => m.Gjinia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </fieldset>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p>
+                                        By clicking UPDATE, you are agreeing to the Policy and Terms &amp; Conditions.
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary btn-wide pull-right" type="button" onclick="edito(this)">
+                                        Edito <i class="fa fa-arrow-circle-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="panel_password" class="tab-pane fade">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.UserId)
+                        <form class="form-forgot " id="forgot">
+                            <fieldset>
+                                <legend>
+                                    Ndrysho Fjalekalimin
+                                </legend>
+                                <div class="row">
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <span class="symbol required"></span>
+                                                @Html.Label("OldPassword", "Fjalëkalimi i tanishëm", new { @class = "" })
+                                                @Html.Password("OldPassword", "", new { @class = "form-control", required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <span class="symbol required"></span>
+                                                @Html.Label("NewPassword", "Fjalëkalimi i ri", new { @class = "" })
+                                                @Html.Password("NewPassword", "", new { @class = "form-control", required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <span class="symbol required"></span>
+                                                @Html.Label("ConfirmPassword", "Konfirmo fjalëkalimin e ri", new { @class = "" })
+                                                @Html.Password("ConfirmPassword", "", new { @class = "form-control", required = "required" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <div class="row">
+                                <div class="col-md-8">
+
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary btn-block btn-flat" onclick="editoPassword(this)">Ndrysho <i class="fa fa-arrow-circle-right"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-    <!-- start: MAIN JAVASCRIPTS -->
-    <script src="~/Content/theme/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Content/theme/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/Content/theme/vendor/modernizr/modernizr.js"></script>
-    <script src="~/Content/theme/vendor/jquery-cookie/jquery.cookie.js"></script>
-    <script src="~/Content/theme/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="~/Content/theme/vendor/switchery/switchery.min.js"></script>
-    <script src="~/Content/theme/vendor/bootstrap-fileinput/jasny-bootstrap.js"></script>
-    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-    <!-- start: CLIP-TWO JAVASCRIPTS -->
-    <script src="~/Content/theme/assets/js/main.js"></script>
-    <!-- start: JavaScript Event Handlers for this page -->
+</div>
+
+@section Scripts{
     <script>
-        jQuery(document).ready(function () {
-            Main.init();
-        });
-    </script>
-
-    <script src="~/Content/theme/vendor/jquery-validation/jquery.validate.min.js"></script>
-
-</body>
-</html>
-<script>
         runValidator1 = function () {
             var form1 = $('#form');
             var errorHandler1 = $('.errorHandler', form1);
@@ -439,10 +354,104 @@
 
                     NrTelefonit: {
 
+                    }
+
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+        var edito = function (btn) {
+
+        runValidator1();
+        if ($("#form").valid() === true) {
+            var gjinia = true;
+            if ($("input[name='select1']:checked").val() == 0) {
+                gjinia = false;
+            }
+                    var obj = {
+                        Emri: $("#Emri").val(),
+                        ID: $("#ID").val(),
+                        Mbiemri: $("#Mbiemri").val(),
+                        Email: $("#Email").val(),
+                        NrTelefonit: $("#NrTelefonit").val(),
+                        Password: $("#Password").val(),
+                        Datelindja: $("#Datelindja").val(),
+                        Gjinia: gjinia/* $("input[name='select1']:checked").val()*/
+                    };
+
+                var url_redirect = '@Url.Action("Index", "PROFILI" )';
+                $.ajax({
+                    url: "@Url.Action("Edit", "PROFILI")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            window.location.href = url_redirect;
+                        }
+                        else {
+                            alert(rs.Message, "error");
+                        }
+
                     },
-                    Password: {
-                        required: true,
-                        password: true
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+
+            };
+    </script>
+
+    @*---------------! Pjesa e nderrimit te passwordit - ende nuk eshte funksionale !-----------------------------------*@
+    <script> 
+        runValidator2 = function () {
+            var form2 = $('#forgot');
+            var errorHandler1 = $('.errorHandler', form2);
+            var successHandler1 = $('.successHandler', form2);
+            $('#forgot').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+
+                    error.insertAfter(element);
+                    // for other inputs, just perform default behavior
+
+                },
+                ignore: "",
+                rules: {
+
+                    ConfirmPassword: {
+                        equalTo: "#NewPassword"
                     }
 
 
@@ -474,130 +483,19 @@
                 }
             });
         };
-    var edito = function (btn) {
-        alert("Konfirmoni ndryshimin e te dhenave!");
-        runValidator1();
-
-        if ($("#form").valid() === true) {
-
-                    var obj = {
-
-                        Emri: $("#Emri").val(),
-                        ID: $("#ID").val(),
-                        Mbiemri: $("#Mbiemri").val(),
-                        Email: $("#Email").val(),
-                        NrTelefonit: $("#NrTelefonit").val(),
-                        Password: $("#Password").val(),
-                        Datelindja: $("#Datelindja").val()
-                    };
-
-                var url_redirect = '@Url.Action("Index", "PROFILI" )';
-                $.ajax({
-                    url: "@Url.Action("Edit", "PROFILI")",
-                    cache: false,
-                    type: "POST",
-                    dataType: "json",
-                    data: obj,
-                    success: function (rs) {
-                        if (rs.status) {
-                            window.location.href = url_redirect;
-                        }
-                        else {
-                            alert(rs.Message, "error");
-                        }
-
-                    },
-                    error: function (jqXHR, error, errorThrown) {
-                        if (jqXHR.status && jqXHR.status == 400) {
-                            console.log(jqXHR.responseText);
-                        } else {
-                            console.log("Something went wrong");
-                        }
-                    }
-                });
-            }
-
-            };
-</script>
-
-@*---------------! Pjesa e nderrimit te passwordit - ende nuk eshte funksionale !-----------------------------------*@
-<script>
-            runValidator1 = function () {
-                var form1 = $('#forgot');
-                var errorHandler1 = $('.errorHandler', form1);
-                var successHandler1 = $('.successHandler', form1);
-                $('#forgot').validate({
-                    errorElement: "span", // contain the error msg in a span tag
-                    errorClass: 'help-block',
-                    errorPlacement: function (error, element) { // render error placement for each input type
-                        if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
-                            error.insertAfter($(element).closest('.form-group').children('div').children().last());
-                        } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
-                            error.insertAfter($(element).closest('.form-group').children('div'));
-                        } else {
-                            error.insertAfter(element);
-                            // for other inputs, just perform default behavior
-                        }
-                    },
-                    ignore: "",
-                    rules: {
-                        OldPassword: {
-                            required: true,
-                            password: true
-                        },
-                        Password: {
-                            required: true,
-                            password: true
-                        },
-                        ConfirmPassword: {
-                            required: true,
-                            password: true
-                        }
-
-
-                    },
-                    invalidHandler: function (event, validator) { //display error alert on form submit
-                        successHandler1.hide();
-                        errorHandler1.show();
-                    },
-                    highlight: function (element) {
-                        $(element).closest('.help-block').removeClass('valid');
-                        // display OK icon
-                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
-                        // add the Bootstrap error class to the control group
-                    },
-                    unhighlight: function (element) { // revert the change done by hightlight
-                        $(element).closest('.form-group').removeClass('has-error');
-                        // set error class to the control group
-                    },
-                    success: function (label, element) {
-                        label.addClass('help-block valid');
-                        // mark the current input as valid and display OK icon
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
-                    },
-                    submitHandler: function (form) {
-                        successHandler1.show();
-                        errorHandler1.hide();
-                        // submit form
-                        //$('#form').submit();
-                    }
-                });
-            };
         var editoPassword = function (btn) {
-            alert("Konfirmoni ndryshimin e te dheeeeenave!");
-            runValidator1();
 
-            if ($("#form").valid() === true) {
-                        var obj = {
-                            ID: $("#ID").val(),
-                            OldPassword: $("#OldPassword").val(),
-                            Password: $("#Password").val(),
-                            ConfirmPassword: $("#ConfirmPassword").val(),
+            runValidator2();
+            if ($("#forgot").valid() === true) { 
+                    var obj = { 
+                        OldPassword: $("#OldPassword").val(),
+                        NewPassword: $("#NewPassword").val(),
+                        ConfirmPassword: $("#ConfirmPassword").val(),
                         };
 
                     var url_redirect = '@Url.Action("Index", "PROFILI" )';
                     $.ajax({
-                        url: "@Url.Action("Edit", "PROFILI")",
+                        url: "@Url.Action("EditPassword", "PROFILI")",
                         cache: false,
                         type: "POST",
                         dataType: "json",
@@ -607,7 +505,7 @@
                                 window.location.href = url_redirect;
                             }
                             else {
-                                alert(rs.Message, "error");
+                                alert("Ka ndodhur nje gabim");
                             }
 
                         },
@@ -621,5 +519,5 @@
                     });
                 }
                 };
-</script>
-
+    </script>
+}

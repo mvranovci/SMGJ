@@ -342,7 +342,7 @@ namespace SMGJ.Controllers
                         newUser.NrTelefonit = model.Telefoni;
                         newUser.KomunaID = model.InstitucioniID;
                         if (model.Ditelindja != null)
-                        {
+                        { 
                             newUser.Datelindja = model.Ditelindja.Value;
                         }
                         else

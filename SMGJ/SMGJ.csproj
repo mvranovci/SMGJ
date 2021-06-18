@@ -170,7 +170,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AppicationDbContext.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KOMUNAController.cs" />
@@ -189,12 +188,6 @@
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Controller_Actions_Menu.cs">
-      <DependentUpon>dbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Controller_Menu.cs">
-      <DependentUpon>dbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\dbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
