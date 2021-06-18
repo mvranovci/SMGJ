@@ -1,7 +1,9 @@
-@model IEnumerable<SMGJ.Models.MENU>
+﻿@model IEnumerable<SMGJ.Models.MENU>
 @{
     ViewBag.Title = "Index";
 }
+
+
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
@@ -55,11 +57,13 @@
                                             }
                                         }
                                         <span class="label label-sm label-@klasa">@pershktimi</span>
+
                                     </td>
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                                             <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
                                             <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -71,6 +75,8 @@
         </div>
     </div>
 </div>
+
+
 <script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
 @section Scripts{
     <script>
@@ -94,6 +100,7 @@
             });
             e.preventDefault
         });
+
         var deletemenu = function (btn) {
             var obj = { ID: $(btn).data("menuid")  };
                 $.ajax({
@@ -124,3 +131,5 @@
         };
     </script>
 }
+
+

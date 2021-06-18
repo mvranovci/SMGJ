@@ -48,7 +48,7 @@
                             <label class="control-label">
                                 Renditja <span class="symbol required" aria-required="true"></span>
                             </label>
-                            @Html.TextBoxFor(m => m.Renditja, new { @class = "form-control", @placeholder = "Shkruani rendditjen" })
+                            @Html.TextBoxFor(m => m.Renditja, new { @class = "form-control", @placeholder = "Shkruani renditjen" })
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -109,7 +109,6 @@
                     Renditja: {
                         required: true,
                         number: true
-
                     }
                 },
                 invalidHandler: function (event, validator) { //display error alert on form submit
