@@ -21,5 +21,15 @@ namespace SMGJ.Helpers
             Fermer = 2
 
         }
+        
+        public enum Nivelet_e_kontaminimit
+        {
+            [Description("I ulët")]
+            I_ulet = 1,
+            [Description("I mesëm")]
+            I_mesem = 2,
+            [Description("I lartë")]
+            I_larte = 3,
+        }
     }
 }
