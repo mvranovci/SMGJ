@@ -1,4 +1,4 @@
-﻿using SMGJ.Models;
+using SMGJ.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace SMGJ.Controllers
 {
+    [Authorize]
     public class FermaController : BaseController
     {
         SMGJDB db = new SMGJDB();
@@ -17,7 +18,6 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             List<FERMA> model = db.FERMAs.ToList();
-
 
             return View(model);
 
@@ -73,13 +73,14 @@ namespace SMGJ.Controllers
             MessageJs returnmodel = new MessageJs();
 
             var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
-
-            if (exists)
+            var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
+            if (exists || existsKrijuar)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme, sepse ekziston!";
+                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
+
 
             if (ModelState.IsValid)
             {
