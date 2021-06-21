@@ -1,0 +1,156 @@
+﻿@model SMGJ.Models.FERMA
+@{
+    ViewBag.Title = "Create";
+}
+@Html.HiddenFor(m => m.ID)
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Editimi i fermave</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <form action="#" role="form" id="forma">
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>Edito te dhenat e fermes</legend>
+
+                        <div class="row " >
+                            <div class=" col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Emri <span class="symbol required" aria-required="true"></span>
+                                    </label>
+                                    @Html.TextBoxFor(m => m.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        Komuna
+                                    </label><span class="symbol required"></span>
+                                    @Html.DropDownList("KomunaID", null, htmlAttributes: new { @class = "form-control select2" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary pull-right" onclick="editdata(this)">Edito   <i class="fa fa-arrow-circle-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $.validator.addMethod(
+                "legalPassword",
+                function (value, element) {
+                    return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!#$%^&*.,?])/.test(value);
+                },
+                "Fjalekalimi duhet te permbaje se paku nje numer, nje shkronje te madhe, nje shkronje te vogel dhe nje nga  simbolet (-+_!#$%^&*.,?)  "
+            );
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    Emri: {
+                        required: true,
+                    },
+                    KomunaID: {
+                        required: true,
+                    }
+
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+        var editdata = function (btn) {
+                runValidator1();
+                if ($("#forma").valid() === true) {
+                    var obj = {
+                        ID: $("#ID").val(),
+                        Emri: $("#Emri").val(),
+                        KomunaID: $("#KomunaID").val(),
+                     // fetije
+                    };
+                var url_redirect = '@Url.Action("Index", "FERMA")';
+                $.ajax({
+                    url: "@Url.Action("Edit", "FERMA")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        swal("", rs.Mesazhi, "success");
+                        if (rs.status) {
+                            window.location.href = url_redirect;
+                        }
+                        else {
+
+                            swal("", rs.Mesazhi, "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+
+            };
+    </script>
+}
