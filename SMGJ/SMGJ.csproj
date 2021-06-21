@@ -173,10 +173,13 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KOMUNAController.cs" />
+    <Compile Include="Controllers\KontaminimiController.cs" />
     <Compile Include="Controllers\LAGESHTIA_AJRITController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MENUController.cs" />
+    <Compile Include="Controllers\Menu_RoliController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
+    <Compile Include="Controllers\RACAController.cs" />
     <Compile Include="Controllers\RRAHJET_ZEMRESController.cs" />
     <Compile Include="Controllers\TEMPERATURAController.cs" />
     <Compile Include="Controllers\TipiController.cs" />
@@ -2056,6 +2059,13 @@
     <Content Include="Views\USER\Index.cshtml" />
     <Content Include="Views\USER\Edit.cshtml" />
     <Content Include="Views\USER\PasswordReset.cshtml" />
+    <Content Include="Views\Kontaminimi\Create.cshtml" />
+    <Content Include="Views\Kontaminimi\Edit.cshtml" />
+    <Content Include="Views\Kontaminimi\Index.cshtml" />
+    <Content Include="Views\Menu_Roli\Index.cshtml" />
+    <Content Include="Views\Menu_Roli\MenueList.cshtml" />
+    <Content Include="Views\RACA\ADDorEDIT.cshtml" />
+    <Content Include="Views\RACA\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
