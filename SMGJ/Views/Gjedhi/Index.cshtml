@@ -1,0 +1,414 @@
+﻿@model IEnumerable<SMGJ.Models.GJEDHI>
+@using SMGJ.Models
+@using SMGJ.Controllers
+@{
+    ViewBag.Title = "Index";
+    //int t = 1;
+    SMGJDB db = new SMGJDB();
+    var no_val = "N/A";
+}
+<head>
+    <link href="~/Content/theme/vendor/sweetalert/sweet-alert.css" rel="stylesheet" media="screen">
+    <link href="~/Content/theme/vendor/sweetalert/ie9.css" rel="stylesheet" media="screen">
+    <link href="~/Content/theme/vendor/toastr/toastr.min.css" rel="stylesheet" media="screen">
+    <style>
+        .no_values {
+            color: red;
+        }
+    </style>
+</head>
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle" style="color:royalblue; font-family: Shakespeare, 'Times New Roman', Times, serif">Lista e gjetheve</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="@Url.Action("Create","Gjedhi")" class="btn btn-green">Regjistro</a>
+        </div>
+    </div>
+    <div class="row margin-top-15 ">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Lista e gjedheve</h5>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Emri)
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.FermaID)*@
+                                    Ferma
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.RacaID)*@
+                                    Raca
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.PrindiID)*@
+                                    Prindi
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.TipiID)*@
+                                    Tipi
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.Datelindja)*@
+                                    Datëlindja
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gjinia)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Vathe)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Pesha)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Krijuar)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.KrijuarNga)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model)
+                                {
+                                    <tr name="rreshtat" contenteditable="false">
+                                        <td contenteditable="false">@item.ID</td>
+                                        <td class="hidden-xs">
+                                            @item.Emri
+                                        </td>
+                                        @*<td>
+                                                @{
+                                                    var emri_ferma = "";
+                                                    var ferma = db.FERMAs.Find(item.FermaID);
+                                                    if (ferma != null)
+                                                    {
+                                                        if (ferma.Emri == null)
+                                                        {
+                                                            emri_ferma = "Pa emër";
+                                                        }
+
+                                                        else
+                                                        {
+                                                            emri_ferma = ferma.Emri;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        emri_ferma = "Pa fermë";
+                                                    }
+
+                                                }
+
+                                                @emri_ferma
+                                            </td>*@
+
+                                        @{
+                                            var ferma = db.FERMAs.Find(item.FermaID);
+                                            if (ferma != null)
+                                            {
+                                                if (ferma.Emri == null)
+                                                {
+                                                    <td><span class="no_values">Pa emër</span></td>
+                                                }
+
+                                                else
+                                                {
+                                                    <td>@ferma.Emri</td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <td><span class="no_values">Pa fermë</span></td>
+                                            }
+
+                                        }
+
+                                        @*<td>*@
+                                        @{
+                                            var raca = db.RACAs.Find(item.RacaID);
+                                            if (raca != null)
+                                            {
+                                                if (raca.Emertimi == null)
+                                                {
+                                                    <td><span class="no_values">Pa emër</span></td>
+                                                }
+
+                                                else
+                                                {
+                                                    <td>@raca.Emertimi</td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <td><span class="no_values">Pa racë</span></td>
+                                            }
+
+                                        }
+                                        @*@emri_raca*@
+                                        @*</td>*@
+                                        @{
+                                            var prindi = db.GJEDHIs.Find(item.PrindiID);
+                                            if (prindi != null)
+                                            {
+                                                if (prindi.Emri == null)
+                                                {
+                                                    <td><span class="no_values">Pa emër</span></td>
+                                                }
+
+                                                else
+                                                {
+                                                    <td>@prindi.Emri</td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <td><span class="no_values">Pa prind</span></td>
+                                            }
+
+                                        }
+
+
+                                        @{
+                                            var tipi = db.TIPIs.Find(item.TipiID);
+                                            if (tipi != null)
+                                            {
+                                                if (tipi.Emertimi == null)
+                                                {
+                                                    <td><span class="no_values">Pa emër</span></td>
+                                                }
+
+                                                else
+                                                {
+                                                    <td>@tipi.Emertimi</td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <td><span class="no_values">Pa tip</span></td>
+                                            }
+
+                                        }
+
+                                        @{
+                                            if (item.Krijuar != null)
+                                            {
+                                                <td class="hidden-xs">
+                                                    @*<span class="label label-sm label-@klasa">@pershktimi</span>*@
+                                                    @item.Datelindja
+                                                </td>
+                                            }
+                                            else
+                                            {
+
+                                                <td class="hidden-xs">
+                                                    @*<span class="label label-sm label-@klasa">@pershktimi</span>*@
+                                                    @no_val
+                                                </td>
+                                            }
+                                        }
+
+                                        @{
+                                            switch (item.Gjinia)
+                                            {
+                                                case true:
+                                                    <td>Femër</td>
+                                                    break;
+                                                case false:
+                                                    <td>Mashkull</td>
+                                                    break;
+                                                default:
+                                                    <td>@no_val</td>
+                                                    break;
+                                            }
+                                        }
+                                        @{ if (item.Vathe != null)
+                                            {
+                                                <td>@item.Vathe</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@no_val</td>
+                                            }
+                                        }
+
+                                        @{ if (item.Pesha != null)
+                                            {
+                                                <td>@item.Pesha</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@no_val</td>
+                                            }
+                                        }
+                                        @{
+                                            if (item.Krijuar != null)
+                                            {
+                                                <td class="hidden-xs">
+
+                                                    @*<span class="label label-sm label-@klasa">@pershktimi</span>*@
+                                                    @item.Krijuar.Value.ToString("dd/MM/yyyy")
+                                                </td>
+
+                                            }
+                                            else
+                                            {
+                                                <td>@no_val</td>
+                                            }
+
+                                        }
+
+                                        @{
+                                            var user = db.USERs.Find(item.KrijuarNga);
+                                            if (user != null)
+                                            {
+                                                <td>@user.Emri @user.Mbiemri</td>
+                                            }
+                                            else
+                                            {
+                                                <td>E pa dhënë</td>
+                                            }
+                                        }
+
+                                        <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                <a href="@Url.Action("Edit","GJEDHI" , new {id=(item.ID)})" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                                @*<a href="@Url.Action("Edit","Gjethi" , new {id=(BaseController.Encrypt(item.ID.ToString()))})" class="btn btn-transparent btn-primary btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>*@
+                                                <a onclick="deletemenu(this)" data-gjedhi_id="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                                @*<tr>
+                                        <td><input type="text" name="New_Id" placeholder=2 /></td>
+                                        <td><input type="text" placeholder=2 /></td>
+                                        <td><input type="text" placeholder=3 /></td>
+                                        <td><input type="text" placeholder=4 /></td>
+                                        <td><input type="text" placeholder=5 /></td>
+                                        <td><button>Shto Rreshtin</button></td>
+                                    </tr>*@
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+    <script src="~/Content/theme/vendor/toastr/toastr.min.js"></script>
+    <script src="~/Content/theme/assets/js/main.js"></script>
+    <script src="~/Content/theme/assets/js/ui-notifications.js"></script>
+    <script>
+
+
+        var deletemenu = function (btn) {
+            //alert("heelo");
+
+
+            @*//alert($(btn).data("kontid"))
+             $.ajax({
+                    url: "@Url.Action("DeleteKont", "KONTAMINIMI")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            /*swal("Deleted!", "Your imaginary file has been deleted.", "success");*/
+
+                            //window.setTimeout(function () { location.reload() }, 2000);
+                            location.reload();
+                        } else {
+                            //alert("This cannot be deleted");
+                            alert(rs.Mesazhi)
+                            //swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        }
+                        else {
+                            swal("Error deleting!", "Please try again", "error");
+                        }
+                    }
+                }); //end ajax*@
+            /*var obj = { ID: $(btn).data("menuid") };*/
+            //var obj = { ID: $(btn).data("kontid") };
+            swal({
+                    title: "A jeni i sigurt?",
+                text: "Ju nuk do të jeni në gjendje të riktheni gjethin e zgjedhur!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Po, fshije!",
+                    cancelButtonText: "Jo, anulo!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, //end swal
+                function (isConfirm) {
+
+                        if (isConfirm) {
+                            var obj = { ID: $(btn).data("gjedhi_id") };
+                            $.ajax({
+                                url: "@Url.Action("Delete", "Gjedhi")",
+                                cache: false,
+                                type: "POST",
+                                dataType: "json",
+                                data: obj,
+                                success: function (rs) {
+                                    if (rs.status) {
+                                        swal({ title: "Deleted!", text: "Gjethi i zgjedhur është fshirë me sukses!", type: "success" },  function () {
+                                            location.reload()
+                                        });
+
+                                        //window.setTimeout(function () { location.reload() }, 2000);
+                                        //location.reload();
+                                    } else {
+                                        //alert("This cannot be deleted");
+                                        swal("Anulim!", rs.Mesazhi, "error");
+                                    }
+                                },
+                                error: function (jqXHR, error, errorThrown) {
+                                    if (jqXHR.status && jqXHR.status == 400) {
+                                        console.log(jqXHR.responseText);
+                                    }
+                                    else {
+                                        swal("Gabim në fshirje!", "Ju lutemi provoni përsëri!", "error");
+                                    }
+                                }
+                            }); //end ajax
+                        } else {
+                            swal("Anulim!", "Gjethi i zgjedhur nuk është fshirë!", "error");
+                        }
+                    });
+        } //end delete
+    </script>
+
+}
+
+

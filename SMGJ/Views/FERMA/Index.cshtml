@@ -43,34 +43,34 @@
                             @foreach (var item in Model)
                             {
                                 var user = db.USERs.Find(item.KrijuarNga);
-                            <tr>
-                                <td>@item.ID</td>
-                                <td class="hidden-xs">
-                                    @item.Emri
-                                </td>
-                                @if (item.KomunaID != null)
-                                {
+                                <tr>
+                                    <td>@item.ID</td>
                                     <td class="hidden-xs">
-                                        @item.KOMUNA.Emri
+                                        @item.Emri
                                     </td>
-                                }
-                                else
-                                {
-                                    <td class="hidden-xs">
-                                       NULL
-                                    </td>
-                                }
-                                <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
-                                @*.Value.ToString("dd/MM/yyyy")*@
-                                <td>@user.Emri @user.Mbiemri</td>
-                                <td>
-                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                        <a href="@Url.Action("Edit","FERMA" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                        <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+                                    @if (item.KomunaID != null)
+                                    {
+                                        <td class="hidden-xs">
+                                            @item.KOMUNA.Emri
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="hidden-xs">
+                                            NULL
+                                        </td>
+                                    }
+                                    <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
+                                    @*.Value.ToString("dd/MM/yyyy")*@
+                                    <td>@user.Emri @user.Mbiemri</td>
+                                    <td>
+                                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                            <a href="@Url.Action("Edit","FERMA" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
 
-                                    </div>
-                                </td>
-                            </tr>
+                                        </div>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

@@ -171,6 +171,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FERMAController.cs" />
+    <Compile Include="Controllers\GJEDHIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KOMUNAController.cs" />
     <Compile Include="Controllers\KontaminimiController.cs" />
@@ -2066,6 +2068,12 @@
     <Content Include="Views\Menu_Roli\MenueList.cshtml" />
     <Content Include="Views\RACA\ADDorEDIT.cshtml" />
     <Content Include="Views\RACA\Index.cshtml" />
+    <Content Include="Views\FERMA\Create.cshtml" />
+    <Content Include="Views\FERMA\Edit.cshtml" />
+    <Content Include="Views\FERMA\Index.cshtml" />
+    <Content Include="Views\Gjedhi\Create.cshtml" />
+    <Content Include="Views\Gjedhi\Edit.cshtml" />
+    <Content Include="Views\Gjedhi\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
