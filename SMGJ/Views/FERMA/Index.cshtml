@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SMGJ.Models.FERMA>
+@model IEnumerable<SMGJ.Models.FERMA>
 @using SMGJ.Models;
 @{
     ViewBag.Title = "Ferma";
@@ -37,40 +37,46 @@
                                 <th class="hidden-xs"> Krjuar nga</th>
                                 <th>
                                 </th>
+                                @*<th>
+                                    userat
+                                </th>*@
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 var user = db.USERs.Find(item.KrijuarNga);
-                                <tr>
-                                    <td>@item.ID</td>
+                            <tr>
+                                <td>@item.ID</td>
+                                <td class="hidden-xs">
+                                    @item.Emri
+                                </td>
+                                @if (item.KomunaID != null)
+                                {
                                     <td class="hidden-xs">
-                                        @item.Emri
+                                        @item.KOMUNA.Emri
                                     </td>
-                                    @if (item.KomunaID != null)
-                                    {
-                                        <td class="hidden-xs">
-                                            @item.KOMUNA.Emri
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="hidden-xs">
-                                            NULL
-                                        </td>
-                                    }
-                                    <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
-                                    @*.Value.ToString("dd/MM/yyyy")*@
-                                    <td>@user.Emri @user.Mbiemri</td>
-                                    <td>
-                                        <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                            <a href="@Url.Action("Edit","FERMA" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+                                }
+                                else
+                                {
+                                    <td class="hidden-xs">
+                                       NULL
+                                    </td>
+                                }
+                                <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
+                                @*.Value.ToString("dd/MM/yyyy")*@
+                                <td>@user.Emri @user.Mbiemri</td>
+                                <td>
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                        <a href="@Url.Action("Edit","FERMA" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                        <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
 
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                                @*<td>
+                                    @Html.DropDownList("Users", ViewBag.Users as SelectList);
+                                </td>*@
+                            </tr>
                             }
                         </tbody>
                     </table>
