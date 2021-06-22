@@ -6,53 +6,108 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using SMGJ.Models;
 using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
-    public class GJEDHIController : BaseController
+    public class GjedhiController : BaseController
     {
         SMGJDB db = new SMGJDB();
-        MessageJs returnmodel = new MessageJs();
-        // GET: GJEDHI
-        
-        // GET: KOMUNA
+        // GET: Gjedhi
         public async Task<ActionResult> Index()
-        
-        {
-            var user = await GetUser();
-            var u = db.USERs.Find(user.ID);           
-            var ferma = db.FERMAs.ToList();
-            try { 
-                            var usferm =u.FermaID;
-
-                if (usferm != null)
-            {
-                  //  var model = db.GJEDHIs.Where(q => q.KrijuarNga == user.ID).ToList();
-                    var model = db.GJEDHIs.Where(q => q.FermaID == u.FermaID).ToList();
-                    return View(model);
-            }
-            // USED TO DISPLAY FARM NAME IN INDEX
-            var emriferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
-            ViewBag.emriferma = emriferma.Emri;
-        
-            // var lista permban listen me gjedhat e perdoruesit te kycur
-            var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).OrderByDescending(x=>x.ID).ToList();
-            return View(lista);
-        }
-            catch {
-                return RedirectToAction("Index", "FERMA");
-
-            }
-             return RedirectToAction("Index", "FERMA"); ;            
-        }
-        public async Task<ActionResult> Create()
         {
             var user = await GetUser();
             
-            var model = new List<SelectListItem>();
+            //Pyesim se a ka ky perdorues ferme
+            if (!hasFarm(user.ID))
+                return RedirectToAction("Create", "Ferma");
+
+            //var ferma = (from f in db.FERMAs where f.KrijuarNga == user.ID select f);
+            //var gjedhi = (from k in db.GJEDHIs select k).AsEnumerable();
+            //var emriferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).SingleOrDefault();
+            //ViewBag.emriferma = emriferma.Emri;
+
+            var gjedhi = (from k in db.GJEDHIs join f in db.FERMAs on k.FermaID equals f.ID where f.KrijuarNga == user.ID select k).AsEnumerable();
+            return View(gjedhi);
+
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(GJEDHI model)
+        {
+            var user = await GetUser();
+            if (hasFarm(user.ID))
+            {
+                MessageJs returnmodel = new MessageJs();
+                try
+                {
+                    GJEDHI gjedhi = db.GJEDHIs.Find(model.ID);
+                    //var test = from M in db.MENUs
+                    //           join MR in db.MENU_ROLI on M.ID equals MR.MenuID
+                    //           select new { ID = M.ID, Emertimi = M.Emertimi, MR_ID = MR.MenuID };
+
+                    var kushti_parametrat = from Gj in db.GJEDHIs
+                                            join P in db.GJEDHAT_PARAMETRAT on Gj.ID equals P.GjedhiID
+                                            select new { ID = Gj.ID };
+                    var z = (from k in kushti_parametrat select k.ID).ToList();
+
+                    if (z.Contains(model.ID))
+                    {
+                        //Nuk lejohet 
+                        returnmodel.Mesazhi = "Ky gjedh nuk mund të fshihet sepse ekzistojnë parametra për këtë gjedh!";
+                        returnmodel.status = false;
+                        return Json(returnmodel, JsonRequestBehavior.DenyGet);
+
+                    }
+                    else
+                    {
+                        var kushti_qumesht = from Gj in db.GJEDHIs
+                                             join Q in db.QUMESHTIs on Gj.ID equals Q.GjedhiID
+                                             select new { ID = Gj.ID };
+                        var z1 = (from k in kushti_qumesht select k.ID).ToList();
+                        if (z1.Contains(model.ID))
+                        {
+                            //Nuk lejohet 
+                            returnmodel.Mesazhi = "Ky gjedh nuk mund të fshihet sepse ekzistojnë qumështa për këtë gjedh!";
+                            returnmodel.status = false;
+                            return Json(returnmodel, JsonRequestBehavior.DenyGet);
+                        }
+                        else
+                        {
+                            //Lejohet
+                            db.GJEDHIs.Remove(gjedhi);
+                            await db.SaveChangesAsync();
+                            returnmodel.status = true;
+                            return Json(returnmodel, JsonRequestBehavior.AllowGet);
+                        }
+
+                    }
+                }
+                catch (Exception)
+                {
+                    returnmodel.status = false;
+                    returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+                    return Json(returnmodel, JsonRequestBehavior.DenyGet);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Create", "Ferma");
+            }
+        }
+
+
+        public async Task<ActionResult> Create()
+        {
+            var user = await GetUser();
+            //Pyesim se a ka ky perdorues ferme
+            if (!hasFarm(user.ID))
+                return RedirectToAction("Create", "Ferma");
+
+
             var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
+            var model = new List<SelectListItem>();
             foreach (var item in gjinia)
             {
                 model.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false });
@@ -62,50 +117,32 @@ namespace SMGJ.Controllers
             ViewBag.TipiID = await loadTipi(null);
             ViewBag.RacaID = await loadRaca(null);
             ViewBag.PrindiID = await loadPrindi(null);
-            ViewBag.TipiID = await loadTipi(null);
-
             return View();
-                    }
-
+        }
         [HttpPost]
         public async Task<ActionResult> Create(GJEDHI model)
         {
+
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
-
-            var exists = db.GJEDHIs.Any(x => x.Emri == model.Emri);
-            if (exists)
-            {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Gjedhi me kete emer ekziston!";
-                return Json(returnmodel, JsonRequestBehavior.AllowGet);
-            }
             if (ModelState.IsValid)
             {
                 try
                 {
                     GJEDHI new_model = new GJEDHI();
-
-                    var ferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
-                    
                     new_model.Emri = model.Emri;
                     new_model.FermaID = model.FermaID;
                     new_model.RacaID = model.RacaID;
                     new_model.PrindiID = model.PrindiID;
                     new_model.TipiID = model.TipiID;
-                    new_model.PrindiID = model.PrindiID;
                     new_model.Datelindja = model.Datelindja;
                     new_model.Gjinia = model.Gjinia;
                     new_model.Vathe = model.Vathe;
                     new_model.Pesha = model.Pesha;
-                    new_model.KrijuarNga = user.ID;
-                    new_model.Krijuar = DateTime.Now;
-                    new_model.KrijuarNga = user.ID;
-
                     db.GJEDHIs.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Gjedhi u regjistrua me sukses";
+                    returnmodel.Mesazhi = "Menu-ja u regjistrua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
@@ -118,18 +155,20 @@ namespace SMGJ.Controllers
             else
             {
                 returnmodel.status = false;
-                    Console.WriteLine(returnmodel.status);
+                Console.WriteLine(returnmodel.status);
                 returnmodel.Mesazhi = "Modeli nuk eshte valid";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
         }
 
-
         public async Task<ActionResult> Edit(int? id)
         {
+
             var user = await GetUser();
+            //Pyesim se a ka ky perdorues ferme
             if (!hasFarm(user.ID))
                 return RedirectToAction("Create", "Ferma");
+
             GJEDHI model = new GJEDHI();
             ViewBag.FermaID = await loadFerma(null);
             ViewBag.RacaID = await loadRaca(null);
@@ -141,7 +180,6 @@ namespace SMGJ.Controllers
             }
             var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
             var modeli = new List<SelectListItem>();
-
             foreach (var item in gjinia)
             {
                 if (model.Gjinia != null)
@@ -162,21 +200,18 @@ namespace SMGJ.Controllers
                 }
             }
             ViewBag.Gjinia = modeli;
-
             return View(model);
         }
-
         [HttpPost]
         public async Task<ActionResult> Edit(GJEDHI model)
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
-
             var exists = db.GJEDHIs.Any(x => x.Emri == model.Emri);
-            if (exists && db.GJEDHIs.Find(model.ID).Emri != model.Emri)
+            if (exists)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Gjedhi me kete emer ekziston!";
+                returnmodel.Mesazhi = "Nuk mund ta ndryshoni kete gjedh sepse ekziston!";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             if (ModelState.IsValid)
@@ -184,12 +219,11 @@ namespace SMGJ.Controllers
                 try
                 {
                     GJEDHI new_model = db.GJEDHIs.Find(model.ID);
-
                     new_model.Emri = model.Emri;
                     new_model.FermaID = model.FermaID;
                     new_model.RacaID = model.RacaID;
                     new_model.TipiID = model.TipiID;
-                    new_model.PrindiID = model.PrindiID;
+                    //new_model.PrindiID = model.PrindiID;
                     new_model.Datelindja = model.Datelindja;
                     new_model.Vathe = model.Vathe;
                     new_model.Pesha = model.Pesha;
@@ -205,7 +239,7 @@ namespace SMGJ.Controllers
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     returnmodel.status = false;
                     returnmodel.Mesazhi = "Ka ndodhur nje gabim";
@@ -219,37 +253,7 @@ namespace SMGJ.Controllers
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
         }
-        [HttpPost]
-        public async Task<ActionResult> Delete(GJEDHI model)
-        {
-            var user = await GetUser();
-            MessageJs returnmodel = new MessageJs();
-            try
-            {
-                GJEDHI gjedhi = db.GJEDHIs.Find(model.ID);
-                var exists = await db.GJEDHIs.AnyAsync(x => x.PrindiID == model.ID);
-                if (exists)
-                {
-                    returnmodel.status = false;
-                    returnmodel.Mesazhi = "Kete gjedh nuk mund ta fshini sepse eshte prind!";
-                    return Json(returnmodel, JsonRequestBehavior.DenyGet);
-                }
-
-                db.GJEDHIs.Remove(gjedhi);
-                await db.SaveChangesAsync();
-                returnmodel.status = true;
-                returnmodel.Mesazhi = "Gjedhi eshte fshire!";
-                return Json(returnmodel, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Ka ndodhur nje gabim";
-                return Json(returnmodel, JsonRequestBehavior.DenyGet);
-            }
-        }
-
-    }
 
 
-}
+    }//Fundi i klases
+}//Fundi i namespace

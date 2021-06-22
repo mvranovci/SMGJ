@@ -1,7 +1,8 @@
-﻿@model SMGJ.Models.GJEDHI
+@model SMGJ.Models.GJEDHI
 @{
     ViewBag.Title = "Create";
     var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
+
 }
 <section id="page-title">
     <div class="row">
@@ -15,65 +16,105 @@
         <div class="panel-body">
             <form id="forma">
                 <div class="row">
-                    <div class="form-group">
-                        <label class="control-label">
-                            Gjedhi <span class="symbol required" aria-required="true"></span>
-                        </label>
-                        @Html.TextBoxFor(gj => gj.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin e gjedhit" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Raca
-                        </label>
-                        @Html.DropDownListFor(gj => gj.RacaID, null, "Zgjedh", (new { @class = "form-control select2" }))
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Prindi
-                        </label>
-                        @Html.DropDownListFor(gj => gj.PrindiID, null, "Zgjedh", (new { @class = "form-control select2" }))
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Tipi
-                        </label>
-                        @Html.DropDownListFor(gj => gj.TipiID, null, "Zgjedh", (new { @class = "form-control select2" }))
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Datelindja</label>
-                        <p class="input-group input-append datepicker date">
-                            @Html.TextBoxFor(gj => gj.Datelindja, new { @class = "form-control", @placeholder = "" })
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-primary">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Gjinia:
-                        </label>
-                        @foreach (var item in gjinia)
-                        {
-                            <input type="radio" id="@item.Value" name="select1" value="@item.Value" checked=@item.Selected />
-                            @item.Text
-                        }
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Vathe <span class="symbol required" aria-required="true"></span>
-                        </label>
-                        @Html.TextBoxFor(gj => gj.Vathe, new { @class = "form-control", @placeholder = "Shkruani emertimin e vathit" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Pesha <span class="symbol required" aria-required="true"></span>
-                        </label>
-                        @Html.TextBoxFor(gj => gj.Pesha, new { @class = "form-control", @placeholder = "Shkruani vleren e peshes" })
-                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Emri <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.EditorFor(model => model.Emri, new { htmlAttributes = new { @class = "form-control" } })
 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Ferma <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.DropDownListFor(model => model.FermaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Raca <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.DropDownListFor(model => model.RacaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Prindi @*<span class="symbol required" aria-required="true"></span>*@
+                            </label>
+                            @Html.DropDownListFor(model => model.PrindiID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Tipi <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.DropDownListFor(model => model.TipiID, null, "Zgjedh", (new { @class = "form-control select2" }))
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Datelindja @*<span class="symbol required" aria-required="true"></span>*@
+                            </label>
+                            @Html.EditorFor(model => model.Datelindja, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Gjinia <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @foreach (var item in gjinia)
+                            {
+                                <div class="clip-radio radio-primary radio-inline">
+                                    <input type="radio" id="@item.Value" name="gjinia" value="@item.Value">
+                                    <label for="@item.Value">
+                                        @item.Text
+                                    </label>
+                                </div>
+                            }
+                            @Html.ValidationMessageFor(m => m.Gjinia, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Vathe @*<span class="symbol required" aria-required="true"></span>*@
+                            </label>
+                            @Html.EditorFor(model => model.Vathe, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Pesha @*<span class="symbol required" aria-required="true"></span>*@
+                            </label>
+                            @Html.EditorFor(model => model.Pesha, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    
+                </div>
+               
+
             </form>
         </div>
         <div class="panel-footer clearfix">
@@ -108,6 +149,19 @@
                 rules: {
                     Emri: {
                         required: true
+                    },
+                    FermaID: {
+                        required: true
+
+                    },
+                    RacaID: {
+                        required: true
+
+                    },
+
+                    TipiID: {
+                        required: true
+
                     }
                 },
                 invalidHandler: function (event, validator) { //display error alert on form submit
@@ -138,25 +192,25 @@
             });
         };
         var regjistro = function (btn) {
-                runValidator1();
+            runValidator1();
+            var gjinia = true;
+            if ($("input[name='gjinia']:checked").val() == 0) {
+                gjinia = false;
+            }
                 if ($("#forma").valid() === true) {
-                    var gjinia = true;
-                    if ($("input[name='select1']:checked").val() == 0) {
-                        gjinia = false;
-                        }
                     var obj = {
-                    ID: $("#ID").val(),
-                    Emri: $("#Emri").val(),
-                    //FermaID: $("#FermaID").val(), ----- Nuk ka nevoje pasi qe gjedhi shtohet ne fermen e userit te kycur(cdo user e ka vetem nje ferme)
-                    RacaID: $("#RacaID").val(),
-                    TipiID: $("#TipiID").val(),
-                    PrindiID: $("#PrindiID").val(),
-                    Datelindja: $("#Datelindja").val(),
-                    Gjinia: gjinia,
-                    Vathe: $("#Vathe").val(),
-                    Pesha: $("#Pesha").val()
+                        Emri: $("#Emri").val(),
+                        FermaID: $("#FermaID").val(),
+                        RacaID: $("#RacaID").val(),
+                        PrindiID: $("#PrindiID").val(),
+                        TipiID: $("#TipiID").val(),
+                        Datelindja: $("#Datelindja").val(),
+                        Gjinia: gjinia,
+                        Vathe: $("#Vathe").val(),
+                        Pesha: $("#Pesha").val(),
                 };
                 var url_redirect = '@Url.Action("Index", "GJEDHI")';
+
                 $.ajax({
                     url: "@Url.Action("Create", "GJEDHI")",
                     cache: false,
