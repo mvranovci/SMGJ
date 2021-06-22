@@ -18,32 +18,19 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             List<FERMA> model = db.FERMAs.ToList();
-            ViewBag.KomunaID = await loadKomuna(null);
-
-            bool result = User.IsInRole("Administrator");
-            if (!result)
-            {
-                if (!hasFarm(user.ID))
-                {
-                    //return RedirectToAction("Create", "Ferma");
-                    return View("~/Views/FERMA/Create.cshtml");
-                }
-                else
-                {
-
-                    // return View("Edit","Ferma");
-                     return RedirectToAction("Edit", "Ferma");
-                    // return View("~/Views/FERMA/Edit.cshtml");
-                }
-            }
-            else
+            if (user.RoleID == 1)
             {
                 return View(model);
             }
-        
-
-        
-
+            else if(user.RoleID == 2 && db.FERMAs.Any(x => x.KrijuarNga == user.ID))
+            {
+                var u = db.USERs.Find(user.ID);
+                return RedirectToAction("Edit", new { id = u.FermaID });
+            }
+            else
+            {
+                return RedirectToAction("Create", "Ferma");
+            }
     }
 
     [NoDirectAccess]
