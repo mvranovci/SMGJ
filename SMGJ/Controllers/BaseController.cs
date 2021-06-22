@@ -15,7 +15,7 @@ using SMGJ.Helpers;
 using SMGJ.Models;
 
 namespace SMGJ.Controllers
-{ 
+{
     [Authorize]
     public class BaseController : Controller
     {
@@ -118,6 +118,7 @@ namespace SMGJ.Controllers
             }
             return usertotal;
         }
+        
         public async Task<SelectList> loadKomuna(int? selected)
         { 
             var allvalues = await  db.KOMUNAs.ToListAsync();
@@ -201,6 +202,58 @@ namespace SMGJ.Controllers
                 return null;
             }
         }
+        //-------------------------- GJEDHI LOAD METHODS ---------------------------------------------
+        public async Task<SelectList> loadFerma(int? selected)
+        {
+            var allvalues = await db.FERMAs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emri", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emri");
+        }
+        public async Task<SelectList> loadRaca(int? selected)
+        {
+            var allvalues = await db.RACAs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emertimi");
+        }
+        public async Task<SelectList> loadPrindi(int? selected)
+        {
+            var user = await GetUser();
+            //lista qe permban vetem gjedhat e perdoruesit te kycur
+            var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).ToList();
+            if (selected.HasValue)
+                return new SelectList(lista, "ID", "Emri", selected.Value);
+            else
+                return new SelectList(lista, "ID", "Emri");
+        }
+        public async Task<SelectList> loadTipi(int? selected)
+        {
+            var allvalues = await db.TIPIs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emertimi");
+        }
+        //DOES USER HAVE A FARM CHECK METHOD
+        public Boolean hasFarm(int? userId)
+        {
+            var ferma = db.FERMAs.ToList();
+            foreach (var item in ferma)
+            {
+                if (item.KrijuarNga == userId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         public async Task<SelectList> loadFerma(int? selected)
         {
