@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Entity;
 using System.Globalization;
 using System.IO;
@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Microsoft.AspNet.Identity.Owin;
 using SMGJ.Helpers;
 using SMGJ.Models;
@@ -29,11 +30,11 @@ namespace SMGJ.Controllers
         static readonly string VIKey = "@1B2c3D4e5F6g7H8f";
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            string cultureName = null; 
+            string cultureName = null;
             var user = (GetUser)Session["User"];
 
             try
-            { 
+            {
                 System.Web.HttpCookie cultureCookie = Request.Cookies["_culture"];
                 if (Session["kultura"] != null)
                 {
@@ -43,8 +44,8 @@ namespace SMGJ.Controllers
                 {
                     if (cultureCookie != null)
                         cultureName = cultureCookie.Value;
-                   
-                } 
+
+                }
 
                 // Validate culture name
                 cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
@@ -78,7 +79,7 @@ namespace SMGJ.Controllers
 
             }
 
-           return base.BeginExecuteCore(callback, state);
+            return base.BeginExecuteCore(callback, state);
         }
         public async Task<GetUser> GetUser()
         {
@@ -118,16 +119,25 @@ namespace SMGJ.Controllers
             }
             return usertotal;
         }
-        
         public async Task<SelectList> loadKomuna(int? selected)
-        { 
-            var allvalues = await  db.KOMUNAs.ToListAsync();
+        {
+            var allvalues = await db.KOMUNAs.ToListAsync();
 
             if (selected.HasValue)
                 return new SelectList(allvalues, "ID", "Emri", selected.Value);
             else
                 return new SelectList(allvalues, "ID", "Emri");
         }
+        public async Task<SelectList> loadUser(int? selected)
+        {
+            var allvalues = await db.USERs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emri", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emri");
+        }
+
         public ApplicationUserManager UserManager
         {
             get
@@ -172,7 +182,7 @@ namespace SMGJ.Controllers
         }
         public async Task<SelectList> loadMenu(int? selected)
         {
-            var allvalues = await db.MENUs.Where(q=>q.Aktiv==true).ToListAsync();
+            var allvalues = await db.MENUs.Where(q => q.Aktiv == true).ToListAsync();
             if (selected.HasValue)
                 return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
             else
@@ -202,45 +212,6 @@ namespace SMGJ.Controllers
                 return null;
             }
         }
-        //-------------------------- GJEDHI LOAD METHODS ---------------------------------------------
-        public async Task<SelectList> loadFerma(int? selected)
-        {
-            var allvalues = await db.FERMAs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emri", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emri");
-        }
-        public async Task<SelectList> loadRaca(int? selected)
-        {
-            var allvalues = await db.RACAs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emertimi");
-        }
-        public async Task<SelectList> loadPrindi(int? selected)
-        {
-            var user = await GetUser();
-            //lista qe permban vetem gjedhat e perdoruesit te kycur
-            var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).ToList();
-            if (selected.HasValue)
-                return new SelectList(lista, "ID", "Emri", selected.Value);
-            else
-                return new SelectList(lista, "ID", "Emri");
-        }
-        public async Task<SelectList> loadTipi(int? selected)
-        {
-            var allvalues = await db.TIPIs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emertimi");
-        }
-        //DOES USER HAVE A FARM CHECK METHOD
         public Boolean hasFarm(int? userId)
         {
             var ferma = db.FERMAs.ToList();
@@ -252,6 +223,19 @@ namespace SMGJ.Controllers
                 }
             }
             return false;
+        }
+        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+        public class NoDirectAccessAttribute : ActionFilterAttribute
+        {
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+                if (filterContext.HttpContext.Request.UrlReferrer == null ||
+         filterContext.HttpContext.Request.Url.Host != filterContext.HttpContext.Request.UrlReferrer.Host)
+                {
+                    filterContext.Result = new RedirectToRouteResult(new
+                                              RouteValueDictionary(new { controller = "Home", action = "Logout", area = "Main" }));
+                }
+            }
         }
 
 
