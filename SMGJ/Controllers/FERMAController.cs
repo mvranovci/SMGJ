@@ -17,109 +17,201 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
-            var u = db.USERs.Find(user.ID);
-            List<FERMA> model;
-            if (user.RoleID == 1)
+            List<FERMA> model = db.FERMAs.ToList();
+            ViewBag.KomunaID = await loadKomuna(null);
+
+            bool result = User.IsInRole("Administrator");
+            if (!result)
             {
-                model = db.FERMAs.ToList();
+                if (!hasFarm(user.ID))
+                {
+                    //return RedirectToAction("Create", "Ferma");
+                    return View("~/Views/FERMA/Create.cshtml");
+                }
+                else
+                {
+
+                    // return View("Edit","Ferma");
+                     return RedirectToAction("Edit", "Ferma");
+                    // return View("~/Views/FERMA/Edit.cshtml");
+                }
+            }
+            else
+            {
+                return View(model);
+            }
+        
+
+        //if(User.IsInRole("Administrator"))
+        //{ 
+        //    return View(model);
+        //}
+        //else
+        //{
+        //    return View("~/Views/FERMA/CreateEdit.cshtml");
+        //}
+
+    }
+
+    [NoDirectAccess]
+    public async Task<ActionResult> Create()
+    {
+        var user = await GetUser();
+        FERMA model = new FERMA();
+        ViewBag.KomunaID = await loadKomuna(null);
+        return View(model);
+    }
+
+
+    [HttpPost]
+    public async Task<ActionResult> DeleteFerma(FERMA model)
+    {
+        var user = await GetUser();
+        MessageJs returnmodel = new MessageJs();
+
+        try
+        {
+            FERMA menu = db.FERMAs.Find(model.ID);
+
+            db.FERMAs.Remove(menu);
+            await db.SaveChangesAsync();
+            returnmodel.status = true;
+            returnmodel.Mesazhi = "Ferma eshte fshire me sukses";
+            return Json(returnmodel, JsonRequestBehavior.AllowGet);
+        }
+        catch (Exception)
+        {
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+            return Json(returnmodel, JsonRequestBehavior.DenyGet);
+        }
+    }
+
+    //[NoDirectAccess]
+    public async Task<ActionResult> Edit(int? id)
+    {
+        var user = await GetUser();
+        bool result = User.IsInRole("Administrator");
+
+            if (!result)
+            {
+
+                var model = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
+                
+                ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+                ViewBag.UserID = await loadUser(model.UserID);
+
                 return View(model);
             }
             else
             {
-                if (u.FermaID != null)
+                FERMA model = new FERMA();
+                if (id != null)
                 {
-                    var ferma = db.FERMAs.Find(u.FermaID);
-                    return RedirectToAction("Edit", "FERMA", ferma);
+                    model = db.FERMAs.Find(id.Value);
+
+                    
+
                 }
-                else
-                {
-                    return RedirectToAction("Create", "FERMA");
-                }
+
+                ViewBag.UserID = await loadUser(model.UserID);
+                ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+                return View(model);
             }
+
         }
-        public async Task<ActionResult> Create()
+    [HttpPost]
+    public async Task<ActionResult> Create(FERMA model)
+    {
+
+        var user = await GetUser();
+        MessageJs returnmodel = new MessageJs();
+
+        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
+        var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
+        if (exists || existsKrijuar)
         {
-            var user = await GetUser();
-            FERMA model = new FERMA();
-            ViewBag.KomunaID = await loadKomuna(null);
-            return View(model);
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
+            return Json(returnmodel, JsonRequestBehavior.DenyGet);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> DeleteFerma(FERMA model)
+
+        if (ModelState.IsValid)
         {
-            var user = await GetUser();
-            MessageJs returnmodel = new MessageJs();
 
             try
             {
-                FERMA menu = db.FERMAs.Find(model.ID);
-
-                db.FERMAs.Remove(menu);
+                FERMA new_model = new FERMA();
+                    
+                new_model.Emri = model.Emri;
+                new_model.KomunaID = model.KomunaID;
+                new_model.KrijuarNga =user.ID;
+                new_model.Krijuar = DateTime.Now;
+                db.FERMAs.Add(new_model);
                 await db.SaveChangesAsync();
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "Ferma eshte fshire me sukses";
+                returnmodel.Mesazhi = "Ferma u regjistrua me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception)
+            catch
             {
                 returnmodel.status = false;
                 returnmodel.Mesazhi = "Ka ndodhur nje gabim";
-                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
         }
-        public async Task<ActionResult> Edit(int? id)
+        else
         {
-            var user = await GetUser();
-            var u = db.USERs.Find(user.ID);
-            FERMA model = new FERMA();
-            if (id != null)
-            {
-                model = db.FERMAs.Find(id.Value);
-            }
-            ViewBag.KomunaID = await loadKomuna(model.KomunaID);
-            ViewBag.userRoliID = u.RoleID;
-            return View(model);
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Modeli nuk eshte valid";
+            return Json(returnmodel, JsonRequestBehavior.DenyGet);
         }
-        [HttpPost]
-        public async Task<ActionResult> Create(FERMA model)
+
+        ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Edit(FERMA model)
+    {
+        var user = await GetUser();
+        MessageJs returnmodel = new MessageJs();
+
+        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
+
+        var exists1 = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
+        bool result = User.IsInRole("Administrator");
+        
+            if (exists)
         {
-
-            var user = await GetUser();
-            var u = db.USERs.Find(user.ID);
-            MessageJs returnmodel = new MessageJs();
-
-            var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
-            var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
-            if (exists || existsKrijuar)
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Nuk mund ta editoni kete ferme, sepse ekziston!";
+            return Json(returnmodel, JsonRequestBehavior.DenyGet);
+        }
+            //if (ModelState.IsValid)
+            //{
+            if (result)
             {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
-                return Json(returnmodel, JsonRequestBehavior.DenyGet);
-            }
-
-
-            if (ModelState.IsValid)
-            {
-
                 try
                 {
-                    FERMA new_model = new FERMA();
+                    FERMA new_model = db.FERMAs.Find(model.ID);
 
                     new_model.Emri = model.Emri;
                     new_model.KomunaID = model.KomunaID;
-                    new_model.KrijuarNga = user.ID;
+                    new_model.KrijuarNga = model.KrijuarNga;
                     new_model.Krijuar = DateTime.Now;
-                    db.FERMAs.Add(new_model);
-                    
-                    u.FermaID = new_model.ID;
-                    db.Entry(u).State = EntityState.Modified;
+                    //bone update
+                    db.Entry(new_model).State = EntityState.Modified;
+                    //ruaj te dhenat
+                    ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+
+                    ViewBag.UserID = await loadUser(model.KrijuarNga);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Ferma u regjistrua me sukses";
+                    returnmodel.Mesazhi = "FERMA u editua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
-                catch
+                catch (Exception ex)
                 {
                     returnmodel.status = false;
                     returnmodel.Mesazhi = "Ka ndodhur nje gabim";
@@ -127,30 +219,6 @@ namespace SMGJ.Controllers
                 }
             }
             else
-            {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Modeli nuk eshte valid";
-                return Json(returnmodel, JsonRequestBehavior.DenyGet);
-            }
-
-            ViewBag.KomunaID = await loadKomuna(model.KomunaID);
-
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Edit(FERMA model)
-        {
-            var user = await GetUser();
-            MessageJs returnmodel = new MessageJs();
-
-            var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
-            if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
-            {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Ferma me kete emer ekziston!";
-                return Json(returnmodel, JsonRequestBehavior.DenyGet);
-            }
-            if (ModelState.IsValid)
             {
                 try
                 {
@@ -161,6 +229,8 @@ namespace SMGJ.Controllers
                     new_model.KrijuarNga = user.ID;
                     new_model.Krijuar = DateTime.Now;
                     //bone update
+                    ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+
                     db.Entry(new_model).State = EntityState.Modified;
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
@@ -168,21 +238,104 @@ namespace SMGJ.Controllers
                     returnmodel.Mesazhi = "FERMA u editua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
-                catch
+                catch (Exception ex)
                 {
                     returnmodel.status = false;
                     returnmodel.Mesazhi = "Ka ndodhur nje gabim";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
             }
-            else
-            {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Modeli nuk eshte valid";
-                return Json(returnmodel, JsonRequestBehavior.DenyGet);
-            }
-            ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+        //}
+        //else
+        //{
+        //    returnmodel.status = false;
+        //    returnmodel.Mesazhi = "Modeli nuk eshte valid";
+        //    return Json(returnmodel, JsonRequestBehavior.DenyGet);
+        //}
+            
+            ViewBag.Useri = user.ID;
         }
 
+
+    public async Task<ActionResult> CreateEdit(int? id)
+    {
+        var user = await GetUser();
+        FERMA model = new FERMA();
+        if (id != null)
+        {
+            model = db.FERMAs.Find(id.Value);
+        }
+        ViewBag.KomunaID = await loadKomuna(null);
+        ViewBag.KomunaIDEdit = await loadKomuna(null);
+        return View(model);
     }
+
+
+    [HttpPost]
+    public async Task<ActionResult> CreateEdit(FERMA model)
+    {
+
+        var user = await GetUser();
+        MessageJs returnmodel = new MessageJs();
+
+        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
+        var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
+        if (exists || existsKrijuar)
+        {
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
+            return Json(returnmodel, JsonRequestBehavior.DenyGet);
+        }
+
+
+        if (ModelState.IsValid)
+        {
+
+            try
+            {
+                FERMA new_model = new FERMA();
+                if (model.Emri is null)
+                {
+                    new_model.Emri = model.Emri;
+                }
+                else
+                {
+                    new_model.Emri = model.EmriEdit;
+                }
+
+                if (model.KomunaID is null)
+                {
+                    new_model.KomunaID = model.KomunaIDEdit;
+                }
+                else
+                {
+                    new_model.KomunaID = model.KomunaID;
+                }
+                new_model.KrijuarNga = user.ID;
+                new_model.Krijuar = DateTime.Now;
+                db.FERMAs.Add(new_model);
+                await db.SaveChangesAsync();
+                returnmodel.status = true;
+                returnmodel.Mesazhi = "Ferma u regjistrua me sukses";
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
+            }
+        }
+        else
+        {
+            returnmodel.status = false;
+            returnmodel.Mesazhi = "Modeli nuk eshte valid";
+            return Json(returnmodel, JsonRequestBehavior.DenyGet);
+        }
+
+        ViewBag.KomunaIDEdit = await loadKomuna(model.KomunaIDEdit);
+
+        ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+    }
+}
 }
