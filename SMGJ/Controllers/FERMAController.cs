@@ -17,10 +17,25 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
-            List<FERMA> model = db.FERMAs.ToList();
-
-            return View(model);
-
+            var u = db.USERs.Find(user.ID);
+            List<FERMA> model;
+            if (user.RoleID == 1)
+            {
+                model = db.FERMAs.ToList();
+                return View(model);
+            }
+            else
+            {
+                if (u.FermaID != null)
+                {
+                    var ferma = db.FERMAs.Find(u.FermaID);
+                    return RedirectToAction("Edit", "FERMA", ferma);
+                }
+                else
+                {
+                    return RedirectToAction("Create", "FERMA");
+                }
+            }
         }
         public async Task<ActionResult> Create()
         {
@@ -56,13 +71,14 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
+            var u = db.USERs.Find(user.ID);
             FERMA model = new FERMA();
             if (id != null)
             {
                 model = db.FERMAs.Find(id.Value);
             }
             ViewBag.KomunaID = await loadKomuna(model.KomunaID);
-            // ViewBag.InstitucioniID = await loadKomuna(user.KomunaID);
+            ViewBag.userRoliID = u.RoleID;
             return View(model);
         }
         [HttpPost]
@@ -118,6 +134,7 @@ namespace SMGJ.Controllers
             }
 
             ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+
         }
 
         [HttpPost]
