@@ -42,14 +42,7 @@ namespace SMGJ.Controllers
             }
         
 
-        //if(User.IsInRole("Administrator"))
-        //{ 
-        //    return View(model);
-        //}
-        //else
-        //{
-        //    return View("~/Views/FERMA/CreateEdit.cshtml");
-        //}
+        
 
     }
 
@@ -245,97 +238,11 @@ namespace SMGJ.Controllers
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
             }
-        //}
-        //else
-        //{
-        //    returnmodel.status = false;
-        //    returnmodel.Mesazhi = "Modeli nuk eshte valid";
-        //    return Json(returnmodel, JsonRequestBehavior.DenyGet);
-        //}
+      
             
             ViewBag.Useri = user.ID;
         }
 
 
-    public async Task<ActionResult> CreateEdit(int? id)
-    {
-        var user = await GetUser();
-        FERMA model = new FERMA();
-        if (id != null)
-        {
-            model = db.FERMAs.Find(id.Value);
-        }
-        ViewBag.KomunaID = await loadKomuna(null);
-        ViewBag.KomunaIDEdit = await loadKomuna(null);
-        return View(model);
-    }
-
-
-    [HttpPost]
-    public async Task<ActionResult> CreateEdit(FERMA model)
-    {
-
-        var user = await GetUser();
-        MessageJs returnmodel = new MessageJs();
-
-        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
-        var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
-        if (exists || existsKrijuar)
-        {
-            returnmodel.status = false;
-            returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
-            return Json(returnmodel, JsonRequestBehavior.DenyGet);
-        }
-
-
-        if (ModelState.IsValid)
-        {
-
-            try
-            {
-                FERMA new_model = new FERMA();
-                if (model.Emri is null)
-                {
-                    new_model.Emri = model.Emri;
-                }
-                else
-                {
-                    new_model.Emri = model.EmriEdit;
-                }
-
-                if (model.KomunaID is null)
-                {
-                    new_model.KomunaID = model.KomunaIDEdit;
-                }
-                else
-                {
-                    new_model.KomunaID = model.KomunaID;
-                }
-                new_model.KrijuarNga = user.ID;
-                new_model.Krijuar = DateTime.Now;
-                db.FERMAs.Add(new_model);
-                await db.SaveChangesAsync();
-                returnmodel.status = true;
-                returnmodel.Mesazhi = "Ferma u regjistrua me sukses";
-                return Json(returnmodel, JsonRequestBehavior.AllowGet);
-            }
-            catch
-            {
-                returnmodel.status = false;
-                returnmodel.Mesazhi = "Ka ndodhur nje gabim";
-                return Json(returnmodel, JsonRequestBehavior.AllowGet);
-            }
-        }
-        else
-        {
-            returnmodel.status = false;
-            returnmodel.Mesazhi = "Modeli nuk eshte valid";
-            return Json(returnmodel, JsonRequestBehavior.DenyGet);
-        }
-
-        ViewBag.KomunaIDEdit = await loadKomuna(model.KomunaIDEdit);
-
-        ViewBag.KomunaID = await loadKomuna(model.KomunaID);
-    }
 }
 }
