@@ -127,10 +127,10 @@ namespace SMGJ.Controllers
             MessageJs returnmodel = new MessageJs();
 
             var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
-            if (exists)
+            if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta editoni kete ferme, sepse ekziston!";
+                returnmodel.Mesazhi = "Ferma me kete emer ekziston!";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             if (ModelState.IsValid)
