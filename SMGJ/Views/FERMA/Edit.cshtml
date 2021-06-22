@@ -42,6 +42,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
+                            <input type="hidden" id="userRole" value="@ViewBag.userRoliID" />
                             <button type="button" class="btn btn-primary pull-right" onclick="editdata(this)">Edito   <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </div>
@@ -122,9 +123,9 @@
                         ID: $("#ID").val(),
                         Emri: $("#Emri").val(),
                         KomunaID: $("#KomunaID").val(),
-                     // fetije
                     };
                 var url_redirect = '@Url.Action("Index", "FERMA")';
+                    var ur = $("#userRole").val();
                 $.ajax({
                     url: "@Url.Action("Edit", "FERMA")",
                     cache: false,
@@ -132,9 +133,13 @@
                     dataType: "json",
                     data: obj,
                     success: function (rs) {
-                        swal("", rs.Mesazhi, "success");
+                        
                         if (rs.status) {
-                            window.location.href = url_redirect;
+                            if (ur == 1) {
+                                window.location.href = url_redirect;
+                            } else {
+                                window.location.href ='@Url.Action("Index", "Home")';
+                            }
                         }
                         else {
 
