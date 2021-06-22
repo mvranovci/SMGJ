@@ -255,44 +255,5 @@ namespace SMGJ.Controllers
         }
 
 
-        public async Task<SelectList> loadFerma(int? selected)
-        {
-            var allvalues = await db.FERMAs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emri", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emri");
-        }
-
-        public async Task<SelectList> loadRaca(int? selected)
-        {
-            var allvalues = await db.RACAs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emertimi");
-        }
-        public async Task<SelectList> loadTipi(int? selected)
-        {
-            var allvalues = await db.TIPIs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emertimi");
-        }
-
-        public async Task<SelectList> loadPrindi(int? selected)
-        {
-            var allvalues = await db.GJEDHIs.ToListAsync();
-
-            if (selected.HasValue)
-                return new SelectList(allvalues, "ID", "Emri", selected.Value);
-            else
-                return new SelectList(allvalues, "ID", "Emri");
-        }
-
     }
 }
