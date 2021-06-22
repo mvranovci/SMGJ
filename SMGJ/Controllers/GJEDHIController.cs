@@ -16,7 +16,7 @@ namespace SMGJ.Controllers
         SMGJDB db = new SMGJDB();
         MessageJs returnmodel = new MessageJs();
         // GET: GJEDHI
-        SMGJDB db = new SMGJDB();
+        
         // GET: KOMUNA
         public async Task<ActionResult> Index()
         
