@@ -1,6 +1,7 @@
-﻿@model SMGJ.Models.FERMA
+@model SMGJ.Models.FERMA
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
+    var useri = ViewBag.Useri;
 }
 @Html.HiddenFor(m => m.ID)
 <section id="page-title">
@@ -19,15 +20,15 @@
                         <legend>Edito te dhenat e fermes</legend>
 
                         <div class="row ">
-                            <div class=" col-md-6">
+                            <div class=" col-md-5">
                                 <div class="form-group">
                                     <label class="control-label">
                                         Emri <span class="symbol required" aria-required="true"></span>
                                     </label>
-                                    @Html.TextBoxFor(m => m.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin" })
+                                    @Html.TextBoxFor(m => m.Emri, new { @class = "form-control" })
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>
                                         Komuna
@@ -35,17 +36,39 @@
                                     @Html.DropDownList("KomunaID", null, htmlAttributes: new { @class = "form-control select2" })
                                 </div>
                             </div>
+                            @if (this.User.IsInRole("Administrator"))
+                            {
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>
+                                            Fermeri
+                                        </label><span class="symbol required"></span>
+                                        @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control select2", @id = "listauser" })
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </fieldset>
                 </div>
 
                 <div class="col-md-12">
+                    @*@if (this.User.IsInRole("Administrator"))
+                        {*@
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="hidden" id="userRole" value="@ViewBag.userRoliID" />
                             <button type="button" class="btn btn-primary pull-right" onclick="editdata(this)">Edito   <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </div>
+                    @*}
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary pull-right" onclick="editdata1(this)">Edito   <i class="fa fa-arrow-circle-right"></i></button>
+                                </div>
+                            </div>*@
+                    @*}*@
                 </div>
             </form>
         </div>
@@ -118,14 +141,16 @@
         };
         var editdata = function (btn) {
                 runValidator1();
-                if ($("#forma").valid() === true) {
+            if ($("#forma").valid() === true) {
                     var obj = {
                         ID: $("#ID").val(),
                         Emri: $("#Emri").val(),
                         KomunaID: $("#KomunaID").val(),
+                        KrijuarNga: $("#listauser").val()
+                     /*   KrijuarNga: $('#KrijuarNga').val($(listauser == null ? '#KrijuarNga' : '#listauser').val());*/
+                     // fetije
                     };
                 var url_redirect = '@Url.Action("Index", "FERMA")';
-                    var ur = $("#userRole").val();
                 $.ajax({
                     url: "@Url.Action("Edit", "FERMA")",
                     cache: false,
@@ -133,13 +158,9 @@
                     dataType: "json",
                     data: obj,
                     success: function (rs) {
-                        
+                        swal("", rs.Mesazhi, "success");
                         if (rs.status) {
-                            if (ur == 1) {
-                                window.location.href = url_redirect;
-                            } else {
-                                window.location.href ='@Url.Action("Index", "Home")';
-                            }
+                            window.location.href = url_redirect;
                         }
                         else {
 
@@ -156,6 +177,45 @@
                 });
             }
 
-            };
+        };
+        @*var editdata1 = function (btn) {
+                runValidator1();
+            if ($("#forma").valid() === true) {
+                    var obj = {
+                        ID: $("#ID").val(),
+                        Emri: $("#Emri").val(),
+                        KomunaID: $("#KomunaID").val(),
+                        KrijuarNga: $("#listauser").val()
+                     /*   KrijuarNga: $('#KrijuarNga').val($(listauser == null ? '#KrijuarNga' : '#listauser').val());*/
+                     // fetije
+                    };
+                var url_redirect = '@Url.Action("Index", "FERMA")';
+                $.ajax({
+                    url: "@Url.Action("Edit", "FERMA")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        swal("", rs.Mesazhi, "success");
+                        if (rs.status) {
+                            window.location.href = url_redirect;
+                        }
+                        else {
+
+                            swal("", rs.Mesazhi, "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+
+            };*@
     </script>
 }
