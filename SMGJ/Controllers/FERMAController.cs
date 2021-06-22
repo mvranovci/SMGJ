@@ -47,24 +47,28 @@ namespace SMGJ.Controllers
     public async Task<ActionResult> DeleteFerma(FERMA model)
     {
         var user = await GetUser();
-        MessageJs returnmodel = new MessageJs();
+            MessageJs returnmodel = new MessageJs();
 
-        try
-        {
-            FERMA menu = db.FERMAs.Find(model.ID);
+            try
+            {
+                FERMA ferma = db.FERMAs.Find(model.ID);
 
-            db.FERMAs.Remove(menu);
-            await db.SaveChangesAsync();
-            returnmodel.status = true;
-            returnmodel.Mesazhi = "Ferma eshte fshire me sukses";
-            return Json(returnmodel, JsonRequestBehavior.AllowGet);
-        }
-        catch (Exception)
-        {
-            returnmodel.status = false;
-            returnmodel.Mesazhi = "Ka ndodhur nje gabim";
-            return Json(returnmodel, JsonRequestBehavior.DenyGet);
-        }
+                var u = db.USERs.Find(ferma.KrijuarNga);
+                u.FermaID = null;
+                db.Entry(u).State = EntityState.Modified;
+                db.FERMAs.Remove(ferma);
+
+                await db.SaveChangesAsync();
+                returnmodel.status = true;
+                returnmodel.Mesazhi = "Ferma eshte fshire me sukses!";
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Ka ndodhur nje gabim!";
+                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+            }
     }
 
     //[NoDirectAccess]
@@ -162,7 +166,7 @@ namespace SMGJ.Controllers
         var exists1 = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
         bool result = User.IsInRole("Administrator");
         
-            if (exists)
+            if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
         {
             returnmodel.status = false;
             returnmodel.Mesazhi = "Nuk mund ta editoni kete ferme, sepse ekziston!";
