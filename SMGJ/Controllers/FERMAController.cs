@@ -70,6 +70,7 @@ namespace SMGJ.Controllers
         {
 
             var user = await GetUser();
+            var u = db.USERs.Find(user.ID);
             MessageJs returnmodel = new MessageJs();
 
             var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
@@ -94,6 +95,9 @@ namespace SMGJ.Controllers
                     new_model.KrijuarNga = user.ID;
                     new_model.Krijuar = DateTime.Now;
                     db.FERMAs.Add(new_model);
+                    
+                    u.FermaID = new_model.ID;
+                    db.Entry(u).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
                     returnmodel.Mesazhi = "Ferma u regjistrua me sukses";

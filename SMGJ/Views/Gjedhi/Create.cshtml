@@ -209,7 +209,7 @@
                         Vathe: $("#Vathe").val(),
                         Pesha: $("#Pesha").val(),
                 };
-                @*var url_redirect = '@Url.Action("Index", "GJEDHI")';*@
+                var url_redirect = '@Url.Action("Index", "GJEDHI")';
 
                 $.ajax({
                     url: "@Url.Action("Create", "GJEDHI")",
@@ -219,7 +219,7 @@
                     data: obj,
                     success: function (rs) {
                         if (rs.status) {
-                           // window.location.href = url_redirect;
+                            window.location.href = url_redirect;
                         }
                         else {
                             swal("Gabim", rs.Mesazhi, "error");

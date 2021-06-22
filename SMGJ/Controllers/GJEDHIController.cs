@@ -16,16 +16,18 @@ namespace SMGJ.Controllers
         SMGJDB db = new SMGJDB();
         // GET: KOMUNA
         public async Task<ActionResult> Index()
+        
         {
             var user = await GetUser();           
+            var u = db.USERs.Find(user.ID);           
             var ferma = db.FERMAs.ToList();
-            try
-            {
-                var usferm = db.USERs.Find(user).FermaID;
+            try { 
+                            var usferm =u.FermaID;
 
                 if (usferm != null)
                 { 
-                    var model = db.GJEDHIs.Where(q => q.KrijuarNga == user.ID).ToList();
+                  //  var model = db.GJEDHIs.Where(q => q.KrijuarNga == user.ID).ToList();
+                    var model = db.GJEDHIs.Where(q => q.FermaID == u.FermaID).ToList();
                     return View(model);
                 }
                
@@ -76,6 +78,8 @@ namespace SMGJ.Controllers
                     new_model.Gjinia = model.Gjinia;
                     new_model.Vathe = model.Vathe;
                     new_model.Pesha = model.Pesha;
+                    new_model.KrijuarNga = user.ID;
+                    new_model.Krijuar = DateTime.Now;
 
                     db.GJEDHIs.Add(new_model);
                     await db.SaveChangesAsync();
