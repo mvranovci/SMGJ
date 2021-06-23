@@ -116,6 +116,8 @@ namespace SMGJ.Controllers
     public async Task<ActionResult> Create(FERMA model)
     {
 
+      
+        bool result = User.IsInRole("Administrator");
         var user = await GetUser();
         MessageJs returnmodel = new MessageJs();
 
@@ -138,7 +140,13 @@ namespace SMGJ.Controllers
                     
                 new_model.Emri = model.Emri;
                 new_model.KomunaID = model.KomunaID;
-                new_model.KrijuarNga =user.ID;
+                if (result)
+                    {
+                        new_model.KrijuarNga = model.KrijuarNga;
+                    }
+                    else {
+                        new_model.KrijuarNga = user.ID;
+                    }
                 new_model.Krijuar = DateTime.Now;
                 db.FERMAs.Add(new_model);
                 await db.SaveChangesAsync();
@@ -161,6 +169,7 @@ namespace SMGJ.Controllers
         }
 
         ViewBag.KomunaID = await loadKomuna(model.KomunaID);
+        ViewBag.UserID = await loadUser(model.KrijuarNga);
     }
 
     [HttpPost]
