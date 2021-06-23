@@ -22,11 +22,17 @@
                         </label>
                         @Html.TextBoxFor(gj => gj.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin e gjedhit" })
                     </div>
+                    @*<div class="form-group">
+                            <label class="control-label">
+                                Ferma
+                            </label>
+                            @Html.DropDownListFor(gj => gj.FermaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>*@
                     <div class="form-group">
                         <label class="control-label">
-                            Ferma
+                            Prindi
                         </label>
-                        @Html.DropDownListFor(gj => gj.FermaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        @Html.DropDownListFor(gj => gj.PrindiID, null, "Zgjedh", (new { @class = "form-control select2" }))
                     </div>
                     <div class="form-group">
                         <label class="control-label">
@@ -73,6 +79,7 @@
                         </label>
                         @Html.TextBoxFor(gj => gj.Pesha, new { @class = "form-control", @placeholder = "Shkruani vleren e peshes" })
                     </div>
+
                 </div>
             </form>
         </div>
@@ -91,12 +98,7 @@
             var form1 = $('#forma');
             var errorHandler1 = $('.errorHandler', form1);
             var successHandler1 = $('.successHandler', form1);
-            $.validator.addMethod(
-            "legalNr",
-            function (value, element) {
-                return /(^[0][1-7]{1,2}[:.,-]?$)/.test(value);
-            }, "Shkruani nje numer ne formen 0X ku X ka vleren 1-7"
-        );
+
             $('#forma').validate({
                 errorElement: "span", // contain the error msg in a span tag
                 errorClass: 'help-block',
@@ -149,11 +151,12 @@
                     var gjinia = true;
                     if ($("input[name='select1']:checked").val() == 0) {
                         gjinia = false;
-                        }
+                    }
                     var obj = {
                     ID: $("#ID").val(),
                     Emri: $("#Emri").val(),
-                    FermaID: $("#FermaID").val(),
+                    PrindiID: $("#PrindiID").val(),
+                    //FermaID: $("#FermaID").val(), ---- nuk mundesh me zgjedh ne cilen ferme me shtu gjedhin pasi qe e kemi vetem nje ferme per nje perdorues dhe cdo gjedh shtohet te ferma e perdoruesit automatikisht
                     RacaID: $("#RacaID").val(),
                     TipiID: $("#TipiID").val(),
                     Datelindja: $("#Datelindja").val(),
@@ -175,6 +178,7 @@
                         else {
                             swal("Nuk u pranua", rs.Mesazhi, "error");
                         }
+
                     },
                     error: function (jqXHR, error, errorThrown) {
                         if (jqXHR.status && jqXHR.status == 400) {
@@ -184,13 +188,9 @@
                         }
                     }
                 });
+
             }
+
             };
     </script>
 }
-React
-Reply
-
-1:42
-
-

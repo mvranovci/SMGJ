@@ -289,6 +289,45 @@ namespace SMGJ.Controllers
             else
                 return new SelectList(allvalues, "ID", "Emertimi");
         }
+        public async Task<SelectList> loadGjedhi(int? selected)
+        {
+            var allvalues = await db.GJEDHIs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emri", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emri");
+        }
+
+        public async Task<SelectList> loadLageshtia(int? selected)
+        {
+            var allvalues = await db.LAGESHTIA_AJRIT.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Vlera", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Vlera");
+        }
+
+        public async Task<SelectList> loadTemperatura(int? selected)
+        {
+            var allvalues = await db.TEMPERATURAs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Vlera", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Vlera");
+        }
+
+        public async Task<SelectList> loadRrahjetEZemres(int? selected)
+        {
+            var allvalues = await db.RRAHJET_ZEMRES.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Vlera", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Vlera");
+        }
         //DOES USER HAVE A FARM CHECK METHOD
         public Boolean hasFarm(int? userId)
         {
