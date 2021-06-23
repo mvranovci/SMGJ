@@ -124,7 +124,7 @@ namespace SMGJ.Controllers
 
         var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
         var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
-         if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
+         if (exists ||  existsKrijuar)
         {
             returnmodel.status = false;
             returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
