@@ -1,0 +1,153 @@
+﻿@model IEnumerable<SMGJ.Models.GJEDHAT_PARAMETRAT>
+@using SMGJ.Models;
+@{
+    ViewBag.Title = "Index";
+    SMGJDB db = new SMGJDB();
+    var idgjedh = 0;
+    if ((int)TempData["GjedhiId"] == 0)
+    {
+        idgjedh = (int)TempData["GjedhiId"];
+    }
+    else
+    {
+        idgjedh = (int)TempData["GjedhiId"];
+    }
+}
+
+<section id="page-title">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="mainTitle text-center">Lista e Parametrave te Gjedhave</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="@Url.Action("Create","GJEDHI_PARAMETRAT" , new {id=(idgjedh)})" class="btn btn-green">Regjistro</a>
+        </div>
+    </div>
+    <div class="row margin-top-15 ">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Lista e Gjedhave</h5>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Gjedhi</th>
+                                <th>Rrahjet e Zemres</th>
+                                <th>Temperatura</th>
+                                <th>Lageshtia</th>
+                                <th>Data e Matjes</th>
+                                <th>Krijuar</th>
+                                <th class="hidden-xs"> Krijuar nga</th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var user = db.USERs.Find(item.KrijuarNga);
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <td class="hidden-xs">@item.GJEDHI.Emri</td>
+                                    <td> @item.RRAHJET_ZEMRES.Vlera</td>
+                                    <td> @item.TEMPERATURA.Vlera</td>
+                                    <td> @item.LAGESHTIA_AJRIT.Vlera</td>
+                                    <td> @item.DataMatjes.Value.ToString("dd/MM/yyyy")</td>
+                                    <td> @item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
+                                    <td> @user.Emri @user.Mbiemri</td>
+                                    <td>
+                                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                            <a href="@Url.Action("Edit","GJEDHI_PARAMETRAT" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" onclick="deletegjedhiparametrat(this)" data-gjedhiparametratid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+@section Scripts{
+    <script>
+        $(".warning-message-parameter").on("click", function (e) {
+            swal({
+                title: "A jeni i sigurte qe deshironi ta fshini kete ferme?",
+                text: "Ju nuk mund te e kryeni kete funksion!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Po, fshije!",
+                cancelButtonText: "Jo, anulo procesin!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    deleteferma(e.currentTarget);
+                } else {
+                    swal("U anulua", "Parametrat nuk jane fshire!", "error");
+                }
+            });
+            e.preventDefault
+        });
+
+        var deletegjedhiparametrat = function (btn) {
+            var obj = { ID: $(btn).data("gjedhiparametratid") };
+            swal({
+                title: "A jeni i sigurte?",
+                text: "Jeni duke fshire të dhëna nga sistemi",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Po, fshije!",
+                cancelButtonText: "Jo, anuloje!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                    if (isConfirm) {
+                    $.ajax({
+                    url: "@Url.Action("DeleteParametrat", "GJEDHI_PARAMETRAT")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal({title: "Ne rregull!", text: rs.Mesazhi, type: "success" },
+                                function () {
+                                    location.reload();
+                                }
+                            );
+                        }
+                        else {
+                            swal("Gabim!",
+                                rs.Mesazhi,
+                                "info");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+                } else {
+                    swal("Anuluar", "Fshirja e te dhenave eshte anuluar!", "error");
+                }
+            });
+
+        } //end delete
+    </script>
+}

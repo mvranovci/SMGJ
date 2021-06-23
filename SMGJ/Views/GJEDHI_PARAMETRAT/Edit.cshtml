@@ -1,0 +1,103 @@
+﻿@model SMGJ.Models.GJEDHAT_PARAMETRAT
+@{
+    ViewBag.Title = "Edit";
+}
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Ndryshimi i Parametrave te <span style="color:#1FBBA6">@Html.DisplayFor(model => model.GJEDHI.Emri)</span></h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <form id="forma">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>
+                                Lageshtia
+                            </label>
+                            @Html.DropDownListFor(model => model.LageshtiaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>
+                                Temperatura
+                            </label>
+                            @Html.DropDownListFor(model => model.TemperaturaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>
+                                Rrahjet E Zemres
+                            </label>
+                            @Html.DropDownListFor(model => model.RrahjeteZemresID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">Data e Matjes</label>
+                            <p class="input-group input-append datepicker date">
+                                @Html.TextBoxFor(m => m.DataMatjes, new { @class = "form-control", @placeholder = "" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="edito(this)">
+                    Ndrysho <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var edito = function (btn) {
+                if ($("#forma").valid() === true) {
+                    var obj = {
+                        GjedhiID: $("#GjedhiID").val(),
+                        LageshtiaID: $("#LageshtiaID").val(),
+                        TemperaturaID: $("#TemperaturaID").val(),
+                        RrahjeteZemresID: $("#RrahjeteZemresID").val(),
+                        DataMatjes: $("#DataMatjes").val(),
+                };
+                var url_redirect = '@Url.Action("Index", "GJEDHI_PARAMETRAT")';
+                $.ajax({
+                    url: "@Url.Action("Edit", "GJEDHI_PARAMETRAT")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            window.location.href = url_redirect;
+                        }
+                        else {
+                            alert(rs.Message, "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+            };
+    </script>
+}
