@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.IO;
@@ -129,7 +130,44 @@ namespace SMGJ.Controllers
             else
                 return new SelectList(allvalues, "ID", "Emri");
         }
-         public async Task<SelectList> loadUser(int? selected)
+        public async Task<SelectList> loadGjedhi(int? selected)
+        {
+            var user = await GetUser();
+            
+            List<GJEDHI> allvalues =  db.GJEDHIs.ToList();
+            List<GJEDHI> values;
+            if (!User.IsInRole("Administrator"))
+            {
+                values =  db.GJEDHIs.Where(q => q.KrijuarNga == user.ID).ToList();
+            }
+            else
+            {
+                values = allvalues;
+            }
+            if (selected.HasValue)
+                return new SelectList(values, "ID", "Emri", selected.Value);
+            else
+                return new SelectList(values, "ID", "Emri");
+        }
+        public async Task<SelectList> loadYndyra(int? selected)
+        {
+            var allvalues = await db.YNDYRAs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Emertimi", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Emertimi");
+        }
+        public async Task<SelectList> loadKontaminimi(int? selected)
+        {
+            var allvalues = await db.KONTAMINIMIs.ToListAsync();
+
+            if (selected.HasValue)
+                return new SelectList(allvalues, "ID", "Vlera", selected.Value);
+            else
+                return new SelectList(allvalues, "ID", "Vlera");
+        }
+        public async Task<SelectList> loadUser(int? selected)
         {
             var allvalues = await db.USERs.ToListAsync();
 

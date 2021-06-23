@@ -27,5 +27,6 @@ namespace SMGJ.Models
         public virtual GJEDHI GJEDHI { get; set; }
         public virtual KONTAMINIMI KONTAMINIMI { get; set; }
         public virtual YNDYRA YNDYRA { get; set; }
+        public int? UserID { get; internal set; }
     }
 }

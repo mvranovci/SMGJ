@@ -36,18 +36,7 @@
                                     @Html.DropDownList("KomunaID", null, htmlAttributes: new { @class = "form-control select2" })
                                 </div>
                             </div>
-                            @if (this.User.IsInRole("Administrator"))
-                            {
-
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>
-                                            Fermeri
-                                        </label><span class="symbol required"></span>
-                                        @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control select2", @id = "listauser" })
-                                    </div>
-                                </div>
-                            }
+                            
                         </div>
                     </fieldset>
                 </div>
@@ -146,7 +135,7 @@
                         ID: $("#ID").val(),
                         Emri: $("#Emri").val(),
                         KomunaID: $("#KomunaID").val(),
-                        KrijuarNga: $("#listauser").val()
+                        KrijuarNga: $("#KrijuarNga").val()
                      /*   KrijuarNga: $('#KrijuarNga').val($(listauser == null ? '#KrijuarNga' : '#listauser').val());*/
                      // fetije
                     };

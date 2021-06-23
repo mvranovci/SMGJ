@@ -181,6 +181,7 @@
     <Compile Include="Controllers\MENUController.cs" />
     <Compile Include="Controllers\Menu_RoliController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
+    <Compile Include="Controllers\QumeshtiController.cs" />
     <Compile Include="Controllers\RACAController.cs" />
     <Compile Include="Controllers\RRAHJET_ZEMRESController.cs" />
     <Compile Include="Controllers\TEMPERATURAController.cs" />
@@ -2074,6 +2075,9 @@
     <Content Include="Views\Gjedhi\Create.cshtml" />
     <Content Include="Views\Gjedhi\Edit.cshtml" />
     <Content Include="Views\Gjedhi\Index.cshtml" />
+    <Content Include="Views\Qumeshti\Index.cshtml" />
+    <Content Include="Views\Qumeshti\Create.cshtml" />
+    <Content Include="Views\Qumeshti\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

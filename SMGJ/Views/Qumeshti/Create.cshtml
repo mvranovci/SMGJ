@@ -1,0 +1,216 @@
+﻿@model SMGJ.Models.QUMESHTI
+@{
+    ViewBag.Title = "Create";
+}
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Regjistrimi i Qumeshtit</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="panel panel-white">
+        <div class="panel-body">
+            <form id="forma">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Sasia Prodhimit <span class="symbol required" aria-required="true"></span>
+                            </label>
+                            @Html.TextBoxFor(m => m.SasiaProdhuar, new { @class = "form-control", @placeholder = "Shkruani vleren" })
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Data Prodhimit</label>
+                            <p class="input-group input-append datepicker date">
+                                @Html.TextBoxFor(m => m.DataProdhimit, new { @class = "form-control", @placeholder = "" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Data Skadimit</label>
+                            <p class="input-group input-append datepicker date">
+                                @Html.TextBoxFor(m => m.DataSkadimit, new { @class = "form-control", @placeholder = "" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                GjedhiID
+                            </label><span class="symbol required"></span>
+                            @*@Html.HiddenFor(m => m.ID)*@
+                            @Html.DropDownList("GjedhiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                YndyraId
+                            </label><span class="symbol required"></span>
+                            @*@Html.HiddenFor(m => m.ID)*@
+                            @Html.DropDownList("YndyraID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                KontaminimiID
+                            </label><span class="symbol required"></span>
+                            @*@Html.HiddenFor(m => m.ID)*@
+                            @Html.DropDownList("KontaminimiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-wide pull-right" type="button" onclick="regjistro(this)">
+                    Register <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+
+@section Scripts{
+    <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    SasiaProdhuar: {
+                        required: true,
+                        number: true
+                    },
+                    DataProdhimit: {
+                        required: true
+                    },
+                    DataSkadimit: {
+                        required: true
+                    },
+                    GjedhiID: {
+                        required: true
+                    },
+                    YndyraID: {
+                        required: true
+                    },
+                    KontaminimiID: {
+                        required: true
+                    },
+                    Krijuar: {
+                        required: true
+                      //  date: true
+                    },
+                    KrijuarNga: {
+                        required: true
+                    },
+
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+        var regjistro = function (btn) {
+                runValidator1();
+                if ($("#forma").valid() === true) {
+                    var obj = {
+                        SasiaProdhuar: $("#SasiaProdhuar").val(),
+                        DataProdhimit: $("#DataProdhimit").val(),
+                        DataSkadimit: $("#DataSkadimit").val(),
+                        GjedhiID: $("#GjedhiID").val(),
+                        YndyraID: $("#YndyraID").val(),
+                        KontaminimiID: $("#KontaminimiID").val(),
+                        Krijuar: $("#Krijuar").val(),
+                        KrijuarNga: $("#KrijuarNga").val()
+                };
+                var url_redirect = '@Url.Action("Index", "QUMESHTI")';
+                $.ajax({
+                    url: "@Url.Action("Create", "QUMESHTI")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            window.location.href = url_redirect;
+                        }
+                        else {
+                            swal({
+                                title: 'Oops...',
+                                text: 'Qumeshti ekziston!',
+                            })                        }
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+
+            };
+    </script>
+
+
+}

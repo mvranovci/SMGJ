@@ -1,0 +1,160 @@
+﻿@model IEnumerable<SMGJ.Models.QUMESHTI>
+@using SMGJ.Models;
+@{
+    ViewBag.Title = "Qumeshti";
+    var useri = ViewBag.UserID;
+    SMGJDB db = new SMGJDB();
+}
+
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Lista e Qumeshtit</h1>
+        </div>
+    </div>
+</section>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="@Url.Action("Create","QUMESHTI")" class="btn btn-green">Regjistro</a>
+        </div>
+    </div>
+    <div class="row margin-top-15 ">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Lista e Qumeshtit</h5>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+                        <thead>
+                            <tr>
+                                @*<th>ID</th>*@
+                                <th>GjedhiID</th>
+
+                                <th>
+                                    YndyraID
+                                </th>
+                                <th>
+                                    Kontaminimi
+                                </th>
+                                <th>
+                                    SasiaProdhuar
+                                </th>
+                                <th>
+                                    DataProdhimit
+                                </th>
+                                <th>
+                                    DataSkadimit
+                                </th>
+                                <th> Krjuar</th>
+
+                                <th> Krjuar nga</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var user = db.USERs.Find(item.KrijuarNga);
+                                <tr>
+                                    @*<td>@item.ID</td>*@
+                                    <td>
+                                        @item.GJEDHI.Emri
+                                    </td>
+                                    <td>
+                                        @item.YNDYRA.Emertimi
+                                    </td>
+
+                                    <td>
+                                        @item.KONTAMINIMI.Vlera
+                                    </td>
+
+                                    <td>
+                                        @item.SasiaProdhuar
+                                    </td>
+
+                                    <td>
+                                        @item.DataProdhimit.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        @item.DataSkadimit.Value.ToString("dd/MM/yyyy")
+                                    </td>
+                                    <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
+                                    <td>@user.Emri  @user.Mbiemri</td>
+                                    <td>
+                                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                            <a href="@Url.Action("Edit", "QUMESHTI", new { id = item.ID })" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+
+@section Scripts{
+    <script>
+        $(".warning-message-parameter").on("click", function (e) {
+            swal({
+                title: "A jeni i sigurte qe deshironi ta fshini kete qumesht?",
+                text: "Ju nuk mund te e kryeni kete funksion!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Po, fshije!",
+                cancelButtonText: "Jo, anulo procesin!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    deletequmeshti(e.currentTarget);
+                } else {
+                    swal("U anulua", "Qumeshti juaj eshte e sigurte:)", "error");
+                }
+            });
+            e.preventDefault
+        });
+
+        var deletequmeshti = function (btn) {
+            var obj = { ID: $(btn).data("menuid")  };
+                $.ajax({
+                    url: "@Url.Action("DeleteQumeshti", "QUMESHTI")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal("Fshire!", rs.Mesazhi, "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1500)
+                        }
+                        else {
+                            swal("Anuluar", rs.Mesazhi , "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+        };
+    </script>
+}
