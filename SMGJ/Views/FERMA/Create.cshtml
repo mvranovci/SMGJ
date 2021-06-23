@@ -16,7 +16,7 @@
         <div class="panel-body">
             <form id="forma">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label class="control-label">
                                 Emri <span class="symbol required" aria-required="true"></span>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label>
                                 Komuna
@@ -34,6 +34,17 @@
                             @Html.DropDownList("KomunaID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
                         </div>
                     </div>
+                      @if (this.User.IsInRole("Administrator"))
+                    {
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Fermeri
+                                </label><span class="symbol required"></span>
+                                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control select2", @id = "listauser" })
+                            </div>
+                        </div>
+                    }
                 </div>
             </form>
         </div>
@@ -119,7 +130,7 @@
                                 Emri: $("#Emri").val(),
                                 KomunaID: $("#KomunaID").val(),
                                 Krijuar: $("#Krijuar").val(),
-                                 KrijuarNga: $("#KrijuarNga").val(),
+                                 KrijuarNga: $("#listauser").val()
                         };
                         var url_redirect = '@Url.Action("Index", "FERMA")';
                         $.ajax({
