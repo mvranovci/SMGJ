@@ -23,7 +23,7 @@ namespace SMGJ.Controllers
             {
                 List<QUMESHTI> model = db.QUMESHTIs.Where(t => t.KrijuarNga == user.ID).ToList();
 
-                ViewBag.GjedhiID = await loadGjedhi(null);
+                ViewBag.GjedhiID = await loadGjedhi1(null);
                 ViewBag.YndyraID = await loadYndyra(null);
                 ViewBag.KontaminimiID = await loadKontaminimi(null);
                 ViewBag.UserID = user.ID;
@@ -35,7 +35,7 @@ namespace SMGJ.Controllers
             {
                 List<QUMESHTI> model = db.QUMESHTIs.ToList();
 
-                ViewBag.GjedhiID = await loadGjedhi(null);
+                ViewBag.GjedhiID = await loadGjedhi1(null);
                 ViewBag.YndyraID = await loadYndyra(null);
                 ViewBag.KontaminimiID = await loadKontaminimi(null);
                 ViewBag.UserID = user.ID;
@@ -50,7 +50,7 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             QUMESHTI model = new QUMESHTI();
-            ViewBag.GjedhiID = await loadGjedhi(null);
+            ViewBag.GjedhiID = await loadGjedhi1(null);
             ViewBag.YndyraID = await loadYndyra(null);
             ViewBag.KontaminimiID = await loadKontaminimi(null);
             return View(model);
@@ -83,7 +83,7 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             QUMESHTI model = new QUMESHTI();
-            ViewBag.GjedhiID = await loadGjedhi(model.GjedhiID);
+            ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
             ViewBag.YndyraID = await loadYndyra(model.YndyraID);
             ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
             if (id != null)
@@ -135,7 +135,7 @@ namespace SMGJ.Controllers
                 returnmodel.Mesazhi = "Modeli nuk eshte valid";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
-            ViewBag.GjedhiID = await loadGjedhi(model.GjedhiID);
+            ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
             ViewBag.YndyraID = await loadYndyra(model.YndyraID);
             ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
         }
@@ -161,7 +161,7 @@ namespace SMGJ.Controllers
 
                     new_model.Krijuar = DateTime.Now;
                     //bone update
-                    ViewBag.GjedhiID = await loadGjedhi(model.GjedhiID);
+                    ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
                     ViewBag.YndyraID = await loadYndyra(model.YndyraID);
                     ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
                     db.Entry(new_model).State = EntityState.Modified;

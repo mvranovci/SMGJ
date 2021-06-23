@@ -130,7 +130,7 @@ namespace SMGJ.Controllers
             else
                 return new SelectList(allvalues, "ID", "Emri");
         }
-        public async Task<SelectList> loadGjedhi(int? selected)
+        public async Task<SelectList> loadGjedhi1(int? selected)
         {
             var user = await GetUser();
             

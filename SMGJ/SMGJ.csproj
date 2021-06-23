@@ -173,6 +173,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FERMAController.cs" />
     <Compile Include="Controllers\GJEDHIController.cs" />
+    <Compile Include="Controllers\GJEDHI_PARAMETRATController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KOMUNAController.cs" />
     <Compile Include="Controllers\KontaminimiController.cs" />
@@ -2078,6 +2079,9 @@
     <Content Include="Views\Qumeshti\Index.cshtml" />
     <Content Include="Views\Qumeshti\Create.cshtml" />
     <Content Include="Views\Qumeshti\Edit.cshtml" />
+    <Content Include="Views\GJEDHI_PARAMETRAT\Create.cshtml" />
+    <Content Include="Views\GJEDHI_PARAMETRAT\Edit.cshtml" />
+    <Content Include="Views\GJEDHI_PARAMETRAT\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
