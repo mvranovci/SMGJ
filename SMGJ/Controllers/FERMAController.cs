@@ -47,6 +47,7 @@ namespace SMGJ.Controllers
         var user = await GetUser();
         FERMA model = new FERMA();
         ViewBag.KomunaID = await loadKomuna(null);
+            ViewBag.UserID = await loadUser(null);
         return View(model);
     }
 
@@ -123,7 +124,7 @@ namespace SMGJ.Controllers
 
         var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
         var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
-        if (exists || existsKrijuar)
+         if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
         {
             returnmodel.status = false;
             returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
