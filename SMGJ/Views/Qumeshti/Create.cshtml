@@ -16,6 +16,33 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label>
+                                GjedhiID
+                            </label><span class="symbol required"></span>
+                            
+                            @Html.DropDownList("GjedhiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                YndyraId
+                            </label><span class="symbol required"></span>
+                         
+                            @Html.DropDownList("YndyraID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                KontaminimiID
+                            </label><span class="symbol required"></span>
+                       
+                            @Html.DropDownList("KontaminimiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label class="control-label">
                                 Sasia Prodhimit <span class="symbol required" aria-required="true"></span>
                             </label>
@@ -50,33 +77,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                GjedhiID
-                            </label><span class="symbol required"></span>
-                            @*@Html.HiddenFor(m => m.ID)*@
-                            @Html.DropDownList("GjedhiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                YndyraId
-                            </label><span class="symbol required"></span>
-                            @*@Html.HiddenFor(m => m.ID)*@
-                            @Html.DropDownList("YndyraID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                KontaminimiID
-                            </label><span class="symbol required"></span>
-                            @*@Html.HiddenFor(m => m.ID)*@
-                            @Html.DropDownList("KontaminimiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
-                        </div>
-                    </div>
+                    
                 </div>
 
             </form>
