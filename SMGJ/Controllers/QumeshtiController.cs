@@ -135,9 +135,7 @@ namespace SMGJ.Controllers
                 returnmodel.Mesazhi = "Modeli nuk eshte valid";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
-            ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
-            ViewBag.YndyraID = await loadYndyra(model.YndyraID);
-            ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
+    
         }
 
         [HttpPost]
