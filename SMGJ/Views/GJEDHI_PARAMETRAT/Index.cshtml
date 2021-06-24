@@ -47,6 +47,8 @@
                                 <th class="hidden-xs"> Krijuar nga</th>
                                 <th>
                                 </th>
+                                <th>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +70,11 @@
                                             <a href="#" onclick="deletegjedhiparametrat(this)" data-gjedhiparametratid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
                                         </div>
                                     </td>
+                                    <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                <a href="@Url.Action("Index","GJEDHI_PARAMETRAT" , new {id=(item.ID)})" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Parametra"><i class="fa fa-info-circle"></i></a>
+                                            </div>
+                                        </td>
                                 </tr>
                             }
                         </tbody>
