@@ -15,6 +15,34 @@
         <div class="panel-body">
             <form id="forma">
                 <div class="row">
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                GjedhiID
+                            </label><span class="symbol required"></span>
+                           
+                            @Html.DropDownList("GjedhiID", null,@*Model.GJEDHI.Emri,*@htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                YndyraId
+                            </label><span class="symbol required"></span>
+                            @*@Html.HiddenFor(m => m.ID)*@
+                            @Html.DropDownList("YndyraID", null,@*Model.YNDYRA.Emertimi,*@htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                KontaminimiID
+                            </label><span class="symbol required"></span>
+                            @*@Html.HiddenFor(m => m.ID)*@
+                            @Html.DropDownList("KontaminimiID", null,@*Model.KONTAMINIMI.Vlera.ToString(),*@htmlAttributes: new { @class = "form-control select2" })
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="control-label">
@@ -49,33 +77,6 @@
                                     </button>
                                 </span>
                             </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                GjedhiID
-                            </label><span class="symbol required"></span>
-                            @*@Html.HiddenFor(m => m.ID)*@
-                            @Html.DropDownList("GjedhiID", null,@*Model.GJEDHI.Emri,*@htmlAttributes: new { @class = "form-control select2" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                YndyraId
-                            </label><span class="symbol required"></span>
-                            @*@Html.HiddenFor(m => m.ID)*@
-                            @Html.DropDownList("YndyraID", null,@*Model.YNDYRA.Emertimi,*@htmlAttributes: new { @class = "form-control select2" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                KontaminimiID
-                            </label><span class="symbol required"></span>
-                            @*@Html.HiddenFor(m => m.ID)*@
-                            @Html.DropDownList("KontaminimiID", null,@*Model.KONTAMINIMI.Vlera.ToString(),*@htmlAttributes: new { @class = "form-control select2" })
                         </div>
                     </div>
                     @if (this.User.IsInRole("Administrator"))
