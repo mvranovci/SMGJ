@@ -17,30 +17,22 @@ namespace SMGJ.Controllers
         
         {
             var user = await GetUser();
-            var admin = this.User.IsInRole("Administrator");
 
+            ViewBag.GjedhiID = await loadGjedhi1(null);
+            ViewBag.YndyraID = await loadYndyra(null);
+            ViewBag.KontaminimiID = await loadKontaminimi(null);
+            ViewBag.UserID = user.ID;
+
+            var admin = this.User.IsInRole("Administrator");
             if (!admin)
             {
                 List<QUMESHTI> model = db.QUMESHTIs.Where(t => t.KrijuarNga == user.ID).ToList();
-
-                ViewBag.GjedhiID = await loadGjedhi1(null);
-                ViewBag.YndyraID = await loadYndyra(null);
-                ViewBag.KontaminimiID = await loadKontaminimi(null);
-                ViewBag.UserID = user.ID;
-
 
                 return View(model);
             }
             else
             {
                 List<QUMESHTI> model = db.QUMESHTIs.ToList();
-
-                ViewBag.GjedhiID = await loadGjedhi1(null);
-                ViewBag.YndyraID = await loadYndyra(null);
-                ViewBag.KontaminimiID = await loadKontaminimi(null);
-                ViewBag.UserID = user.ID;
-
-
                 return View(model);
 
             }
@@ -82,14 +74,12 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
-            QUMESHTI model = new QUMESHTI();
+        
+            QUMESHTI model = db.QUMESHTIs.Find(id);            
             ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
             ViewBag.YndyraID = await loadYndyra(model.YndyraID);
             ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
-            if (id != null)
-            {
-                model = db.QUMESHTIs.Find(id.Value);
-            }
+       
             return View(model);
         }
         [HttpPost]
@@ -159,9 +149,9 @@ namespace SMGJ.Controllers
 
                     new_model.Krijuar = DateTime.Now;
                     //bone update
-                    ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
-                    ViewBag.YndyraID = await loadYndyra(model.YndyraID);
-                    ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
+                    //ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
+                    //ViewBag.YndyraID = await loadYndyra(model.YndyraID);
+                    //ViewBag.KontaminimiID = await loadKontaminimi(model.KontaminimiID);
                     db.Entry(new_model).State = EntityState.Modified;
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
