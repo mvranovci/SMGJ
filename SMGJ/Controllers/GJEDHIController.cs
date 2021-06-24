@@ -15,42 +15,40 @@ namespace SMGJ.Controllers
     {
         SMGJDB db = new SMGJDB();
         MessageJs returnmodel = new MessageJs();
-        // GET: GJEDHI
-        //SMGJDB db = new SMGJDB();
-        // GET: KOMUNA
         public async Task<ActionResult> Index()
-        
+
         {
             var user = await GetUser();
-            var u = db.USERs.Find(user.ID);           
+            var u = db.USERs.Find(user.ID);
             var ferma = db.FERMAs.ToList();
-            try { 
-                            var usferm =u.FermaID;
+            try
+            {
+                var usferm = u.FermaID;
 
                 if (usferm != null)
-            {
-                  //  var model = db.GJEDHIs.Where(q => q.KrijuarNga == user.ID).ToList();
+                {
                     var model = db.GJEDHIs.Where(q => q.FermaID == u.FermaID).ToList();
                     return View(model);
+                }
+                // USED TO DISPLAY FARM NAME IN INDEX
+                var emriferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
+                ViewBag.emriferma = emriferma.Emri;
+
+                // var lista permban listen me gjedhat e perdoruesit te kycur
+                var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).OrderByDescending(x => x.ID).ToList();
+                return View(lista);
             }
-            // USED TO DISPLAY FARM NAME IN INDEX
-            var emriferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
-            ViewBag.emriferma = emriferma.Emri;
-        
-            // var lista permban listen me gjedhat e perdoruesit te kycur
-            var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).OrderByDescending(x=>x.ID).ToList();
-            return View(lista);
-        }
-            catch {
+            catch
+            {
                 return RedirectToAction("Index", "FERMA");
 
             }
-             return RedirectToAction("Index", "FERMA"); ;            
+            return RedirectToAction("Index", "FERMA"); 
         }
         public async Task<ActionResult> Create()
         {
             var user = await GetUser();
-            
+
             var model = new List<SelectListItem>();
             var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
             foreach (var item in gjinia)
@@ -65,7 +63,7 @@ namespace SMGJ.Controllers
             ViewBag.TipiID = await loadTipi(null);
 
             return View();
-                    }
+        }
 
         [HttpPost]
         public async Task<ActionResult> Create(GJEDHI model)
@@ -87,7 +85,7 @@ namespace SMGJ.Controllers
                     GJEDHI new_model = new GJEDHI();
 
                     var ferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
-                    
+
                     new_model.Emri = model.Emri;
                     new_model.FermaID = model.FermaID;
                     new_model.RacaID = model.RacaID;
@@ -118,7 +116,7 @@ namespace SMGJ.Controllers
             else
             {
                 returnmodel.status = false;
-                    Console.WriteLine(returnmodel.status);
+                Console.WriteLine(returnmodel.status);
                 returnmodel.Mesazhi = "Modeli nuk eshte valid";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
@@ -130,40 +128,43 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             if (!hasFarm(user.ID))
                 return RedirectToAction("Create", "Ferma");
-            GJEDHI model = new GJEDHI();
-            ViewBag.FermaID = await loadFerma(null);
-            ViewBag.RacaID = await loadRaca(null);
-            ViewBag.PrindiID = await loadPrindi(null);
-            ViewBag.TipiID = await loadTipi(null);
-            if (id != null)
+            if (ModelState.IsValid)
             {
-                model = db.GJEDHIs.Find(id.Value);
-            }
-            var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
-            var modeli = new List<SelectListItem>();
-
-            foreach (var item in gjinia)
-            {
-                if (model.Gjinia != null)
+                GJEDHI model = db.GJEDHIs.Find(id);
+                var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
+                var modeli = new List<SelectListItem>();
+                foreach (var item in gjinia)
                 {
-                    int vlera = int.Parse(item.Value);
-                    if (Convert.ToBoolean(vlera) == model.Gjinia)
+                    if (model.Gjinia != null)
                     {
-                        modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = true });
+                        int vlera = int.Parse(item.Value);
+                        if (Convert.ToBoolean(vlera) == model.Gjinia)
+                        {
+                            modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = true });
+                        }
+                        else
+                        {
+                            modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false });
+                        }
                     }
                     else
                     {
                         modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false });
                     }
                 }
-                else
-                {
-                    modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false });
-                }
-            }
-            ViewBag.Gjinia = modeli;
+                ViewBag.FermaID = await loadFerma(model.FermaID);
+                ViewBag.RacaID = await loadRaca(model.RacaID);
+                ViewBag.PrindiID = await loadPrindi(model.PrindiID);
+                ViewBag.TipiID = await loadTipi(model.TipiID);
+                ViewBag.Gjinia = modeli;
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "GJEDHI");
+            }
+                             
         }
 
         [HttpPost]
@@ -205,7 +206,7 @@ namespace SMGJ.Controllers
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     returnmodel.status = false;
                     returnmodel.Mesazhi = "Ka ndodhur nje gabim";
