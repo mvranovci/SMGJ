@@ -87,7 +87,7 @@ namespace SMGJ.Controllers
                     var ferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
 
                     new_model.Emri = model.Emri;
-                    new_model.FermaID = model.FermaID;
+                    new_model.FermaID = ferma.ID;
                     new_model.RacaID = model.RacaID;
                     new_model.PrindiID = model.PrindiID;
                     new_model.TipiID = model.TipiID;
