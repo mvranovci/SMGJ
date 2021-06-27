@@ -119,7 +119,7 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
             var exists = db.KOMUNAs.Any(x => x.Emri == model.Emri);
-            if (exists)
+            if (exists && db.KOMUNAs.Find(model.ID).Emri != model.Emri)
             {
                 returnmodel.status = false;
                 returnmodel.Mesazhi = "Nuk mund ta ndryshoni kete komune sepse ekziston!";
