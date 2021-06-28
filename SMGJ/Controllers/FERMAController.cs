@@ -23,16 +23,13 @@ namespace SMGJ.Controllers
             bool result = User.IsInRole("Administrator");
             if (!result)
             {
-                if (!hasFarm(user.ID))
+                if(hasFarm(user.ID))
                 {
-                    //return RedirectToAction("Create", "Ferma");
-                    return View("~/Views/FERMA/Create.cshtml");
+                    return RedirectToAction("Edit", "Ferma");
                 }
                 else
                 {
-                    // return View("Edit","Ferma");
-                     return RedirectToAction("Edit", "Ferma");
-                    // return View("~/Views/FERMA/Edit.cshtml");
+                    return View("~/Views/FERMA/Create.cshtml");
                 }
             }
             else
