@@ -86,12 +86,12 @@ namespace SMGJ.Controllers
             if (!result)
             {
 
-                var model = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
+                var ferma = db.FERMAs.Find(user.FermaID);
                 
-                ViewBag.KomunaID = await loadKomuna(model.KomunaID);
-                ViewBag.UserID = await loadUser(model.UserID);
+                ViewBag.KomunaID = await loadKomuna(ferma.KomunaID);
+                ViewBag.UserID = await loadUser(ferma.UserID);
 
-                return View(model);
+                return View(ferma);
             }
             else
             {
