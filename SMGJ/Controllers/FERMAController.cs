@@ -13,7 +13,7 @@ namespace SMGJ.Controllers
     public class FermaController : BaseController
     {
         SMGJDB db = new SMGJDB();
-        // GET: Ferma
+        // GET: Temperatura
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
@@ -23,15 +23,13 @@ namespace SMGJ.Controllers
             bool result = User.IsInRole("Administrator");
             if (!result)
             {
-                if (!hasFarm(user.ID))
+                if(hasFarm(user.ID))
                 {
-                    return View("~/Views/FERMA/Create.cshtml");
+                    return RedirectToAction("Edit", "Ferma");
                 }
                 else
                 {
-                    // return View("Edit","Ferma");
-                     return RedirectToAction("Edit", "Ferma");
-                    // return View("~/Views/FERMA/Edit.cshtml");
+                    return View("~/Views/FERMA/Create.cshtml");
                 }
             }
             else
@@ -79,7 +77,7 @@ namespace SMGJ.Controllers
             }
     }
 
-    [NoDirectAccess]
+    //[NoDirectAccess]
     public async Task<ActionResult> Edit(int? id)
     {
         var user = await GetUser();
@@ -88,12 +86,12 @@ namespace SMGJ.Controllers
             if (!result)
             {
 
-                var model = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
+                var ferma = db.FERMAs.Find(user.FermaID);
                 
-                ViewBag.KomunaID = await loadKomuna(model.KomunaID);
-                ViewBag.UserID = await loadUser(model.UserID);
+                ViewBag.KomunaID = await loadKomuna(ferma.KomunaID);
+                ViewBag.UserID = await loadUser(ferma.UserID);
 
-                return View(model);
+                return View(ferma);
             }
             else
             {
@@ -115,13 +113,11 @@ namespace SMGJ.Controllers
     [HttpPost]
     public async Task<ActionResult> Create(FERMA model)
     {
-
-      
         bool result = User.IsInRole("Administrator");
         var user = await GetUser();
+            var u = db.USERs.Find(user.ID);
         MessageJs returnmodel = new MessageJs();
-
-        var exists = db.FERMAs.Any(t => t.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
+        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
         var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
          if (exists ||  existsKrijuar)
         {
@@ -129,15 +125,11 @@ namespace SMGJ.Controllers
             returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
             return Json(returnmodel, JsonRequestBehavior.DenyGet);
         }
-
-
         if (ModelState.IsValid)
         {
-
             try
             {
                 FERMA new_model = new FERMA();
-                    
                 new_model.Emri = model.Emri;
                 new_model.KomunaID = model.KomunaID;
                 if (result)
@@ -149,7 +141,9 @@ namespace SMGJ.Controllers
                     }
                 new_model.Krijuar = DateTime.Now;
                 db.FERMAs.Add(new_model);
-                await db.SaveChangesAsync();
+                    u.FermaID = new_model.ID;
+                    db.Entry(u).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
                 returnmodel.status = true;
                 returnmodel.Mesazhi = "Ferma u regjistrua me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
@@ -167,7 +161,6 @@ namespace SMGJ.Controllers
             returnmodel.Mesazhi = "Modeli nuk eshte valid";
             return Json(returnmodel, JsonRequestBehavior.DenyGet);
         }
-
         ViewBag.KomunaID = await loadKomuna(model.KomunaID);
         ViewBag.UserID = await loadUser(model.KrijuarNga);
     }
@@ -178,12 +171,12 @@ namespace SMGJ.Controllers
         var user = await GetUser();
         MessageJs returnmodel = new MessageJs();
 
-        var exists = db.FERMAs.Any(t => t.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
+        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
 
         var exists1 = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
         bool result = User.IsInRole("Administrator");
         
-            if (exists && db.FERMAs.Find(model.ID).Emri.ToLower().Trim() != model.Emri.ToLower().Trim())
+            if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
         {
             returnmodel.status = false;
             returnmodel.Mesazhi = "Nuk mund ta editoni kete ferme, sepse ekziston!";
@@ -209,7 +202,7 @@ namespace SMGJ.Controllers
                     ViewBag.UserID = await loadUser(model.KrijuarNga);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Te dhenat e fermes u edituan me sukses";
+                    returnmodel.Mesazhi = "FERMA u editua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
@@ -236,7 +229,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Te dhenat e fermes u edituan me sukses";
+                    returnmodel.Mesazhi = "FERMA u editua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)

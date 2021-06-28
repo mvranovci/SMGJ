@@ -171,7 +171,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FERMAController.cs" />
     <Compile Include="Controllers\GJEDHIController.cs" />
     <Compile Include="Controllers\GJEDHI_PARAMETRATController.cs" />
@@ -184,6 +183,7 @@
     <Compile Include="Controllers\Menu_RoliController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
     <Compile Include="Controllers\QumeshtiController.cs" />
+    <Compile Include="Controllers\QumeshtiDetajetController.cs" />
     <Compile Include="Controllers\RACAController.cs" />
     <Compile Include="Controllers\RRAHJET_ZEMRESController.cs" />
     <Compile Include="Controllers\TEMPERATURAController.cs" />
@@ -2083,7 +2083,8 @@
     <Content Include="Views\GJEDHI_PARAMETRAT\Create.cshtml" />
     <Content Include="Views\GJEDHI_PARAMETRAT\Edit.cshtml" />
     <Content Include="Views\GJEDHI_PARAMETRAT\Index.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\QumeshtiDetajet\Create.cshtml" />
+    <Content Include="Views\QumeshtiDetajet\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

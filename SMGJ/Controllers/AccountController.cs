@@ -19,7 +19,7 @@ using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
-    [Authorize]
+    [CustomAuthorizeAttribute]
     public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;

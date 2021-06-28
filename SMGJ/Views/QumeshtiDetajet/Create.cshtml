@@ -1,0 +1,291 @@
+﻿@model SMGJ.Models.QUMESHTI_DETAJET
+
+@{
+    ViewBag.Title = "Create";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<h2>Regjistro</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid container-fullw bg-white">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <form id="forma">
+
+                    <h4>Detajet e qumështit</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="#">Data e Prodhimit</label>
+                                <p class="input-group input-append datepicker date">
+                                    @Html.TextBoxFor(gj => gj.DataProdhimit, new { @class = "form-control", @placeholder = "" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="#">Ushqim për viça</label>
+
+                                @Html.EditorFor(model => model.UshqimViqave, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UshqimViqave, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="#">Humbjet</label>
+
+                                @Html.EditorFor(model => model.Humbjet, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Humbjet, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="form-group" id="llogaritja" hidden>
+                        <h2 class="control-label col-md-2">Total Litra:</h2>
+                        <label class="control-label col-md-offset-1" id="llogaritjaTotalBruto" style="border: solid; padding: 1%"></label>
+                        <i class="fa fa-minus-square col-md-offset-1 fa-2x"></i>
+                        <label class="control-label col-md-offset-1" id="llogaritjaPerViqa" style="border: solid; padding: 1%"></label>
+                        <i class="fa fa-minus-square col-md-offset-1 fa-2x"></i>
+                        <label class="control-label col-md-offset-1" id="llogaritjaPerHumbje" style="border:solid; padding:1%"></label>
+                        @*<i class="fa fa- col-md-offset-1 fa-2x"></i>*@
+                        <hr style="height:2px;border:none;color:#333;background-color:#333; width:55%;" />
+
+                        <label class="control-label col-md-offset-5" id="llogaritjaPerTotalNeto" value="" style="border:solid; padding:1% 8%"></label>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-0 col-md-12">
+                            <button type="button" class="btn btn-primary pull-left" onclick="calculateTotal(this)">Llogarit totalin  <i class="fa fa-calculator"></i></button>
+                            <input type="button" value="Mbyll Ditën!" class="btn bg-dark-green pull-right" onclick="regjistro(this)" />
+
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+        <div>
+            <!--<button type="button" class="btn bg-danger" onclick="@Html.ActionLink("Back to List", "Index")">-->@*<i class="fa fa-arrow-circle-o-left"></i>*@<!--</button>-->
+            @*<a href="@Url.Action("Index","QumeshtiDetajet")" class="btn btn-danger btn-wide">Kthehu <i class="fa fa-arrow-circle-left"></i></a>*@
+            @*@Html.ActionLink("Back to List", "Index")*@
+        </div>
+    </div>
+
+
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    UshqimViqave: {
+                        required: true,
+                        number: true
+                    },
+                    Humbjet: {
+                        required: true,
+                        number: true
+                    }
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                    // submit form
+                    //$('#form').submit();
+                }
+            });
+        };
+
+
+
+        var calculateTotal = function (btn) {
+
+            //runValidator1();
+            //alert("Test");
+            //alert($("#forma").valid() === true)
+            if (/*$("#forma").valid() === */true) {
+
+                var obj = { DataProdhimit: $("#DataProdhimit").val() };
+                $.ajax({
+                    url: "@Url.Action("LlogaritTotalin", "QumeshtiDetajet")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            //var totalLitratNeto = rs.totalLitrat - $("#UshqimViqave").val() - $("#Humbjet").val();
+                            //alert(rs.totali - $("#UshqimViqave").val() - $("#Humbjet").val())
+
+                            swal({ title: "U llogarit!", text: rs.Mesazhi, type: "success" }, function () {
+                                $("#llogaritjaTotalBruto").html(rs.totali);
+                                $("#llogaritjaPerViqa").html($("#UshqimViqave").val());
+                                $("#llogaritjaPerHumbje").html($("#Humbjet").val());
+                                //$("#TotalLitra").val(rs.totali - $("#UshqimViqave").val() - $("#Humbjet").val());
+                                //$("#llogaritjaPerTotalNeto").val(rs.totali - $("#UshqimViqave").val() - $("#Humbjet").val());
+                                $("#llogaritjaPerTotalNeto").html(rs.totali - $("#UshqimViqave").val() - $("#Humbjet").val());
+                                $("#llogaritjaPerTotalNeto").val(rs.totali - $("#UshqimViqave").val() - $("#Humbjet").val());
+                                $("#llogaritja").show();
+                                //alert($("#llogaritjaPerTotalNeto").val())
+                                //location.reload()
+                            });
+
+                        }
+                        else {
+                            swal("Anuluar", rs.Mesazhi, "error");
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+        };
+
+    @*</script>
+
+    <script>*@
+
+        var regjistro = function (btn) {
+            var totalNeto = $("#llogaritjaPerTotalNeto").val();
+            //alert(totalNeto);
+            swal({
+                title: "A jeni i sigurt!", text: "A dëshironi të mbyllni ditën", type: "warning", confirmButtonText: "Po, mbylle!",
+                cancelButtonText: "Jo, anulo!", confirmButtonColor: "#DD6B55", showCancelButton: true,
+            }, function () {
+                var url_redirect = '@Url.Action("Index", "QumeshtiDetajet")';
+
+
+                var obj = { DataProdhimit: $("#DataProdhimit").val(), UshqimViqave: $("#UshqimViqave").val(), Humbjet: $("#Humbjet").val(), TotalLitra: $("#llogaritjaPerTotalNeto").val() };
+                //alert(obj.UshqimViqave);
+                //alert(obj.Humbjet);
+                //alert(obj.TotalLitra);
+                $.ajax({
+                        url: "@Url.Action("Create", "QumeshtiDetajet")",
+                        @*//url: "@Url.Action("Create", "QumeshtiDetajet")",*@
+                        cache: false,
+                        type: "POST",
+                        dataType: "json",
+                        data: obj,
+                        success: function (rs) {
+                            if (rs.status) {
+                                //var totalLitratNeto = rs.totalLitrat - $("#UshqimViqave").val() - $("#Humbjet").val();
+                                //alert(rs.totali - $("#UshqimViqave").val() - $("#Humbjet").val())
+
+                                swal({ title: "U regjistrua!", text: rs.Mesazhi, type: "success" }, function () {
+
+                                    $("#llogaritja").show();
+                                //alert($("#llogaritjaPerTotalNeto").val())
+                                //location.reload()
+                                    window.location.href = url_redirect;
+                                });
+
+                            }
+                            else {
+                                swal({ title: "Anuluar", text: rs.Mesazhi, type: "error" }, function () {
+                                    location.reload();
+                                    //window.location.href = url_redirect;
+                                });
+
+                            }
+                        },
+                        error: function (jqXHR, error, errorThrown) {
+                            if (jqXHR.status && jqXHR.status == 400) {
+                                swal("Anuluar", rs.Mesazhi, "error");
+                                //console.log(jqXHR.responseText);
+                            } else {
+                                swal("Anuluar", rs.Mesazhi, "error");
+                                //console.log("Something went wrong");
+                            }
+                        }
+                    });
+            })
+
+
+
+        };
+
+
+
+
+    </script>
+}

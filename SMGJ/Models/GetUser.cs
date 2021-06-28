@@ -14,6 +14,7 @@ namespace SMGJ.Models
         public string NumriLeternjoftimit { get; set; }
         public string Email { get; set; }
         public int RoleID { get; set; } 
+        public int? FermaID { get; set; }
     } 
 
 
