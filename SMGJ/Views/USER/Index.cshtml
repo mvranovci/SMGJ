@@ -1,9 +1,11 @@
-﻿@model IEnumerable<SMGJ.Models.Perdoruesit>
+@model IEnumerable<SMGJ.Models.Perdoruesit>
 @using SMGJ.Models;
 @{
+    SMGJDB db = new SMGJDB();
     ViewBag.Title = "Lista e përdoruesve";
     int roli = (int)ViewBag.RoliPerdoruesit;
     var user = (GetUser)ViewBag.user;
+
 
 } 
 <section id="page-title">
@@ -53,6 +55,9 @@
                             <th>
                                 Useri
                             </th>
+                            <th>
+                                Ferma
+                            </th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -67,26 +72,30 @@
                                 statusi = "Pasiv";
                                 bg = "#C82E29";
                             }
-                            <tr>
-                                <td>
-                                    @item.Perdoruesi
-                                </td>
-                                <td>
-                                    @item.Institucioni
-                                </td>
-                                <td>
-                                    @item.Email
-                                </td>
-                                <td>
-                                    @item.RoliKryesor
+                        <tr>
+                            <td>
+                                @item.Perdoruesi
+                            </td>
+                            <td>
+                                @item.Institucioni
+                            </td>
+                            <td>
+                                @item.Email
+                            </td>
+                            <td>
+                                @item.RoliKryesor
+                            </td>
+                            <td>
+                                <label class="label " style="background-color:@bg">@statusi</label>
+                            </td>
+                            <td>
+                                @item.User
+                            </td>
 
-                                </td>
-                                <td>
-                                    <label class="label " style="background-color:@bg">@statusi</label>
-                                </td>
-                                <td>
-                                    @item.User
-                                </td>
+                           
+                            <td>@item.Ferma</td>
+                            
+
                                 <td>
                                     <a href="#/" data-toggle="modal" data-target="#modalReset" onclick="Reset(@item.ID)" data-keyboard="false" style="float:right" title="Reseto fjalekalimin" data-step="2" data-intro="Shtypet butoni dhe hapet forma per resetim te fjalekalimit te perdoruesit" data-position="right" data-scrollTo='tooltip'><i class="fa fa-lock" style="font-size:1.4em"></i></a>
                                 </td>
@@ -124,3 +133,4 @@
 
     </script>
 }
+
