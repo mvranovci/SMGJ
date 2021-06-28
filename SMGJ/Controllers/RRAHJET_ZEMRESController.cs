@@ -9,7 +9,7 @@ using System.Data.Entity;
 using System.Net;
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class RRAHJET_ZEMRESController : BaseController
     {
         SMGJDB db = new SMGJDB();
