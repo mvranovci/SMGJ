@@ -67,7 +67,7 @@ namespace SMGJ.Controllers
                 db.TIPIs.Remove(tipi);
                 await db.SaveChangesAsync();
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "DELETED FROM DATABASE";
+                returnmodel.Mesazhi = "Tipi i gjedhit eshte fshire me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

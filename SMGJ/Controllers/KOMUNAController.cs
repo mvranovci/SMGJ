@@ -31,11 +31,11 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
 
-            var exists = db.KOMUNAs.Any(x => x.Emri == model.Emri);
+            var exists = db.KOMUNAs.Any(x => x.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
             if (exists)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete komune sepse ekziston!";
+                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete komune, sepse ekziston!";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             if (ModelState.IsValid)
@@ -85,7 +85,7 @@ namespace SMGJ.Controllers
                 if (existsFerma || existsUsers)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Kete komune nuk mund ta fshini sepse gjendet ne tabelen FERMA ose USER!";
+                    returnmodel.Mesazhi = "Nuk jeni i autorizuar per ta fshire kete komune!";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 
@@ -118,11 +118,11 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
-            var exists = db.KOMUNAs.Any(x => x.Emri == model.Emri);
+            var exists = db.KOMUNAs.Any(x => x.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
             if (exists)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta ndryshoni kete komune sepse ekziston!";
+                returnmodel.Mesazhi = "Ekziston nje komune me keto te dhena!";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             if (ModelState.IsValid)
@@ -140,9 +140,8 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Komuna u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e komunes u edituan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
-                    //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
                 {

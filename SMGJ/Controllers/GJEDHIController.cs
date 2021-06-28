@@ -71,7 +71,7 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
 
-            var exists = db.GJEDHIs.Any(x => x.Emri == model.Emri);
+            var exists = db.GJEDHIs.Any(x => x.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
             if (exists)
             {
                 returnmodel.status = false;
@@ -122,12 +122,27 @@ namespace SMGJ.Controllers
             }
         }
 
-
+        
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
             if (!hasFarm(user.ID))
                 return RedirectToAction("Create", "Ferma");
+
+            //a ekziston
+
+            var exists = (from gj in db.GJEDHIs where gj.ID == id select gj).FirstOrDefault();
+
+            if (exists==null)
+                return RedirectToAction("Index", "Gjedhi");
+
+
+            // a osht e jemja
+
+            if (exists.FermaID == user.)
+            {
+
+            }
             if (ModelState.IsValid)
             {
                 GJEDHI model = db.GJEDHIs.Find(id);
@@ -166,15 +181,15 @@ namespace SMGJ.Controllers
             }
                              
         }
-
+      
         [HttpPost]
         public async Task<ActionResult> Edit(GJEDHI model)
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
 
-            var exists = db.GJEDHIs.Any(x => x.Emri == model.Emri);
-            if (exists && db.GJEDHIs.Find(model.ID).Emri != model.Emri)
+            var exists = db.GJEDHIs.Any(x => x.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
+            if (exists && db.GJEDHIs.Find(model.ID).Emri.ToLower().Trim() != model.Emri.ToLower().Trim())
             {
                 returnmodel.status = false;
                 returnmodel.Mesazhi = "Gjedhi me kete emer ekziston!";
@@ -202,7 +217,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Gjedhi u ndryshua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e gjedhit u edituan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
@@ -232,7 +247,7 @@ namespace SMGJ.Controllers
                 if (exists)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Kete gjedh nuk mund ta fshini sepse eshte prind!";
+                    returnmodel.Mesazhi = "Kete gjedh nuk mund ta fshini, sepse eshte prind!";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 

@@ -99,7 +99,7 @@ namespace SMGJ.Controllers
                     db.GJEDHAT_PARAMETRAT.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Parametrat u regjistruan me sukses";
+                    returnmodel.Mesazhi = "Parametrat per gjedhin u regjistruan me sukses";
                     TempData["GjedhiId"] = model.GjedhiID;
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
@@ -156,7 +156,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Menu-ja u editua me sukses";
+                    returnmodel.Mesazhi = "Parametrat e gjedhit u edituan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
@@ -188,7 +188,7 @@ namespace SMGJ.Controllers
                 db.GJEDHAT_PARAMETRAT.Remove(gjedhiparametrat);
                 await db.SaveChangesAsync();
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "Ferma eshte fshire me sukses!";
+                returnmodel.Mesazhi = "Parametrat e gjedhit jane fshire me sukses!";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

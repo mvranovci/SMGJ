@@ -71,6 +71,7 @@ namespace SMGJ.Controllers
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
         }
+        [NoDirectAccess]
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
@@ -156,7 +157,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Temperatura u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e qumeshtit u ndryshuan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch

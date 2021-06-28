@@ -13,7 +13,7 @@ namespace SMGJ.Controllers
     public class FermaController : BaseController
     {
         SMGJDB db = new SMGJDB();
-        // GET: Temperatura
+        // GET: Ferma
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
@@ -25,7 +25,6 @@ namespace SMGJ.Controllers
             {
                 if (!hasFarm(user.ID))
                 {
-                    //return RedirectToAction("Create", "Ferma");
                     return View("~/Views/FERMA/Create.cshtml");
                 }
                 else
@@ -80,7 +79,7 @@ namespace SMGJ.Controllers
             }
     }
 
-    //[NoDirectAccess]
+    [NoDirectAccess]
     public async Task<ActionResult> Edit(int? id)
     {
         var user = await GetUser();
@@ -122,7 +121,7 @@ namespace SMGJ.Controllers
         var user = await GetUser();
         MessageJs returnmodel = new MessageJs();
 
-        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
+        var exists = db.FERMAs.Any(t => t.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
         var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
          if (exists ||  existsKrijuar)
         {
@@ -179,12 +178,12 @@ namespace SMGJ.Controllers
         var user = await GetUser();
         MessageJs returnmodel = new MessageJs();
 
-        var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
+        var exists = db.FERMAs.Any(t => t.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
 
         var exists1 = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
         bool result = User.IsInRole("Administrator");
         
-            if (exists && db.FERMAs.Find(model.ID).Emri != model.Emri)
+            if (exists && db.FERMAs.Find(model.ID).Emri.ToLower().Trim() != model.Emri.ToLower().Trim())
         {
             returnmodel.status = false;
             returnmodel.Mesazhi = "Nuk mund ta editoni kete ferme, sepse ekziston!";
@@ -210,7 +209,7 @@ namespace SMGJ.Controllers
                     ViewBag.UserID = await loadUser(model.KrijuarNga);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "FERMA u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e fermes u edituan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
@@ -237,7 +236,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "FERMA u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e fermes u edituan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)

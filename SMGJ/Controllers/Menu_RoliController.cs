@@ -39,7 +39,7 @@ namespace SMGJ.Controllers
                     if (allmenuRoli.Any(m => m.RoliID == obj.RoleID && m.MenuID == item.ID))
                     {
                         js.status = false;
-                        js.Mesazhi = "Ky Model Roli Egziston ne Db";
+                        js.Mesazhi = "Ky rol ekziston";
                         continue;
                     }
                     else

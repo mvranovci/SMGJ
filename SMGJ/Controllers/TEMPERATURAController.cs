@@ -39,7 +39,7 @@ namespace SMGJ.Controllers
                 if (exist)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Kete nuk mund ta fshini sepse ekziston tek Tabela GjedhiParametrat";
+                    returnmodel.Mesazhi = "Nuk mund ta fshini, sepse ekziston temperatura qe e permban kete vlere";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 
@@ -76,7 +76,7 @@ namespace SMGJ.Controllers
             var exists = db.TEMPERATURAs.Any(t => t.Vlera == model.Vlera);
             if (exists) { 
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete temperature, sepse ekziston!";
+                returnmodel.Mesazhi = "Nuk mund ta regjistroni, sepse ekziston temperature qe e permban kete vlere";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
 
@@ -121,7 +121,7 @@ namespace SMGJ.Controllers
             if (exists)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Nuk mund ta regjistroni kete temperature, sepse ekziston!";
+                returnmodel.Mesazhi = "Nuk mund ta ndryshoni, sepse ekziston temperature qe e permban kete vlere";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             if (ModelState.IsValid)
@@ -138,7 +138,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Temperatura u editua me sukses";
+                    returnmodel.Mesazhi = "Temperatura u ndryshua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch

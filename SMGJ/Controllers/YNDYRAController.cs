@@ -40,7 +40,7 @@ namespace SMGJ.Controllers
                 if (exists)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Nuk mund te perfundohet ky veprim";
+                    returnmodel.Mesazhi = "Nuk mund të fshihet, sepse ekziston qumesht qe permban kete yndyre";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 
@@ -84,17 +84,17 @@ namespace SMGJ.Controllers
                         KrijuarNga = user.ID
                     };
 
-                    var exists = db.YNDYRAs.Where(e => e.Emertimi == model.Emertimi).Any();
+                    var exists = db.YNDYRAs.Where(e => e.Emertimi.ToLower().Trim() == model.Emertimi.ToLower().Trim()).Any();
                     if (exists)
                     {
                         returnmodel.status = false;
-                        returnmodel.Mesazhi = "Kjo e dhene ekziston";
+                        returnmodel.Mesazhi = "Këto vlera të yndyres ekzistojnë!";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
                     db.YNDYRAs.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Recordi u regjistrua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e yndyres u regjistruan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
@@ -132,7 +132,7 @@ namespace SMGJ.Controllers
                     if (exists)
                     {
                         returnmodel.status = false;
-                        returnmodel.Mesazhi = "Nuk mund te perfundohet ky veprim";
+                        returnmodel.Mesazhi = "Këto vlera ekzistojnë!";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
 
@@ -140,7 +140,7 @@ namespace SMGJ.Controllers
                     if (exist)
                     {
                         returnmodel.status = false;
-                        returnmodel.Mesazhi = "Kjo e dhene ekziston";
+                        returnmodel.Mesazhi = "Këto vlera të yndyres ekzistojnë!";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
                     //bone update
@@ -148,7 +148,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Yndyra-ja u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e yndyres u ndryshuan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
 
                 }

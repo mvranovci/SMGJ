@@ -21,10 +21,8 @@ namespace SMGJ.Controllers
 
             
             var user = await GetUser();
-            //IEnumerable<KONTAMINIMI> kontaminimi = db.KONTAMINIMIs.AsEnumerable();
 
             var kontaminimi = (from k in db.KONTAMINIMIs select k).AsEnumerable();
-            //var kontaminimi = db.KONTAMINIMIs.ToList();
             return View(kontaminimi);
         }
 
@@ -69,7 +67,7 @@ namespace SMGJ.Controllers
                     db.KONTAMINIMIs.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Kontaminimi regjistrua me sukses";
+                    returnmodel.Mesazhi = "Kontaminimi u regjistrua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
@@ -109,7 +107,7 @@ namespace SMGJ.Controllers
                 if (z.Contains(model.ID))
                 {
                     //Nuk lejohet 
-                    returnmodel.Mesazhi = "Ky kontamin nuk mund të fshihet sepse ekzistojnë qumështa me këtë kontaminim!";
+                    returnmodel.Mesazhi = "Ky kontaminim nuk mund të fshihet sepse ekziston qumesht qe permban kete kontaminim";
                     returnmodel.status = false;
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
 
@@ -200,7 +198,7 @@ namespace SMGJ.Controllers
                     var z = (from t in test1 select t.ID).ToList();
                     if (z.Contains(model.ID))
                     {
-                        returnmodel.Mesazhi = "Ky kontamin nuk mund të ndryshohet sepse ekzistojnë qumështa me këtë kontaminim!";
+                        returnmodel.Mesazhi = "Ky kontaminim nuk mund të fshihet, sepse ekziston qumesht qe permban kete kontaminim";
                         returnmodel.status = false;
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
@@ -214,7 +212,7 @@ namespace SMGJ.Controllers
                      * */
                     if (test.Count() != 0)
                     {
-                        returnmodel.Mesazhi = "Këto vlera të kontaminimit ekzistojnë në databazë!";
+                        returnmodel.Mesazhi = "Këto vlera të kontaminimit ekzistojnë!";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
 
@@ -234,7 +232,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Menu-ja u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e kontaminimit u edituan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }

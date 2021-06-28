@@ -9,8 +9,11 @@ using System.Web.Routing;
 
 namespace SMGJ
 {
+
     public class MvcApplication : System.Web.HttpApplication
     {
+        
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -35,5 +38,37 @@ namespace SMGJ
             System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
             System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;//CultureInfo.CreateSpecificCulture(cultureInfo.Name);
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            Response.Clear();
+
+            HttpException httpException = exception as HttpException;
+
+            if (httpException != null)
+            {
+                string action;
+
+                switch (httpException.GetHttpCode())
+                {
+                    case 404:
+                        // page not found
+                        action = "Index";
+                        break;
+                    case 500:
+                        // server error
+                        action = "Index";
+                        break;
+                    default:
+                        action = "Index";
+                        break;
+                }
+
+                // clear error on server
+                Server.ClearError();
+
+                Response.Redirect(String.Format("~/Error/{0}", action));
+            }
+        }
+        }
     }
-}

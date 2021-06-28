@@ -40,7 +40,7 @@ namespace SMGJ.Controllers
                 if (exists)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Nuk mund te perfundohet ky veprim";
+                    returnmodel.Mesazhi = "Nuk mund ta fshini kete lageshti te ajrit, sepse ekzistojne Gjedha qe permbajne kete parameter ";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 
@@ -87,13 +87,13 @@ namespace SMGJ.Controllers
                     if (exists)
                     {
                         returnmodel.status = false;
-                        returnmodel.Mesazhi = "Kjo e dhene ekziston";
+                        returnmodel.Mesazhi = "Keto vlera te lageshtise se ajrit ekzistojne";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
                     db.LAGESHTIA_AJRIT.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Recordi u regjistrua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat u regjistruan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
@@ -133,14 +133,14 @@ namespace SMGJ.Controllers
                     if (exist)
                     {
                         returnmodel.status = false;
-                        returnmodel.Mesazhi = "Kjo e dhene ekziston";
+                        returnmodel.Mesazhi = "Keto vlera te lageshtise se ajrit ekzistojne";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
                     var exists = db.GJEDHAT_PARAMETRAT.Where(e => e.LageshtiaID == model.ID).Any();
                     if (exists)
                     {
                         returnmodel.status = false;
-                        returnmodel.Mesazhi = "Nuk mund te perfundohet ky veprim";
+                        returnmodel.Mesazhi = "Nuk mund te ndryshoni kete lageshti te ajrit, sepse ekziston nje e tille";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
 
@@ -148,7 +148,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Menu-ja u editua me sukses";
+                    returnmodel.Mesazhi = "Keto vlera te lageshtise se ajrit u ndryshuan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
 
                 }

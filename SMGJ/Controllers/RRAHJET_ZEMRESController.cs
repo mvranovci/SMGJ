@@ -38,7 +38,7 @@ namespace SMGJ.Controllers
                 if (await db.GJEDHAT_PARAMETRAT.AnyAsync(x => x.RrahjeteZemresID == model.ID))
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Kete vlere nuk mund ta fshini sepse gjendet ne tabelen GJEDHAT PARAMETRAT!";
+                    returnmodel.Mesazhi = "Nuk mund ta fshini, sepse ekziston Gjedh qe e permban kete vlere";
 
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
@@ -72,11 +72,11 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
             var exists = db.GJEDHAT_PARAMETRAT.Any(gj => gj.RrahjeteZemresID == model.ID);
-            var existsEmertimi = db.RRAHJET_ZEMRES.Any(x => x.Vlera == model.Vlera);
+            var existsEmertimi = db.RRAHJET_ZEMRES.Any(x => x.Vlera.ToLower().Trim() == model.Vlera.ToLower().Trim());
             if (exists || existsEmertimi)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Vlera ekziston te gjedhi parametrat ose te rrahjet e zemres!";
+                returnmodel.Mesazhi = "Nuk mund ta regjistroni, sepse ekziston Gjedh qe e permban kete emertim";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             if (ModelState.IsValid)
@@ -92,7 +92,7 @@ namespace SMGJ.Controllers
                     db.RRAHJET_ZEMRES.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Rrahjet e zemres u regjistruan me sukses";
+                    returnmodel.Mesazhi = "Vlera per rrahjet e zemres u regjistrua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
@@ -117,11 +117,11 @@ namespace SMGJ.Controllers
             MessageJs returnmodel = new MessageJs();
 
             var exists = db.GJEDHAT_PARAMETRAT.Any(gj => gj.RrahjeteZemresID == model.ID);
-            var existsEmertimi = db.RRAHJET_ZEMRES.Any(x => x.Vlera == model.Vlera);
+            var existsEmertimi = db.RRAHJET_ZEMRES.Any(x => x.Vlera.ToLower().Trim() == model.Vlera.ToLower().Trim());
             if (exists || existsEmertimi)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Vlera ekziston te gjedhi parametrat ose te rrahjet e zemres!";
+                returnmodel.Mesazhi = "Nuk mund ta ndryshoni, sepse ekziston Gjedh qe e permban kete vlere ose emertim";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             if (ModelState.IsValid)
@@ -138,7 +138,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Rrahjet e zemres u edituan me sukses";
+                    returnmodel.Mesazhi = "Vlera per rrahjet e zemres u ndryshua me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }

@@ -38,14 +38,14 @@ namespace SMGJ.Controllers
                 if (exist)
                 {
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "menu ekziston";
+                    returnmodel.Mesazhi = "Menu-ja ekziston";
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
 
                 db.MENUs.Remove(menu);
                 await db.SaveChangesAsync();
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "sukses";
+                returnmodel.Mesazhi = "Te dhenat jane fshire me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -123,7 +123,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Menu-ja u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e menu-se u ndryshuan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }

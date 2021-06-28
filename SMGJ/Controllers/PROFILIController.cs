@@ -59,7 +59,7 @@ namespace SMGJ.Controllers
             if (result.Succeeded)
             {
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "Fjalekalimi i user-it u editua me sukses";
+                returnmodel.Mesazhi = "Fjalekalimi i perdoruesit u ndryshua me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             } 
             returnmodel.status = false;
@@ -94,7 +94,7 @@ namespace SMGJ.Controllers
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "User u editua me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e perdoruesit u ndryshuan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch
