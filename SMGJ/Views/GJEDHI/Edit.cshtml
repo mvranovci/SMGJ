@@ -1,4 +1,4 @@
-﻿@model SMGJ.Models.GJEDHI
+@model SMGJ.Models.GJEDHI
 @{
     ViewBag.Title = "Edit";
     var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
@@ -22,12 +22,15 @@
                         </label>
                         @Html.TextBoxFor(gj => gj.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin e gjedhit" })
                     </div>
-                    @*<div class="form-group">
+                    @if (ViewBag.Roli == 1)
+                    {
+                        <div class="form-group">
                             <label class="control-label">
                                 Ferma
                             </label>
                             @Html.DropDownListFor(gj => gj.FermaID, null, "Zgjedh", (new { @class = "form-control select2" }))
-                        </div>*@
+                        </div>
+                    }
                     <div class="form-group">
                         <label class="control-label">
                             Prindi
@@ -156,7 +159,7 @@
                     ID: $("#ID").val(),
                     Emri: $("#Emri").val(),
                     PrindiID: $("#PrindiID").val(),
-                    //FermaID: $("#FermaID").val(), ---- nuk mundesh me zgjedh ne cilen ferme me shtu gjedhin pasi qe e kemi vetem nje ferme per nje perdorues dhe cdo gjedh shtohet te ferma e perdoruesit automatikisht
+                    FermaID: $("#FermaID").val(),
                     RacaID: $("#RacaID").val(),
                     TipiID: $("#TipiID").val(),
                     Datelindja: $("#Datelindja").val(),
