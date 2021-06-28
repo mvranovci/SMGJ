@@ -1,4 +1,4 @@
-﻿using SMGJ.Models;
+using SMGJ.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,6 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using SMGJ.Helpers;
+using static SMGJ.Helpers.Enums;
+using System.Threading;
+using System.Threading.Tasks;
+
 
 namespace SMGJ.Controllers
 {
@@ -88,6 +93,7 @@ namespace SMGJ.Controllers
                 try
                 {
                     GJEDHAT_PARAMETRAT new_model = new GJEDHAT_PARAMETRAT();
+
                     new_model.GjedhiID = model.GjedhiID;
                     new_model.LageshtiaID = model.LageshtiaID;
                     new_model.TemperaturaID = model.TemperaturaID;
@@ -98,6 +104,79 @@ namespace SMGJ.Controllers
 
                     db.GJEDHAT_PARAMETRAT.Add(new_model);
                     await db.SaveChangesAsync();
+
+
+                    if (new_model.LageshtiaID > 60 || new_model.LageshtiaID < 40)
+                    {
+                        NJOFTIMET re_model = new NJOFTIMET();
+                        re_model.Gjedhi_ParametriID = new_model.ID;
+                        re_model.Data = DateTime.Now;
+                        re_model.Mesazhi = "Lageshtia e ajrit eshte jashte normales";
+                        db.NJOFTIMETs.Add(re_model);
+                        await db.SaveChangesAsync();
+                        NJOFTIMET_USER njofto = new NJOFTIMET_USER();
+                        njofto.NjoftimetID = re_model.ID;
+                        
+                        var user1 = (from a in db.USERs where a.RoleID == (int)Roli.Administrator select a).FirstOrDefault();
+                        njofto.PrejID = user1.ID;
+                        njofto.TekID = user.ID;
+                        db.NJOFTIMET_USER.Add(njofto);
+                        await db.SaveChangesAsync();
+                        string subjekti = "Anomali ne shendetin e gjedhit";
+                        string body = "<p>I/e nderuar,</p><p> Lageshtia e ajrit eshte jashte normales per gjedhin me ID:" + new_model.GjedhiID + "  </p>" +
+                            "Lageshtia e ajrit eshte   " + new_model.LageshtiaID;
+
+                        var threadDergoEmail = new Thread(() => SendMail.DergoEmail(user1.Email, subjekti, body)); threadDergoEmail.Start();
+
+                    }
+                    if (new_model.RrahjeteZemresID > 9 || new_model.RrahjeteZemresID < 6)
+                    {
+                        NJOFTIMET re_model = new NJOFTIMET();
+                        re_model.Gjedhi_ParametriID = new_model.ID;
+                        re_model.Data = DateTime.Now;
+                        re_model.Mesazhi = "Rrahjet e zemres jane jashte normales";
+                        db.NJOFTIMETs.Add(re_model);
+                        await db.SaveChangesAsync();
+                        NJOFTIMET_USER njofto = new NJOFTIMET_USER();
+                        njofto.NjoftimetID = re_model.ID;
+                        var vlera = (from a in db.RRAHJET_ZEMRES where a.ID == model.RrahjeteZemresID select a.Vlera).FirstOrDefault();
+                        
+
+                        var user1 = (from a in db.USERs where a.RoleID == (int)Roli.Administrator select a).FirstOrDefault();
+                        njofto.PrejID = user1.ID;
+                        njofto.TekID = user.ID;
+                        db.NJOFTIMET_USER.Add(njofto);
+                        await db.SaveChangesAsync();
+                        string subjekti = "Anomali ne shendetin e gjedhit";
+                        string body = "<p>I/e nderuar,</p> <p> Rrahjet e zemres jane jashte normales per gjedhin me ID:" + new_model.GjedhiID + "  </p>" +
+                            "Rrahjet e zemres jane "  + vlera;
+
+                        var threadDergoEmail = new Thread(() => SendMail.DergoEmail(user1.Email, subjekti, body)); threadDergoEmail.Start();
+                    }
+                    if (new_model.TemperaturaID > 5 || new_model.TemperaturaID < 3)
+                    {
+                        NJOFTIMET re_model = new NJOFTIMET();
+                        re_model.Gjedhi_ParametriID = new_model.ID;
+                        re_model.Data = DateTime.Now;
+                        re_model.Mesazhi = "Temperatura e gjedhit eshte jashte normales";
+                        db.NJOFTIMETs.Add(re_model);
+                        NJOFTIMET_USER njofto = new NJOFTIMET_USER();
+                        njofto.NjoftimetID = re_model.ID;
+                        var vlera1 = (from a in db.TEMPERATURAs where a.ID == model.TemperaturaID select a.Vlera).FirstOrDefault();
+                        var user1 = (from a in db.USERs where a.RoleID == (int)Roli.Administrator select a).FirstOrDefault();
+                        njofto.PrejID = user1.ID;
+                        njofto.TekID = user.ID;
+                        db.NJOFTIMET_USER.Add(njofto);
+                        await db.SaveChangesAsync();
+                        string subjekti = "Anomali ne shendetin e gjedhit";
+                        string body = "<p>I/e nderuar,</p><p> Temperatura eshte jashte normales per gjedhin me ID:" + new_model.GjedhiID + "  </p>" +
+                            "Temperatura eshte" + vlera1;
+
+                        var threadDergoEmail = new Thread(() => SendMail.DergoEmail(user1.Email, subjekti, body)); threadDergoEmail.Start();
+                    }
+
+                    await db.SaveChangesAsync();
+                    
                     returnmodel.status = true;
                     returnmodel.Mesazhi = "Parametrat u regjistruan me sukses";
                     TempData["GjedhiId"] = model.GjedhiID;
