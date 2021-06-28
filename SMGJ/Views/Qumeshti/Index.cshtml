@@ -5,11 +5,10 @@
     var useri = ViewBag.UserID;
     SMGJDB db = new SMGJDB();
 }
-
 <section id="page-title">
     <div class="row">
-        <div class="col-sm-8">
-            <h1 class="mainTitle">Lista e Qumeshtit</h1>
+        <div class="col-md-12">
+            <h1 class="mainTitle text-center">Lista e Qumeshtit</h1>
         </div>
     </div>
 </section>
@@ -84,7 +83,7 @@
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                                             <a href="@Url.Action("Edit", "QUMESHTI", new { id = item.ID })" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+                                            <a onclick="deletequmeshti(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
 
                                         </div>
                                     </td>
