@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class KONTAMINIMIController : BaseController
     {
         SMGJDB db = new SMGJDB();
