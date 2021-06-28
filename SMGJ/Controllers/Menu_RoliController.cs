@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class Menu_RoliController : BaseController
     {
         SMGJDB db = new SMGJDB();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class QumeshtiController : BaseController
     {
         SMGJDB db = new SMGJDB();

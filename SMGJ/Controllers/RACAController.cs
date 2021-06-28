@@ -9,7 +9,7 @@ using Microsoft.Ajax.Utilities;
 using SMGJ.Models;
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class RACAController : BaseController
     {
         SMGJDB db = new SMGJDB();
