@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 using static SMGJ.Helpers.Enums; 
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class PROFILIController : BaseController
     {
         SMGJDB db = new SMGJDB();
