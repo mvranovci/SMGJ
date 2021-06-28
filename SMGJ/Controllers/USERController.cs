@@ -10,7 +10,8 @@ using System.Web.Mvc;
 using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
-{
+{     [CustomAuthorizeAttribute]
+
     public class USERController : BaseController
     {
         // GET: USER
