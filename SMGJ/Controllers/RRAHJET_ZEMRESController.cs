@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Net;
 
 namespace SMGJ.Controllers
 {
@@ -16,8 +17,15 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
-            List<RRAHJET_ZEMRES> model = db.RRAHJET_ZEMRES.ToList();
-            return View(model);
+            if (user.RoleID == 1)
+            {
+                List<RRAHJET_ZEMRES> model = db.RRAHJET_ZEMRES.ToList();
+                return View(model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
         }
         public async Task<ActionResult> Create()
         {
