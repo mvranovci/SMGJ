@@ -1,4 +1,4 @@
-﻿using SMGJ.Models;
+using SMGJ.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,6 +22,13 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             var u = db.USERs.Find(user.ID);
             var ferma = db.FERMAs.ToList();
+
+            var role_admin = User.IsInRole("Administrator");
+            if(role_admin){
+                //Nese roli admin return listen me te gjithe gjedhat e te gjitha fermave
+                var lista = await db.GJEDHIs.ToListAsync();
+                return View(lista);
+            }
             try
             {
                 var usferm = u.FermaID;
@@ -35,16 +42,15 @@ namespace SMGJ.Controllers
                 var emriferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
                 ViewBag.emriferma = emriferma.Emri;
 
-                // var lista permban listen me gjedhat e perdoruesit te kycur
-                var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).OrderByDescending(x => x.ID).ToList();
+                // lista permban listen me gjedhat e perdoruesit te kycur
+                var lista = db.GJEDHIs.Where(x => x.FermaID == user.FermaID);
                 return View(lista);
             }
             catch
             {
                 return RedirectToAction("Index", "FERMA");
 
-            }
-            return RedirectToAction("Index", "FERMA"); 
+            } 
         }
         public async Task<ActionResult> Create()
         {
@@ -62,6 +68,7 @@ namespace SMGJ.Controllers
             ViewBag.RacaID = await loadRaca(null);
             ViewBag.PrindiID = await loadPrindi(null);
             ViewBag.TipiID = await loadTipi(null);
+            ViewBag.Roli = user.RoleID;
 
             return View();
         }
@@ -85,12 +92,19 @@ namespace SMGJ.Controllers
                 {
                     GJEDHI new_model = new GJEDHI();
 
-                    var ferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
+                    var ferma = db.FERMAs.Find(user.FermaID);
 
                     new_model.Emri = model.Emri;
-                    new_model.FermaID = ferma.ID;
                     new_model.RacaID = model.RacaID;
                     new_model.PrindiID = model.PrindiID;
+                    if (user.RoleID == 1)
+                    {
+                        new_model.FermaID = model.FermaID;
+                    }
+                    else
+                    {
+                        new_model.FermaID = ferma.ID;
+                    }
                     new_model.TipiID = model.TipiID;
                     new_model.PrindiID = model.PrindiID;
                     new_model.Datelindja = model.Datelindja;
@@ -100,7 +114,7 @@ namespace SMGJ.Controllers
                     new_model.KrijuarNga = user.ID;
                     new_model.Krijuar = DateTime.Now;
                     new_model.KrijuarNga = user.ID;
-
+                    
                     db.GJEDHIs.Add(new_model);
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
@@ -137,10 +151,10 @@ namespace SMGJ.Controllers
             if (exists == null)
                 return RedirectToAction("Index", "Gjedhi");
 
-            // a osht e jemja
+            //// a osht e jemja
 
-            if (exists.FermaID == user.FermaID)
-                return RedirectToAction("Index", "Gjedhi");
+            //if (exists.FermaID == user.FermaID)
+            //    return RedirectToAction("Index", "Gjedhi");
 
             if (ModelState.IsValid)
             {
@@ -171,6 +185,7 @@ namespace SMGJ.Controllers
                 ViewBag.PrindiID = await loadPrindi(model.PrindiID);
                 ViewBag.TipiID = await loadTipi(model.TipiID);
                 ViewBag.Gjinia = modeli;
+                ViewBag.Roli = user.RoleID;
 
                 return View(model);
             }
@@ -186,6 +201,7 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
+            var gjedhi = db.GJEDHIs.Find(model.ID);
 
             var exists = db.GJEDHIs.Any(x => x.Emri.ToLower().Trim() == model.Emri.ToLower().Trim());
             if (exists && db.GJEDHIs.Find(model.ID).Emri.ToLower().Trim() != model.Emri.ToLower().Trim())
@@ -203,24 +219,39 @@ namespace SMGJ.Controllers
                     
                   
                     new_model.Emri = model.Emri;
-                    new_model.FermaID = ferma.ID;
+                    if (user.RoleID == 1)
+                    {
+                        new_model.FermaID = model.FermaID;
+                    }
+                    else
+                    {
+                        new_model.FermaID = ferma.ID;
+                    }
                     new_model.RacaID = model.RacaID;
                     new_model.TipiID = model.TipiID;
-                    new_model.PrindiID = model.PrindiID;
+                    if (model.PrindiID == model.ID)
+                    {
+                        returnmodel.status = false;
+                        returnmodel.Mesazhi = "Gjedhi nuk mund te jete prind i vetvetes!";
+                        return Json(returnmodel, JsonRequestBehavior.DenyGet);
+                    }
+                    else
+                    {
+                        new_model.PrindiID = model.PrindiID;
+                    }
                     new_model.Datelindja = model.Datelindja;
                     new_model.Vathe = model.Vathe;
                     new_model.Pesha = model.Pesha;
                     new_model.Gjinia = model.Gjinia;
-                    new_model.Krijuar = DateTime.Now;
-                    new_model.KrijuarNga = user.ID;
+                    //new_model.Krijuar = DateTime.Now;
+                    //new_model.KrijuarNga = user.ID;
                     //bone update
                     db.Entry(new_model).State = EntityState.Modified;
                     //ruaj te dhenat
                     await db.SaveChangesAsync();
                     returnmodel.status = true;
-                    returnmodel.Mesazhi = "Te dhenat e gjedhit u edituan me sukses";
+                    returnmodel.Mesazhi = "Te dhenat e gjedhit u ndryshuan me sukses";
                     return Json(returnmodel, JsonRequestBehavior.AllowGet);
-                    //return Json(returnmodel, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
