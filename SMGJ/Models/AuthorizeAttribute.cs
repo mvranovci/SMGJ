@@ -17,14 +17,19 @@ namespace SMGJ.Models
 
          protected  override bool AuthorizeCore(HttpContextBase httpContext) 
             {
+               try{
                  var user = httpContext.User.Identity.GetUserId();
-            var u = db.USERs.First(q=>q.UserId==user);
-            /*httpContext.User.Identity.AuthenticationType.ToString();*/
+                  var u = db.USERs.First(q=>q.UserId==user);
+                  /*httpContext.User.Identity.AuthenticationType.ToString();*/
 
-            var controller = httpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
-            bool isValid = db.AUTORIZIMETs.Any(a => a.Controller == controller && a.RoleID == u.RoleID);
+                  var controller = httpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
+                  bool isValid = db.AUTORIZIMETs.Any(a => a.Controller == controller && a.RoleID == u.RoleID);
 
-            return isValid;
+                  return isValid;
+            }
+            catch{
+               return false;
+               }
         }
 
         /*  protected virtual void HandleUnauthorizedRequest(AuthorizationContext filterContext) 
