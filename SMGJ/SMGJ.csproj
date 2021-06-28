@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FERMAController.cs" />
     <Compile Include="Controllers\GJEDHIController.cs" />
     <Compile Include="Controllers\GJEDHI_PARAMETRATController.cs" />
