@@ -5,26 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="39b847545eb4434bb966683d2be65e10" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="SMGJModel.FERMA" Width="1.5" PointX="3" PointY="9" />
-        <EntityTypeShape EntityType="SMGJModel.GJEDHAT_PARAMETRAT" Width="1.5" PointX="13.5" PointY="8.75" />
-        <EntityTypeShape EntityType="SMGJModel.GJEDHI" Width="1.5" PointX="8.25" PointY="8" />
-        <EntityTypeShape EntityType="SMGJModel.KOMUNA" Width="1.5" PointX="0.75" PointY="9.25" />
-        <EntityTypeShape EntityType="SMGJModel.KONTAMINIMI" Width="1.5" PointX="8.25" PointY="3.875" />
-        <EntityTypeShape EntityType="SMGJModel.LAGESHTIA_AJRIT" Width="1.5" PointX="11.25" PointY="19.125" />
-        <EntityTypeShape EntityType="SMGJModel.Medium" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="SMGJModel.MENU" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SMGJModel.MENU_ROLI" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SMGJModel.NJOFTIMET" Width="1.5" PointX="8.25" PointY="14.25" />
-        <EntityTypeShape EntityType="SMGJModel.NJOFTIMET_USER" Width="1.5" PointX="10.5" PointY="13.25" />
-        <EntityTypeShape EntityType="SMGJModel.QUMESHTI" Width="1.5" PointX="10.5" PointY="4.75" />
-        <EntityTypeShape EntityType="SMGJModel.QUMESHTI_DETAJET" Width="1.5" PointX="10.5" PointY="8.875" />
-        <EntityTypeShape EntityType="SMGJModel.RACA" Width="1.5" PointX="6" PointY="14.75" />
-        <EntityTypeShape EntityType="SMGJModel.RRAHJET_ZEMRES" Width="1.5" PointX="11.25" PointY="1.625" />
-        <EntityTypeShape EntityType="SMGJModel.sysdiagram" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SMGJModel.TEMPERATURA" Width="1.5" PointX="11.25" PointY="16.375" />
-        <EntityTypeShape EntityType="SMGJModel.TIPI" Width="1.5" PointX="6" PointY="4" />
-        <EntityTypeShape EntityType="SMGJModel.USER" Width="1.5" PointX="5.25" PointY="7.625" />
-        <EntityTypeShape EntityType="SMGJModel.YNDYRA" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SMGJModel.AUTORIZIMET" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SMGJModel.FERMA" Width="1.5" PointX="3" PointY="10.375" />
+        <EntityTypeShape EntityType="SMGJModel.GJEDHAT_PARAMETRAT" Width="1.5" PointX="10.5" PointY="6.125" />
+        <EntityTypeShape EntityType="SMGJModel.GJEDHI" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="SMGJModel.KOMUNA" Width="1.5" PointX="0.75" PointY="10.5" />
+        <EntityTypeShape EntityType="SMGJModel.KONTAMINIMI" Width="1.5" PointX="8.25" PointY="19.25" />
+        <EntityTypeShape EntityType="SMGJModel.LAGESHTIA_AJRIT" Width="1.5" PointX="8.25" PointY="4" />
+        <EntityTypeShape EntityType="SMGJModel.Medium" Width="1.5" PointX="6" PointY="5.5" />
+        <EntityTypeShape EntityType="SMGJModel.MENU" Width="1.5" PointX="2.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SMGJModel.MENU_ROLI" Width="1.5" PointX="4.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SMGJModel.NJOFTIMET" Width="1.5" PointX="11.25" PointY="2.5" />
+        <EntityTypeShape EntityType="SMGJModel.NJOFTIMET_USER" Width="1.5" PointX="13.5" PointY="10.5" />
+        <EntityTypeShape EntityType="SMGJModel.QUMESHTI" Width="1.5" PointX="10.5" PointY="14.125" />
+        <EntityTypeShape EntityType="SMGJModel.QUMESHTI_DETAJET" Width="1.5" PointX="10.5" PointY="10.25" />
+        <EntityTypeShape EntityType="SMGJModel.RACA" Width="1.5" PointX="3" PointY="14.125" />
+        <EntityTypeShape EntityType="SMGJModel.RRAHJET_ZEMRES" Width="1.5" PointX="8.25" PointY="15.5" />
+        <EntityTypeShape EntityType="SMGJModel.sysdiagram" Width="1.5" PointX="12.75" PointY="6.125" />
+        <EntityTypeShape EntityType="SMGJModel.TEMPERATURA" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SMGJModel.TIPI" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="SMGJModel.USER" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="SMGJModel.YNDYRA" Width="1.5" PointX="8.25" PointY="22.125" />
         <AssociationConnector Association="SMGJModel.FK_FERMA_KOMUNA" />
         <AssociationConnector Association="SMGJModel.FK_GJEDHI_FERMA" />
         <AssociationConnector Association="SMGJModel.FK_QUMESHTI_DETAJET_FERMA" />

@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SMGJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTORIZIMET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -482,6 +492,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SMGJModelStoreContainer">
+          <EntitySet Name="AUTORIZIMET" EntityType="Self.AUTORIZIMET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FERMA" EntityType="Self.FERMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="Self.GJEDHAT_PARAMETRAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GJEDHI" EntityType="Self.GJEDHI" Schema="dbo" store:Type="Tables" />
@@ -592,6 +603,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SMGJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SMGJEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTORIZIMETs" EntityType="SMGJModel.AUTORIZIMET" />
           <EntitySet Name="FERMAs" EntityType="SMGJModel.FERMA" />
           <EntitySet Name="GJEDHAT_PARAMETRAT" EntityType="SMGJModel.GJEDHAT_PARAMETRAT" />
           <EntitySet Name="GJEDHIs" EntityType="SMGJModel.GJEDHI" />
@@ -697,6 +709,16 @@
             <End Role="QUMESHTI_DETAJET" EntitySet="QUMESHTI_DETAJET" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AUTORIZIMET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Controller" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+        </EntityType>
         <EntityType Name="FERMA">
           <Key>
             <PropertyRef Name="ID" />
@@ -1221,6 +1243,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SMGJModelStoreContainer" CdmEntityContainer="SMGJEntities">
+          <EntitySetMapping Name="AUTORIZIMETs">
+            <EntityTypeMapping TypeName="SMGJModel.AUTORIZIMET">
+              <MappingFragment StoreEntitySet="AUTORIZIMET">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FERMAs">
             <EntityTypeMapping TypeName="SMGJModel.FERMA">
               <MappingFragment StoreEntitySet="FERMA">

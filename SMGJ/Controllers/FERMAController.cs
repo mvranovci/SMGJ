@@ -90,7 +90,7 @@ namespace SMGJ.Controllers
                 var ferma = db.FERMAs.Find(user.FermaID);
                 
                 ViewBag.KomunaID = await loadKomuna(ferma.KomunaID);
-                ViewBag.UserID = await loadUser(ferma.UserID);
+               // ViewBag.UserID = await loadUser(f);
 
                 return View(ferma);
             }
@@ -105,7 +105,7 @@ namespace SMGJ.Controllers
 
                 }
 
-                ViewBag.UserID = await loadUser(model.UserID);
+                //ViewBag.UserID = await loadUser(model.UserID);
                 ViewBag.KomunaID = await loadKomuna(model.KomunaID);
                 return View(model);
             }

@@ -27,7 +27,6 @@ namespace SMGJ.Models
         public Nullable<int> KomunaID { get; set; }
         public Nullable<System.DateTime> Krijuar { get; set; }
         public Nullable<int> KrijuarNga { get; set; }
-       
     
         public virtual KOMUNA KOMUNA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -36,6 +35,5 @@ namespace SMGJ.Models
         public virtual ICollection<QUMESHTI_DETAJET> QUMESHTI_DETAJET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER> USERs { get; set; }
-        public int? UserID { get; internal set; }
     }
 }

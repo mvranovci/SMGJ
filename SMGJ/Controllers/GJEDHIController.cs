@@ -134,16 +134,14 @@ namespace SMGJ.Controllers
 
             var exists = (from gj in db.GJEDHIs where gj.ID == id select gj).FirstOrDefault();
 
-            if (exists==null)
+            if (exists == null)
                 return RedirectToAction("Index", "Gjedhi");
-
 
             // a osht e jemja
 
-            if (exists.FermaID == user.)
-            {
+            if (exists.FermaID == user.FermaID)
+                return RedirectToAction("Index", "Gjedhi");
 
-            }
             if (ModelState.IsValid)
             {
                 GJEDHI model = db.GJEDHIs.Find(id);

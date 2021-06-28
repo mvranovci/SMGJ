@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Net;
 
 namespace SMGJ.Controllers
 {    [CustomAuthorizeAttribute]

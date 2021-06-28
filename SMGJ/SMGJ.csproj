@@ -197,6 +197,10 @@
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuthorizeAttribute.cs" />
+    <Compile Include="Models\AUTORIZIMET.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2086,6 +2090,7 @@
     <Content Include="Views\GJEDHI_PARAMETRAT\Index.cshtml" />
     <Content Include="Views\QumeshtiDetajet\Create.cshtml" />
     <Content Include="Views\QumeshtiDetajet\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
