@@ -59,7 +59,7 @@
                                     <td>
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
                                             <a href="@Url.Action("Edit","MENU" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-                                            <button data-menuid="@item.ID" class="btn btn-link btn-xs tooltips pull-right warning-message-parameter" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></button>
+                                            <a onclick="deletemenu(this)" data-menuid="@item.ID" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
 
                                         </div>
                                     </td>
