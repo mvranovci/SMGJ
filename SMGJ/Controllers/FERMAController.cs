@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace SMGJ.Controllers
 {
-    [Authorize]
+    [CustomAuthorizeAttribute]
     public class FermaController : BaseController
     {
         SMGJDB db = new SMGJDB();
