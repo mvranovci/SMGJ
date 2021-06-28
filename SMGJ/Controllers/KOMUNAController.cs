@@ -16,8 +16,15 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
-            List<KOMUNA> model = db.KOMUNAs.ToList();
-            return View(model);
+            if (user.RoleID == 1)
+            {
+                List<KOMUNA> model = db.KOMUNAs.ToList();
+                return View(model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
         }
         public async Task<ActionResult> Create()
         {
