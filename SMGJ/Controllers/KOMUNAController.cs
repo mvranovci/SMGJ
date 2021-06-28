@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 namespace SMGJ.Controllers
-{
+{    [CustomAuthorizeAttribute]
+
     public class KOMUNAController : BaseController
     {
         SMGJDB db = new SMGJDB();
