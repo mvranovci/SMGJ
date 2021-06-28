@@ -11,5 +11,6 @@ namespace SMGJ.Models
         public bool status { get; set; }
         public string Mesazhi { get; set; }
 
+        public decimal totali { get; set; }
     }
 }
