@@ -1,4 +1,4 @@
-﻿using SMGJ.Models;
+using SMGJ.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,8 +10,7 @@ using System.Web.Mvc;
 using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
-{     [CustomAuthorizeAttribute]
-
+{
     public class USERController : BaseController
     {
         // GET: USER
@@ -31,17 +30,21 @@ namespace SMGJ.Controllers
                                                           join b in userList on a.UserId equals b.Id
                                                           join c in allRoles on a.RoleID equals int.Parse(c.Value)
                                                           join i in db.KOMUNAs on a.KomunaID equals i.ID
+                                                          //join f in db.FERMAs on a.FermaID equals f.ID
+                                                          join f in db.FERMAs on a.FermaID equals f.ID into joinedT
+                                                          from f in joinedT.DefaultIfEmpty()
                                                           select new Perdoruesit
                                                           {
                                                               AktivNeInstitucion = a.Aktiv.HasValue? a.Aktiv.Value : false,
                                                               Email = a.Email,
                                                               Perdoruesi = a.Emri + " " + a.Mbiemri,
-                                                              Institucioni = i.Emri, 
+                                                              Institucioni = i.Emri,
                                                               User = b.UserName,
                                                               RoliKryesor = c.Text,
                                                               UserID = a.UserId,
                                                               ID = a.ID,
-                                                              InstitucioniID = a.KomunaID, 
+                                                              InstitucioniID = a.KomunaID,
+                                                              Ferma = a.FermaID != null ? f.Emri : string.Empty,
                                                               RoliKryesorID = c.Value
                                                           }).AsEnumerable();
 
@@ -113,6 +116,11 @@ namespace SMGJ.Controllers
             var allRoles = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList(); 
             ViewBag.RoleID = new SelectList(allRoles, "Id", "Name", selectedValue: user.RoleID); 
             ViewBag.InstitucioniID = await loadKomuna(user.KomunaID);
+            ViewBag.FermaID = await loadFerma(user.FermaID);
+
+
+
+
             var gjinia = EnumsToSelectList<Gjinia>.GetSelectList(); 
             var modeli = new List<SelectListItem>();
             foreach (var item in gjinia)
@@ -168,6 +176,8 @@ namespace SMGJ.Controllers
                     useri.KomunaID = model.InstitucioniID; 
                     useri.Aktiv = model.Statusi;
                     useri.Gjinia = Convert.ToBoolean(model.Gjinia);
+                    useri.FermaID = model.FermaID;
+
                     db.Entry(useri).State = EntityState.Modified; 
                     await db.SaveChangesAsync();
                     if (roliVjeterID.ToString() != model.RoleID.ToString())
@@ -191,7 +201,9 @@ namespace SMGJ.Controllers
             var userlogged = await GetUser();
             var allRoles = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList();
             ViewBag.InstitucioniID = await loadKomuna(model.InstitucioniID); 
-            ViewBag.RoleID = new SelectList(allRoles, "Id", "Name", selectedValue: model.RoleID); 
+            ViewBag.RoleID = new SelectList(allRoles, "Id", "Name", selectedValue: model.RoleID);
+            //ViewBag.FermaID = await loadFerma(model.Ferma);
+
             return View(model);
         }
     }

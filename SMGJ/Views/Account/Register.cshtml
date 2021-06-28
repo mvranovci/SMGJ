@@ -1,7 +1,8 @@
-﻿@model SMGJ.Models.RegisterViewModel
+@model SMGJ.Models.RegisterViewModel
 @{
     ViewBag.Title = "Create";
     var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
+   
 }
 <section id="page-title">
     <div class="row">
@@ -143,6 +144,15 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>
+                                        Ferma
+                                    </label><span class="symbol required"></span>
+                                    @Html.DropDownList("FermaID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                                    @*@Html.TextBoxFor(m => m.Ferma, new { @class = "form-control", @placeholder = "Shenoni fermen" })*@
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label class="control-label">
                                         Username
                                     </label><span class="symbol required"></span>
@@ -236,6 +246,9 @@
                     },
                     InstitucioniID: {
                         required: true,
+                    },
+                    FermaID: {
+                        required: true,
                     }
 
                 },
@@ -277,9 +290,11 @@
                         Telefoni: $("#Telefoni").val(),
                         RoleID: $("#RoleID").val(),
                         InstitucioniID: $("#InstitucioniID").val(),
+                        FermaID: $("#FermaID").val(),
                         UserName: $("#UserName").val(),
                         Password: $("#Password").val(),
                         Gjinia: $("input[name='select1']:checked").val(),
+                        Ferma: $("#Ferma").val(),
                         Statusi: $('#checkbox1').is(':checked')
                 };
                 var url_redirect = '@Url.Action("Index", "USER")';

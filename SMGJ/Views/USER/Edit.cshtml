@@ -1,4 +1,4 @@
-﻿@model SMGJ.Models.Editimi
+@model SMGJ.Models.Editimi
 @{
     ViewBag.Title = "Create";
     var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
@@ -144,6 +144,15 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>
+                                        Ferma
+                                    </label><span class="symbol required"></span>
+                                    @Html.DropDownList("FermaID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label class="control-label">
                                         Username
                                     </label><span class="symbol required"></span>
@@ -212,7 +221,11 @@
                     },
                     InstitucioniID: {
                         required: true,
+                    },
+                    FermaID: {
+                        required: true,
                     }
+
 
                 },
                 invalidHandler: function (event, validator) { //display error alert on form submit
@@ -255,6 +268,7 @@
                         RoleID: $("#RoleID").val(),
                         Email: $("#Email").val(),
                         InstitucioniID: $("#InstitucioniID").val(),
+                        FermaID: $("#FermaID").val(),
                         UserName: $("#UserName").val(),
                         Gjinia: $("input[name='select1']:checked").val(),
                         Statusi: $('#checkbox1').is(':checked')
@@ -288,3 +302,4 @@
             };
     </script> 
 }
+
