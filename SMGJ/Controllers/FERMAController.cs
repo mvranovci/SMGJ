@@ -113,12 +113,10 @@ namespace SMGJ.Controllers
     [HttpPost]
     public async Task<ActionResult> Create(FERMA model)
     {
-
-      
         bool result = User.IsInRole("Administrator");
         var user = await GetUser();
+            var u = db.USERs.Find(user.ID);
         MessageJs returnmodel = new MessageJs();
-
         var exists = db.FERMAs.Any(t => t.Emri == model.Emri);
         var existsKrijuar = db.FERMAs.Any(t => t.KrijuarNga == user.ID);
          if (exists ||  existsKrijuar)
@@ -127,15 +125,11 @@ namespace SMGJ.Controllers
             returnmodel.Mesazhi = "Nuk mund ta regjistroni kete ferme!";
             return Json(returnmodel, JsonRequestBehavior.DenyGet);
         }
-
-
         if (ModelState.IsValid)
         {
-
             try
             {
                 FERMA new_model = new FERMA();
-                    
                 new_model.Emri = model.Emri;
                 new_model.KomunaID = model.KomunaID;
                 if (result)
@@ -147,7 +141,9 @@ namespace SMGJ.Controllers
                     }
                 new_model.Krijuar = DateTime.Now;
                 db.FERMAs.Add(new_model);
-                await db.SaveChangesAsync();
+                    u.FermaID = new_model.ID;
+                    db.Entry(u).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
                 returnmodel.status = true;
                 returnmodel.Mesazhi = "Ferma u regjistrua me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
@@ -165,7 +161,6 @@ namespace SMGJ.Controllers
             returnmodel.Mesazhi = "Modeli nuk eshte valid";
             return Json(returnmodel, JsonRequestBehavior.DenyGet);
         }
-
         ViewBag.KomunaID = await loadKomuna(model.KomunaID);
         ViewBag.UserID = await loadUser(model.KrijuarNga);
     }
