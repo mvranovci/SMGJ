@@ -185,9 +185,10 @@ namespace SMGJ.Controllers
                 try
                 {
                     GJEDHI new_model = db.GJEDHIs.Find(model.ID);
-
+                    var ferma = db.FERMAs.Where(x => x.KrijuarNga == user.ID).Single();
+                  
                     new_model.Emri = model.Emri;
-                    new_model.FermaID = model.FermaID;
+                    new_model.FermaID = ferma.ID;
                     new_model.RacaID = model.RacaID;
                     new_model.TipiID = model.TipiID;
                     new_model.PrindiID = model.PrindiID;
