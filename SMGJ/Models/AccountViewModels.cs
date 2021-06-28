@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -29,6 +29,9 @@ namespace SMGJ.Models
         public int ID { get; set; }  
         public int InstitucioniID { get; set; }
         public string RoliKryesorID { get; set; }
+        public int? FermaID { get; set; }
+        public string Ferma { get; set; }
+
 
     }
     public class SendCodeViewModel
@@ -107,6 +110,7 @@ namespace SMGJ.Models
         public int RoleID { get; set; } 
         public int InstitucioniID { get; set; }
         public int Gjinia { get; set; }
+        public int FermaID { get; set; }
     }
     public class Editimi : RegisterViewModel
     { 
@@ -178,8 +182,8 @@ namespace SMGJ.Models
         public string NumriLeternjoftimit { get; set; }
 
         public USER user { get; set; }
-
-   
+        public FERMA FERMA { get; set; }
+        public int FermaID { get; internal set; }
     }
 
  
