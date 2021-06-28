@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using SMGJ.Models;
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class HomeController : BaseController
     {
         public ActionResult Index()

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class GJEDHI_PARAMETRATController : BaseController
     {
         SMGJDB db = new SMGJDB();

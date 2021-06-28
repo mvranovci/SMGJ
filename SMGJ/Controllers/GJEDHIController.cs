@@ -11,6 +11,7 @@ using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class GJEDHIController : BaseController
     {
         SMGJDB db = new SMGJDB();
