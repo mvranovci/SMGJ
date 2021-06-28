@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using SMGJ.Models;
 namespace SMGJ.Controllers
-{
+{   [CustomAuthorizeAttribute]
     public class QumeshtiDetajetController : BaseController
     {
         SMGJDB db = new SMGJDB();
