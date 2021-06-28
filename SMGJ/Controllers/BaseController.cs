@@ -328,18 +328,20 @@ namespace SMGJ.Controllers
             else
                 return new SelectList(allvalues, "ID", "Vlera");
         }
-        //DOES USER HAVE A FARM CHECK METHOD
-        public Boolean hasFarm(int? userId)
+        // DOES USER HAVE A FARM
+        public Boolean hasFarm(int? userID)
         {
-            var ferma = db.FERMAs.ToList();
-            foreach (var item in ferma)
+            var useri = db.USERs.Find(userID);
+            var hasfarm = useri.FermaID != null;
+
+            if (hasfarm)
             {
-                if (item.KrijuarNga == userId)
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
         public class NoDirectAccessAttribute : ActionFilterAttribute
