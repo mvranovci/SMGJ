@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
@@ -19,7 +19,7 @@ using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
-    [CustomAuthorizeAttribute]
+    [Authorize]
     public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
@@ -75,12 +75,14 @@ namespace SMGJ.Controllers
             RegisterViewModelUser model = new RegisterViewModelUser();
             var gjinia = EnumsToSelectList<Gjinia>.GetSelectList();
             var modeli = new List<SelectListItem>();
+           
             foreach (var item in gjinia)
             {
                 modeli.Add(new SelectListItem { Value = item.Value, Text = item.Text, Selected = false });
             }
             ViewBag.Gjinia = modeli;
             ViewBag.KomunaID = await loadKomuna(null);
+            ViewBag.FermaID = await loadFerma(null);
             return View(model);
         }
 
@@ -112,6 +114,7 @@ namespace SMGJ.Controllers
                         new_user.KomunaID = model.KomunaID;
                         new_user.Email = model.EmailAdresa;
                         new_user.NrLeternjoftimit = model.NumriLeternjoftimit;
+                        new_user.FermaID = model.FermaID;
 
                         ASCIIEncoding binarypass = new ASCIIEncoding();
                         string encrypted = Encrypt(model.UserPassword);
@@ -305,6 +308,7 @@ namespace SMGJ.Controllers
             RegisterViewModel model = new RegisterViewModel();
             var allvalues = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList().Select(q => new SelectListItem { Value = q.Id, Text = q.Name }).ToList();
             ViewBag.InstitucioniID = await loadKomuna(null);
+            ViewBag.FermaID = await loadFerma(null);
             ViewBag.RoleID = allvalues;
             ViewBag.RoleUserID = user.RoleID;
             var modeli = new List<SelectListItem>();
@@ -315,6 +319,7 @@ namespace SMGJ.Controllers
             }
             ViewBag.Gjinia = modeli;
             MENU modeil = new MENU();
+            ViewBag.Ferma = modeli;
             return View(model);
         }
         [HttpPost]
@@ -341,6 +346,13 @@ namespace SMGJ.Controllers
                         newUser.NrLeternjoftimit = model.NumriPersonal;
                         newUser.NrTelefonit = model.Telefoni;
                         newUser.KomunaID = model.InstitucioniID;
+                        //newUser.FermaID = model.FermaID;
+
+
+                       
+                       
+
+                       
                         if (model.Ditelindja != null)
                         { 
                             newUser.Datelindja = model.Ditelindja.Value;
@@ -354,6 +366,7 @@ namespace SMGJ.Controllers
                         newUser.Aktiv = model.Statusi;
                         newUser.RoleID = roliID;
                         newUser.Gjinia = Convert.ToBoolean(model.Gjinia);
+                        
                         db.USERs.Add(newUser);
                         await db.SaveChangesAsync();
                     }
@@ -380,6 +393,8 @@ namespace SMGJ.Controllers
             ViewBag.Gjinia = modeli;
             ViewBag.RoleID = (new ApplicationDbContext()).Roles.OrderBy(q => q.Name).ToList().Select(q => new SelectListItem { Value = q.Id, Text = q.Name }).ToList();
             ViewBag.InstitucioniID = await loadKomuna(null);
+            ViewBag.FermaID = await loadFerma(null);
+
             return View(model);
         }
 
