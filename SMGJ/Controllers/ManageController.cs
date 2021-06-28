@@ -9,8 +9,9 @@ using Microsoft.Owin.Security;
 using SMGJ.Models;
 
 namespace SMGJ.Controllers
-{
-    [Authorize]
+{   
+    [CustomAuthorizeAttribute]
+    
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
