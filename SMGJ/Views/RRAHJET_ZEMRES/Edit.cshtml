@@ -29,7 +29,7 @@
                                         <label class="control-label">
                                             Vlera <span class="symbol required" aria-required="true"></span>
                                         </label>
-                                        @Html.TextBoxFor(rr => rr.Vlera, new { @class = "form-control", @placeholder = "Shkruani vleren", @type = "number", @min = "0", @max = "200" })
+                                        @Html.TextBoxFor(rr => rr.Vlera, new { @class = "form-control", @placeholder = "Shkruani vleren"})
                                     </div>
                                 </div>
                             </div>
@@ -68,8 +68,7 @@
                 ignore: "",
                 rules: {
                     Vlera: {
-                        required: true,
-                        number:true
+                        required: true
                     }
                 },
                 invalidHandler: function (event, validator) { //display error alert on form submit
