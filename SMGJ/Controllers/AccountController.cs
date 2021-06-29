@@ -346,12 +346,7 @@ namespace SMGJ.Controllers
                         newUser.NrLeternjoftimit = model.NumriPersonal;
                         newUser.NrTelefonit = model.Telefoni;
                         newUser.KomunaID = model.InstitucioniID;
-                        //newUser.FermaID = model.FermaID;
-
-
-                       
-                       
-
+                        newUser.FermaID = model.FermaID;
                        
                         if (model.Ditelindja != null)
                         { 
