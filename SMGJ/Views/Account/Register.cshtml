@@ -148,7 +148,6 @@
                                         Ferma
                                     </label><span class="symbol required"></span>
                                     @Html.DropDownList("FermaID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
-                                    @*@Html.TextBoxFor(m => m.Ferma, new { @class = "form-control", @placeholder = "Shenoni fermen" })*@
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -288,13 +287,14 @@
                         NumriPersonal: $("#NumriPersonal").val(),
                         Ditelindja: $("#Ditelindja").val(), 
                         Telefoni: $("#Telefoni").val(),
+                        Email: $("#Email").val(),
                         RoleID: $("#RoleID").val(),
                         InstitucioniID: $("#InstitucioniID").val(),
                         FermaID: $("#FermaID").val(),
                         UserName: $("#UserName").val(),
                         Password: $("#Password").val(),
                         Gjinia: $("input[name='select1']:checked").val(),
-                        Ferma: $("#Ferma").val(),
+
                         Statusi: $('#checkbox1').is(':checked')
                 };
                 var url_redirect = '@Url.Action("Index", "USER")';
