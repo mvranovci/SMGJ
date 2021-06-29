@@ -1,4 +1,4 @@
-﻿using SMGJ.Models;
+using SMGJ.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,37 +10,50 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Microsoft.Build.Tasks;
 using Microsoft.Reporting.WebForms;
+using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
     public class RAPORTIMIController : BaseController
     {
-
         SMGJDB db = new SMGJDB();
         // GET: RAPORTIMI
         public async Task<ActionResult> Index()
         {
             var user = await GetUser();
-
-            //e mbushni nji dropdown me raporte enums ose database, e thirrni ne index
+            ViewBag.Raportet = EnumsToSelectList<Raportet>.GetSelectList();
+            ViewBag.FermaID = await loadFerma(user.FermaID);
+            ViewBag.Roli = user.RoleID;
+            ViewBag.FermaUserit = user.FermaID;
             return View();
         }
 
 
         //Mrena e krijoni nji model me i dergu si parametra 
-        public void HapRaportin()
+        public void HapRaportin(RaportiModel model)
         {
             var user = (GetUser)Session["user"];
-            //string data_prej = Convert.ToString(model.Prej);
-            //string data_deri = Convert.ToString(model.Deri);
+            string data_prej = Convert.ToString(model.Prej);
+            string data_deri = Convert.ToString(model.Deri);
 
-            //if (data_prej != "")
+            if (data_prej != "")
+            {
+                data_prej = data_prej.Split('/')[2].Trim() + "-" + data_prej.Split('/')[1] + "-" + data_prej.Split('/')[0];
+            }
+            if (data_deri != "")
+            {
+                data_deri = data_deri.Split('/')[2].Trim() + "-" + data_deri.Split('/')[1] + "-" + data_deri.Split('/')[0];
+            }
+
+            if (model.Raportet == 1)
+            {
+                Session["strQueryReport"] = "EXEC RAPORTI_GJEDHI @FermaId =  " + model.FermaID;
+                Session["strEmriRaportit"] = "Raportet\\Raport_gjedhi_parametrat.rdl";
+            }
+            //if (model.Raportet == 1)
             //{
-            //    data_prej = data_prej.Split('/')[2].Trim() + "-" + data_prej.Split('/')[1] + "-" + data_prej.Split('/')[0];
-            //}
-            //if (data_deri != "")
-            //{
-            //    data_deri = data_deri.Split('/')[2].Trim() + "-" + data_deri.Split('/')[1] + "-" + data_deri.Split('/')[0];
+            //    Session["strQueryReport"] = "EXEC RAPORTI_GJEDHI @FermaID =  " + model.FermaID + ",@DataPrej='" + model.Prej + "',@DataDeri = ='" + model.Deri + "'";
+            //    Session["strEmriRaportit"] = "Raportet\\Raport_gjedhi_parametrat.rdl";
             //}
 
             //Session["strQueryReport"] = "EXEC test";
@@ -60,7 +73,6 @@ namespace SMGJ.Controllers
 
 
             //pdf format
-            
                 string reportType = "PDF";
                 string mimeType;
                 string encoding;
