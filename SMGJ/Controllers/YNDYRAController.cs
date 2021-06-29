@@ -143,6 +143,13 @@ namespace SMGJ.Controllers
                         returnmodel.Mesazhi = "Këto vlera të yndyres ekzistojnë!";
                         return Json(returnmodel, JsonRequestBehavior.DenyGet);
                     }
+                    var exi = db.YNDYRAs.Where(e => e.Emertimi == model.Emertimi && e.ID != model.ID).Any();
+                    if (exi)
+                    {
+                        returnmodel.status = false;
+                        returnmodel.Mesazhi = "Këto vlera të yndyres ekzistojnë!";
+                        return Json(returnmodel, JsonRequestBehavior.DenyGet);
+                    }
                     //bone update
                     db.Entry(new_model).State = EntityState.Modified;
                     //ruaj te dhenat
