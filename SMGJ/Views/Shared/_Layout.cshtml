@@ -4,7 +4,21 @@
 
     SMGJ.Models.SMGJDB db = new SMGJ.Models.SMGJDB();
 
-    GetUser user = (GetUser)Session["User"]; 
+    var mesazhet = (from nu in db.NJOFTIMET_USER
+                    join u in db.USERs on nu.PrejID equals u.ID
+                    join n in db.NJOFTIMETs on nu.NjoftimetID equals n.ID
+                    select new { Emri = "Nuk po ban", Njoftimi = "Refresh", time = n.Data }).ToList();
+
+    GetUser user = (GetUser)Session["User"];
+
+    if (user != null)
+    {
+        mesazhet = (from nu in db.NJOFTIMET_USER
+                    join u in db.USERs on nu.PrejID equals u.ID
+                    join n in db.NJOFTIMETs on nu.NjoftimetID equals n.ID
+                    where nu.TekID == user.ID
+                    select new { Emri = u.Emri, Njoftimi = n.Mesazhi, time = n.Data }).ToList();
+    }
     int roli = Session["Roli"] == null ? 0 : int.Parse(Session["Roli"].ToString());
 }
 <html>
@@ -139,8 +153,8 @@
                     <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
                         <i class="ti-align-justify"></i>
                     </a>
-                    <a class="navbar-brand" href="#">
-                        <img src="assets/images/logo.png" alt="Clip-Two" />
+                    <a class="navbar-brand" href="@Url.Action("Index","HOME")">
+                        <img src="~/Content/theme/assets/images/logo.png" alt="Clip-Two" />
                     </a>
                     <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
                         <i class="ti-align-justify"></i>
@@ -163,53 +177,49 @@
                                 <li>
                                     <div class="drop-down-wrapper ps-container">
                                         <ul>
-                                            <li class="unread">
-                                                <a href="javascript:;" class="unread">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img src="./assets/images/avatar-2.jpg" alt="">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Nicole Bell</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula...</span>
-                                                            <span class="time"> Just Now</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" class="unread">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img src="./assets/images/avatar-3.jpg" alt="">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Steven Thompson</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula...</span>
-                                                            <span class="time">8 hrs</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img src="./assets/images/avatar-5.jpg" alt="">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Kenneth Ross</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula...</span>
-                                                            <span class="time">14 hrs</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                            @{
+
+                                                if (mesazhet != null)
+                                                {
+                                                    foreach (var item in mesazhet.Take(3))
+                                                    {
+                                                        <li class="unread">
+                                                            <a href="#" class="unread">
+                                                                <div class="clearfix">
+                                                                    <div class="thread-image">
+                                                                        <img src="./assets/images/avatar-2.jpg" alt="">
+                                                                    </div>
+                                                                    <div class="thread-content">
+                                                                        <span class="author">@item.Emri</span>
+                                                                        @{
+                                                                            if (item.Njoftimi.Length > 50)
+                                                                            {
+                                                                                <span class="preview">
+                                                                                    @item.Njoftimi.Substring(0, 50)
+                                                                                </span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="preview">
+                                                                                    @item.Njoftimi
+                                                                                </span>
+                                                                            }
+                                                                        }
+
+                                                                        <span class="time"> @item.time.Value.ToString("dd/mm/yyyy")</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
+
+                                            }
                                         </ul>
                                     </div>
                                 </li>
                                 <li class="view-all">
-                                    <a href="#">
+                                    <a href="@Url.Action("Index","NJOFTIMET")">
                                         See All
                                     </a>
                                 </li>

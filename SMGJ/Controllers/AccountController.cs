@@ -108,8 +108,9 @@ namespace SMGJ.Controllers
 
                         USER new_user = new USER();
                         new_user.UserId = userfound.Id;
-                        new_user.Emri = model.Emri;
-                        new_user.Mbiemri = model.Mbiemri;
+
+                        new_user.Emri = capitalize(model.Emri);// Per shkronje te madhe
+                        new_user.Mbiemri = capitalize(model.Mbiemri);// Per shkronje te madhe
                         new_user.RoleID = roli;
                         new_user.KomunaID = model.KomunaID;
                         new_user.Email = model.EmailAdresa;

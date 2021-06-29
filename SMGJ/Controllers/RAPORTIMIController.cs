@@ -13,6 +13,9 @@ using Microsoft.Reporting.WebForms;
 using static SMGJ.Helpers.Enums;
 using System.IO;
 using System.Web.UI;
+using WECPOFLogic;
+using ReportViewer = Microsoft.Reporting.WebForms.ReportViewer;
+ 
 
 namespace SMGJ.Controllers
 {

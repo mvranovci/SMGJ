@@ -6,7 +6,7 @@
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="mainTitle">Ndryshimi i Parametrave te <span style="color:#1FBBA6">@Html.DisplayFor(model => model.GJEDHI.Emri)</span></h1>
+            <h1 class="mainTitle">Ndryshimi i Parametrave të <span style="color:#1FBBA6">@Html.DisplayFor(model => model.GJEDHI.Emri)</span></h1>
         </div>
     </div>
 </section>
@@ -18,7 +18,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label>
-                                Lageshtia
+                                Lagështia
                             </label>
                             @Html.DropDownListFor(model => model.LageshtiaID, null, "Zgjedh", (new { @class = "form-control select2" }))
                         </div>
@@ -34,14 +34,14 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label>
-                                Rrahjet E Zemres
+                                Rrahjet e zemrës
                             </label>
                             @Html.DropDownListFor(model => model.RrahjeteZemresID, null, "Zgjedh", (new { @class = "form-control select2" }))
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="control-label">Data e Matjes</label>
+                            <label class="control-label">Data e matjes</label>
                             <p class="input-group input-append datepicker date">
                                 @Html.TextBoxFor(m => m.DataMatjes, new { @class = "form-control", @placeholder = "" })
                                 <span class="input-group-btn">

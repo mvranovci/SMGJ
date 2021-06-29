@@ -26,5 +26,12 @@ namespace SMGJ.Models
         public string css { get; set; }
     }
 
+    public class Njoftimet_e_reja
+    {
+        public string Emri { get; set; }
+        public string Mesazhi { get; set; }
+        public DateTime Koha { get; set; }
+        public int GjedhiId { get; set; }
 
+    }
 }

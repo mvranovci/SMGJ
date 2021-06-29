@@ -8,7 +8,7 @@
 <section id="page-title">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="mainTitle text-center">YNDYRAT</h1>
+            <h1 class="mainTitle text-center">YNDYRNAT</h1>
         </div>
     </div>
 </section>
@@ -22,19 +22,17 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading">
-                    <h5 class="panel-title">Lista e yndyrave </h5>
+                    <h5 class="panel-title">Lista e yndyrnave </h5>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th class="hidden-xs">Emertimi</th>
-                                <th class="hidden-xs">Perqindja</th>
-                                <th>
-                                    Krijuar
-                                </th>
-                                <th class="hidden-xs"> KrijuarNga</th>
+                                
+                                <th class="hidden-xs">Emërtimi</th>
+                                <th class="hidden-xs">Përqindja</th>
+                                <th>Krijuar</th>
+                                <th class="hidden-xs"> Krijuar nga</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +40,7 @@
                             {
                                 var user = db.USERs.Find(item.KrijuarNga);
                                 <tr>
-                                    <td>@item.ID</td>
+                                    
                                     <td>@item.Emertimi</td>
                                     <td>@item.Perqindja%</td>
                                     <td>@item.Krijuar</td>

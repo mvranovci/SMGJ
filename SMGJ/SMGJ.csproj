@@ -45,6 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Eco.Handles, Version=7.0.0.13278, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoCore.7.0.0.13278\lib\net40\Eco.Handles.dll</HintPath>
+    </Reference>
+    <Reference Include="Eco.Interfaces, Version=7.0.0.13278, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoCore.7.0.0.13278\lib\net40\Eco.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Eco.LinqExtender, Version=7.0.0.13278, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoCore.7.0.0.13278\lib\net40\Eco.LinqExtender.dll</HintPath>
+    </Reference>
+    <Reference Include="Eco.WPF, Version=7.0.0.13278, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoWpf.7.0.0.13278\lib\net40\Eco.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -66,7 +78,7 @@
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1449.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -133,6 +145,12 @@
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WECPOFLogic, Version=7.0.0.13278, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoWpf.7.0.0.13278\lib\net40\WECPOFLogic.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFViewModelExternalControls, Version=7.0.0.13278, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoWpf.7.0.0.13278\lib\net40\WPFViewModelExternalControls.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +222,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MENUController.cs" />
     <Compile Include="Controllers\Menu_RoliController.cs" />
+    <Compile Include="Controllers\NJOFTIMETController.cs" />
     <Compile Include="Controllers\PROFILIController.cs" />
     <Compile Include="Controllers\QumeshtiController.cs" />
     <Compile Include="Controllers\QumeshtiDetajetController.cs" />
@@ -220,8 +239,23 @@
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AuthorizeAttribute.cs" />
     <Compile Include="Models\AUTORIZIMET.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dbModel.Context.cs">
@@ -287,6 +321,7 @@
     <Compile Include="Models\RACA.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RaportiModel.cs" />
     <Compile Include="Models\RRAHJET_ZEMRES.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -311,6 +346,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Eco.Handles.dll" />
+    <Content Include="bin\Eco.Interfaces.dll" />
+    <Content Include="bin\Eco.LinqExtender.dll" />
+    <Content Include="bin\Eco.WPF.dll" />
+    <Content Include="bin\Microsoft.SqlServer.Types.dll" />
+    <Content Include="bin\WECPOFLogic.dll" />
+    <Content Include="bin\WPFViewModelExternalControls.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2129,10 +2171,10 @@
     <Content Include="Views\QumeshtiDetajet\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\RAPORTIMI\Index.cshtml" />
+    <Content Include="Views\NJOFTIMET\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="bin\" />
     <Folder Include="Content\theme\assets\fonts\" />
     <Folder Include="file\" />
     <Folder Include="obj\Debug\TempPE\" />

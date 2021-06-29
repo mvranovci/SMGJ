@@ -9,7 +9,7 @@
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="mainTitle">Lageshtia e ajrit</h1>
+            <h1 class="mainTitle">Lagështia e ajrit</h1>
         </div>
     </div>
 </section>
@@ -23,25 +23,25 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading">
-                    <h5 class="panel-title">Lista e lageshtive te ajrit </h5>
+                    <h5 class="panel-title">Lista e lagështive të ajrit </h5>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                
                                 <th class="hidden-xs">Vlera</th>
                                 <th>
                                     Krijuar
                                 </th>
-                                <th class="hidden-xs">KrijuarNga</th>
+                                <th class="hidden-xs">Krijuar e nga</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {var user = db.USERs.Find(item.KrijuarNga);
                                 <tr>
-                                    <td>@item.ID</td>
+                                    
                                     <td class="hidden-xs">
                                         @item.Vlera
                                     </td>

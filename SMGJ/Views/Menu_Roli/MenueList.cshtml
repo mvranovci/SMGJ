@@ -50,7 +50,7 @@
     <script>
      var deletemenu = function (btn) {
          var obj = { ID: $(btn).data("menuid") };
-         //alert($(btn).data("menuid"));
+         
                 $.ajax({
                     url: "@Url.Action("Delete", "Menu_Roli")",
                     cache: false,

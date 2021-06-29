@@ -360,5 +360,14 @@ namespace SMGJ.Controllers
 
 
 
+        protected string capitalize(string text)
+        {
+
+            if (text.Length == 1)
+                return (char.ToUpper(text[0]) + "");
+            else
+                return char.ToUpper(text[0]) + text.Substring(1);
+        }
+
     }
 }

@@ -47,6 +47,14 @@
         <AssociationConnector Association="SMGJModel.FK_NJOFTIMET_USER_USER1" />
         <AssociationConnector Association="SMGJModel.FK_QUMESHTI_YNDYRA" />
         <AssociationConnector Association="SMGJModel.FK_QUMESHTI_DETAJET_USER" />
+        <EntityTypeShape EntityType="SMGJModel.C__MigrationHistory" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SMGJModel.AspNetRole" Width="1.5" PointX="13.375" PointY="15.5" />
+        <EntityTypeShape EntityType="SMGJModel.AspNetUserClaim" Width="1.5" PointX="17.875" PointY="16.625" />
+        <EntityTypeShape EntityType="SMGJModel.AspNetUserLogin" Width="1.5" PointX="17.875" PointY="14" />
+        <EntityTypeShape EntityType="SMGJModel.AspNetUser" Width="1.5" PointX="15.625" PointY="14.375" />
+        <AssociationConnector Association="SMGJModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SMGJModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SMGJModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -32,6 +32,14 @@ namespace SMGJ.Models
                }
         }
 
+
+        override
+        protected void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            //filterContext.HttpContext.Response.Redirect(filterContext.RequestContext.HttpContext.Request.UrlReferrer);
+            filterContext.Result = new RedirectResult("/Home/Index");
+        }
+
         /*  protected virtual void HandleUnauthorizedRequest(AuthorizationContext filterContext) 
           {
 
