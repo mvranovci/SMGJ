@@ -104,10 +104,25 @@ namespace SMGJ.Controllers
             }
             //XLS format
             else if(id == 2) {
-                //XLS FORMAT CODE
-                //
-                //
-                //
+                Microsoft.Reporting.WebForms.Warning[] warnings;
+                string[] streamIds;
+                string contentType;
+                string encoding;
+                string extension;
+
+                //Export the RDLC Report to Byte Array.
+                byte[] bytes = rvRaporti.LocalReport.Render("Excel", null, out contentType, out encoding, out extension, out streamIds, out warnings);
+
+                //Download the RDLC Report in Word, Excel, PDF and Image formats.
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = contentType;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=RDLC." + extension);
+                Response.BinaryWrite(bytes);
+                Response.Flush();
+                Response.End();
             }
 
             return View();
