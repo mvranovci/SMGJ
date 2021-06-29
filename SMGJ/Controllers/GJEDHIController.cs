@@ -141,9 +141,11 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
-            if (!hasFarm(user.ID))
-                return RedirectToAction("Create", "Ferma");
-
+            if (user.RoleID == 2)
+            {
+                if (!hasFarm(user.ID))
+                    return RedirectToAction("Create", "Ferma");
+            }
             //a ekziston
 
             var exists = (from gj in db.GJEDHIs where gj.ID == id select gj).FirstOrDefault();
