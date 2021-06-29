@@ -1,0 +1,91 @@
+﻿@using SMGJ.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid container-fullw" id="rezultati">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-heading border-bottom">
+                    <h5 class="text-primary">Filtrimi në bazë të llojit të raportit</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Lloji i raportit</label>
+                                @*@Html.DropDownList("RaportiID", null, "Zgjedh llojin", htmlAttributes: new { @class = "form-control select2" })*@
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Prej</label>
+                                <div class="input-group">
+                                    <input type="text" id="Prej"
+                                           class="form-control datepicker" placeholder="dd/MM/yyyy" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Deri</label>
+                                <div class="input-group">
+                                    <input type="text" id="Deri"
+                                           class="form-control datepicker" placeholder="dd/MM/yyyy" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group mr-2">
+                                <button type="button" onclick="raporti_pdf(this)" title="Raporti" class="btn btn-wide btn-info pull-right"><i class="fa fa-print padding-right-5"></i>PDF</button>
+                            </div>
+                            <div class="btn-group mr-2">
+                                <button type="button" onclick="raporti_xls(this)" title="Raporti" class="btn btn-wide btn-success pull-right"><i class="fa fa-list padding-right-5"></i>XLS</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        var raporti_pdf = function (btn) {
+            $.ajax({
+                url: "/RAPORTIMI/HapRaportin",
+                cache: false,
+                type: "POST",
+                data: {
+                    // parametrat i dergoni raportin, daten etj
+                },
+                dataType: "html",
+                success: function () {
+                    window.open("/RAPORTIMI/RAPORTI_DESIGN", '_blank')
+                }
+
+            });
+        }
+
+        // nji jquery e bani per raporti_xls
+    </script>
+}
+
