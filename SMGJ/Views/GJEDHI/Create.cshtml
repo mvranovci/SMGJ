@@ -1,4 +1,4 @@
-﻿@model SMGJ.Models.GJEDHI
+@model SMGJ.Models.GJEDHI
 @{
     ViewBag.Title = "Create";
     var gjinia = (List<SelectListItem>)ViewBag.Gjinia;
@@ -21,6 +21,15 @@
                         </label>
                         @Html.TextBoxFor(gj => gj.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin e gjedhit" })
                     </div>
+                    @if (ViewBag.Roli == 1)
+                    {
+                        <div class="form-group">
+                            <label class="control-label">
+                                Ferma
+                            </label>
+                            @Html.DropDownListFor(gj => gj.FermaID, null, "Zgjedh", (new { @class = "form-control select2" }))
+                        </div>
+                    }
                     <div class="form-group">
                         <label class="control-label">
                             Raca
@@ -147,7 +156,7 @@
                     var obj = {
                     ID: $("#ID").val(),
                     Emri: $("#Emri").val(),
-                    //FermaID: $("#FermaID").val(), ----- Nuk ka nevoje pasi qe gjedhi shtohet ne fermen e userit te kycur(cdo user e ka vetem nje ferme)
+                    FermaID: $("#FermaID").val(),
                     RacaID: $("#RacaID").val(),
                     TipiID: $("#TipiID").val(),
                     PrindiID: $("#PrindiID").val(),

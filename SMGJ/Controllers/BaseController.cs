@@ -274,8 +274,8 @@ namespace SMGJ.Controllers
         public async Task<SelectList> loadPrindi(int? selected)
         {
             var user = await GetUser();
-            //lista qe permban vetem gjedhat e perdoruesit te kycur
-            var lista = db.GJEDHIs.Where(x => x.KrijuarNga == user.ID).ToList();
+            //lista qe permban vetem gjedhat fermes se perdoruesit te kycur
+            var lista = db.GJEDHIs.Where(x => x.FermaID == user.FermaID).ToList();
             if (selected.HasValue)
                 return new SelectList(lista, "ID", "Emri", selected.Value);
             else
