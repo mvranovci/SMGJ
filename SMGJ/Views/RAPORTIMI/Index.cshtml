@@ -88,7 +88,6 @@
 @section Scripts{
 
     <script>
-
         var raporti_pdf = function (btn) {
             var obj = {
                 Raportet: $("#Raportet").val(),
@@ -103,7 +102,26 @@
                 data: obj,
                 dataType: "html", /*json*/
                 success: function () {
-                    window.open("/RAPORTIMI/RAPORTI_DESIGN", '_blank')
+                    window.open("/RAPORTIMI/RAPORTI_DESIGN/"+1, '_blank')
+                }
+
+            });
+        }
+        var raporti_xls = function (btn) {
+            var obj = {
+                Raportet: $("#Raportet").val(),
+                FermaID: $("#FermaID").val(),
+                Prej: $("#Prej").val(),
+                Deri: $("#Deri").val()
+            };
+            $.ajax({
+                url: "/RAPORTIMI/HapRaportin",
+                cache: false,
+                type: "POST",
+                data: obj,
+                dataType: "html", /*json*/
+                success: function () {
+                    window.open("/RAPORTIMI/RAPORTI_DESIGN/"+2, '_blank')
                 }
 
             });
