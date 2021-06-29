@@ -11,6 +11,8 @@ using System.Configuration;
 using Microsoft.Build.Tasks;
 using Microsoft.Reporting.WebForms;
 using static SMGJ.Helpers.Enums;
+using System.IO;
+using System.Web.UI;
 
 namespace SMGJ.Controllers
 {
@@ -50,18 +52,20 @@ namespace SMGJ.Controllers
                 Session["strQueryReport"] = "EXEC RAPORTI_GJEDHI @FermaId =  " + model.FermaID;
                 Session["strEmriRaportit"] = "Raportet\\Raport_gjedhi_parametrat.rdl";
             }
-            //if (model.Raportet == 1)
-            //{
-            //    Session["strQueryReport"] = "EXEC RAPORTI_GJEDHI @FermaID =  " + model.FermaID + ",@DataPrej='" + model.Prej + "',@DataDeri = ='" + model.Deri + "'";
-            //    Session["strEmriRaportit"] = "Raportet\\Raport_gjedhi_parametrat.rdl";
-            //}
-
-            //Session["strQueryReport"] = "EXEC test";
-            //Session["strEmriRaportit"] = "Raportet\\test.rdl";
+            else if(model.Raportet == 3)
+            {
+                Session["strQueryReport"] = "EXEC TotalLitrat @FermaID =  " + model.FermaID + ",@Datefilimit = '" + data_prej + "',@Datembarimit ='" + data_deri + "'";
+                Session["strEmriRaportit"] = "Raportet\\Totali.rdl";
+            }
+            else if (model.Raportet == 2)
+            {
+                Session["strQueryReport"] = "EXEC GjedhaParametrat @FERMA =  " + model.FermaID;
+                Session["strEmriRaportit"] = "Raportet\\NumriGjedhave.rdl";
+            }
         }
 
         // duhet me e dergu nji parameter ne RAPORT_DESIGN per me caktu formatin
-        public ActionResult RAPORTI_DESIGN()
+        public ActionResult RAPORTI_DESIGN(int id)
         {
             DataTable dt = RunQuery(Session["strQueryReport"].ToString(), "Tabela").Tables[0];
             ReportViewer rvRaporti = new ReportViewer();
@@ -70,9 +74,9 @@ namespace SMGJ.Controllers
 
             rvRaporti.LocalReport.ReportPath = Session["strEmriRaportit"].ToString();
             rvRaporti.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
-
-
+            rvRaporti.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt));
             //pdf format
+            if (id == 1) {
                 string reportType = "PDF";
                 string mimeType;
                 string encoding;
@@ -97,10 +101,14 @@ namespace SMGJ.Controllers
                 Response.AddHeader("Content-Type", lContentType);
                 Response.BinaryWrite(renderedBytes);
                 Response.End();
-
-
-            // detyra e juve me bo ne XLS format
-
+            }
+            //XLS format
+            else if(id == 2) {
+                //XLS FORMAT CODE
+                //
+                //
+                //
+            }
 
             return View();
         }
