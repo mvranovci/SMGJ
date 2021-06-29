@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -30,6 +30,15 @@ namespace SMGJ.Helpers
             I_mesem = 2,
             [Description("I lartë")]
             I_larte = 3,
+        }
+        public enum Raportet
+        {
+            [Description("Gjedhat e fermes")]
+            Gjedhat_Fermes = 1,
+            [Description("Gjedhat me probleme shendetsore")]
+            Gj_Prob_Shendetesore = 2,
+            [Description("Numri i litrave te prodhuara nga secili gjedh per periudhe kohore")]
+            Gj_Litra_Prodhuara = 3
         }
     }
 }
