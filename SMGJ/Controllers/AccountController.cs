@@ -115,7 +115,6 @@ namespace SMGJ.Controllers
                         new_user.KomunaID = model.KomunaID;
                         new_user.Email = model.EmailAdresa;
                         new_user.NrLeternjoftimit = model.NumriLeternjoftimit;
-                        new_user.FermaID = model.FermaID;
 
                         ASCIIEncoding binarypass = new ASCIIEncoding();
                         string encrypted = Encrypt(model.UserPassword);
