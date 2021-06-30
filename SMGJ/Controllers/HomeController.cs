@@ -17,6 +17,12 @@ namespace SMGJ.Controllers
         {
             SMGJDB db = new SMGJDB();
             var user = await GetUser();
+            ViewBag.nrviqa = db.GJEDHIs.Where(x => x.TipiID == 4 && x.FermaID == user.FermaID).Count();
+            ViewBag.nrlopa = db.GJEDHIs.Where(x => x.TipiID == 6 && x.FermaID == user.FermaID).Count();
+            ViewBag.nrbulli = db.GJEDHIs.Where(x => x.TipiID == 7 && x.FermaID == user.FermaID).Count();
+            ViewBag.nrmushtjerra = db.GJEDHIs.Where(x => x.TipiID == 11 && x.FermaID == user.FermaID).Count();
+            ViewBag.nrMale = db.GJEDHIs.Where(x => x.Gjinia == false && x.FermaID == user.FermaID).Count();
+            ViewBag.nrFemale = db.GJEDHIs.Where(x => x.Gjinia == true && x.FermaID == user.FermaID).Count();
 
             GJEDHI gjedhi = new GJEDHI();
 
@@ -51,7 +57,8 @@ namespace SMGJ.Controllers
                 ViewBag.GjedhiMePSH = gjedhiEmri;
             }
 
-           
+            //var litratPerDite = db.QUMESHTI_DETAJET.Where(q => q.DataProdhimit == model.DataProdhimit).Sum(q => q.TotalLitra);
+            //     decimal totali = db.QUMESHTIs.Where(q => q.DataProdhimit == model.DataProdhimit).Sum(q => q.SasiaProdhuar);
 
             ViewBag.Litrat = totali;
 
@@ -66,6 +73,9 @@ namespace SMGJ.Controllers
                              emri = g.FirstOrDefault().GJEDHI.Emri,
                              vathi = g.FirstOrDefault().GJEDHI.Vathe
                          }).AsEnumerable();
+
+
+            
 
 
             return View(sasia);
