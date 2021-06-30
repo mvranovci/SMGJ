@@ -137,15 +137,13 @@ namespace SMGJ.Controllers
             }
         }
 
-        
+        [NoDirectAccess]
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
-            if (user.RoleID == 2)
-            {
-                if (!hasFarm(user.ID))
-                    return RedirectToAction("Create", "Ferma");
-            }
+            if (!hasFarm(user.ID))
+                return RedirectToAction("Create", "Ferma");
+
             //a ekziston
 
             var exists = (from gj in db.GJEDHIs where gj.ID == id select gj).FirstOrDefault();
@@ -197,7 +195,7 @@ namespace SMGJ.Controllers
             }
                              
         }
-      
+
         [HttpPost]
         public async Task<ActionResult> Edit(GJEDHI model)
         {
