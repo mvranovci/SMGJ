@@ -11,8 +11,9 @@ namespace SMGJ.Controllers
     
     public class HomeController : BaseController
     {
-        public ActionResult Index()
-        { 
+        public async Task<ActionResult> Index()
+        {
+            var user = await GetUser();
             return View();
         }
 
@@ -21,6 +22,7 @@ namespace SMGJ.Controllers
             var user = await GetUser();
 
             RegisterViewModelUser modeli = new RegisterViewModelUser();
+            modeli.ID = user.ID;
             modeli.Emri = user.Emri;
             modeli.Mbiemri = user.Mbiemri;
             return View(modeli);

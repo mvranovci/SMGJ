@@ -4,10 +4,8 @@
 
     SMGJ.Models.SMGJDB db = new SMGJ.Models.SMGJDB();
 
-    var mesazhet = (from nu in db.NJOFTIMET_USER
-                    join u in db.USERs on nu.PrejID equals u.ID
-                    join n in db.NJOFTIMETs on nu.NjoftimetID equals n.ID
-                    select new { Emri = "Nuk po ban", Njoftimi = "Refresh", time = n.Data }).ToList();
+    var mesazhet = (from n in db.NJOFTIMETs
+                    select new { Emri = "//", Njoftimi = "Refresh", time = n.Data }).ToList();
 
     GetUser user = (GetUser)Session["User"];
 
@@ -19,7 +17,7 @@
                     where nu.TekID == user.ID
                     select new { Emri = u.Emri, Njoftimi = n.Mesazhi, time = n.Data }).ToList();
     }
-    int roli = Session["Roli"] == null ? 0 : int.Parse(Session["Roli"].ToString());
+    int roli = Session["RoliID"] == null ? 0 : int.Parse(Session["RoliID"].ToString());
 }
 <html>
 <head>
@@ -100,7 +98,7 @@
                         var lista_menuve = (from i in db.MENUs
                                             let string_url = (i.Controller + "/" + i.Action_Metoda == "" ? "javascript:void(0)" :
                                               "/" + i.Controller + "/" + i.Action_Metoda)
-                                            let css = current_menu.ToLower() == string_url.ToLower() ? "active open" : ""
+                                            let css = current_controller.ToLower() == i.Controller.ToLower() ? "active open" : ""
                                             join m in db.MENU_ROLI on i.ID equals m.MenuID
                                             where m.RoliID == roli && i.Aktiv != false
                                             orderby i.Renditja
@@ -221,56 +219,6 @@
                                 <li class="view-all">
                                     <a href="@Url.Action("Index","NJOFTIMET")">
                                         See All
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-check-box"></i> <span>ACTIVITIES</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large">
-                                <li>
-                                    <span class="dropdown-header"> You have new notifications</span>
-                                </li>
-                                <li>
-                                    <div class="drop-down-wrapper ps-container">
-                                        <div class="list-group no-margin">
-                                            <a class="media list-group-item" href="">
-                                                <img class="img-circle" alt="..." src="assets/images/avatar-1.jpg">
-                                                <span class="media-body block no-margin"> Use awesome animate.css <small class="block text-grey">10 minutes ago</small> </span>
-                                            </a>
-                                            <a class="media list-group-item" href="">
-                                                <span class="media-body block no-margin"> 1.0 initial released <small class="block text-grey">1 hour ago</small> </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="view-all">
-                                    <a href="#">
-                                        See All
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-world"></i> English
-                            </a>
-                            <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
-                                <li>
-                                    <a href="#" class="menu-toggler">
-                                        Deutsch
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="menu-toggler">
-                                        English
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="menu-toggler">
-                                        Italiano
                                     </a>
                                 </li>
                             </ul>

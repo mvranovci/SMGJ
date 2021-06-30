@@ -117,8 +117,10 @@ namespace SMGJ.Controllers
             else
             {
                 usertotal = (GetUser)Session["User"];
-                Session["Roli"] = usertotal.RoleID;
+                user = db.USERs.Single(q => q.ID == usertotal.ID);
+                usertotal.FermaID = user.FermaID != null ? user.FermaID : null;
             }
+
             return usertotal;
         }
         
@@ -276,6 +278,8 @@ namespace SMGJ.Controllers
             var user = await GetUser();
             //lista qe permban vetem gjedhat fermes se perdoruesit te kycur
             var lista = db.GJEDHIs.Where(x => x.FermaID == user.FermaID).ToList();
+
+
             if (selected.HasValue)
                 return new SelectList(lista, "ID", "Emri", selected.Value);
             else

@@ -137,25 +137,24 @@ namespace SMGJ.Controllers
             }
         }
 
-        [NoDirectAccess]
+        
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
-            if (!hasFarm(user.ID))
-                return RedirectToAction("Create", "Ferma");
+            if (user.RoleID == (int)Roli.Fermer)
+            {
+                if (!hasFarm(user.ID))
+                    return RedirectToAction("Create", "Ferma");
 
-            //a ekziston
+                var exists = (from gj in db.GJEDHIs where gj.ID == id select gj).FirstOrDefault();
 
-            var exists = (from gj in db.GJEDHIs where gj.ID == id select gj).FirstOrDefault();
+                if (exists == null)
+                    return RedirectToAction("Index", "Gjedhi");
 
-            if (exists == null)
-                return RedirectToAction("Index", "Gjedhi");
+                if (exists.FermaID != user.FermaID)
+                    return RedirectToAction("Index", "Gjedhi");
 
-            //// a osht e jemja
-
-            //if (exists.FermaID == user.FermaID)
-            //    return RedirectToAction("Index", "Gjedhi");
-
+            }
             if (ModelState.IsValid)
             {
                 GJEDHI model = db.GJEDHIs.Find(id);
@@ -195,7 +194,7 @@ namespace SMGJ.Controllers
             }
                              
         }
-
+      
         [HttpPost]
         public async Task<ActionResult> Edit(GJEDHI model)
         {
