@@ -1,0 +1,158 @@
+﻿@model SMGJ.Models.RACA
+
+@{
+    ViewBag.Title = "Create";
+
+}
+<body>
+    <section id="page-title">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1 class="mainTitle" style="color:royalblue; font-family: Shakespeare, 'Times New Roman', Times, serif">Regjistrimi i Races</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid container-fullw bg-white">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <form id="forma">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Emertimi <span class="symbol required" aria-required="true"></span>
+                                </label>
+                                @Html.TextBoxFor(m => m.Emertimi, new { @class = "form-control", @placeholder = "Shkruani llojin e races" })
+
+                            </div>
+                        </div>
+                       
+                    </div>
+                  
+                </form>
+            </div>
+            <div class="panel-footer clearfix">
+                <div class="col-md-12">
+                    <button class="btn btn-primary btn-wide pull-right" type="button" onclick="regjistro(this)">
+                        Regjistro <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                    <a href="@Url.Action("Index","RACA")" class="btn btn-danger btn-wide">Anulo <i class="fa fa-arrow-circle-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+        runValidator1 = function () {
+            var form1 = $('#forma');
+            var errorHandler1 = $('.errorHandler', form1);
+            var successHandler1 = $('.successHandler', form1);
+            $('#forma').validate({
+                errorElement: "span", // contain the error msg in a span tag
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+                        error.insertAfter($(element).closest('.form-group').children('div').children().last());
+                    } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+                        error.insertAfter($(element).closest('.form-group').children('div'));
+                    } else {
+                        error.insertAfter(element);
+                        // for other inputs, just perform default behavior
+                    }
+                },
+                ignore: "",
+                rules: {
+                    Emertimi: {
+                        required: true
+                    },
+                    
+                },
+                invalidHandler: function (event, validator) { //display error alert on form submit
+                    successHandler1.hide();
+                    errorHandler1.show();
+                },
+                highlight: function (element) {
+                    $(element).closest('.help-block').removeClass('valid');
+                    // display OK icon
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+                    // add the Bootstrap error class to the control group
+                },
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error');
+                    // set error class to the control group
+                },
+                success: function (label, element) {
+                    label.addClass('help-block valid');
+                    // mark the current input as valid and display OK icon
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                },
+                submitHandler: function (form) {
+                    successHandler1.show();
+                    errorHandler1.hide();
+                  
+                }
+            });
+        };
+        var regjistro = function (btn) {
+
+                runValidator1();
+                if ($("#forma").valid() === true) {
+                    var obj = {
+                        Emertimi: $("#Emertimi").val(),
+                        Krijuar: $("#Krijuar").val(),
+                        KrijuarNga: $("#KrijuarNga").val()
+                   
+                };
+                var url_redirect = '@Url.Action("Index", "RACA")';
+                $.ajax({
+                    url: "@Url.Action("Create", "RACA")",
+                    cache: false,
+                    type: "POST",
+                    dataType: "json",
+                    data: obj,
+                    success: function (rs) {
+                        if (rs.status) {
+                            swal({ title: "U regjistrua!", text: "Raca eshte regjistruar me sukses!", type: "success" }, function () {
+                                //location.reload()
+                                window.location.href = url_redirect;
+
+                            });
+
+                        }
+                        else {
+                            
+                            swal("Gabim në regjistrim!", rs.Mesazhi, "error");
+                        }
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        if (jqXHR.status && jqXHR.status == 400) {
+                            
+                            swal("Anulim!","Ka ndodhur një problem në regjistrim! Ju lutemi provoni përsëri!","error")
+                            console.log(jqXHR.responseText);
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    }
+                });
+            }
+
+            };
+
+       
+        </script>
+
+        <script src="~/Content/theme/vendor/sweetalert/sweet-alert.min.js"></script>
+
+        <script src="~/Content/theme/vendor/select2/select2.min.js"></script>
+        <script>
+            jQuery(document).ready(function () {
+
+                $(".select2").select2(
+                    {
+                        width: '100%'
+                    });
+            })
+        </script>
+    }
+</body>
