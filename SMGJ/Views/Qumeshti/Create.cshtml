@@ -1,11 +1,11 @@
-﻿@model SMGJ.Models.QUMESHTI
+@model SMGJ.Models.QUMESHTI
 @{
     ViewBag.Title = "Create";
 }
 <section id="page-title">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="mainTitle">Regjistrimi i Qumështit</h1>
+            <h1 class="mainTitle">Regjistrimi i Qumeshtit</h1>
         </div>
     </div>
 </section>
@@ -17,7 +17,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>
-                                Gjedhi
+                                GjedhiID
                             </label><span class="symbol required"></span>
                             
                             @Html.DropDownList("GjedhiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
@@ -26,7 +26,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>
-                                Yndyra
+                                YndyraId
                             </label><span class="symbol required"></span>
                          
                             @Html.DropDownList("YndyraID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
@@ -35,7 +35,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>
-                                Kontaminimi
+                                KontaminimiID
                             </label><span class="symbol required"></span>
                        
                             @Html.DropDownList("KontaminimiID", null, "Zgjedh", htmlAttributes: new { @class = "form-control select2" })
@@ -44,16 +44,16 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="control-label">
-                                Sasia e prodhuar<span class="symbol required" aria-required="true"></span>
+                                Sasia Prodhimit <span class="symbol required" aria-required="true"></span>
                             </label>
-                            @Html.TextBoxFor(m => m.SasiaProdhuar, new { @class = "form-control", @placeholder = "Shkruani vlerën" })
+                            @Html.TextBoxFor(m => m.SasiaProdhuar, new { @class = "form-control", @placeholder = "Shkruani vleren" })
 
                         </div>
 
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="control-label">Data e prodhimit</label>
+                            <label class="control-label">Data Prodhimit</label>
                             <p class="input-group input-append datepicker date">
                                 @Html.TextBoxFor(m => m.DataProdhimit, new { @class = "form-control", @placeholder = "" })
                                 <span class="input-group-btn">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="control-label">Data e skadimit</label>
+                            <label class="control-label">Data Skadimit</label>
                             <p class="input-group input-append datepicker date">
                                 @Html.TextBoxFor(m => m.DataSkadimit, new { @class = "form-control", @placeholder = "" })
                                 <span class="input-group-btn">
