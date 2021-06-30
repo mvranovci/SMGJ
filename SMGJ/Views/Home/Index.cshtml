@@ -2,12 +2,11 @@
 @model IEnumerable<SMGJ.Models.gjedhi_qumshti>
 @using SMGJ.Models;
 @{
-    ViewBag.Title = "Home ";
+    ViewBag.Title = "Home Page";
 }
 
-<div id="gjedhiParametrat">
-
-    <div class="container-fluid container-fullw bg-white">
+<div class="container-fluid container-fullw bg-white">
+    <div id="gjedhiParametrat">
         <div class="row">
             <div class="col-sm-4">
                 <div class="panel panel-white no-radius text-center">
@@ -86,91 +85,201 @@
         </div>
     </div>
 
-
-
-</div>
-
-<div class="panel panel-white no-radius">
-    <div class="panel-body">
-        <div class="partition-light-grey padding-15 text-center margin-bottom-20">
-            <h4 class="no-margin">Statistikat mujore</h4>
-            <span class="text-light">Te dhenat  pergjithshme</span>
-        </div>
-        <div id="accordion" class="panel-group accordion accordion-white no-margin">
-            <div class="panel no-radius">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle padding-15">
-                            <i class="icon-arrow"></i>
-                            Kete muaj <span class="label label-danger pull-right"></span>
-                        </a>
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse in" id="collapseOne">
-                    <div class="panel-body no-padding partition-light-grey">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Emri i Gjedhit
-                                    </th>
-                                    <th>
-                                        Id e qumshtit
-                                    </th>
-                                    <th>
-                                        Sasia e Qumeshtit
-                                    </th>
-                                    <th>
-                                        Vathi
-                                    </th>
-                                </tr>
-                            </thead>
-
-
-
-                            @foreach (var item in Model)
-                            {
-
-                                <tr>
-                                    <td>
-                                        @item.emri
-                                    </td>
-                                    <td>
-                                        @item.ID
-                                    </td>
-                                    <td>
-                                        @item.sasia
-                                    </td>
-                                    <td>
-                                        @item.vathi
-                                    </td>
-
-
-
-
-                                </tr>
-                            }
-
-                        </table>
+    <div class="panel panel-white no-radius">
+        <div class="panel-body">
+            <div class="partition-light-grey padding-15 text-center margin-bottom-20">
+                <h4 class="no-margin">Statistikat mujore</h4>
+                <span class="text-light">Te dhenat  pergjithshme</span>
+            </div>
+            <div id="accordion" class="panel-group accordion accordion-white no-margin">
+                <div class="panel no-radius">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle padding-15">
+                                <i class="icon-arrow"></i>
+                                Kete muaj <span class="label label-danger pull-right"></span>
+                            </a>
+                        </h4>
                     </div>
+                    <div class="panel-collapse collapse in" id="collapseOne">
+                        <div class="panel-body no-padding partition-light-grey">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Emri i Gjedhit
+                                        </th>
+                                        <th>
+                                            Id e qumshtit
+                                        </th>
+                                        <th>
+                                            Sasia e Qumeshtit
+                                        </th>
+                                        <th>
+                                            Vathi
+                                        </th>
+                                    </tr>
+                                </thead>
 
+
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @item.emri
+                                        </td>
+                                        <td>
+                                            @item.ID
+                                        </td>
+                                        <td>
+                                            @item.sasia
+                                        </td>
+                                        <td>
+                                            @item.vathi
+                                        </td>
+
+
+
+
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-5 col-lg-offset-1">
+                <div class="panel panel-white no-radius">
+                    <div class="panel-heading border-bottom">
+                        <h4 class="panel-title text-center">Tipet e Gjedhave</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <span>
+                                <canvas id="tipet" class="full-width" width="250" height="250"></canvas>
+                                <span></span>
+                            </span>
+                        </div>
+                        <div class="margin-top-20 text-center legend-xs inline">
+                            <div id="chart3Legend" class="chart-legend"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="clearfix padding-5 space5">
+                            <div class="row inline">
+                                <div class="col-sm-12">
+                                    <div id="doughnutLegend" class="chart-legend inline">
+                                        <ul class="doughnut-legend">
+                                            <li><span style="background-color:#F7464A"></span>Viqat</li>
+                                            <li><span style="background-color:#46BFBD"></span>Lopet</li>
+                                            <li><span style="background-color:#FDB45C"></span>Buajt</li>
+                                            <li><span style="background-color:#949FB1"></span>Mushtjerrat</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="panel panel-white no-radius">
+                    <div class="panel-heading border-bottom">
+                        <h4 class="panel-title text-center">Gjinia e Gjedhave</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <span>
+                                <canvas id="gjinia" class="full-width" width="250" height="250"></canvas>
+                                <span></span>
+                            </span>
+                        </div>
+                        <div class="margin-top-20 text-center legend-xs inline">
+                            <div id="chart3Legend" class="chart-legend"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="clearfix padding-5 space5">
+                            <div class="row inline">
+                                <div class="col-sm-12">
+                                    <div id="doughnutLegend" class="chart-legend inline">
+                                        <ul class="doughnut-legend center">
+                                            <li><span style="background-color:#F7464A"></span>Mashkull</li>
+                                            <li><span style="background-color:#46BFBD"></span>Femer</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<span hidden id="nrviqa">nrviqa</span>
 
-
-
-<div id="gjedhi" class="panel panel-white"></div>
 
 @section scripts
 
 {
+
+    <script>
+        var nrviqa = @ViewBag.nrviqa;
+        var nrlop = @ViewBag.nrlopa;
+        var nrbulli = @ViewBag.nrbulli;
+        var nrmushtjerra = @ViewBag.nrmushtjerra;
+        var pieData = [
+            {
+                value: nrviqa,
+                color: "#F7464A"
+            },
+            {
+                value: nrlop,
+                color: "#46BFBD"
+            },
+            {
+                value: nrbulli,
+                color: "#FDB45C"
+            },
+            {
+                value: nrmushtjerra,
+                color: "#949FB1"
+            }
+        ];
+        var tipet = document.getElementById("tipet").getContext("2d");
+        new Chart(tipet).Pie(pieData);
+        var nrMale = @ViewBag.nrMale;
+        var nrFemale = @ViewBag.nrFemale;
+        var pieData2 = [
+            {
+                value: nrMale,
+                color: "#F7464A"
+            },
+            {
+                value: nrFemale,
+                color: "#46BFBD"
+            }
+        ];
+        // Get the context of the canvas element we want to select
+        var gjinia = document.getElementById("gjinia").getContext("2d");
+        new Chart(gjinia).Pie(pieData2);
+    </script>
+
     <script>
         jQuery(document).ready(function () {
 
 
         });
     </script>
+
+
 }
