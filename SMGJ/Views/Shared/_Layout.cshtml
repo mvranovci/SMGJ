@@ -292,10 +292,13 @@
     <script src="~/Content/theme/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/theme/vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
     <script src="~/Content/theme/assets/js/form-elements.js"></script>
+    <script src="~/Content/theme/vendor/Chart.js/Chart.min.js"></script>
+    <script src="~/Content/theme/assets/js/charts.js"></script>
     <script>
         jQuery(document).ready(function () {
             Main.init();
             log_out();
+            Charts.init();
             TableData.init();
             FormElements.init();
             $(".select2").select2(
