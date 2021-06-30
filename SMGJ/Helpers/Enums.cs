@@ -33,11 +33,11 @@ namespace SMGJ.Helpers
         }
         public enum Raportet
         {
-            [Description("Gjedhat e fermes")]
+            [Description("Raporti i gjedhave të fermës pa fëmijë me peshë nën 200 kg")]
             Gjedhat_Fermes = 1,
-            [Description("Gjedhat me probleme shendetsore")]
+            [Description("Gjedhat me probleme shëndetsore")]
             Gj_Prob_Shendetesore = 2,
-            [Description("Numri i litrave te prodhuara nga secili gjedh per periudhe kohore")]
+            [Description("Numri i litrave të prodhuara nga secili gjedh për periudhë kohore")]
             Gj_Litra_Prodhuara = 3
         }
     }

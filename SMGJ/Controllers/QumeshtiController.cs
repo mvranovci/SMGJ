@@ -71,10 +71,33 @@ namespace SMGJ.Controllers
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
         }
-        [NoDirectAccess]
+   
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
+
+            if (id == null)
+                return HttpNotFound();
+
+            var exists = (from q in db.QUMESHTIs where q.ID == id select q).FirstOrDefault();
+
+            if (exists == null)
+                return RedirectToAction("Index", "Qumeshti");
+
+
+            if (User.IsInRole("Fermer"))
+            {
+               
+                var qumeshti_detajet = (from q in db.QUMESHTIs
+                                        join gj in db.GJEDHIs on q.GjedhiID equals gj.ID
+                                        join f in db.FERMAs on gj.FermaID equals f.ID
+                                        where q.ID == exists.ID
+                                        select f.ID).FirstOrDefault();
+
+                if (qumeshti_detajet !=  user.FermaID)
+                    return RedirectToAction("Index", "Qumeshti");
+            }
+
             ViewBag.UserID = await loadUser(null);
             QUMESHTI model = db.QUMESHTIs.Find(id);            
             ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
