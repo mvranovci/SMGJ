@@ -2,93 +2,175 @@
 @model IEnumerable<SMGJ.Models.gjedhi_qumshti>
 @using SMGJ.Models;
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home ";
 }
 
-  
-            <div class="panel panel-white no-radius">
-                <div class="panel-body">
-                    <div class="partition-light-grey padding-15 text-center margin-bottom-20">
-                        <h4 class="no-margin">Statistikat mujore</h4>
-                        <span class="text-light">Te dhenat  pergjithshme</span>
-                    </div>
-                    <div id="accordion" class="panel-group accordion accordion-white no-margin">
-                        <div class="panel no-radius">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle padding-15">
-                                        <i class="icon-arrow"></i>
-                                        Kete muaj <span class="label label-danger pull-right"></span>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div class="panel-collapse collapse in" id="collapseOne">
-                                <div class="panel-body no-padding partition-light-grey">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    Emri i Gjedhit
-                                                </th>
-                                                <th>
-                                                    Id e qumshtit
-                                                </th>
-                                                <th>
-                                                    Sasia e Qumeshtit
-                                                </th>
-                                                <th>
-                                                    Vathi
-                                                </th>
-                                            </tr>
-                                        </thead>
+<div id="gjedhiParametrat">
 
-
-
-                                        @foreach (var item in Model)
-                                        {
-
-                                            <tr>
-                                                <td>
-                                                    @item.emri
-                                                </td>
-                                                <td>
-                                                    @item.ID
-                                                </td>
-                                                <td>
-                                                    @item.sasia
-                                                </td>
-                                                <td>
-                                                    @item.vathi
-                                                </td>
-
-
-
-
-                                            </tr>
-                                        }
-
-                                    </table>
-                                </div>
-
-                            </div>
+    <div class="container-fluid container-fullw bg-white">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel panel-white no-radius text-center">
+                    <div class="panel-body">
+                        <div class="btn btn-primary btn-wide StepTitle">
+                            Gjedhat <i class="fa "></i>
                         </div>
+
+                        <p class="text-bold padding-20">
+
+                            Ne fermen tuaj keni @ViewBag.numriGjedhave gjedha te regjistruar
+
+                        </p>
+                        <p class="cl-effect-1">
+                            <a href="@Url.Action("Index", "GJEDHI")">
+                                Shiko me shume
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
-    
-    
-    <div id="gjedhiParametrat" class="panel panel-white"></div>
+            <div class="col-sm-4">
+                <div class="panel panel-white no-radius text-center">
+                    <div class="panel-body">
+                        <div class="btn btn-primary btn-wide StepTitle">
+                            Gjedhat me probleme shendetsore<i class="fa "></i>
+                        </div>
+                        <p class="text-bold padding-20">
+                            @if (@ViewBag.GjedhiMePSH == null)
+                            {
+                                <span>Nuk ka ndonje gjedh me probleme shendetore</span>
+                            }
+                            else
+                            {
+                                <span>
+                                    Gjedhi @ViewBag.GjedhiMePSH ka probleme shendetsore
+                                </span>
+                            }
+
+                        </p>
+                        <p class="cl-effect-1">
+                            <a href="#">
+                                Shiko me shume
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-white no-radius text-center">
+                    <div class="panel-body">
+                        <div class="btn btn-primary btn-wide StepTitle">
+                            Litra/Dite <i class="fa "></i>
+                        </div>
+                        <p class="text-bold padding-20">
+                            Sot jane prodhuar  @if (@ViewBag.Litrat == null)
+                            {
+                                <span>0</span>
+                            }
+                            else
+                            {
+                                @ViewBag.Litrat
+                            }
+                            litra qumeshte
+
+                        </p>
+                        <p class="cl-effect-1">
+                            <a href="@Url.Action("Index", "QUMESHTI")">
+                                Shiko me shume
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="panel panel-white no-radius">
+    <div class="panel-body">
+        <div class="partition-light-grey padding-15 text-center margin-bottom-20">
+            <h4 class="no-margin">Statistikat mujore</h4>
+            <span class="text-light">Te dhenat  pergjithshme</span>
+        </div>
+        <div id="accordion" class="panel-group accordion accordion-white no-margin">
+            <div class="panel no-radius">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle padding-15">
+                            <i class="icon-arrow"></i>
+                            Kete muaj <span class="label label-danger pull-right"></span>
+                        </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" id="collapseOne">
+                    <div class="panel-body no-padding partition-light-grey">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Emri i Gjedhit
+                                    </th>
+                                    <th>
+                                        Id e qumshtit
+                                    </th>
+                                    <th>
+                                        Sasia e Qumeshtit
+                                    </th>
+                                    <th>
+                                        Vathi
+                                    </th>
+                                </tr>
+                            </thead>
+
+
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.emri
+                                    </td>
+                                    <td>
+                                        @item.ID
+                                    </td>
+                                    <td>
+                                        @item.sasia
+                                    </td>
+                                    <td>
+                                        @item.vathi
+                                    </td>
+
+
+
+
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div id="gjedhi" class="panel panel-white"></div>
-        
-@section Script
+
+@section scripts
 
 {
-   <script> 
-    jQuery(document).ready(function () {
-          
-       
+    <script>
+        jQuery(document).ready(function () {
+
+
         });
     </script>
-    }
-        
+}
