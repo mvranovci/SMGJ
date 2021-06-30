@@ -34,7 +34,7 @@
                                 <td class="hidden-xs">
                                     @item.Emertimi
                                 </td>
-                                <td>@item.Krijuar</td>
+                                <td>@item.Krijuar.Value.ToString("dd/MMMM/yyyy")</td>
                                 <td>@user.Emri @user.Mbiemri</td>
                                 <td>
                                     <div class="visible-md visible-lg hidden-sm hidden-xs">
@@ -83,16 +83,30 @@
 
         function SubmitForm(form) {
             if ($(form).valid()) {
-                $.ajax({
-                    type: "POST",
-                    url: form.action,
-                    data: $(form).serialize(),
-                    success: function (data) {
-                        if (data.success) {
-                            Popup.dialog('close');
+                $(form).submit(function (e) {
+                    e.preventDefault();
+                     });
+                    $.ajax({
+                        type: "POST",
+                        url: form.action,
+                        data: $(form).serialize(),
+                        success: function (rs) {
+                            if (rs.status) {
+                            swal({ title: "Sukses", text: rs.Mesazhi, type: "success" },
+                                function () {
+                                    location.reload();
+                                }
+                            );
                         }
-                    }
-                });
+                            else {
+                                swal({ title: "Gabim", text: rs.Mesazhi, type: "info" },
+                                function () {
+                                    location.reload();
+                                }
+                            );
+                            }
+                        }
+                    });
             }
             return false;
         }
