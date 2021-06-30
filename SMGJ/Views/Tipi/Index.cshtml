@@ -115,12 +115,12 @@
             var obj = { ID: $(btn).data("menuid") };
             swal({
                 title: "Kujdes!!!",
-                text: "Jeni duke fshire të dhëna nga sistemi",
+                text: "Jeni duke fshirë të dhëna nga Baza",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes!",
-                cancelButtonText: "No!",
+                confirmButtonText: "Po!",
+                cancelButtonText: "Jo!",
                 closeOnConfirm: false,
                 closeOnCancel: false
             }, function (isConfirm) {
@@ -154,7 +154,7 @@
                     }
                 });
                 } else {
-                    swal("Anuluar", "Fshirja e te dhenave eshte anuluar :)", "error");
+                    swal("Anuluar", "Fshirja e të dhënave është anuluar :)", "error");
                 }
             });
 
