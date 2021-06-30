@@ -73,6 +73,14 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
+             bool exists1 = db.GJEDHIs.Any(q => q.TipiID == model.ID);
+
+            if(exists1)
+            {
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Tipi i gjedhit nuk mund te fshihet";
+                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+            }
             try
             {
                 TIPI tipi = db.TIPIs.Find(model.ID);
