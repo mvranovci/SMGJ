@@ -78,7 +78,7 @@ namespace SMGJ.Controllers
             if(exists1)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Tipi i gjedhit nuk mund te fshihet";
+                returnmodel.Mesazhi = "Tipi i gjedhit nuk mund të fshihet";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
             try
@@ -87,13 +87,13 @@ namespace SMGJ.Controllers
                 db.TIPIs.Remove(tipi);
                 await db.SaveChangesAsync();
                 returnmodel.status = true;
-                returnmodel.Mesazhi = "Tipi i gjedhit eshte fshire me sukses";
+                returnmodel.Mesazhi = "Tipi i gjedhit është fshirë me sukses";
                 return Json(returnmodel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
                 returnmodel.status = false;
-                returnmodel.Mesazhi = "Ka ndodhur nje gabim";
+                returnmodel.Mesazhi = "Ka ndodhur një gabim";
                 return Json(returnmodel, JsonRequestBehavior.DenyGet);
             }
         }
