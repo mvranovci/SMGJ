@@ -1,0 +1,58 @@
+﻿@model SMGJ.Controllers.CHARTSController
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5 class="over-title margin-bottom-15">Pie <span class="text-bold">Chart</span></h5>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>
+                        Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data.
+                    </p>
+                    <p>
+                        They are excellent at showing the relational proportions between data.
+                    </p>
+                    <p>
+                        Pie and doughnut charts are effectively the same class in Chart.js, but have one different default value - their <code>percentageInnerCutout</code>. This equates what percentage of the inner should be cut out. This defaults to <code>0</code> for pie charts, and <code>50</code> for doughnuts.
+                    </p>
+                    <p class="margin-top-20">
+                    </p><div id="pieLegend" class="chart-legend"><ul class="pie-legend"><li><span style="background-color:#F7464A"></span>Red</li><li><span style="background-color:#46BFBD"></span>Green</li><li><span style="background-color:#FDB45C"></span>Yellow</li></ul></div>
+                    <p></p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-center margin-bottom-15">
+                        <canvas id="myChart" class="full-width" width="300" height="150" style="width: 300px; height: 150px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+            var ctx1 = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx1, {
+                type: 'pie',
+                height: "230px",
+                width: "300px",
+                responsive: false,
+                animation: false,
+                legend: { position: 'bottom' },
+                data: {
+
+                    labels: [@Html.Raw(ViewBag.Tipet)],
+                    datasets: [{
+                        label: 'aaaaa',
+                        data: [@ViewBag.Vlerat],
+                        backgroundColor: ["red"]
+                    }]
+                }, options: {
+                    // This chart will not respond to mousemove, etc
+                    events: ['click']
+                }
+            });
+    </script>
+}
