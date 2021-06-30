@@ -1,21 +1,60 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using SMGJ.Models;
+using System.Data.Entity;
 
 namespace SMGJ.Controllers
 {
-    
+
     public class HomeController : BaseController
     {
         public async Task<ActionResult> Index()
         {
-        SMGJDB db = new SMGJDB();
-
+            SMGJDB db = new SMGJDB();
             var user = await GetUser();
+
+            GJEDHI gjedhi = new GJEDHI();
+
+            var nrGjedhave = db.FERMAs.Where(x => x.ID == gjedhi.FermaID).Count();
+            ViewBag.numriGjedhave = nrGjedhave;
+
+
+            // (from a in db.USERs where a.RoleID == (int)Roli.Administrator select a)
+            // var totali = (from qd in db.QUMESHTI_DETAJET where qd.DataProdhimit. == DateTime.Today select qd.TotalLitra).FirstOrDefault();
+            var totali = (from qd in db.QUMESHTI_DETAJET
+                          join u in db.USERs on qd.FermaID equals u.FermaID
+                          where DbFunctions.TruncateTime(qd.DataProdhimit) == DbFunctions.TruncateTime(DateTime.Now)
+                          && qd.FermaID == user.FermaID
+                          select qd.TotalLitra).FirstOrDefault();
+
+
+            var gjedhiMePSH = (from N in db.NJOFTIMETs
+                               join gjp in db.GJEDHAT_PARAMETRAT on N.Gjedhi_ParametriID equals gjp.ID
+                               join Gj in db.GJEDHIs on gjp.GjedhiID equals Gj.ID
+                               join F in db.FERMAs on Gj.FermaID equals F.ID
+                               where F.ID == user.FermaID
+                               select new { Gj.Emri, N.Data }).ToList().OrderByDescending(x => x.Data).FirstOrDefault();
+
+            if (gjedhiMePSH == null)
+            {
+                ViewBag.GjedhiMePSH = null;
+            }
+            else
+            {
+
+                var gjedhiEmri = gjedhiMePSH.Emri;
+                ViewBag.GjedhiMePSH = gjedhiEmri;
+            }
+
+           
+
+            ViewBag.Litrat = totali;
+
             var sasia = (from q in db.QUMESHTIs
                          join gj in db.GJEDHIs on q.GjedhiID equals gj.ID
                          where user.FermaID == gj.FermaID
@@ -24,14 +63,15 @@ namespace SMGJ.Controllers
                          {
                              ID = g.Key.a,
                              sasia = g.Sum(q => q.SasiaProdhuar),
-                             emri=g.FirstOrDefault().GJEDHI.Emri,
+                             emri = g.FirstOrDefault().GJEDHI.Emri,
                              vathi = g.FirstOrDefault().GJEDHI.Vathe
                          }).AsEnumerable();
-            
+
 
             return View(sasia);
-            
+
         }
+      
 
         public async Task<ActionResult> GetUserHome()
         {
