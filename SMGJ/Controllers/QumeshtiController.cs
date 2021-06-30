@@ -1,4 +1,4 @@
-﻿using SMGJ.Models;
+using SMGJ.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +75,7 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             var user = await GetUser();
-        
+            ViewBag.UserID = await loadUser(null);
             QUMESHTI model = db.QUMESHTIs.Find(id);            
             ViewBag.GjedhiID = await loadGjedhi1(model.GjedhiID);
             ViewBag.YndyraID = await loadYndyra(model.YndyraID);
@@ -134,7 +134,7 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             MessageJs returnmodel = new MessageJs();
-
+            
             if (ModelState.IsValid)
             {
                 try
