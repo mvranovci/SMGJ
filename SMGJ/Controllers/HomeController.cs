@@ -13,8 +13,24 @@ namespace SMGJ.Controllers
     {
         public async Task<ActionResult> Index()
         {
+        SMGJDB db = new SMGJDB();
+
             var user = await GetUser();
-            return View();
+            var sasia = (from q in db.QUMESHTIs
+                         join gj in db.GJEDHIs on q.GjedhiID equals gj.ID
+                         where user.FermaID == gj.FermaID
+                         group q by new { a = q.GjedhiID } into g
+                         select new gjedhi_qumshti
+                         {
+                             ID = g.Key.a,
+                             sasia = g.Sum(q => q.SasiaProdhuar),
+                             emri=g.FirstOrDefault().GJEDHI.Emri,
+                             vathi = g.FirstOrDefault().GJEDHI.Vathe
+                         }).AsEnumerable();
+            
+
+            return View(sasia);
+            
         }
 
         public async Task<ActionResult> GetUserHome()
