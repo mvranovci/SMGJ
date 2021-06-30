@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <fieldset>
                         <legend>Edito te dhenat e fermes</legend>
-
+                        @Html.HiddenFor(m => m.KrijuarNga)
                         <div class="row ">
                             <div class=" col-md-5">
                                 <div class="form-group">
@@ -36,7 +36,7 @@
                                     @Html.DropDownList("KomunaID", null, htmlAttributes: new { @class = "form-control select2" })
                                 </div>
                             </div>
-                            
+
                         </div>
                     </fieldset>
                 </div>
