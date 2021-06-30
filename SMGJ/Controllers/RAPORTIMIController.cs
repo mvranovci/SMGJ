@@ -55,16 +55,19 @@ namespace SMGJ.Controllers
                 Session["strQueryReport"] = "EXEC RAPORTI_GJEDHI @FermaId =  " + model.FermaID;
                 Session["strEmriRaportit"] = "Raportet\\Raport_gjedhi_parametrat.rdl";
             }
-            else if(model.Raportet == 3)
-            {
-                Session["strQueryReport"] = "EXEC TotalLitrat @FermaID =  " + model.FermaID + ",@Datefilimit = '" + data_prej + "',@Datembarimit ='" + data_deri + "'";
-                Session["strEmriRaportit"] = "Raportet\\Totali.rdl";
-            }
+
             else if (model.Raportet == 2)
             {
                 Session["strQueryReport"] = "EXEC GjedhaParametrat @FERMA =  " + model.FermaID;
                 Session["strEmriRaportit"] = "Raportet\\NumriGjedhave.rdl";
             }
+
+            else if(model.Raportet == 3)
+            {
+                Session["strQueryReport"] = "EXEC TotalLitrat @FermaID =  " + model.FermaID + ",@Datefilimit = '" + data_prej + "',@Datembarimit ='" + data_deri + "'";
+                Session["strEmriRaportit"] = "Raportet\\Totali.rdl";
+            }
+            
         }
 
         // duhet me e dergu nji parameter ne RAPORT_DESIGN per me caktu formatin
@@ -84,7 +87,7 @@ namespace SMGJ.Controllers
                 string mimeType;
                 string encoding;
                 string fileNameExtension;
-                int page_width = 13;
+                int page_width = 11;
                 string deviceInfo = "<DeviceInfo>" + "  <OutputFormat>PDF</OutputFormat>" + "  <PageWidth>" + page_width + "in</PageWidth>" + "  <PageHeight>8.5in</PageHeight>" + "  <MarginTop>0.5in</MarginTop>" + "  <MarginLeft>0in</MarginLeft>" + "  <MarginRight>0in</MarginRight>" + "  <MarginBottom>0.5in</MarginBottom>" + "</DeviceInfo>";
 
                 Microsoft.Reporting.WebForms.Warning[] warnings;

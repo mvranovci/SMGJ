@@ -202,14 +202,32 @@ namespace SMGJ.Controllers
         {
             var user = await GetUser();
             GJEDHAT_PARAMETRAT model = new GJEDHAT_PARAMETRAT();
-            if (id != null)
+
+            var exists = (from q in db.GJEDHAT_PARAMETRAT where q.ID == id select q).FirstOrDefault();
+
+            if (exists == null)
+                return RedirectToAction("Index", "GJEDHI_PARAMETRAT");
+
+
+            if (User.IsInRole("Fermer"))
             {
+
+                int gjedhi_parametrat = (from gj_p in db.GJEDHAT_PARAMETRAT
+                                        join gj in db.GJEDHIs on gj_p.GjedhiID equals gj.ID
+                                        join f in db.FERMAs on gj.FermaID equals f.ID
+                                         where gj_p.ID == exists.ID
+                                         select f.ID).FirstOrDefault();
+
+                if (gjedhi_parametrat != user.FermaID)
+                    return RedirectToAction("Index", "GJEDHI_PARAMETRAT");
+            }
+
                 model = db.GJEDHAT_PARAMETRAT.Find(id.Value);
                 ViewBag.GjedhiID = await loadGjedhi(null);
                 ViewBag.LageshtiaID = await loadLageshtia(null);
                 ViewBag.TemperaturaID = await loadTemperatura(null);
                 ViewBag.RrahjeteZemresID = await loadRrahjetEZemres(null);
-            }
+
             return View(model);
         }
         [HttpPost]

@@ -9,7 +9,7 @@ namespace SMGJ.Models
     {
         public int Raportet { get; set; }
         public int FermaID { get; set; }
-        public DateTime Prej { get; set; }
-        public DateTime Deri { get; set; }
+        public DateTime? Prej { get; set; }
+        public DateTime? Deri { get; set; }
     }
 }
