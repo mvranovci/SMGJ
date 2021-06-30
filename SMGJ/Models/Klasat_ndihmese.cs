@@ -18,6 +18,14 @@ namespace SMGJ.Models
         }
        
     }
+     public class gjedhi_qumshti
+    {
+        public string   emri { get; set; }
+        public int ID { get; set; }
+        public decimal sasia { get; set; }
+
+        public string vathi { get; set; }
+    }
     public class Menute
     {
        public string Url { get; set; }
