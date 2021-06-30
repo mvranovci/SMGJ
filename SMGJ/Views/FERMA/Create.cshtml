@@ -21,6 +21,7 @@
                             <label class="control-label">
                                 Emri <span class="symbol required" aria-required="true"></span>
                             </label>
+                            @Html.HiddenFor(m => m.ID)
                             @Html.TextBoxFor(m => m.Emri, new { @class = "form-control", @placeholder = "Shkruani emrin" })
                         </div>
                     </div>
@@ -127,6 +128,7 @@
                         runValidator1();
                         if ($("#forma").valid() === true) {
                             var obj = {
+                                ID: $("#ID").val(),
                                 Emri: $("#Emri").val(),
                                 KomunaID: $("#KomunaID").val(),
                                 Krijuar: $("#Krijuar").val(),
