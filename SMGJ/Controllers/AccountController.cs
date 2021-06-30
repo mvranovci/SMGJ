@@ -143,7 +143,8 @@ namespace SMGJ.Controllers
                 {
 
                     returnmodel.status = false;
-                    returnmodel.Mesazhi = "Perdoruesi egziston";
+                    //returnmodel.Mesazhi = "Perdoruesi egziston";
+                    returnmodel.Mesazhi = result.Errors.First();
                     return Json(returnmodel, JsonRequestBehavior.DenyGet);
                 }
             }
