@@ -21,9 +21,7 @@
     <div class="row margin-top-15 ">
         <div class="col-md-12">
             <div class="panel panel-white">
-                <div class="panel-heading">
-                    <h5 class="panel-title">Lista e Fermave</h5>
-                </div>
+          
                 <div class="panel-body">
                     <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
                         <thead>
@@ -60,19 +58,12 @@
                                 else
                                 {
                                     <td class="hidden-xs">
-                                        NULL
+                                       NULL
                                     </td>
                                 }
                                 <td>@item.Krijuar.Value.ToString("dd/MM/yyyy")</td>
                                 @*.Value.ToString("dd/MM/yyyy")*@
-                                @if (item.KrijuarNga != null)
-                                {
-                                    <td>@user.Emri @user.Mbiemri</td>
-                                }
-                                else
-                                {
-                                    <td>N/A</td>
-                                }
+                                <td>@user.Emri @user.Mbiemri</td>
                                 <td>
                                     <div class="visible-md visible-lg hidden-sm hidden-xs">
                                         <a href="@Url.Action("Edit","FERMA" , new {id=item.ID})" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
@@ -81,8 +72,8 @@
                                     </div>
                                 </td>
                                 @*<td>
-            @Html.DropDownList("Users", ViewBag.Users as SelectList);
-        </td>*@
+                                    @Html.DropDownList("Users", ViewBag.Users as SelectList);
+                                </td>*@
                             </tr>
                             }
                         </tbody>
@@ -102,7 +93,6 @@
         $(".warning-message-parameter").on("click", function (e) {
             swal({
                 title: "A jeni i sigurte qe deshironi ta fshini kete ferme?",
-                text: "",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -114,7 +104,7 @@
                 if (isConfirm) {
                     deleteferma(e.currentTarget);
                 } else {
-                    swal("U anulua", "Ferma juaj eshte e sigurte:)", "error");
+                    swal("U anulua", "Te dhenat e fermes jane te sigurta!", "error");
                 }
             });
             e.preventDefault
