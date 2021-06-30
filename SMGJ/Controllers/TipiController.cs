@@ -23,8 +23,9 @@ namespace SMGJ.Controllers
         [HttpGet]
         public ActionResult AddOrEdit(int id = 0)
         {
+            var tipi = new TIPI();
             if (id == 0)
-                return View(new TIPI());
+                return View(tipi);
             else
                     return View(db.TIPIs.Where(x => x.ID == id).FirstOrDefault<TIPI>());
         }
@@ -33,28 +34,39 @@ namespace SMGJ.Controllers
         public async Task<ActionResult> AddOrEdit(TIPI emp)
         {
             var user = await GetUser();
+            MessageJs returnmodel = new MessageJs();
             TIPI tip = new TIPI();
-            if(emp.ID != 0)
+            if (emp.ID != 0)
             {
                 tip = db.TIPIs.Find(emp.ID);
             }
+            tip.ID = emp.ID;
             tip.Emertimi = emp.Emertimi;
             tip.Krijuar = DateTime.Now;
             tip.KrijuarNga = user.ID;
-                if (emp.ID == 0)
-                {
-                    db.TIPIs.Add(tip);
-                    db.SaveChanges();
-                    return Json(new { success = true}, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    db.Entry(tip).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return Json(new { success = true}, JsonRequestBehavior.AllowGet);
-                }
 
 
+            var exist = db.TIPIs.Where(e => e.Emertimi.ToLower().Trim() == emp.Emertimi.ToLower().Trim()).Any();
+            if (exist)
+            {
+                returnmodel.status = false;
+                returnmodel.Mesazhi = "Këto tipe ekzistojnë!";
+                return Json(returnmodel, JsonRequestBehavior.DenyGet);
+            }  
+
+            if (emp.ID == 0)
+            {
+                db.TIPIs.Add(tip);
+            }
+            else
+            {
+                db.Entry(tip).State = EntityState.Modified;
+            }
+                
+                await db.SaveChangesAsync();
+                returnmodel.status = true;
+                returnmodel.Mesazhi = "Të dhënat e tipit u regjistruan me sukses";
+                return Json(returnmodel, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public async Task<ActionResult> Delete(TIPI model)
