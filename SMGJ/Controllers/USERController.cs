@@ -11,6 +11,7 @@ using static SMGJ.Helpers.Enums;
 
 namespace SMGJ.Controllers
 {
+ [CustomAuthorize]
     public class USERController : BaseController
     {
         // GET: USER
